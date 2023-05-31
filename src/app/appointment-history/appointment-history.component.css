@@ -5,9 +5,15 @@ table {
   
   .mat-mdc-form-field {
     font-size: 14px;
-    width: 100%;
+    width: 20%;
+    float: right;
+    margin: 20px 10px 0px 0px;
+    /* padding-top: 50px; */
+    
   }
   
 mat-form-field{
-    margin-top: 20px;
+    height: 70px;
+    /* padding-top: 500px; */
+    
 }

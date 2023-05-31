@@ -1,7 +1,6 @@
 
 <mat-toolbar color="primary" class="mat-elevation-z6">
-    <span routerLink="/home"><mat-icon>eco</mat-icon>Medicine Reminder</span>
-<div class="spacer"></div>
+    
     <button mat-button routerLink="/home">Home</button>
 
 <button mat-button [matMenuTriggerFor]="medicine">Medicine</button>
@@ -27,6 +26,9 @@
   <button mat-menu-item  routerLink="/appointment-add">Add Appointment</button>
   <button mat-menu-item  routerLink="/appointment-history">Appointment History</button>
 </mat-menu>
+<div class="spacer"></div>
+<span routerLink="/home"><mat-icon>eco</mat-icon>Medicine Reminder</span>
+<div class="spacer_1"></div>
 
 <button mat-raised-button color="accent" routerLink="/register">Sign Up</button>
 
