@@ -63,7 +63,7 @@ export class MedicineHistoryComponent implements OnInit{
 deleteMedicine(id: number) {
   Swal.fire({
     title: 'Are you sure?',
-    text: "You won't be able to revert this!",
+    text: "Are you sure you want delete this medicine ?",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',

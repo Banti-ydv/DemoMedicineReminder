@@ -101,7 +101,7 @@ export class ExerciseHistoryComponent implements OnInit{
   deleteExercise(id: number) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: "Are you sure you want delete this exercise ?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -140,13 +140,13 @@ export class ExerciseHistoryComponent implements OnInit{
     Swal.fire({
       title: 'Update Exercise',
       html:
-        '<input id="swal-input-name" class="swal2-input" value="' +
+        '<input id="swal-input-exercisename" class="swal2-input" value="' +
         element.exercisename +
         '">' +
-        '<input id="swal-input-shape" class="swal2-input" value="' +
+        '<input id="swal-input-date" class="swal2-input" value="' +
         element.date +
         '">' +
-        '<input id="swal-input-description" class="swal2-input" value="' +
+        '<input id="swal-input-exercisetime" class="swal2-input" value="' +
         element.exercisetime +
         '">',
       focusConfirm: false,
@@ -154,11 +154,11 @@ export class ExerciseHistoryComponent implements OnInit{
       confirmButtonText: 'Update',
       cancelButtonText: 'Cancel',
       preConfirm: () => {
-        const nameValue = (<HTMLInputElement>document.getElementById('swal-input-name')).value;
+        const nameValue = (<HTMLInputElement>document.getElementById('swal-input-exercisename')).value;
         // const shapeValue = (<HTMLInputElement>document.getElementById('swal-input-shape')).value;
         // const doseValue = (<HTMLInputElement>document.getElementById('swal-input-dose')).value;
         const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
-        const timeValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
+        const timeValue = (<HTMLInputElement>document.getElementById('swal-input-exercisetime')).value;
         // const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
   
         return {

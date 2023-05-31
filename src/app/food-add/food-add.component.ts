@@ -23,7 +23,7 @@ export class FoodAddComponent {
         // Registration successful, do something with the response
         console.log('Add successful', response);
         // Redirect to a success page or perform any other action
-        // this.router.navigate(['/medicine-add']);
+        this.router.navigate(['/food-history']);
 
       },
       (error: any) => {
@@ -33,5 +33,8 @@ export class FoodAddComponent {
       }
     );
   }
+
+ 
+  
 
 }

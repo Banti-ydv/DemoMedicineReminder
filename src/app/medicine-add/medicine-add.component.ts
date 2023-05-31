@@ -41,6 +41,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-medicine-add',
@@ -64,10 +65,12 @@ export class MedicineAddComponent {
   //   username: '',
   //   password: ''
   // };
+  selectedDate: Date = new Date();
+
 
   hide = true; // Add the necessary property used in the template
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router,private datePipe: DatePipe) { }
 
   onmedicine() {  // Update the method name to match the one used in the template
     this.userService.medicineAdd(this.medicine).subscribe(
@@ -85,5 +88,9 @@ export class MedicineAddComponent {
         // Display an error message or perform any other action
       }
     );
+  }
+  formatDate(date: Date): string {
+    const formattedDate = this.datePipe.transform(date, 'dd/MM/yyyy');
+    return formattedDate || ''; // Provide a fallback value when formattedDate is null
   }
 }

@@ -19,6 +19,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+
+
 
 import { NgIf , NgFor, AsyncPipe} from '@angular/common';
 import { MedicineAddComponent } from './medicine-add/medicine-add.component';
@@ -84,6 +89,9 @@ import { environment } from 'src/environments/environment';
     MatTableModule,
     MatDialogModule,
     NgConfirmModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+
     // AngularFireAuthModule,
     // AngularFireMessagingModule,
     // AngularFireDatabaseModule,
@@ -92,7 +100,7 @@ import { environment } from 'src/environments/environment';
     // AngularFireAuthModule,
    
   ],
-  providers: [NotificationService, AsyncPipe],
+  providers: [NotificationService, AsyncPipe ,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

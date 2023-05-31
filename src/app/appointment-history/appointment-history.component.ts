@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgConfirmService } from 'ng-confirm-box';
@@ -13,10 +13,6 @@ export interface PeriodicElement {
 
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {id: 1, withWhome: 'Hydrogen', appointmentdate: '11/01/1018', time: '11:10 am'},
-  {id: 2, withWhome: 'Helium', appointmentdate: '22/02/2028', time: '02:20 am'},
-];
 
 
 @Component({
@@ -24,10 +20,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './appointment-history.component.html',
   styleUrls: ['./appointment-history.component.css']
 })
-export class AppointmentHistoryComponent {
+export class AppointmentHistoryComponent implements OnInit{
 
-  displayedColumns: string[] = ['position', 'withWhome', 'appointmentdate', 'time', 'edit', 'delete'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['id', 'withWhome', 'appointmentdate', 'time', 'edit', 'delete'];
+  dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(
     private http: HttpClient,
@@ -35,6 +31,31 @@ export class AppointmentHistoryComponent {
     private router: Router
     ) { }
 
+    
+  ngOnInit() {
+    this.callApi();
+  }
+
+
+  
+
+  callApi() {
+    const apiUrl = 'http://192.168.1.11:8866/myAppointment';
+    const token = localStorage.getItem('token'); // Replace with your actual token
+
+    // Set the headers with the token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
+      (data: PeriodicElement[]) => {
+        this.dataSource.data = data;
+        
+      },
+      (error) => {
+        console.error('An error occurred while calling the API:', error);
+      }
+    );
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -43,7 +64,7 @@ export class AppointmentHistoryComponent {
   deleteAppointment(id: number) {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: "Are you sure you want delete this appointment ?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -51,7 +72,7 @@ export class AppointmentHistoryComponent {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        const apiUrl = `http://192.168.1.11:8866/deleteMyAppointment/${id}`;
+        const apiUrl = `http://192.168.1.11:8866/deleteMyAppointmnetdetail/${id}`;
         const token = localStorage.getItem('token'); 
         const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
   
@@ -77,13 +98,13 @@ export class AppointmentHistoryComponent {
     Swal.fire({
       title: 'Update Appointment',
       html:
-        '<input id="swal-input-name" class="swal2-input" value="' +
-        element.appointmentdate +
-        '">' +
-        '<input id="swal-input-shape" class="swal2-input" value="' +
+        '<input id="swal-input-withWhome" class="swal2-input" value="' +
         element.withWhome +
         '">' +
-        '<input id="swal-input-description" class="swal2-input" value="' +
+        '<input id="swal-input-appointmentdate" class="swal2-input" value="' +
+        element.appointmentdate +
+        '">' +
+        '<input id="swal-input-time" class="swal2-input" value="' +
         element.time +
         '">',
       focusConfirm: false,
@@ -91,11 +112,11 @@ export class AppointmentHistoryComponent {
       confirmButtonText: 'Update',
       cancelButtonText: 'Cancel',
       preConfirm: () => {
-        const nameValue = (<HTMLInputElement>document.getElementById('swal-input-name')).value;
-        // const shapeValue = (<HTMLInputElement>document.getElementById('swal-input-shape')).value;
-        // const doseValue = (<HTMLInputElement>document.getElementById('swal-input-dose')).value;
-        const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
-        const timeValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
+        const nameValue = (<HTMLInputElement>document.getElementById('swal-input-withWhome')).value;
+        const dateValue = (<HTMLInputElement>document.getElementById('swal-input-appointmentdate')).value;
+        const timeValue = (<HTMLInputElement>document.getElementById('swal-input-time')).value;
+        // const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
+        // const timingValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
         // const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
   
         return {
@@ -108,7 +129,7 @@ export class AppointmentHistoryComponent {
       if (result.isConfirmed) {
         const formValues = result.value;
         if (formValues) {
-          const { withWhome, appointmentdate, time} = formValues;
+          const {withWhome, appointmentdate, time} = formValues;
   
           const apiUrl = `http://192.168.1.11:8866/updateMyAppointment/${element.id}`;
           const token = localStorage.getItem('token');
@@ -117,8 +138,11 @@ export class AppointmentHistoryComponent {
           const updatedData: PeriodicElement = {
             ...element,
             withWhome: withWhome,
+            // shape: shape,
+            // dose: Number(dose),
             appointmentdate: appointmentdate,
             time: time,
+            // description: description,
           };
   
           this.http.put(apiUrl, updatedData, { headers }).subscribe(
@@ -140,4 +164,5 @@ export class AppointmentHistoryComponent {
       }
     });
   }
+ 
 }
