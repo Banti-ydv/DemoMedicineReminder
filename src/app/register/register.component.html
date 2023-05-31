@@ -1,0 +1,153 @@
+
+<div class="center-content">
+  <form (ngSubmit)="onregister()" #registerForm="ngForm">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Register/Login</mat-card-title>
+        <mat-card-subtitle>Medicine Reminder</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Register">
+            <mat-form-field class="example-full-width">
+              <mat-label>First Name</mat-label>
+              <input type="text" matInput placeholder="" name="firstname" [(ngModel)]="register.firstname" required>
+              <mat-icon matSuffix>mode_edit</mat-icon>
+              <mat-error *ngIf="registerForm.controls['firstname'].invalid && (registerForm.controls['firstname'].dirty || registerForm.submitted)">
+                <ng-container *ngIf="registerForm.controls['firstname'].hasError('required')">
+                  First Name is required.
+                </ng-container>
+                <ng-container *ngIf="registerForm.controls['firstname'].value?.length > 8">
+                  Maximum length exceeded. Maximum length is 8 characters.
+                </ng-container>
+              </mat-error>
+            </mat-form-field>
+
+            
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Last Name</mat-label>
+              <input type="text" matInput placeholder="" name="lastname" [(ngModel)]="register.lastname" required>
+              <mat-icon matSuffix>mode_edit</mat-icon>
+              <mat-error *ngIf="registerForm.controls['lastname'].invalid && (registerForm.controls['lastname'].dirty || registerForm.submitted)">
+                Last Name is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Email Id</mat-label>
+              <input type="email" matInput placeholder="Ex. asd@gmail.com" name="emailid" [(ngModel)]="register.emailid" required>
+              <mat-icon matSuffix>email</mat-icon>
+              <mat-error *ngIf="registerForm.controls['emailid'].invalid && (registerForm.controls['emailid'].dirty || registerForm.submitted)">
+                Please enter a valid email address.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>User Name</mat-label>
+              <input type="text" matInput placeholder="" name="username" [(ngModel)]="register.username" required>
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-error *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.submitted)">
+                User Name is required.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="password" [(ngModel)]="register.password" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z]).*$">
+              <i mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </i>
+              <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+                Password is required.
+              </mat-error>
+              <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">
+                Password should be at least 8 characters long.
+              </mat-error>
+              <mat-error *ngIf="registerForm.controls['password'].hasError('pattern')">
+                Password should contain at least one uppercase and one lowercase letter.
+              </mat-error>
+            </mat-form-field>
+            
+
+            <button class="mat-button" mat-raised-button color="primary" [disabled]="registerForm.invalid">Register</button>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+
+
+
+
+ <!-- <div class="center-content">
+  <form (ngSubmit)="onregister()" #registerForm="ngForm">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Register/Login</mat-card-title>
+        <mat-card-subtitle>Medicine Reminder</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Register">
+            <div class="row">
+              <mat-form-field class="example-full-width" flex>
+                <mat-label>First Name</mat-label>
+                <input type="text" matInput placeholder="" name="firstname" [(ngModel)]="register.firstname" required>
+                <mat-icon matSuffix>mode_edit</mat-icon>
+                <mat-error *ngIf="registerForm.controls['firstname'].invalid && (registerForm.controls['firstname'].dirty || registerForm.submitted)">
+                  <ng-container *ngIf="registerForm.controls['firstname'].hasError('required')">
+                    First Name is required.
+                  </ng-container>
+                  <ng-container *ngIf="registerForm.controls['firstname'].value?.length > 8">
+                    Maximum length exceeded. Maximum length is 8 characters.
+                  </ng-container>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" flex>
+                <mat-label>Last Name</mat-label>
+                <input type="text" matInput placeholder="" name="lastname" [(ngModel)]="register.lastname" required>
+                <mat-icon matSuffix>mode_edit</mat-icon>
+                <mat-error *ngIf="registerForm.controls['lastname'].invalid && (registerForm.controls['lastname'].dirty || registerForm.submitted)">
+                  Last Name is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field class="example-full-width" flex>
+                <mat-label>User Name</mat-label>
+                <input type="text" matInput placeholder="" name="username" [(ngModel)]="register.username" required>
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-error *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.submitted)">
+                  User Name is required.
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" flex>
+                <mat-label>Password</mat-label>
+                <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="password" [(ngModel)]="register.password" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z]).*$">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="registerForm.controls['password'].hasError('required')">
+                  Password is required.
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['password'].hasError('minlength')">
+                  Password should be at least 8 characters long.
+                </mat-error>
+                <mat-error *ngIf="registerForm.controls['password'].hasError('pattern')">
+                  Password should contain at least one uppercase and one lowercase letter.
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <button class="mat-button" mat-raised-button color="primary" [disabled]="registerForm.invalid">Register</button>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div> -->

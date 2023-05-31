@@ -1,0 +1,81 @@
+<div class="center-content">
+    <form (ngSubmit)="onlogin()">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>Register/Login</mat-card-title>
+        <mat-card-subtitle>Medicine Reminder</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-tab-group>
+          <!-- <mat-tab label="Register">
+            <mat-form-field class="example-full-width">
+              <mat-label>First Name</mat-label>
+              <input type="text" matInput placeholder="" value="" name="reg_firstname" [(ngModel)]="reg_firstname">
+              
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Last Name</mat-label>
+              <input  type="text" matInput placeholder="" value="" name="reg_lastname" [(ngModel)]="reg_lastname">
+            
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Email Id</mat-label>
+              <input type="email" matInput placeholder="" value="" name="reg_emailid" [(ngModel)]="reg_emailid">
+          
+              <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>User Name</mat-label>
+              <input type="text" matInput placeholder="" value="" name="reg_username" [(ngModel)]="reg_username">
+    
+              <mat-icon matSuffix>account_circle</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="reg_password" [(ngModel)]="reg_password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              
+            </mat-form-field>
+  
+            <button class="mat-button" mat-raised-button color="primary" (click)="register()">Register</button>
+            
+  
+          </mat-tab>
+   -->
+          <mat-tab label="Login">
+            <mat-form-field class="example-full-width">
+              <mat-label>User Name</mat-label>
+              <input type="text" matInput placeholder="" value="" name="username" [(ngModel)]="login.username">
+              
+              
+              <mat-icon matSuffix> account_circle </mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="password" [(ngModel)]="login.password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              
+            </mat-form-field>
+  
+            <button type="submit" class="mat-button" mat-raised-button color="primary">Login</button>
+            
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </form>
+    
+  </div>
+  

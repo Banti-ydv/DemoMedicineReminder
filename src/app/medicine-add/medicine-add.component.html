@@ -1,0 +1,86 @@
+<div class="center-content">
+    <form (ngSubmit)="onmedicine()">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>Medicine Add</mat-card-title>
+        <mat-card-subtitle>Medicine Reminder</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Medicine">
+            <mat-form-field class="example-full-width">
+              <mat-label>Medicine Name</mat-label>
+              <input type="text" matInput placeholder="" value="" name="name" [(ngModel)]="medicine.name">
+              <!-- <input matInput placeholder="" value=""> -->
+              <mat-icon matSuffix>mode_edit</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Shape</mat-label>
+              <input  type="text" matInput placeholder="" value="" name="shape" [(ngModel)]="medicine.shape">
+              <!-- <input matInput placeholder="" value=""> -->
+              <mat-icon matSuffix>details</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Dose</mat-label>
+              <input type="text" matInput placeholder="" value="" name="dose" [(ngModel)]="medicine.dose">
+              <!-- <input matInput placeholder="Ex. asd@gmail.com" value=""> -->
+              <mat-icon matSuffix>person_add</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Date</mat-label>
+              <input type="text" matInput placeholder="" value="" name="date" [(ngModel)]="medicine.date">
+              <!-- <input matInput placeholder="" value=""> -->
+              <mat-icon matSuffix>event</mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+                <mat-label>Time</mat-label>
+                <input type="text" matInput placeholder="" value="" name="timing" [(ngModel)]="medicine.timing">
+                <!-- <input matInput placeholder="" value=""> -->
+                <mat-icon matSuffix>query_builder</mat-icon>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input type="text" matInput placeholder="" value="" name="description" [(ngModel)]="medicine.description">
+                <!-- <input matInput placeholder="" value=""> -->
+                <mat-icon matSuffix>query_builder</mat-icon>
+              </mat-form-field>
+  
+            <button class="mat-button" mat-raised-button color="primary">Add</button>
+            <!-- <button mat-flat-button color="primary">Register</button> -->
+  
+          </mat-tab>
+  <!-- 
+          <mat-tab label="Login" >
+            <mat-form-field class="example-full-width">
+              <mat-label>User Name</mat-label>
+              <input type="text" matInput placeholder="" value="" name="log_username" [(ngModel)]="log_username">
+              
+              
+              <mat-icon matSuffix> account_circle </mat-icon>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="log_password" [(ngModel)]="log_password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              
+            </mat-form-field>
+  
+            <button class="mat-button" mat-raised-button color="primary" (click)="login()">Login</button>
+            
+          </mat-tab> -->
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </form>
+    
+  </div>
+  

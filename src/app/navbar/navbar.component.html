@@ -1,0 +1,38 @@
+
+<mat-toolbar color="primary" class="mat-elevation-z6">
+    <span routerLink="/home"><mat-icon>eco</mat-icon>Medicine Reminder</span>
+<div class="spacer"></div>
+    <button mat-button routerLink="/home">Home</button>
+
+<button mat-button [matMenuTriggerFor]="medicine">Medicine</button>
+<mat-menu #medicine="matMenu">
+  <button mat-menu-item routerLink="/medicine-add">Add Medicine</button>
+  <button mat-menu-item routerLink="/medicine-history">Medicine History</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="exercise">Exercise</button>
+<mat-menu #exercise="matMenu">
+  <button mat-menu-item routerLink="/exercise-add">Add Exercise</button>
+  <button mat-menu-item routerLink="/exercise-history">Exercise History</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="food">Food</button>
+<mat-menu #food="matMenu">
+  <button mat-menu-item routerLink="/food-add">Add Food</button>
+  <button mat-menu-item routerLink="/food-history">Food History</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="appointment">Appointment</button>
+<mat-menu #appointment="matMenu">
+  <button mat-menu-item  routerLink="/appointment-add">Add Appointment</button>
+  <button mat-menu-item  routerLink="/appointment-history">Appointment History</button>
+</mat-menu>
+
+<button mat-raised-button color="accent" routerLink="/register">Sign Up</button>
+
+<button mat-raised-button color="primary" routerLink="/login">Log In</button>
+
+<!-- <button mat-raised-button color="primary"  (click)="_authService.logoutUser">Log Out</button> -->
+
+
+</mat-toolbar>
