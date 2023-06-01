@@ -1,43 +1,3 @@
-// import { Component } from '@angular/core';
-// import { MatTableDataSource } from '@angular/material/table';
-
-// export interface PeriodicElement {
-//   position: number;
-//   exercisename: string;
-//   date: string;
-//   exercisetime: string;
-
-// }
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {position: 1, exercisename: 'Hydrogen', date: '11/01/1018', exercisetime: '11:10 am'},
-//   {position: 2, exercisename: 'Helium', date: '22/02/2028', exercisetime: '02:20 am'},
-// ];
-
-
-// @Component({
-//   selector: 'app-exercise-history',
-//   templateUrl: './exercise-history.component.html',
-//   styleUrls: ['./exercise-history.component.css']
-// })
-// export class ExerciseHistoryComponent {
-
-//   displayedColumns: string[] = ['position', 'exercisename', 'date', 'exercisetime', 'edit', 'delete'];
-//   dataSource = new MatTableDataSource(ELEMENT_DATA);
-
-//   applyFilter(event: Event) {
-//     const filterValue = (event.target as HTMLInputElement).value;
-//     this.dataSource.filter = filterValue.trim().toLowerCase();
-//   }
-// }
-
-
-
-
-
-
-
-
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
@@ -137,18 +97,22 @@ export class ExerciseHistoryComponent implements OnInit{
   }
 
   updateExercise(element: PeriodicElement): void {
+      const formattedDate = this.formatDate(element.date);
     Swal.fire({
       title: 'Update Exercise',
       html:
+        '<label for="swal-input-exercisename" class="swal2-label">Name:</label>' +
         '<input id="swal-input-exercisename" class="swal2-input" value="' +
         element.exercisename +
-        '">' +
-        '<input id="swal-input-date" class="swal2-input" value="' +
-        element.date +
-        '">' +
-        '<input id="swal-input-exercisetime" class="swal2-input" value="' +
+        '"><br>' +
+        '<label for="swal-input-date" class="swal2-label">Date:</label>' +
+        '<input type="date" id="swal-input-date" class="swal2-input" value="' +
+        formattedDate +
+        '"><br>' +
+        '<label for="swal-input-exercisetime" class="swal2-label">Time:</label>' +
+        '<input type="time" id="swal-input-exercisetime" class="swal2-input" value="' +
         element.exercisetime +
-        '">',
+        '"><br>',
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Update',
@@ -202,6 +166,17 @@ export class ExerciseHistoryComponent implements OnInit{
         }
       }
     });
+  }
+
+  formatDate(date: string | null): string {
+    if (date) {
+      const parsedDate = new Date(date);
+      const year = parsedDate.getFullYear();
+      const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
+      const day = ('0' + parsedDate.getDate()).slice(-2);
+      return `${year}-${month}-${day}`;
+    }
+    return '';
   }
   
 }

@@ -20,7 +20,7 @@ export interface PeriodicElement {
   templateUrl: './appointment-history.component.html',
   styleUrls: ['./appointment-history.component.css']
 })
-export class AppointmentHistoryComponent implements OnInit{
+export class AppointmentHistoryComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'withWhome', 'appointmentdate', 'time', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
@@ -29,19 +29,19 @@ export class AppointmentHistoryComponent implements OnInit{
     private http: HttpClient,
     private confirmService: NgConfirmService,
     private router: Router
-    ) { }
+  ) { }
 
-    
+
   ngOnInit() {
     this.callApi();
   }
 
 
-  
+
 
   callApi() {
     const apiUrl = 'http://192.168.1.11:8866/myAppointment';
-    const token = localStorage.getItem('token'); // Replace with your actual token
+    const token = localStorage.getItem('token');
 
     // Set the headers with the token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -49,7 +49,7 @@ export class AppointmentHistoryComponent implements OnInit{
     this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
       (data: PeriodicElement[]) => {
         this.dataSource.data = data;
-        
+
       },
       (error) => {
         console.error('An error occurred while calling the API:', error);
@@ -73,9 +73,9 @@ export class AppointmentHistoryComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         const apiUrl = `http://192.168.1.11:8866/deleteMyAppointmnetdetail/${id}`;
-        const token = localStorage.getItem('token'); 
+        const token = localStorage.getItem('token');
         const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  
+
         this.http.delete(apiUrl, { headers }).subscribe(
           () => {
             console.log('Appointment deleted successfully.');
@@ -95,18 +95,23 @@ export class AppointmentHistoryComponent implements OnInit{
 
 
   updateAppointment(element: PeriodicElement): void {
+
+    const formattedDate = this.formatDate(element.appointmentdate);
     Swal.fire({
       title: 'Update Appointment',
       html:
-        '<input id="swal-input-withWhome" class="swal2-input" value="' +
+        '<label for="swal-input-withWhome" class="swal2-label">With Whome:</label>' +
+        '<input id="swal-input-withWhome" class="swal2-input custom-width" value="' +
         element.withWhome +
-        '">' +
-        '<input id="swal-input-appointmentdate" class="swal2-input" value="' +
-        element.appointmentdate +
-        '">' +
-        '<input id="swal-input-time" class="swal2-input" value="' +
+        '"><br>' +
+        '<label for="swal-input-appointmentdate" class="swal2-label">Date:</label>' +
+        '<input type="date" id="swal-input-appointmentdate" class="swal2-input custom-width" value="' +
+        formattedDate +
+        '"><br>' +
+        '<label for="swal-input-time" class="swal2-label">Time:</label>' +
+        '<input type="time" id="swal-input-time" class="swal2-input custom-width" value="' +
         element.time +
-        '">',
+        '"><br>',
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Update',
@@ -115,10 +120,8 @@ export class AppointmentHistoryComponent implements OnInit{
         const nameValue = (<HTMLInputElement>document.getElementById('swal-input-withWhome')).value;
         const dateValue = (<HTMLInputElement>document.getElementById('swal-input-appointmentdate')).value;
         const timeValue = (<HTMLInputElement>document.getElementById('swal-input-time')).value;
-        // const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
-        // const timingValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
-        // const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
-  
+
+
         return {
           withWhome: nameValue,
           appointmentdate: dateValue,
@@ -129,26 +132,23 @@ export class AppointmentHistoryComponent implements OnInit{
       if (result.isConfirmed) {
         const formValues = result.value;
         if (formValues) {
-          const {withWhome, appointmentdate, time} = formValues;
-  
+          const { withWhome, appointmentdate, time } = formValues;
+
           const apiUrl = `http://192.168.1.11:8866/updateMyAppointment/${element.id}`;
           const token = localStorage.getItem('token');
           const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  
+
           const updatedData: PeriodicElement = {
             ...element,
             withWhome: withWhome,
-            // shape: shape,
-            // dose: Number(dose),
             appointmentdate: appointmentdate,
             time: time,
-            // description: description,
           };
-  
+
           this.http.put(apiUrl, updatedData, { headers }).subscribe(
             () => {
               console.log('Appointment updated successfully.');
-  
+
               const updatedElements = this.dataSource.data.map((e) =>
                 e.id === element.id ? updatedData : e
               );
@@ -164,5 +164,16 @@ export class AppointmentHistoryComponent implements OnInit{
       }
     });
   }
- 
+
+  formatDate(date: string | null): string {
+    if (date) {
+      const parsedDate = new Date(date);
+      const year = parsedDate.getFullYear();
+      const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
+      const day = ('0' + parsedDate.getDate()).slice(-2);
+      return `${year}-${month}-${day}`;
+    }
+    return '';
+  }
+
 }

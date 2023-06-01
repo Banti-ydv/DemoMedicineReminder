@@ -30,11 +30,15 @@
       <td mat-cell *matCellDef="let element"> {{element.dose}} </td>
     </ng-container>
     
-    <ng-container matColumnDef="date">
+    <!-- <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> Date </th>
         <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container> -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element">{{ formatDate(element.date) }}</td>
       </ng-container>
-
+      
       <ng-container matColumnDef="timing">
         <th mat-header-cell *matHeaderCellDef> Time </th>
         <td mat-cell *matCellDef="let element"> {{element.timing}} </td>

@@ -1,15 +1,20 @@
 .example-card {
     max-width: 400px;
+  margin-top: 40px;
+  margin-bottom: 20px;
   }
   
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-  .center-content{
-    text-align: -webkit-center;
-    margin-top: 100px;
-  }
+ .center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 87vh;
+  /* background-image: url('/src/assets/img/photo-157.jpg'); */
+  background-size: cover;
+  text-align: center;
+  padding-right: 800px;
+  background-image: url(https://images.zapnito.com/users/81523/posters/1651502776-62-6741/b828b791-7b82-44a3-bbd3-63d469c56709_large.jpeg);
+}
   .example-full-width {
     width: 100%;
     margin-top: 10px;

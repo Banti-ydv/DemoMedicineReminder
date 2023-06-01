@@ -2,3 +2,22 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+input#swal-input-date,
+ #swal-input-timing,
+ #swal-input-name,
+ #swal-input-shape,
+ #swal-input-dose,
+ #swal-input-description,
+ #swal-input-withWhome,
+ #swal-input-appointmentdate,
+ #swal-input-time,
+ #swal-input-exercisename,
+ #swal-input-exercisetime,
+ #swal-input-foodname,
+ #swal-input-foodtime
+{
+    width: 50%;
+}
+

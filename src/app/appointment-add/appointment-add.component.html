@@ -1,5 +1,5 @@
 <div class="center-content">
-    <form (ngSubmit)="onappointment()">
+  <form (ngSubmit)="onappointment()">
     <mat-card class="example-card">
       <mat-card-header class="center-header">
         <mat-card-title>Add Appointment</mat-card-title>
@@ -8,37 +8,36 @@
       <mat-card-content>
         <div class="form-row">
           <div class="form-column">
-            
-  
+
             <mat-form-field class="example-full-width">
               <mat-label>With Whome</mat-label>
               <input type="text" matInput placeholder="" value="" name="withWhome" [(ngModel)]="appointment.withWhome">
-              <!-- <input matInput placeholder="" value=""> -->
+
               <mat-icon matSuffix>account_circle</mat-icon>
             </mat-form-field>
 
+
             <mat-form-field class="example-full-width">
               <mat-label>Choose a date</mat-label>
-              <input type="text" matInput [matDatepicker]="picker" placeholder="" value="" name="appointmentdate" [(ngModel)]="appointment.appointmentdate">
-             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="picker" name="appointmentdate" [(ngModel)]="appointment.appointmentdate"
+                (ngModelChange)="appointment.appointmentdate = formatDate($event)">
+              <mat-hint>YYYY-MM-DD</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon>date_range</mat-icon>
+              </mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-  
+
             <mat-form-field class="example-full-width">
-                <mat-label>Time</mat-label>
-                <input type="time" matInput placeholder="" value="" name="time" [(ngModel)]="appointment.time">
-                <!-- <input matInput placeholder="" value=""> -->
-                <mat-icon matSuffix>access_time</mat-icon>
-              </mat-form-field>
-              </div>
-              </div>
-            <button class="mat-button" mat-raised-button color="primary">Add</button>
-            <!-- <button mat-flat-button color="primary">Register</button> -->
-  
-          
+              <mat-label>Time</mat-label>
+              <input type="time" matInput placeholder="" value="" name="time" [(ngModel)]="appointment.time">
+              <mat-icon matSuffix>access_time</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+        <button class="mat-button" mat-raised-button color="primary">Add</button>
       </mat-card-content>
     </mat-card>
   </form>
-    
-  </div>
-  
+
+</div>

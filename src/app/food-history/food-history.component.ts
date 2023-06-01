@@ -95,18 +95,22 @@ export class FoodHistoryComponent implements OnInit{
 
 
   updateFood(element: PeriodicElement): void {
+    const formattedDate = this.formatDate(element.date);
     Swal.fire({
       title: 'Update Food',
       html:
+        '<label for="swal-input-foodname" class="swal2-label">Name:</label>' +
         '<input id="swal-input-foodname" class="swal2-input" value="' +
         element.foodname +
-        '">' +
-        '<input id="swal-input-date" class="swal2-input" value="' +
-        element.date +
-        '">' +
-        '<input id="swal-input-foodtime" class="swal2-input" value="' +
+        '"><br>' +
+      '<label for="swal-input-date" class="swal2-label">Date:</label>' +
+        '<input type="date" id="swal-input-date" class="swal2-input" value="' +
+        formattedDate +
+        '"><br>' +
+      '<label for="swal-input-foodtime" class="swal2-label">Time:</label>' +
+        '<input type="time" id="swal-input-foodtime" class="swal2-input" value="' +
         element.foodtime +
-        '">',
+        '"><br>',
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Update',
@@ -161,4 +165,16 @@ export class FoodHistoryComponent implements OnInit{
       }
     });
   }
+
+  formatDate(date: string | null): string {
+    if (date) {
+      const parsedDate = new Date(date);
+      const year = parsedDate.getFullYear();
+      const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
+      const day = ('0' + parsedDate.getDate()).slice(-2);
+      return `${year}-${month}-${day}`;
+    }
+    return '';
+  }
+  
 }

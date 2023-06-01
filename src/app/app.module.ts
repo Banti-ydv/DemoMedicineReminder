@@ -46,6 +46,7 @@ import { NgConfirmModule } from 'ng-confirm-box';
 // import { AsyncPipe } from '@angular/common';
 import { NotificationService } from './notification.service';
 import { environment } from 'src/environments/environment';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -66,6 +67,7 @@ import { environment } from 'src/environments/environment';
     ExerciseHistoryComponent,
     FoodHistoryComponent,
     AppointmentHistoryComponent,
+    ProfileComponent,
 
   ],
   imports: [

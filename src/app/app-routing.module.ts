@@ -12,6 +12,7 @@ import { MedicineHistoryComponent } from './medicine-history/medicine-history.co
 import { ExerciseHistoryComponent } from './exercise-history/exercise-history.component';
 import { FoodHistoryComponent } from './food-history/food-history.component';
 import { AppointmentHistoryComponent } from './appointment-history/appointment-history.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,9 @@ const routes: Routes = [
   { path: 'appointment-history', component: AppointmentHistoryComponent },
   { path: "login", component: LoginComponent, pathMatch:'full'},
   { path: 'register', component: RegisterComponent },
-  { path: 'navbar', component: NavbarComponent},  
+  { path: 'navbar', component: NavbarComponent}, 
+  { path: 'profile', component: ProfileComponent}, 
+
 ];
 
 @NgModule({

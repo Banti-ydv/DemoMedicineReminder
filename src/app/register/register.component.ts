@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
 import { NgToastService } from 'ng-angular-popup';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -21,23 +22,36 @@ export class RegisterComponent{
   constructor(private userService: UserService, private router: Router, private toast: NgToastService) { }
 
     
+ 
+
   onregister() {
     this.userService.registerUser(this.register).subscribe(
-      (response: any) => {
-        // Registration successful, do something with the response
-        console.log('Registration successful', response);
-        // Redirect to a success page or perform any other action
-        this.router.navigate(['/login']);
-        this.toast.success({detail:"Success Message",summary:"Register Successfully.",duration:5000})
+      () => {
+        Swal.fire(
+          'Successful',
+          'Registration successful.',
+          'success'
+        ).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigate(['/login']);
+          }
+        });
       },
       (error: any) => {
-        // Registration failed, handle the error
-        console.error('Error occurred during registration', error);
-        this.toast.error({detail:"Error Message",summary:"Something went wrong.",duration:5000})
-        // Display an error message or perform any other action
+        let errorMessage = 'Error occurred during registration';
+        if (error.status === 409) {
+          errorMessage = 'User already exists. Please choose a different username.';
+        } else if (error.status === 500) {
+          errorMessage = 'Internal server error. Please try again later.';
+        }
+        
+        Swal.fire(
+          'Registration Error',
+          errorMessage,
+          'error'
+        );
       }
     );
-  }
-  
+  }  
   
 }

@@ -1,19 +1,14 @@
-/* Structure */
 table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 20%;
-    float: right;
-    margin: 20px 10px 0px 0px;
-    /* padding-top: 50px; */
-    
-  }
-  
-mat-form-field{
-    height: 70px;
-    /* padding-top: 500px; */
-    
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 20%;
+  float: right;
+  margin: 20px 10px 0px 0px;
+}
+
+mat-form-field {
+  height: 70px;
 }
