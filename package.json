@@ -21,14 +21,16 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "@firebase/app": "^0.9.11",
+    "@firebase/messaging": "^0.12.4",
     "firebase": "^9.22.1",
-    "firebase-tools": "^8.0.0",
     "module-name": "^0.0.1-security",
     "ng-angular-popup": "^0.3.1",
     "ng-confirm-box": "^0.1.1",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.7.8",
     "tslib": "^2.3.0",
+    "web-push": "^3.6.1",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

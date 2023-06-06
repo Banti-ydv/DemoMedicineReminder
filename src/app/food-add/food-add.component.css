@@ -2,13 +2,15 @@
     max-width: 400px;
   }
   
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  .center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 87vh;
     background-size: cover;
-  }
-  .center-content{
-    text-align: -webkit-center;
-    margin-top: 100px;
+    text-align: center;
+    padding-left: 350px;
+    background-image: url(src/assets/img/photo-157.jpg);
   }
   .example-full-width {
     width: 100%;
@@ -27,3 +29,10 @@
   padding-bottom: 10px;
 }
 
+
+@media only screen and (max-width: 800px) and (min-width: 100px)  {
+ 
+  .center-content{
+    padding-left: 50px;
+  }
+}

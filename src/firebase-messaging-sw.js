@@ -6,7 +6,7 @@ firebase.initializeApp({
     projectId: "medicinereminder-f7713",
     storageBucket: "medicinereminder-f7713.appspot.com",
     messagingSenderId: "959379465611",
-    appId: "1:959379465611:web:e677e00b38b0891c153b8e",
-    measurementId: "G-VL23MT6H6Y"
+    appId: "1:959379465611:web:9c7612ad84f19ef2153b8e",
+    measurementId: "G-PJYGDHJNF8"
 });
 const messaging = firebase.messaging();

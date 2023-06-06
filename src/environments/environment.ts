@@ -6,7 +6,9 @@ export const environment = {
         projectId: "medicinereminder-f7713",
         storageBucket: "medicinereminder-f7713.appspot.com",
         messagingSenderId: "959379465611",
-        appId: "1:959379465611:web:e677e00b38b0891c153b8e",
-        measurementId: "G-T0FEG8C07T"
+        appId: "1:959379465611:web:9c7612ad84f19ef2153b8e",
+        measurementId: "G-PJYGDHJNF8",
+        vapidKey: "BCdRlw8Cq_brbmZIWE9S8auhx1JN1MsUY07qCrZFB4oZQDT4EIsrddN_Ty--JH_muHv4bXGu2EgefSBBEYgXM-U"
+
     },
-  };
+};

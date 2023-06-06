@@ -14,13 +14,19 @@ export class UserService {
   private foodAddUrl = 'http://192.168.1.11:8866/saveFood';
   private appointmentAddUrl = 'http://192.168.1.11:8866/takeAppointment';
   
+  
 
   constructor(private http: HttpClient,private router: Router) { }
 
 
 
   generateToken(username:string,password:string){
-    const loginUrl = `${this.login}?username=${username}&password=${password}`;
+    // const deviceToken = localStorage.getItem('deviceToken');
+    
+    const deviceToken = localStorage.getItem('deviceToken');
+    
+    const loginUrl = `${this.login}?username=${username}&password=${password}&deviceToken=${deviceToken}`;
+  console.log("deviceToken",deviceToken)
     return this.http.get(loginUrl);
   }
 

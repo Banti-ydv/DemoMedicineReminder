@@ -1,5 +1,5 @@
 .example-card {
-  max-width: 400px;
+  max-width: 600px;
   margin-top: 60px;
   margin-bottom: 20px;
   /* margin-right: 100%; */
@@ -9,12 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
-  /* background-image: url('/src/assets/img/photo-157.jpg'); */
+  height: 87vh;
   background-size: cover;
   text-align: center;
-  padding-right: 700px;
-  background-image: url(https://images.zapnito.com/users/81523/posters/1651502776-62-6741/b828b791-7b82-44a3-bbd3-63d469c56709_large.jpeg);
+  padding-left: 350px;
+  background-image: url(src/assets/img/photo-157.jpg);
 }
 
 .example-full-width {
@@ -34,4 +33,12 @@
   align-items: center;
   border-bottom: 2px solid #3f51b5;
   padding-bottom: 10px;
+}
+
+
+@media only screen and (max-width: 800px) and (min-width: 100px)  {
+ 
+  .center-content{
+    padding-left: 50px;
+  }
 }

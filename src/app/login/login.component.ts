@@ -17,37 +17,6 @@ export class LoginComponent {
   
   constructor(private userServise: UserService, private router: Router) { }
 
-
-    // onlogin(){
-
-    //   if(this.login.username && this.login.password){
-    //     this.userServise.generateToken(this.login.username, this.login.password).subscribe(
-    //       (resp:any)=>{
-    //         Swal.fire({
-    //           icon: 'success',
-    //           title: 'successful...',
-    //           text: 'Login successful.',
-    //         });
-    //         console.log(resp);
-    //         localStorage.setItem("token",resp.token);
-            
-    //         this.router.navigate(['/home']);
-
-            
-    //       },
-    //       err=>{
-    //         Swal.fire({
-    //           icon: 'error',
-    //           title: 'Oops...',
-    //           text: 'Something went wrong!',
-    //         });
-    //       }
-    //     )
-    //   }
-      
-    // }
-
-
     onlogin() {
       if (this.login.username && this.login.password) {
         this.userServise.generateToken(this.login.username, this.login.password).subscribe(
@@ -68,7 +37,7 @@ export class LoginComponent {
                 text: 'Login successful.',
               });
               localStorage.setItem('token', resp.token);
-              this.router.navigate(['/home']);
+              this.router.navigate(['/profile']);
             }
           },
           (err) => {
@@ -80,12 +49,6 @@ export class LoginComponent {
               });
               
             }
-            // console.error('An error occurred during login:', err);
-            // Swal.fire({
-            //   icon: 'error',
-            //   title: 'Oops...',
-            //   text: 'Something went wrong!',
-            // });
           }
         );
       }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,9 +21,6 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { DatePipe } from '@angular/common';
-
-
-
 import { NgIf , NgFor, AsyncPipe} from '@angular/common';
 import { MedicineAddComponent } from './medicine-add/medicine-add.component';
 import { ExerciseAddComponent } from './exercise-add/exercise-add.component';
@@ -38,17 +34,11 @@ import { NgToastModule } from 'ng-angular-popup';
 import {MatTableModule} from '@angular/material/table';
 import { MatDialogModule }from '@angular/material/dialog';
 import { NgConfirmModule } from 'ng-confirm-box';
-
-// import { AngularFireAuthModule } from '@angular/fire/auth';
-// import { AngularFireModule } from '@angular/fire'
-// import { AngularFireMessagingModule } from '@angular/fire/messaging';
-// import { AngularFireDatabaseModule } from '@angular/fire/database';
-// import { AsyncPipe } from '@angular/common';
-import { NotificationService } from './notification.service';
-import { environment } from 'src/environments/environment';
 import { ProfileComponent } from './profile/profile.component';
-
-
+import { environment } from "../environments/environment";
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
+import { AngularFireModule } from '@angular/fire/compat';
 
 
 
@@ -93,16 +83,10 @@ import { ProfileComponent } from './profile/profile.component';
     NgConfirmModule,
     MatDatepickerModule,
     MatNativeDateModule,
-
-    // AngularFireAuthModule,
-    // AngularFireMessagingModule,
-    // AngularFireDatabaseModule,
-    // AngularFireModule.initializeApp(environment.firebase)
-
-    // AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase)
    
   ],
-  providers: [NotificationService, AsyncPipe ,DatePipe],
+  providers: [ AsyncPipe ,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

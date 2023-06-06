@@ -10,6 +10,9 @@ import { of } from 'rxjs';
 import { throwError } from 'rxjs';
 
 export interface PeriodicElement {
+  emailid: string;
+  lastname: string;
+  firstname: string;
   id: number;
   name: string;
   shape: string;
