@@ -6,7 +6,7 @@
 <mat-form-field>
     <mat-label>Search</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-    <mat-icon matSuffix> search </mat-icon>
+    <!-- <mat-icon matSuffix> search </mat-icon> -->
   </mat-form-field>
   
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -39,9 +39,14 @@
         <th mat-header-cell *matHeaderCellDef> Date </th>
         <td mat-cell *matCellDef="let element"> {{element.date}} </td>
       </ng-container> -->
-      <ng-container matColumnDef="date">
-        <th mat-header-cell *matHeaderCellDef> Date </th>
-        <td mat-cell *matCellDef="let element">{{ formatDate(element.date) }}</td>
+      <ng-container matColumnDef="fromDate">
+        <th mat-header-cell *matHeaderCellDef> from Date </th>
+        <td mat-cell *matCellDef="let element">{{ formatfromDate(element.fromDate) }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="toDate">
+        <th mat-header-cell *matHeaderCellDef> to Date </th>
+        <td mat-cell *matCellDef="let element">{{ formattoDate(element.toDate) }}</td>
       </ng-container>
       
       <ng-container matColumnDef="timing">

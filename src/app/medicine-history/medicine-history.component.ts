@@ -17,7 +17,8 @@ export interface PeriodicElement {
   name: string;
   shape: string;
   dose: number;
-  date: string;
+  fromDate: string;
+  toDate: string;
   timing: string;
   description: string;
 
@@ -31,7 +32,7 @@ export interface PeriodicElement {
 })
 export class MedicineHistoryComponent implements OnInit{
 
-  displayedColumns: string[] = ['id', 'name', 'shape', 'dose', 'date', 'timing', 'description', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'shape', 'dose', 'fromDate', 'toDate', 'timing', 'description', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(
@@ -203,7 +204,8 @@ deleteMedicine(id: number) {
 // }
 
 updateMedicine(element: PeriodicElement): void {
-  const formattedDate = this.formatDate(element.date);
+  const formattedfromDate = this.formatfromDate(element.fromDate);
+  const formattedtoDate = this.formattoDate(element.toDate);
   Swal.fire({
     title: 'Update Medicine',
     html:
@@ -219,9 +221,13 @@ updateMedicine(element: PeriodicElement): void {
       '<input id="swal-input-dose" class="swal2-input custom-width" value="' +
       element.dose +
       '"><br>' +
-      '<label for="swal-input-date" class="swal2-label">Date:</label>' +
-      '<input type="date" id="swal-input-date" class="swal2-input custom-width" value="' +
-      formattedDate +
+      '<label for="swal-input-fromDate" class="swal2-label">fromDate:</label>' +
+      '<input type="date" id="swal-input-fromDate" class="swal2-input custom-width" value="' +
+      formattedfromDate +
+      '"><br>' +
+      '<label for="swal-input-toDate" class="swal2-label">toDate:</label>' +
+      '<input type="date" id="swal-input-toDate" class="swal2-input custom-width" value="' +
+      formattedtoDate +
       '"><br>' +
       '<label for="swal-input-timing" class="swal2-label">Timing:</label>' +
       '<input type="time" id="swal-input-timing" class="swal2-input custom-width" value="' +
@@ -239,7 +245,8 @@ updateMedicine(element: PeriodicElement): void {
       const nameValue = (<HTMLInputElement>document.getElementById('swal-input-name')).value;
       const shapeValue = (<HTMLInputElement>document.getElementById('swal-input-shape')).value;
       const doseValue = (<HTMLInputElement>document.getElementById('swal-input-dose')).value;
-      const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
+      const fromDateValue = (<HTMLInputElement>document.getElementById('swal-input-fromDate')).value;
+      const toDateValue = (<HTMLInputElement>document.getElementById('swal-input-toDate')).value;
       const timingValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
       const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
 
@@ -247,7 +254,8 @@ updateMedicine(element: PeriodicElement): void {
         name: nameValue,
         shape: shapeValue,
         dose: doseValue,
-        date: dateValue,
+        fromDate: fromDateValue,
+        toDate: toDateValue,
         timing: timingValue,
         description: descriptionValue,
       };
@@ -256,7 +264,7 @@ updateMedicine(element: PeriodicElement): void {
     if (result.isConfirmed) {
       const formValues = result.value;
       if (formValues) {
-        const { name, shape, dose, date, timing, description } = formValues;
+        const { name, shape, dose, toDate, fromDate, timing, description } = formValues;
 
         const apiUrl = `http://192.168.1.11:8866/updateMyMedicine/${element.id}`;
         const token = localStorage.getItem('token');
@@ -267,7 +275,8 @@ updateMedicine(element: PeriodicElement): void {
           name: name,
           shape: shape,
           dose: Number(dose),
-          date: date,
+          toDate: toDate,
+          fromDate:fromDate,
           timing: timing,
           description: description,
         };
@@ -298,7 +307,7 @@ updateMedicine(element: PeriodicElement): void {
   });
 }
 
-formatDate(date: string | null): string {
+formatfromDate(date: string | null): string {
     if (date) {
       const parsedDate = new Date(date);
       const year = parsedDate.getFullYear();
@@ -309,5 +318,15 @@ formatDate(date: string | null): string {
     return '';
   }
   
+  formattoDate(date: string | null): string {
+    if (date) {
+      const parsedDate = new Date(date);
+      const year = parsedDate.getFullYear();
+      const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
+      const day = ('0' + parsedDate.getDate()).slice(-2);
+      return `${year}-${month}-${day}`;
+    }
+    return '';
+  }
   
 }

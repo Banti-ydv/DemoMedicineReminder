@@ -13,7 +13,7 @@ export class UserService {
   private exerciseAddUrl = 'http://192.168.1.11:8866/addExercise';
   private foodAddUrl = 'http://192.168.1.11:8866/saveFood';
   private appointmentAddUrl = 'http://192.168.1.11:8866/takeAppointment';
-  
+
   
 
   constructor(private http: HttpClient,private router: Router) { }
@@ -79,5 +79,6 @@ export class UserService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post(this.appointmentAddUrl, appointmentAdd, { headers });
   }
+
 
 }

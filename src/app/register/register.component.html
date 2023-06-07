@@ -1,18 +1,16 @@
-
+<!-- 
  <div class="center-content">
   <form (ngSubmit)="onregister()" #registerForm="ngForm">
     <mat-card class="example-card">
       <mat-card-header class="center-header">
-        <!-- <mat-card-title>Register/Login</mat-card-title> -->
+     
         <mat-card-title>Register</mat-card-title>
         <mat-card-subtitle>Medicine Reminder</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <!-- <mat-tab-group> -->
-          <!-- <mat-tab label="Register"> -->
             <table class="table">
               <tr>
-                <td>
+                <td style="width: 10%;">
                   <mat-form-field class="example-full-width">
                     <mat-label>First Name</mat-label>
                     <input type="text" matInput placeholder="" name="firstname" [(ngModel)]="register.firstname" required>
@@ -82,9 +80,82 @@
               </tr>
             </table>
             <button class="mat-button" mat-raised-button color="primary" [disabled]="registerForm.invalid">Register</button>
-          <!-- </mat-tab> -->
-        <!-- </mat-tab-group> -->
       </mat-card-content>
     </mat-card>
   </form>
+</div> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<main id="main">
+
+  <section id="breadcrumbs" class="breadcrumbs">
+    
+
+ 
+<div class="container_1" id="blur">
+ <form class="login-form" id="register" name="register" (ngSubmit)="onregister()" #registerForm="ngForm">
+   <div class="heading-container_1">
+     <h2>Register Now</h2>
+
+   </div>
+   <table>
+    <tr>
+      <td>
+   <div class="group login-input px-1">
+     <input type="text" required id="firstname" name="firstname" [(ngModel)]="register.firstname">
+     <span>First Name</span>
+    </div>
+    </td>
+    <td>
+  <div class="group login-input px-1">
+     <input type="text" required id="lastname" name="lastname" [(ngModel)]="register.lastname">
+     <span>Last Name</span>
+  </div>
+  </td>
+  <tr>
+    <td>
+  <div class="group login-input px-1">
+    <input type="email" required id="emailid" name="emailid" [(ngModel)]="register.emailid">
+    <span>Email Id</span>
+  </div>
+  </td>
+  <td>
+  <div class="group login-input px-1">
+     <input type="text" required id="username" name="username" [(ngModel)]="register.username">
+     <span>User Name</span>
+   </div>
+   </td>
+   </tr>
+   <tr>
+    <td colspan="2">
+   <div class="group login-input">
+     <input type="password" required id="password" name="password" [(ngModel)]="register.password">
+     <span>Password</span>
+   </div>
+   <div class="group showPassword">
+    <input type="checkbox" id="showPassword">
+      <label for="showPassword">Show password</label>
+   </div>
+   </td>
+   </tr>
+   </table>
+   
+   <div class="group">
+     <button class="btn" type="submit" id="register" name="register">Register</button>
+     
+   </div>
+ </form>
 </div>
+<div class="popup" id="popup">
+<h2>Thank You!</h2>
+<p>Your details has been successfully registered.</p>
+<button type="button" onclick="closepopup()">OK</button>
+</div>
+
+
+
+  </section>
+
+</main>

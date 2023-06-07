@@ -1,4 +1,4 @@
-<div class="center-content">
+<!-- <div class="center-content">
     <form (ngSubmit)="onfood()">
     <mat-card class="example-card">
       <mat-card-header class="center-header">
@@ -8,12 +8,11 @@
       <mat-card-content>
       <div class="form-row">
         <div class="form-column">
-        <!-- <mat-tab-group> -->
-          <!-- <mat-tab label="Food"> -->
+      
             <mat-form-field class="example-full-width">
               <mat-label>Food Name</mat-label>
               <input type="text" matInput placeholder="" value="" name="foodname" [(ngModel)]="food.foodname">
-              <!-- <input matInput placeholder="" value=""> -->
+ 
               <mat-icon matSuffix>mode_edit</mat-icon>
             </mat-form-field>
   
@@ -33,13 +32,55 @@
               </div>
               </div>
             <button class="mat-button" mat-raised-button color="primary">Add</button>
-            <!-- <button mat-flat-button color="primary">Register</button> -->
-  
-          <!-- </mat-tab> -->
-        <!-- </mat-tab-group> -->
+       
       </mat-card-content>
     </mat-card>
   </form>
     
   </div>
-  
+   -->
+
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+   <main id="main">
+
+    <section id="breadcrumbs" class="breadcrumbs">
+      
+ <div class="container_1" id="blur">
+  <form class="login-form" id="food">
+    <div class="heading-container_1">
+      <h2>Food</h2>
+
+    </div>
+    <div class="group login-input">
+      <input type="text" required id="foodname" name="foodname">
+      <span>Food Name</span>
+      <i class="fa fa-user"></i>
+    </div>
+    <div class="group login-input">
+      <input type="text" required id="date" name="date">
+      <span>Date</span>
+      <i class="fa fa-calendar"></i>
+    </div>
+    <div class="group login-input">
+      <input type="text" required id="foodtime" name="foodtime">
+      <span>Time</span>
+      <i class="fa fa-clock-o"></i>
+    </div>
+
+    <div class="group">
+      <button class="btn" type="submit" id="add_food" name="add_food">Add Food</button>
+    </div>
+  </form>
+</div>
+<div class="popup" id="popup">
+  <h2>Thank You!</h2>
+  <p>Your food has been successfully added.</p>
+ <button type="button" onclick="closepopup()">OK</button>
+</div>
+
+    </section>
+
+  </main>

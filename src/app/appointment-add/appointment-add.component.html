@@ -1,4 +1,4 @@
-<div class="center-content">
+<!-- <div class="center-content">
   <form (ngSubmit)="onappointment()">
     <mat-card class="example-card">
       <mat-card-header class="center-header">
@@ -40,4 +40,49 @@
     </mat-card>
   </form>
 
+</div> -->
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<main id="main">
+
+  <section id="breadcrumbs" class="breadcrumbs">
+    
+<div class="container_1" id="blur">
+<form class="login-form" id="appointment" (ngSubmit)="onappointment()">
+  <div class="heading-container_1">
+    <h2>Appointment</h2>
+  
+  </div>
+  <div class="group login-input">
+    <input type="text" required id="withWhome" name="withWhome" [(ngModel)]="appointment.withWhome">
+    <span>With Whom</span>
+    <i class="fa fa-user"></i>
+  </div>
+  <div class="group login-input">
+    <input type="text" required id="appointmentdate" name="appointmentdate">
+    <span>Date</span>
+    <i class="fa fa-calendar"></i>
+  </div>
+  <div class="group login-input">
+    <input type="text" required id="appointmenttime" name="appointmenttime">
+    <span>Time</span>
+    <i class="fa fa-clock-o"></i>
+  </div>
+
+  <div class="group">
+    <button class="btn" type="submit" id="add_appointment" name="add_appointment">Add Appointment</button>
+  </div>
+</form>
 </div>
+<div class="popup" id="popup">
+<h2>Thank You!</h2>
+<p>Your appointment has been successfully added.</p>
+<button type="button" onclick="closepopup()">OK</button>
+</div>
+
+  </section>
+
+</main>

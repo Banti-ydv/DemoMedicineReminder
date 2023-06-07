@@ -40,6 +40,8 @@ import { initializeApp } from "firebase/app";
 initializeApp(environment.firebase);
 import { AngularFireModule } from '@angular/fire/compat';
 
+// import {Observable, Observer} from 'rxjs';
+
 
 
 @NgModule({
@@ -83,8 +85,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     NgConfirmModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AngularFireModule.initializeApp(environment.firebase)
-   
+    AngularFireModule.initializeApp(environment.firebase)   
   ],
   providers: [ AsyncPipe ,DatePipe],
   bootstrap: [AppComponent]

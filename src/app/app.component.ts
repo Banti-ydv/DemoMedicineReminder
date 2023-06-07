@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import 'firebase/compat/messaging';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { environment } from 'src/environments/environment';
+import { v4 as uuidv4 } from 'uuid';
+
 @Component({
   selector: 'medicine-app',
   templateUrl: './app.component.html',
@@ -21,6 +23,9 @@ export class AppComponent implements OnInit {
       { vapidKey: environment.firebase.vapidKey }).then(
         (currentToken) => {
           if (currentToken) {
+            let myuuid = uuidv4();
+
+            console.log('Your UUID is: ' + myuuid);
             console.log("Hurraaa!!! we got the token.....");
             console.log(currentToken);
             localStorage.setItem('deviceToken', currentToken);
