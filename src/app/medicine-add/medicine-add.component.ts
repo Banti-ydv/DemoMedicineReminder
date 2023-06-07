@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component , OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
 import { DatePipe } from '@angular/common';
+// import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -9,7 +11,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './medicine-add.component.html',
   styleUrls: ['./medicine-add.component.css']
 })
-export class MedicineAddComponent {
+export class MedicineAddComponent implements OnInit {
   medicine = {
     name: '',
     shape: '',
@@ -19,18 +21,25 @@ export class MedicineAddComponent {
     timing: '',
     description:''
   };
-  
-  // register = {  // Add the necessary properties used in the template
-  //   firstname: '',
-  //   lastname: '',
-  //   emailid: '',
-  //   username: '',
-  //   password: ''
-  // };
+
+  firstFormGroup: FormGroup | any;
+  secondFormGroup: FormGroup | any;
 
 
   hide = true; // Add the necessary property used in the template
-  constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { }
+  constructor(private userService: UserService, private router: Router, private datePipe: DatePipe,private formBuilder: FormBuilder) { }
+
+  ngOnInit() {
+    this.firstFormGroup = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required]
+    });
+
+    this.secondFormGroup = this.formBuilder.group({
+      address: ['', Validators.required],
+      city: ['', Validators.required]
+    });
+  }
 
 
   onmedicine() {  // Update the method name to match the one used in the template

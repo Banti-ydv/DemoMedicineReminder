@@ -39,6 +39,13 @@ import { environment } from "../environments/environment";
 import { initializeApp } from "firebase/app";
 initializeApp(environment.firebase);
 import { AngularFireModule } from '@angular/fire/compat';
+import { MatSelectModule } from '@angular/material/select';
+
+
+import {FormBuilder, Validators} from '@angular/forms';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import {MatStepperModule} from '@angular/material/stepper';
+
 
 // import {Observable, Observer} from 'rxjs';
 
@@ -85,7 +92,11 @@ import { AngularFireModule } from '@angular/fire/compat';
     NgConfirmModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AngularFireModule.initializeApp(environment.firebase)   
+    MatSelectModule,
+    AngularFireModule.initializeApp(environment.firebase),
+
+    MatStepperModule,
+    
   ],
   providers: [ AsyncPipe ,DatePipe],
   bootstrap: [AppComponent]

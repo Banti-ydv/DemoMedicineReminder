@@ -1,4 +1,4 @@
-
+<!-- 
    <div class="center-content">
   <form (ngSubmit)="onmedicine()">
     <mat-card class="example-card">
@@ -26,27 +26,21 @@
           </tr>
           <tr>
             <td>
-            <mat-form-field class="example-full-width">
-              <mat-label>Dose</mat-label>
-              <input type="text" matInput placeholder="" value="" name="dose" [(ngModel)]="medicine.dose">
-              <mat-icon matSuffix>medical_services</mat-icon>
-            </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Dose</mat-label>
+                <mat-select placeholder="Select Dose" [(ngModel)]="medicine.dose" name="dose">
+                  <mat-option value="1">1</mat-option>
+                  <mat-option value="2">2</mat-option>
+                  <mat-option value="3">3</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
          </td>
          <td>
-  
-          
-            <!-- <mat-form-field class="example-full-width">
-              <mat-label>Choose a date</mat-label>
-              <input type="text" matInput [matDatepicker]="picker" pattern="\d{2}/\d{2}/\d{4}" placeholder="" value="" name="date" [(ngModel)]="medicine.date">
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-             -->
-
              <mat-form-field class="example-full-width">
               <mat-label>Choose start a date</mat-label>
               <input matInput [matDatepicker]="picker1" name="fromDate" [(ngModel)]="medicine.fromDate" (ngModelChange)="medicine.fromDate = formatfromDate($event)">
-              <!-- <mat-hint>YYYY-MM-DD</mat-hint> -->
+
               <mat-datepicker-toggle matSuffix [for]="picker1">
                 <mat-icon>date_range</mat-icon>
               </mat-datepicker-toggle>
@@ -56,7 +50,7 @@
             <mat-form-field class="example-full-width">
               <mat-label>Choose end a date</mat-label>
               <input matInput [matDatepicker]="picker" name="toDate" [(ngModel)]="medicine.toDate" (ngModelChange)="medicine.toDate = formattoDate($event)">
-              <!-- <mat-hint>YYYY-MM-DD</mat-hint> -->
+
               <mat-datepicker-toggle matSuffix [for]="picker">
                 <mat-icon>date_range</mat-icon>
               </mat-datepicker-toggle>
@@ -94,4 +88,105 @@
       </mat-card-content>
     </mat-card>
   </form>
-</div>
+</div> -->
+
+
+<mat-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel></ng-template>
+      
+      <h5>What medicine would you like to add ?</h5><br/>
+      <mat-form-field>
+        <mat-label>Medicine Name</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <!-- <p>Go to a different step to see the error state</p> -->
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" errorMessage="form is the med required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel></ng-template>
+      
+      <h5>What form is the med ?</h5><br/>
+              <mat-form-field class="example-full-width">
+                <mat-label>select</mat-label>
+                <mat-select placeholder="Select Dose" [(ngModel)]="medicine.dose" name="dose">
+                  <mat-option value="Pill">Pill</mat-option>
+                  <mat-option value="Injection">Injection</mat-option>
+                  <mat-option value="Solution">Solution</mat-option>
+                  <mat-option value="Drops">Drops</mat-option>
+                  <mat-option value="Inhaler">Inhaler</mat-option>
+                  <mat-option value="Powder">Powder</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+
+      <div>
+        <!-- <p>Go to a different step to see the error state</p> -->
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="secondFormGroup" errorMessage="form is the med required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel></ng-template>
+      
+      <h5>What are you taking it for ?</h5><br/>
+      <mat-form-field>
+        <mat-label>write here ..</mat-label>
+        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+
+      <div>
+        <!-- <p>Go to a different step to see the error state</p> -->
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="secondFormGroup" errorMessage="form is the med required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel></ng-template>
+      
+      <h5>How often do you take it ?</h5><br/>
+      <mat-form-field class="example-full-width">
+        <mat-label>select</mat-label>
+        <mat-select placeholder="Select Dose" [(ngModel)]="medicine.dose" name="dose">
+          <mat-option value="Every day">Every day</mat-option>
+          <mat-option value="Specific days of the week">Specific days of the week</mat-option>
+          <mat-option value="On a recurring cycle">On a recurring cycle</mat-option>
+          <mat-option value="Every X days">Every X days</mat-option>
+          <mat-option value="Every X week">Every X week</mat-option>
+          <mat-option value="Only as needed">Only as needed</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <!-- <p>Go to a different step to see the error state</p> -->
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+ 
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+
