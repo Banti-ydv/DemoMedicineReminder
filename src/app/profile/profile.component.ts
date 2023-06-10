@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   defaultImageUrl: string = "assets/img/profile-img.png";
   logoutUrl = 'http://192.168.1.11:8866/signout';
   
+  
 
   // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp=CAU
 
@@ -32,6 +33,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router,private sanitizer: DomSanitizer) { }
 
+  // id: number | any;
+  
   ngOnInit(): void {
     this.getUserDetails();
     this.getUserPhoto();
@@ -94,6 +97,22 @@ export class ProfileComponent implements OnInit {
   setDefaultImage(): void {
     this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
   }
+
+  // deletePhoto(id: number) {
+  //   const url = 'http://192.168.1.11:8866/photo/delete/${id}';
+  
+  //   this.http.delete(url).subscribe(
+  //     (resp) => {
+  //       console.log(resp);
+  //       // Photo deletion successful, perform any necessary actions
+  //     },
+  //     (error) => {
+  //       console.log('Error occurred while deleting photo:', error);
+  //       // Handle the error appropriately
+  //     }
+  //   );
+  // }
+  
 
 
   openUploadPopup(): void {
@@ -247,45 +266,7 @@ updateProfile(updatedData:any): void {
     );
   }
 }
-openLogoutConfirmation(): void {
-  Swal.fire({
-    title: 'Logout',
-    text: 'Are you sure you want to log out?',
-    icon: 'question',
-    showCancelButton: true,
-    confirmButtonText: 'Logout',
-    cancelButtonText: 'Cancel'
-  }).then((result) => {
-    if (result.isConfirmed) {
-      this.logout();
-    }
-  });
-}
 
-logout(): void {
-  const token = localStorage.getItem('token');
-
-  if (token) {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    this.http.post(this.logoutUrl, null, { headers }).subscribe(
-      (response) => {
-        console.log('Logged out successfully.');
-        
-        // Perform any additional actions after successful logout
-      },
-      (error) => {
-        localStorage.removeItem('token');
-        this.router.navigate(['/login']);
-        console.error('An error occurred while logging out:', error);
-      }
-    );
-  } else {
-    console.warn('No token found in localStorage.');
-  }
-}
 // updateProfile(updatedData): void {
 //   const updateUrl = 'http://192.168.1.11:8866/updateMydetailes';
 //   const token = localStorage.getItem('token');

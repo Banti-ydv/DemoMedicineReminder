@@ -1,83 +1,85 @@
-<div class="center-content">
-    <form (ngSubmit)="onlogin()">
+<!-- <div class="center-content">
+  <form (ngSubmit)="onlogin()">
     <mat-card class="example-card">
       <mat-card-header class="center-header">
-        <!-- <div mat-card-avatar class="example-header-image"></div> -->
         <mat-card-title>Login</mat-card-title>
         <mat-card-subtitle>Medicine Reminder</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <!-- <mat-tab-group> -->
-          <!-- <mat-tab label="Register">
-            <mat-form-field class="example-full-width">
-              <mat-label>First Name</mat-label>
-              <input type="text" matInput placeholder="" value="" name="reg_firstname" [(ngModel)]="reg_firstname">
-              
-              <mat-icon matSuffix>mode_edit</mat-icon>
-            </mat-form-field>
-  
-            <mat-form-field class="example-full-width">
-              <mat-label>Last Name</mat-label>
-              <input  type="text" matInput placeholder="" value="" name="reg_lastname" [(ngModel)]="reg_lastname">
-            
-              <mat-icon matSuffix>mode_edit</mat-icon>
-            </mat-form-field>
-  
-            <mat-form-field class="example-full-width">
-              <mat-label>Email Id</mat-label>
-              <input type="email" matInput placeholder="" value="" name="reg_emailid" [(ngModel)]="reg_emailid">
-          
-              <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
-  
-            <mat-form-field class="example-full-width">
-              <mat-label>User Name</mat-label>
-              <input type="text" matInput placeholder="" value="" name="reg_username" [(ngModel)]="reg_username">
-    
-              <mat-icon matSuffix>account_circle</mat-icon>
-            </mat-form-field>
-  
-            <mat-form-field class="example-full-width">
-              <mat-label>Password</mat-label>
-              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="reg_password" [(ngModel)]="reg_password">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-              
-            </mat-form-field>
-  
-            <button class="mat-button" mat-raised-button color="primary" (click)="register()">Register</button>
-            
-  
-          </mat-tab>
-   -->
-          <!-- <mat-tab label="Login"> -->
-            <mat-form-field class="example-full-width">
-              <mat-label>User Name</mat-label>
-              <input type="text" matInput placeholder="" value="" name="username" [(ngModel)]="login.username">
-              
-              
-              <mat-icon matSuffix> account_circle </mat-icon>
-            </mat-form-field>
-  
-            <mat-form-field class="example-full-width">
-              <mat-label>Password</mat-label>
-              <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="password" [(ngModel)]="login.password">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              
-            </mat-form-field>
-  
-            <button type="submit" class="mat-button" mat-raised-button color="primary">Login</button>
-            
-          <!-- </mat-tab> -->
-        <!-- </mat-tab-group> -->
+        <mat-form-field class="example-full-width">
+          <mat-label>User Name</mat-label>
+          <input type="text" matInput placeholder="" value="" name="username" [(ngModel)]="login.username">
+
+
+          <mat-icon matSuffix> account_circle </mat-icon>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input [type]="hide ? 'password' : 'text'" matInput placeholder="Ex. Sikar@123" name="password"
+            [(ngModel)]="login.password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+        </mat-form-field>
+
+        <button type="submit" class="mat-button" mat-raised-button color="primary">Login</button>
+
       </mat-card-content>
     </mat-card>
   </form>
-    
-  </div>
 
-  
-  
+</div> -->
+
+
+<div class="container">
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-lg-12 col-md-9">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                </div>
+                <form class="user" (ngSubmit)="onlogin()">
+                  <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="username" 
+                      placeholder="Enter User Name..." name="username" [(ngModel)]="login.username">
+                  </div>
+
+
+                  <div class="form-group">
+                    <div class="input-group">
+                      <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control form-control-user" id="exampleInputPassword"
+                        placeholder="Password" name="password" [(ngModel)]="login.password">
+                        
+                    </div>
+                  </div>
+
+                  <div class="form-group pl-3">
+                    <div class="custom-control custom-checkbox small">
+                      <input type="checkbox" class="custom-control-input" id="customCheck" (change)="togglePasswordVisibility($event)">
+                      <label class="custom-control-label" for="customCheck">Show Password</label>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                </form>
+                <hr>
+                <div class="text-center">
+                  <a class="small" routerLink="/register">Create an Account!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

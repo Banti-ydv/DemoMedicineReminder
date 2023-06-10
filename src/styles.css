@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
 
 input#swal-input-date,
@@ -16,7 +16,13 @@ input#swal-input-date,
  #swal-input-exercisename,
  #swal-input-exercisetime,
  #swal-input-foodname,
- #swal-input-foodtime
+ #swal-input-foodtime,
+ #swal-input-phoneNumber,
+ #swal-input-time,
+ #swal-input-address,
+ #swal-input-reason,
+ #swal-input-speciality
+
 {
     width: 50%;
 }

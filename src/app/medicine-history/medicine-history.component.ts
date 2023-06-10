@@ -21,6 +21,7 @@ export interface PeriodicElement {
   toDate: string;
   timing: string;
   description: string;
+  // frequency: string;
 
 }
 
@@ -32,7 +33,7 @@ export interface PeriodicElement {
 })
 export class MedicineHistoryComponent implements OnInit{
 
-  displayedColumns: string[] = ['id', 'name', 'shape', 'dose', 'fromDate', 'toDate', 'timing', 'description', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'shape', 'dose', 'frequency' , 'fromDate', 'toDate', 'timing', 'description', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(
@@ -108,100 +109,6 @@ deleteMedicine(id: number) {
 
 
 
-// ...
-
-// updateMedicine(element: PeriodicElement): void {
-//   const formattedDate = this.formatDate(element.date);
-//   Swal.fire({
-//     title: 'Update Medicine',
-//     html:
-//       '<label for="swal-input-name" class="swal2-label">Name:</label>' +
-//       '<input id="swal-input-name" class="swal2-input custom-width" value="' +
-//       element.name +
-//       '"><br>' +
-//       '<label for="swal-input-shape" class="swal2-label">Shape:</label>' +
-//       '<input id="swal-input-shape" class="swal2-input custom-width" value="' +
-//       element.shape +
-//       '"><br>' +
-//       '<label for="swal-input-dose" class="swal2-label">Dose:</label>' +
-//       '<input id="swal-input-dose" class="swal2-input custom-width" value="' +
-//       element.dose +
-//       '"><br>' +
-//       '<label for="swal-input-date" class="swal2-label">Date:</label>' +
-//       '<input type="date" id="swal-input-date" class="swal2-input custom-width" value="' +
-//       formattedDate +
-//       '"><br>' +
-//       '<label for="swal-input-timing" class="swal2-label">Timing:</label>' +
-//       '<input type="time" id="swal-input-timing" class="swal2-input custom-width" value="' +
-//       element.timing +
-//       '"><br>' +
-//       '<label for="swal-input-description" class="swal2-label">Description:</label>' +
-//       '<input id="swal-input-description" class="swal2-input custom-width" value="' +
-//       element.description +
-//       '"><br>',
-//     focusConfirm: false,
-//     showCancelButton: true,
-//     confirmButtonText: 'Update',
-//     cancelButtonText: 'Cancel',
-//     preConfirm: () => {
-//       const nameValue = (<HTMLInputElement>document.getElementById('swal-input-name')).value;
-//       const shapeValue = (<HTMLInputElement>document.getElementById('swal-input-shape')).value;
-//       const doseValue = (<HTMLInputElement>document.getElementById('swal-input-dose')).value;
-//       const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
-//       const timingValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
-//       const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
-
-//       return {
-//         name: nameValue,
-//         shape: shapeValue,
-//         dose: doseValue,
-//         date: dateValue,
-//         timing: timingValue,
-//         description: descriptionValue,
-//       };
-//     },
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       const formValues = result.value;
-//       if (formValues) {
-//         const { name, shape, dose, date, timing, description } = formValues;
-
-//         const apiUrl = `http://192.168.1.11:8866/updateMyMedicine/${element.id}`;
-//         const token = localStorage.getItem('token');
-//         const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-//         const updatedData: PeriodicElement = {
-//           ...element,
-//           name: name,
-//           shape: shape,
-//           dose: Number(dose),
-//           date: date,
-//           timing: timing,
-//           description: description,
-//         };
-
-//         this.http.put(apiUrl, updatedData, { headers }).pipe(
-//           catchError((error) => {
-//             console.error('An error occurred while updating the medicine:', error);
-//             Swal.fire('Error!', 'An error occurred while updating the medicine.', 'error');
-//             return of(null);
-//           })
-//         ).subscribe((success) => {
-//           if (success) {
-//             console.log('Medicine updated successfully.');
-
-//             const updatedElements = this.dataSource.data.map((e) =>
-//               e.id === element.id ? updatedData : e
-//             );
-//             this.dataSource.data = updatedElements;
-//             console.log('Medicine updated successfully.', success)
-//             Swal.fire('Success!', 'Medicine updated successfully.', 'success');
-//           }
-//         });
-//       }
-//     }
-//   });
-// }
 
 updateMedicine(element: PeriodicElement): void {
   const formattedfromDate = this.formatfromDate(element.fromDate);
@@ -221,6 +128,10 @@ updateMedicine(element: PeriodicElement): void {
       '<input id="swal-input-dose" class="swal2-input custom-width" value="' +
       element.dose +
       '"><br>' +
+      // '<label for="swal-input-frequency" class="swal2-label">Frequency:</label>' +
+      // '<input id="swal-input-frequency" class="swal2-input custom-width" value="' +
+      // element.frequency +
+      // '"><br>' +
       '<label for="swal-input-fromDate" class="swal2-label">fromDate:</label>' +
       '<input type="date" id="swal-input-fromDate" class="swal2-input custom-width" value="' +
       formattedfromDate +
@@ -249,6 +160,7 @@ updateMedicine(element: PeriodicElement): void {
       const toDateValue = (<HTMLInputElement>document.getElementById('swal-input-toDate')).value;
       const timingValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
       const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
+      // const frequencyValue = (<HTMLInputElement>document.getElementById('swal-input-frequency')).value;
 
       return {
         name: nameValue,
@@ -258,6 +170,7 @@ updateMedicine(element: PeriodicElement): void {
         toDate: toDateValue,
         timing: timingValue,
         description: descriptionValue,
+        // frequency: frequencyValue,
       };
     },
   }).then((result) => {
@@ -279,6 +192,7 @@ updateMedicine(element: PeriodicElement): void {
           fromDate:fromDate,
           timing: timing,
           description: description,
+          // frequency: frequency,
         };
 
         this.http.put(apiUrl, updatedData, { headers }).pipe(

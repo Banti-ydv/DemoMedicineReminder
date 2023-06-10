@@ -1,192 +1,221 @@
-<!-- 
-   <div class="center-content">
-  <form (ngSubmit)="onmedicine()">
-    <mat-card class="example-card">
-      <mat-card-header class="center-header">
-        <mat-card-title>Add Medicine</mat-card-title>
-      </mat-card-header>
-      
-      <mat-card-content>
-        <table class="table">
-          <tr>
-            <td>
-            <mat-form-field class="example-full-width">
-              <mat-label>Medicine Name</mat-label>
-              <input type="text" matInput placeholder="" value="" name="name" [(ngModel)]="medicine.name">
-              <mat-icon matSuffix>mode_edit</mat-icon>
-            </mat-form-field>
-            </td>
-            <td>
-            <mat-form-field class="example-full-width">
-              <mat-label>Shape</mat-label>
-              <input type="text" matInput placeholder="" value="" name="shape" [(ngModel)]="medicine.shape">
-              <mat-icon matSuffix>change_history</mat-icon>
-            </mat-form-field>
-          </td>
-          </tr>
-          <tr>
-            <td>
-              <mat-form-field class="example-full-width">
-                <mat-label>Dose</mat-label>
-                <mat-select placeholder="Select Dose" [(ngModel)]="medicine.dose" name="dose">
-                  <mat-option value="1">1</mat-option>
-                  <mat-option value="2">2</mat-option>
-                  <mat-option value="3">3</mat-option>
-                </mat-select>
-              </mat-form-field>
+<div class="row">
+  <div class="col-sm-12">
+    <h5 class="mt-3 mb-4 fw-bold text-center bg-primary text-white p-2 mb-2 rounded">Add Medicines</h5>
+    <form (ngSubmit)="onMedicine()" #medicineForm="ngForm">
+      <div class="row mb-3">
+        <div class="form-group col-md-4">
+          <label>Medicine Name</label>
+          <input type="text" name="name" class="form-control" placeholder="Enter Medicine Name"
+            [(ngModel)]="medicine.name" required />
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>Shape</label>
+          <!-- <input type="text" name="shape" class="form-control" placeholder="Enter Medicine Name"
+            [(ngModel)]="medicine.name" required /> -->
+            <select name="shape" [(ngModel)]="medicine.shape" class="form-control" required>
+              <option value="">Select</option>
+              <option value="Pill">Pill</option>
+              <option value="Injection">Injection</option>
+              <option value="Solution(liquid)">Solution(liquid)</option>
+              <option value="Drops">Drops</option>
+              <option value="Inhaler">Inhaler</option>
+              <option value="Powder">Powder</option>
+              <option value="Other">Other</option>
               
-         </td>
-         <td>
-             <mat-form-field class="example-full-width">
-              <mat-label>Choose start a date</mat-label>
-              <input matInput [matDatepicker]="picker1" name="fromDate" [(ngModel)]="medicine.fromDate" (ngModelChange)="medicine.fromDate = formatfromDate($event)">
-
-              <mat-datepicker-toggle matSuffix [for]="picker1">
-                <mat-icon>date_range</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-              <mat-label>Choose end a date</mat-label>
-              <input matInput [matDatepicker]="picker" name="toDate" [(ngModel)]="medicine.toDate" (ngModelChange)="medicine.toDate = formattoDate($event)">
-
-              <mat-datepicker-toggle matSuffix [for]="picker">
-                <mat-icon>date_range</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            </td>
-            </tr>
-            <tr>
-              <td>
-            
-            
-         
-            <mat-form-field class="example-full-width">
-              <mat-label>Time</mat-label>
-              <input type="time" matInput placeholder="" value="" name="timing" [(ngModel)]="medicine.timing">
-              <mat-icon matSuffix>access_time</mat-icon>
-            </mat-form-field>
-            </td>
-            <td>
-  
-            <mat-form-field class="example-full-width">
-              <mat-label>Description</mat-label>
-              <input type="text" matInput placeholder="" value="" name="description" [(ngModel)]="medicine.description">
-              <mat-icon matSuffix>more_edit</mat-icon>
-            </mat-form-field>
-         </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-  
-        <button class="mat-button" mat-raised-button color="primary">Add</button>
-        </td>
-        </tr>
-        </table>
-      </mat-card-content>
-    </mat-card>
-  </form>
-</div> -->
-
-
-<mat-stepper #stepper>
-  <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel></ng-template>
-      
-      <h5>What medicine would you like to add ?</h5><br/>
-      <mat-form-field>
-        <mat-label>Medicine Name</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <!-- <p>Go to a different step to see the error state</p> -->
-        <button mat-button matStepperNext>Next</button>
+            </select>
+        </div>
       </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" errorMessage="form is the med required.">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel></ng-template>
-      
-      <h5>What form is the med ?</h5><br/>
-              <mat-form-field class="example-full-width">
-                <mat-label>select</mat-label>
-                <mat-select placeholder="Select Dose" [(ngModel)]="medicine.dose" name="dose">
-                  <mat-option value="Pill">Pill</mat-option>
-                  <mat-option value="Injection">Injection</mat-option>
-                  <mat-option value="Solution">Solution</mat-option>
-                  <mat-option value="Drops">Drops</mat-option>
-                  <mat-option value="Inhaler">Inhaler</mat-option>
-                  <mat-option value="Powder">Powder</mat-option>
-                </mat-select>
-              </mat-form-field>
 
+      <!-- <div class="row mb-3" *ngFor="let medicine of medicines; let i = index">
+        <div class="form-group col-md-4">
+          <label>Time</label><input type="time" name="timings" class="form-control" placeholder="Enter Time" [(ngModel)]="medicine.timings[i]" required />
 
-      <div>
-        <!-- <p>Go to a different step to see the error state</p> -->
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Dose</label>
+          <input type="number" name="dose" class="form-control" placeholder="Enter Dose" [(ngModel)]="medicine.dose" min="1" max="20" required />
+        </div>
+        <div class="form-group col-md-2 mt-4" *ngIf="i !== 0">
+          <samp class="btn btn-danger mt-2" (click)="removeMedicine(i)"><i class="fa fa-minus"></i> Remove</samp>
+        </div>
+      </div> -->
+      <div class="row mb-3" *ngFor="let medicine of medicines; let i = index">
+        <div class="form-group col-md-4">
+          <label>Time</label>
+          <input type="time" name="timings" class="form-control" placeholder="Enter Time" [(ngModel)]="timingsArray[i]"
+            required />
+        </div>
+        <div class="form-group col-md-4">
+          <label>Dose</label>
+          <input type="number" name="dose" class="form-control" placeholder="Enter Dose" [(ngModel)]="medicine.dose"
+            required min="1" max="10" />
+        </div>
+        <div class="form-group col-md-4 mt-4" *ngIf="i !== 0">
+          <button class="btn btn-danger mt-2" (click)="removeMedicine(i)"><i class="fa fa-minus"></i> Remove</button>
+        </div>
       </div>
-    </form>
-  </mat-step>
 
+      <!-- <div class="form-group col-md-2 mt-4">
+        <button type="button" class="btn btn-success" (click)="addMedicine()"><i class="fa fa-plus"></i> Add
+          More</button>
+      </div> -->
 
-  <mat-step [stepControl]="secondFormGroup" errorMessage="form is the med required.">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel></ng-template>
-      
-      <h5>What are you taking it for ?</h5><br/>
-      <mat-form-field>
-        <mat-label>write here ..</mat-label>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-      </mat-form-field>
-
-      <div>
-        <!-- <p>Go to a different step to see the error state</p> -->
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div class="form-group col-md-4">
+        <button type="button" class="btn btn-success" (click)="addMedicine()"><i class="fa fa-plus"></i> Add More</button>
       </div>
-    </form>
-  </mat-step>
 
 
-  <mat-step [stepControl]="secondFormGroup" errorMessage="form is the med required.">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel></ng-template>
+
+      <div class="row mb-3">
+        <div class="form-group col-md-4">
+          <label>How often do you take it ?</label>
+          <select name="frequency" [(ngModel)]="medicine.frequency" class="form-control" id="frequencySelect" required>
+            <option value="">Select</option>
+            <option value="everyday">Everyday</option>
+            <option value="every_x_day">Every X day</option>
+            <option value="specific_day_of_week">Specific day of the week</option>
+            <option value="specific_day_of_month">Specific day of the month</option>
+          </select>
+        </div>
+      <!-- </div> -->
       
-      <h5>How often do you take it ?</h5><br/>
-      <mat-form-field class="example-full-width">
-        <mat-label>select</mat-label>
-        <mat-select placeholder="Select Dose" [(ngModel)]="medicine.dose" name="dose">
-          <mat-option value="Every day">Every day</mat-option>
-          <mat-option value="Specific days of the week">Specific days of the week</mat-option>
-          <mat-option value="On a recurring cycle">On a recurring cycle</mat-option>
-          <mat-option value="Every X days">Every X days</mat-option>
-          <mat-option value="Every X week">Every X week</mat-option>
-          <mat-option value="Only as needed">Only as needed</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div>
-        <!-- <p>Go to a different step to see the error state</p> -->
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div id="xDayInputContainer" style="display: none;"  class=" col-md-4">
+        <div class="form-group">
+          <label>Interval</label>
+          <input type="number" name="interval" class="form-control" placeholder="Enter interval" min="1" max="30"/>
+        </div>
       </div>
+      
+      <!-- <div id="dayOfWeekInputContainer" style="display: none;">
+        <div class="form-group">
+          <label>Day of the week</label>
+          <select id="dayOfWeek" name="shape" class="form-control" multiple required>
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </select>
+        </div>
+      </div>
+       -->
+
+       <div id="dayOfWeekInputContainer" style="display: none;">
+        <!-- Your pop-up content goes here -->
+        <div class="form-group">
+          <label>Day of the week</label>
+          <select id="dayOfWeek" name="dayOfWeek" class="form-control" multiple required>
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </select>
+        </div>
+      </div>
+
+       <div id="dayOfMonthInputContainer" style="display: none;">
+        <div class="form-group">
+          <label>Day of the month</label>
+          <select id="dayOfMonth" name="shape" class="form-control" multiple required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+
+          </select>
+        </div>
+      </div>
+      </div>
+      
+
+      <div class="row mb-3">
+        <div class="form-group col-md-4">
+          <label>Start Date</label>
+          <input type="date" name="fromDate" class="form-control" placeholder="Select" [(ngModel)]="medicine.fromDate"
+            required />
+        </div>
+
+        <div class="form-group col-md-4">
+          <label>End Date</label>
+          <input type="date" name="toDate" class="form-control" placeholder="Select" [(ngModel)]="medicine.toDate"
+            required />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="form-group col-md-4">
+          <label>Description</label>
+          <input type="text" name="description" class="form-control" placeholder="Enter Message.."
+            [(ngModel)]="medicine.description" required />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">Save</button>
     </form>
-  </mat-step>
+  </div>
+</div>
 
 
- 
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-stepper>
-
+<!-- 
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option> -->

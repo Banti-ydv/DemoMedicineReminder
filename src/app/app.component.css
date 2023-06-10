@@ -1,0 +1,8 @@
+
+    .toggled {
+        display: none;
+    }
+    .toggled .sidebar {
+        display: block;
+    }
+

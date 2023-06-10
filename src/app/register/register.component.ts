@@ -18,11 +18,11 @@
 //     username:'',
 //     password:''
 //   }
-  
+
 //   constructor(private userService: UserService, private router: Router, private toast: NgToastService) { }
 
-    
- 
+
+
 
 //   onregister() {
 //     this.userService.registerUser(this.register).subscribe(
@@ -44,7 +44,7 @@
 //         } else if (error.status === 500) {
 //           errorMessage = 'Internal server error. Please try again later.';
 //         }
-        
+
 //         Swal.fire(
 //           'Registration Error',
 //           errorMessage,
@@ -53,7 +53,7 @@
 //       }
 //     );
 //   }  
-  
+
 // }
 
 
@@ -107,8 +107,6 @@
 
 
 
-
-
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
@@ -119,7 +117,15 @@ import { UserService } from '../servise/user.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  hide = true;
+  registerIn: { password: string } = { password: '' };
+  showPassword: boolean = false;
+
+  togglePasswordVisibility(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.showPassword = target.checked;
+  }
+  
+  
   register = {
     firstname: '',
     lastname: '',
@@ -131,27 +137,21 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
-  onregister() {
+  onRegister() {
     this.userService.registerUser(this.register).subscribe(
       (response: any) => {
-        console.log('response===>',response)
-        if (response.status === 200) {
-          this.router.navigate(['/login']);
-        } else if (response.status === 400) {
+        console.log('response ===>', response);
+        this.router.navigate(['/login']);
+      },
+      (error: any) => {
+        console.log('error ===>', error);
+        if (error.status === 400) {
           alert('User already exists. Please choose a different username.');
         } else {
           alert('Error occurred during registration');
-        }
-      },
-      (error: any) => {
-        console.log('error====>',error)
-        if (error.status === 500) {
-          alert('Internal server error. Please try again later.');
-        } else {
-          alert('Error occurred during registration');
-        }
+        } 
       }
     );
   }

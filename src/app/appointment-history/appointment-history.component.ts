@@ -8,7 +8,10 @@ import Swal from 'sweetalert2';
 export interface PeriodicElement {
   id: number;
   withWhome: string;
-  appointmentdate: string;
+  reason: string;
+  speciality: string;
+  address: string;
+  phoneNumber: string;
   time: string;
 
 }
@@ -22,7 +25,7 @@ export interface PeriodicElement {
 })
 export class AppointmentHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'withWhome', 'appointmentdate', 'time', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'withWhome', 'reason', 'speciality',  'time', 'phoneNumber', 'address', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(
@@ -96,7 +99,7 @@ export class AppointmentHistoryComponent implements OnInit {
 
   updateAppointment(element: PeriodicElement): void {
 
-    const formattedDate = this.formatDate(element.appointmentdate);
+    // const formattedDate = this.formatDate(element.appointmentdate);
     Swal.fire({
       title: 'Update Appointment',
       html:
@@ -104,9 +107,21 @@ export class AppointmentHistoryComponent implements OnInit {
         '<input id="swal-input-withWhome" class="swal2-input custom-width" value="' +
         element.withWhome +
         '"><br>' +
-        '<label for="swal-input-appointmentdate" class="swal2-label">Date:</label>' +
-        '<input type="date" id="swal-input-appointmentdate" class="swal2-input custom-width" value="' +
-        formattedDate +
+        '<label for="swal-input-reason" class="swal2-label">Reason:</label>' +
+        '<input type="text" id="swal-input-reason" class="swal2-input custom-width" value="' +
+        element.reason +
+        '"><br>' +
+        '<label for="swal-input-speciality" class="swal2-label">Speciality:</label>' +
+        '<input type="text" id="swal-input-speciality" class="swal2-input custom-width" value="' +
+        element.speciality +
+        '"><br>' +
+        '<label for="swal-input-address" class="swal2-label">Address:</label>' +
+        '<input type="text" id="swal-input-address" class="swal2-input custom-width" value="' +
+        element.address +
+        '"><br>' +
+        '<label for="swal-input-phoneNumber" class="swal2-label">Phone Number:</label>' +
+        '<input type="text" id="swal-input-phoneNumber" class="swal2-input custom-width" value="' +
+        element.phoneNumber +
         '"><br>' +
         '<label for="swal-input-time" class="swal2-label">Time:</label>' +
         '<input type="time" id="swal-input-time" class="swal2-input custom-width" value="' +
@@ -118,13 +133,13 @@ export class AppointmentHistoryComponent implements OnInit {
       cancelButtonText: 'Cancel',
       preConfirm: () => {
         const nameValue = (<HTMLInputElement>document.getElementById('swal-input-withWhome')).value;
-        const dateValue = (<HTMLInputElement>document.getElementById('swal-input-appointmentdate')).value;
+        const reasonValue = (<HTMLInputElement>document.getElementById('swal-input-reason')).value;
         const timeValue = (<HTMLInputElement>document.getElementById('swal-input-time')).value;
 
 
         return {
           withWhome: nameValue,
-          appointmentdate: dateValue,
+          reason: reasonValue,
           time: timeValue,
         };
       },
@@ -132,7 +147,7 @@ export class AppointmentHistoryComponent implements OnInit {
       if (result.isConfirmed) {
         const formValues = result.value;
         if (formValues) {
-          const { withWhome, appointmentdate, time } = formValues;
+          const { withWhome, reason, time } = formValues;
 
           const apiUrl = `http://192.168.1.11:8866/updateMyAppointment/${element.id}`;
           const token = localStorage.getItem('token');
@@ -141,7 +156,7 @@ export class AppointmentHistoryComponent implements OnInit {
           const updatedData: PeriodicElement = {
             ...element,
             withWhome: withWhome,
-            appointmentdate: appointmentdate,
+            reason: reason,
             time: time,
           };
 

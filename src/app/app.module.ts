@@ -41,13 +41,8 @@ initializeApp(environment.firebase);
 import { AngularFireModule } from '@angular/fire/compat';
 import { MatSelectModule } from '@angular/material/select';
 
+import { AuthService } from './servise/auth.service';
 
-import {FormBuilder, Validators} from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import {MatStepperModule} from '@angular/material/stepper';
-
-
-// import {Observable, Observer} from 'rxjs';
 
 
 
@@ -95,10 +90,9 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatSelectModule,
     AngularFireModule.initializeApp(environment.firebase),
 
-    MatStepperModule,
     
   ],
-  providers: [ AsyncPipe ,DatePipe],
+  providers: [ AsyncPipe ,DatePipe, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

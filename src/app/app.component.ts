@@ -3,6 +3,7 @@ import 'firebase/compat/messaging';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthService } from './servise/auth.service';
 
 @Component({
   selector: 'medicine-app',
@@ -11,8 +12,10 @@ import { v4 as uuidv4 } from 'uuid';
 export class AppComponent implements OnInit {
   title = 'af-notification';
   message: any = null;
-  constructor() { }
+  isLoggedIn: boolean | any;
+  constructor(private authService: AuthService) { }
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.isAuthenticated();
     this.requestPermission();
     this.listen();
   }
@@ -57,6 +60,13 @@ export class AppComponent implements OnInit {
     notification.addEventListener('click', () => {
       // Handle notification click event
     });
+  }
+
+
+  logout() {
+    // Call the logout() method from AuthService
+    this.authService.logOut();
+    this.isLoggedIn = false;
   }
 }
 

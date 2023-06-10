@@ -11,9 +11,13 @@ import { DatePipe } from '@angular/common';
 export class AppointmentAddComponent {
 
 appointment = {
-  appointmentdate:'',
   withWhome:'',
-  time:''
+  reason:'',
+  speciality:'',
+  phoneNumber:'',
+  address:'',
+  time:'',
+  appointmentdate:''
   }
 
   constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { }
