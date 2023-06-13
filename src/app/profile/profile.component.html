@@ -108,33 +108,33 @@
 
 
 
-<div class="container emp-profile">
-  <form method="post">
-      <div class="row">
-          <div class="col-md-4">
-              <div class="profile-img">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                  <div class="file btn btn-lg btn-primary">
-                      Change Photo
-                      <input type="file" name="file"/>
+             <div class="container emp-profile">
+              <form method="post">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="profile-img">
+                      <img [src]="imageUrl || defaultImageUrl" alt="" class="rounded-circle"/>
+                      <div class="file btn btn-primary rounded-circle">
+                        <i class="fa fa-camera"></i>
+                        <input type="file" name="file" (change)="openUploadPopup()"/>
+                      </div>
+                    </div>
                   </div>
-              </div>
-          </div>
-          <div class="col-md-4">
-              <div class="profile-head">
-                          <h5>
-                              Banti Yadav
-                          </h5>
-                          <p>
-                              banti.yadav@prilient.com
-                          </p>
-                          <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
-              </div>
-          </div>
-          <div class="col-md-4">
-              <button type="button" class="btn btn-outline-primary">Edit Profile</button>
-          </div>
-      </div>
+                  <div class="col-md-4">
+                    <div class="profile-head">
+                      <h5>
+                        {{ userData?.firstname }} {{ userData?.lastname }}
+                      </h5>
+                      <p>
+                        {{ userData?.emailid }}
+                      </p>
+                      <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-outline-primary" (click)="openUpDatePopUp()">Edit Profile</button>
+                  </div>
+                </div>
       <div class="row">
         <div class="col-md-8 profile-head">
 
@@ -142,9 +142,9 @@
             <li class="nav-item">
                 <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-            </li>
+            </li> -->
         </ul>
 
             <div class="tab-content profile-tab" id="myTabContent">
@@ -154,7 +154,7 @@
                                     <label>User Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Banti@123</p>
+                                    <p>{{ userData?.firstname }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -162,7 +162,7 @@
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>Banti Yadav</p>
+                                    <p>{{ userData?.firstname }} {{ userData?.lastname }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -170,7 +170,7 @@
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p>banti.yadav@prilient.com</p>
+                                    <p>{{ userData?.emailid }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -190,7 +190,10 @@
                                 </div>
                             </div> -->
                 </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+
+
+                <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>Experience</label>
@@ -237,10 +240,13 @@
                             <p>Your detail description</p>
                         </div>
                     </div>
-                </div>
+                </div> -->
+
+
+
             </div>
         </div>
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
               <div class="profile-work">
                   <p>Set Reminder</p>
                   <a routerLink="/medicine-add">Add Medicine</a><br/>
@@ -251,7 +257,7 @@
                   <a routerLink="/exercise-history">Exercise Detailes</a><br/>
                   <a routerLink="/appointment-history">Appointment Detailes</a><br/>
               </div>
-          </div>
+          </div> -->
 
       </div>
   </form>           

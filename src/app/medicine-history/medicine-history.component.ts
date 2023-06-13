@@ -8,8 +8,10 @@ import Swal from 'sweetalert2';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { throwError } from 'rxjs';
+import { UserService } from '../servise/user.service';
 
 export interface PeriodicElement {
+  frequency: string;
   emailid: string;
   lastname: string;
   firstname: string;
@@ -40,6 +42,7 @@ export class MedicineHistoryComponent implements OnInit{
     private http: HttpClient,
     private confirmService: NgConfirmService,
     private router: Router,
+    private userService: UserService
     ) { }
 
 
@@ -55,7 +58,8 @@ export class MedicineHistoryComponent implements OnInit{
     const apiUrl = 'http://192.168.1.11:8866/mymedicine';
     const token = localStorage.getItem('token'); 
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
     this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
       (data: PeriodicElement[]) => {
@@ -81,7 +85,8 @@ deleteMedicine(id: number) {
     if (result.isConfirmed) {
       const apiUrl = `http://192.168.1.11:8866/deleteMyMedicine/${id}`;
       const token = localStorage.getItem('token'); 
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
       this.http.delete(apiUrl, { headers }).subscribe(
         () => {
@@ -128,10 +133,10 @@ updateMedicine(element: PeriodicElement): void {
       '<input id="swal-input-dose" class="swal2-input custom-width" value="' +
       element.dose +
       '"><br>' +
-      // '<label for="swal-input-frequency" class="swal2-label">Frequency:</label>' +
-      // '<input id="swal-input-frequency" class="swal2-input custom-width" value="' +
-      // element.frequency +
-      // '"><br>' +
+      '<label for="swal-input-frequency" class="swal2-label">Frequency:</label>' +
+      '<input id="swal-input-frequency" class="swal2-input custom-width" value="' +
+      element.frequency +
+      '"><br>' +
       '<label for="swal-input-fromDate" class="swal2-label">fromDate:</label>' +
       '<input type="date" id="swal-input-fromDate" class="swal2-input custom-width" value="' +
       formattedfromDate +
@@ -160,7 +165,7 @@ updateMedicine(element: PeriodicElement): void {
       const toDateValue = (<HTMLInputElement>document.getElementById('swal-input-toDate')).value;
       const timingValue = (<HTMLInputElement>document.getElementById('swal-input-timing')).value;
       const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
-      // const frequencyValue = (<HTMLInputElement>document.getElementById('swal-input-frequency')).value;
+      const frequencyValue = (<HTMLInputElement>document.getElementById('swal-input-frequency')).value;
 
       return {
         name: nameValue,
@@ -170,18 +175,19 @@ updateMedicine(element: PeriodicElement): void {
         toDate: toDateValue,
         timing: timingValue,
         description: descriptionValue,
-        // frequency: frequencyValue,
+        frequency: frequencyValue,
       };
     },
   }).then((result) => {
     if (result.isConfirmed) {
       const formValues = result.value;
       if (formValues) {
-        const { name, shape, dose, toDate, fromDate, timing, description } = formValues;
+        const { name, shape, dose, toDate, fromDate, timing, description, frequency } = formValues;
 
         const apiUrl = `http://192.168.1.11:8866/updateMyMedicine/${element.id}`;
         const token = localStorage.getItem('token');
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
         const updatedData: PeriodicElement = {
           ...element,
@@ -192,7 +198,7 @@ updateMedicine(element: PeriodicElement): void {
           fromDate:fromDate,
           timing: timing,
           description: description,
-          // frequency: frequency,
+          frequency: frequency,
         };
 
         this.http.put(apiUrl, updatedData, { headers }).pipe(
@@ -244,3 +250,37 @@ formatfromDate(date: string | null): string {
   }
   
 }
+
+
+// '<label for="swal-input-name" class="swal2-label">Name:</label>' +
+//       '<input id="swal-input-name" class="swal2-input custom-width" value="' +
+//       element.name +
+//       '"><br>' +
+//       '<label for="swal-input-shape" class="swal2-label">Shape:</label>' +
+//       '<input id="swal-input-shape" class="swal2-input custom-width" value="' +
+//       element.shape +
+//       '"><br>' +
+//       '<label for="swal-input-dose" class="swal2-label">Dose:</label>' +
+//       '<input id="swal-input-dose" class="swal2-input custom-width" value="' +
+//       element.dose +
+//       '"><br>' +
+//       '<label for="swal-input-frequency" class="swal2-label">Frequency:</label>' +
+//       '<input id="swal-input-frequency" class="swal2-input custom-width" value="' +
+//       element.frequency +
+//       '"><br>' +
+//       '<label for="swal-input-fromDate" class="swal2-label">fromDate:</label>' +
+//       '<input type="date" id="swal-input-fromDate" class="swal2-input custom-width" value="' +
+//       formattedfromDate +
+//       '"><br>' +
+//       '<label for="swal-input-toDate" class="swal2-label">toDate:</label>' +
+//       '<input type="date" id="swal-input-toDate" class="swal2-input custom-width" value="' +
+//       formattedtoDate +
+//       '"><br>' +
+//       '<label for="swal-input-timing" class="swal2-label">Timing:</label>' +
+//       '<input type="time" id="swal-input-timing" class="swal2-input custom-width" value="' +
+//       element.timing +
+//       '"><br>' +
+//       '<label for="swal-input-description" class="swal2-label">Description:</label>' +
+//       '<input id="swal-input-description" class="swal2-input custom-width" value="' +
+//       element.description +
+//       '"><br>',

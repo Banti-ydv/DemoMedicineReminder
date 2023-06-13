@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { AuthService } from '../servise/auth.service';
+import { UserService } from '../servise/user.service';
 
 interface PeriodicElement {
   id: number;
@@ -25,19 +27,19 @@ export class ProfileComponent implements OnInit {
   defaultImageUrl: string = "assets/img/profile-img.png";
   logoutUrl = 'http://192.168.1.11:8866/signout';
   
-  
 
   // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp=CAU
 
 
 
-  constructor(private http: HttpClient, private router: Router,private sanitizer: DomSanitizer) { }
+  constructor(private http: HttpClient, private router: Router,private sanitizer: DomSanitizer,private userService: UserService) { }
 
   // id: number | any;
   
   ngOnInit(): void {
     this.getUserDetails();
     this.getUserPhoto();
+    
   }
 
 
@@ -46,9 +48,8 @@ export class ProfileComponent implements OnInit {
     const token = localStorage.getItem('token');
 
     if (token) {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      });
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
       this.http.get<PeriodicElement>(userDetailsUrl, { headers }).subscribe(
         (data) => {
@@ -75,9 +76,8 @@ export class ProfileComponent implements OnInit {
         const token = localStorage.getItem('token');
   
         if (token) {
-          const headers = new HttpHeaders({
-            'Authorization': `Bearer ${token}`
-          });
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
   
           this.http.delete(deleteUrl, { headers }).subscribe(
             () => {
@@ -134,9 +134,8 @@ export class ProfileComponent implements OnInit {
           const formData = new FormData();
           formData.append('photo', file);
   
-          const headers = new HttpHeaders({
-            'Authorization': `Bearer ${token}`,
-          });
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
   
           this.http.post(apiUrl, formData, { headers }).subscribe(
             (response) => {
@@ -166,9 +165,8 @@ getUserPhoto(): void {
   const apiUrl = 'http://192.168.1.11:8866/photo/current';
   const token = localStorage.getItem('token');
 
-  const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`,
-  });
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
   this.http.get(apiUrl, { headers, responseType: 'blob' }).subscribe(
     (response: Blob) => {
@@ -186,9 +184,8 @@ openUpDatePopUp(): void {
   const token = localStorage.getItem('token');
 
   if (token) {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
     this.http.get<PeriodicElement>(userDetailsUrl, { headers }).subscribe(
       (data) => {
@@ -246,9 +243,8 @@ updateProfile(updatedData:any): void {
   const token = localStorage.getItem('token');
 
   if (token) {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
     this.http.put(updateUrl, updatedData, { headers }).subscribe(
       (data: any) => {

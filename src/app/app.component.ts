@@ -4,6 +4,13 @@ import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthService } from './servise/auth.service';
+import { Router } from '@angular/router';
+
+interface UserData {
+  firstname: string;
+  // other properties
+}
+
 
 @Component({
   selector: 'medicine-app',
@@ -12,10 +19,14 @@ import { AuthService } from './servise/auth.service';
 export class AppComponent implements OnInit {
   title = 'af-notification';
   message: any = null;
-  isLoggedIn: boolean | any;
-  constructor(private authService: AuthService) { }
+  isLoggedIn: boolean = false;
+  userData: UserData | undefined;
+  constructor(public authService: AuthService,private router: Router) { }
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isAuthenticated();
+    this.isLoggedIn = this.authService.getIsLoggedIn();
+    if (!this.isLoggedIn) {
+      this.router.navigate(['/login']);
+    }
     this.requestPermission();
     this.listen();
   }
@@ -66,7 +77,7 @@ export class AppComponent implements OnInit {
   logout() {
     // Call the logout() method from AuthService
     this.authService.logOut();
-    this.isLoggedIn = false;
+    // this.isLoggedIn = false;
   }
 }
 

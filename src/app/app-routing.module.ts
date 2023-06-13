@@ -13,12 +13,14 @@ import { ExerciseHistoryComponent } from './exercise-history/exercise-history.co
 import { FoodHistoryComponent } from './food-history/food-history.component';
 import { AppointmentHistoryComponent } from './appointment-history/appointment-history.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: LoginComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'home', component: HomeComponent},
   { path: 'medicine-add', component: MedicineAddComponent },
   { path: 'medicine-history', component: MedicineHistoryComponent },

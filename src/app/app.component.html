@@ -24,10 +24,10 @@
         </li>
 
         <!-- Divider -->
-        <hr class="sidebar-divider">
+        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn()">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
+        <div class="sidebar-heading" *ngIf="authService.getIsLoggedIn()">
             Reminder
         </div>
 
@@ -47,7 +47,7 @@
             </div>
         </li> -->
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-medkit"></i>
@@ -62,7 +62,7 @@
             </div>
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExercise"
                 aria-expanded="true" aria-controls="collapseExercise">
                 <i class="fas fa-dumbbell"></i>
@@ -78,7 +78,7 @@
             </div>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
           <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAppointment"
               aria-expanded="true" aria-controls="collapseAppointment">
               <i class="fas fa-calendar-alt"></i>
@@ -178,7 +178,7 @@
                 <ul class="navbar-nav ml-auto">
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
+                    <li class="nav-item dropdown no-arrow d-sm-none" *ngIf="!authService.getIsLoggedIn()">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-search fa-fw"></i>
@@ -202,7 +202,7 @@
                     </li>
 
                     <!-- Nav Item - Alerts -->
-                    <li class="nav-item dropdown no-arrow mx-1">
+                    <li class="nav-item dropdown no-arrow mx-1" *ngIf="authService.getIsLoggedIn()">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
@@ -329,27 +329,42 @@
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
+                    <li class="nav-item dropdown no-arrow" *ngIf="!authService.getIsLoggedIn()">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                            <img class="img-profile rounded-circle"
+                                src="assets/img/profile-img.png"> -->Sign Up
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            
+                            <a class="dropdown-item" *ngIf="!authService.getIsLoggedIn()" routerLink="/register">
+                                <i class="fas fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Register
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" *ngIf="!authService.getIsLoggedIn()" routerLink="/login">
+                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Log In
+                            </a>
+                            
+                        </div>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown no-arrow" *ngIf="authService.getIsLoggedIn()">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome, {{ userData?.firstname }}!</span>
                             <img class="img-profile rounded-circle"
                                 src="assets/img/profile-img.png">
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <a class="dropdown-item" routerLink="/profile">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
-                            </a>
-                            <a class="dropdown-item" *ngIf="!isLoggedIn" routerLink="/register">
-                                <i class="fas fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Register
-                            </a>
-                            <a class="dropdown-item" *ngIf="!isLoggedIn" routerLink="/login">
-                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Log In
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
@@ -357,6 +372,7 @@
                                 Logout
                             </a>
                         </div>
+                        
                     </li>
 
                 </ul>

@@ -32,7 +32,7 @@ export class LoginComponent {
         this.authServise.logIn(this.login.username, this.login.password).subscribe(
           (resp: any) => {
             console.log(resp); // Check the response structure and status code
-    
+            localStorage.setItem('token', resp.token);
             Swal.fire({
               icon: 'success',
               title: 'Successfully...',

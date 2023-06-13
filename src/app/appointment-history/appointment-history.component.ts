@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgConfirmService } from 'ng-confirm-box';
 import Swal from 'sweetalert2';
+import { UserService } from '../servise/user.service';
 
 export interface PeriodicElement {
   id: number;
@@ -13,6 +14,7 @@ export interface PeriodicElement {
   address: string;
   phoneNumber: string;
   time: string;
+  appointmentdate: string;
 
 }
 
@@ -25,13 +27,14 @@ export interface PeriodicElement {
 })
 export class AppointmentHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'withWhome', 'reason', 'speciality',  'time', 'phoneNumber', 'address', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'withWhome', 'reason', 'speciality','appointmentdate',  'time', 'phoneNumber', 'address', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(
     private http: HttpClient,
     private confirmService: NgConfirmService,
-    private router: Router
+    private router: Router,
+    private userService:UserService
   ) { }
 
 
@@ -47,7 +50,8 @@ export class AppointmentHistoryComponent implements OnInit {
     const token = localStorage.getItem('token');
 
     // Set the headers with the token
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
     this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
       (data: PeriodicElement[]) => {
@@ -77,7 +81,8 @@ export class AppointmentHistoryComponent implements OnInit {
       if (result.isConfirmed) {
         const apiUrl = `http://192.168.1.11:8866/deleteMyAppointmnetdetail/${id}`;
         const token = localStorage.getItem('token');
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
         this.http.delete(apiUrl, { headers }).subscribe(
           () => {
@@ -99,7 +104,7 @@ export class AppointmentHistoryComponent implements OnInit {
 
   updateAppointment(element: PeriodicElement): void {
 
-    // const formattedDate = this.formatDate(element.appointmentdate);
+    const formattedDate = this.formatDate(element.appointmentdate);
     Swal.fire({
       title: 'Update Appointment',
       html:
@@ -123,6 +128,10 @@ export class AppointmentHistoryComponent implements OnInit {
         '<input type="text" id="swal-input-phoneNumber" class="swal2-input custom-width" value="' +
         element.phoneNumber +
         '"><br>' +
+        '<label for="swal-input-appointmentdate" class="swal2-label"> Date:</label>' +
+        '<input type="text" id="swal-input-appointmentdate" class="swal2-input custom-width" value="' +
+        formattedDate+
+        '"><br>' +
         '<label for="swal-input-time" class="swal2-label">Time:</label>' +
         '<input type="time" id="swal-input-time" class="swal2-input custom-width" value="' +
         element.time +
@@ -135,29 +144,43 @@ export class AppointmentHistoryComponent implements OnInit {
         const nameValue = (<HTMLInputElement>document.getElementById('swal-input-withWhome')).value;
         const reasonValue = (<HTMLInputElement>document.getElementById('swal-input-reason')).value;
         const timeValue = (<HTMLInputElement>document.getElementById('swal-input-time')).value;
+        const phoneNumberValue = (<HTMLInputElement>document.getElementById('swal-input-phoneNumber')).value;
+        const addressValue = (<HTMLInputElement>document.getElementById('swal-input-address')).value;
+        const specialityValue = (<HTMLInputElement>document.getElementById('swal-input-speciality')).value;
+        const appointmentdateValue = (<HTMLInputElement>document.getElementById('swal-input-appointmentdate')).value;
 
 
         return {
           withWhome: nameValue,
           reason: reasonValue,
           time: timeValue,
+          appointmentdate: appointmentdateValue,
+          phoneNumber: phoneNumberValue,
+          address : addressValue,
+          speciality : specialityValue
+
         };
       },
     }).then((result) => {
       if (result.isConfirmed) {
         const formValues = result.value;
         if (formValues) {
-          const { withWhome, reason, time } = formValues;
+          const { withWhome, reason,appointmentdate,phoneNumber,address,speciality, time } = formValues;
 
           const apiUrl = `http://192.168.1.11:8866/updateMyAppointment/${element.id}`;
           const token = localStorage.getItem('token');
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
           const updatedData: PeriodicElement = {
             ...element,
             withWhome: withWhome,
             reason: reason,
             time: time,
+            appointmentdate:appointmentdate,
+            phoneNumber:phoneNumber,
+            address:address,
+            speciality:speciality,
           };
 
           this.http.put(apiUrl, updatedData, { headers }).subscribe(

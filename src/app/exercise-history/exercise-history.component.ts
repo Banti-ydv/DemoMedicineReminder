@@ -5,11 +5,12 @@ import { NgConfirmService } from 'ng-confirm-box';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { UserService } from '../servise/user.service';
 
 export interface PeriodicElement {
   id: number;
   exercisename: string;
-  date: string;
+  // date: string;
   exercisetime: string;
 
 }
@@ -21,13 +22,14 @@ export interface PeriodicElement {
 })
 export class ExerciseHistoryComponent implements OnInit{
 
-  displayedColumns: string[] = ['position', 'exercisename', 'date', 'exercisetime', 'edit', 'delete'];
+  displayedColumns: string[] = ['position', 'exercisename', 'exercisetime', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(
     private http: HttpClient,
     private confirmService: NgConfirmService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
     ) { }
 
    
@@ -44,7 +46,8 @@ export class ExerciseHistoryComponent implements OnInit{
     const token = localStorage.getItem('token'); // Replace with your actual token
 
     // Set the headers with the token
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
 
     this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
       (data: PeriodicElement[]) => {
@@ -71,7 +74,8 @@ export class ExerciseHistoryComponent implements OnInit{
       if (result.isConfirmed) {
         const apiUrl = `http://192.168.1.11:8866/deleteMyExercise/${id}`;
         const token = localStorage.getItem('token'); 
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
   
         this.http.delete(apiUrl, { headers }).subscribe(
           () => {
@@ -97,7 +101,7 @@ export class ExerciseHistoryComponent implements OnInit{
   }
 
   updateExercise(element: PeriodicElement): void {
-      const formattedDate = this.formatDate(element.date);
+      // const formattedDate = this.formatDate(element.date);
     Swal.fire({
       title: 'Update Exercise',
       html:
@@ -105,10 +109,10 @@ export class ExerciseHistoryComponent implements OnInit{
         '<input id="swal-input-exercisename" class="swal2-input" value="' +
         element.exercisename +
         '"><br>' +
-        '<label for="swal-input-date" class="swal2-label">Date:</label>' +
-        '<input type="date" id="swal-input-date" class="swal2-input" value="' +
-        formattedDate +
-        '"><br>' +
+        // '<label for="swal-input-date" class="swal2-label">Date:</label>' +
+        // '<input type="date" id="swal-input-date" class="swal2-input" value="' +
+        // formattedDate +
+        // '"><br>' +
         '<label for="swal-input-exercisetime" class="swal2-label">Time:</label>' +
         '<input type="time" id="swal-input-exercisetime" class="swal2-input" value="' +
         element.exercisetime +
@@ -121,13 +125,13 @@ export class ExerciseHistoryComponent implements OnInit{
         const nameValue = (<HTMLInputElement>document.getElementById('swal-input-exercisename')).value;
         // const shapeValue = (<HTMLInputElement>document.getElementById('swal-input-shape')).value;
         // const doseValue = (<HTMLInputElement>document.getElementById('swal-input-dose')).value;
-        const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
+        // const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
         const timeValue = (<HTMLInputElement>document.getElementById('swal-input-exercisetime')).value;
         // const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
   
         return {
           exercisename: nameValue,
-          date: dateValue,
+          // date: dateValue,
           exercisetime: timeValue,
         };
       },
@@ -135,16 +139,17 @@ export class ExerciseHistoryComponent implements OnInit{
       if (result.isConfirmed) {
         const formValues = result.value;
         if (formValues) {
-          const { exercisename, date, exercisetime} = formValues;
+          const { exercisename, exercisetime} = formValues;
   
           const apiUrl = `http://192.168.1.11:8866/updateMyExercise/${element.id}`;
           const token = localStorage.getItem('token');
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
   
           const updatedData: PeriodicElement = {
             ...element,
             exercisename: exercisename,
-            date: date,
+            // date: date,
             exercisetime: exercisetime,
           };
   
@@ -168,15 +173,15 @@ export class ExerciseHistoryComponent implements OnInit{
     });
   }
 
-  formatDate(date: string | null): string {
-    if (date) {
-      const parsedDate = new Date(date);
-      const year = parsedDate.getFullYear();
-      const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
-      const day = ('0' + parsedDate.getDate()).slice(-2);
-      return `${year}-${month}-${day}`;
-    }
-    return '';
-  }
+  // formatDate(date: string | null): string {
+  //   if (date) {
+  //     const parsedDate = new Date(date);
+  //     const year = parsedDate.getFullYear();
+  //     const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
+  //     const day = ('0' + parsedDate.getDate()).slice(-2);
+  //     return `${year}-${month}-${day}`;
+  //   }
+  //   return '';
+  // }
   
 }
