@@ -38,6 +38,7 @@ export class LoginComponent {
               title: 'Successfully...',
               text: 'Log In Successfully.',
             });
+            location.reload();
             this.router.navigate(['/home']);
             
           },

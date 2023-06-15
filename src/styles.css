@@ -27,3 +27,10 @@ input#swal-input-date,
     width: 50%;
 }
 
+.dropdown-menu.dropdown-menu-right.p-0.shadow.show {
+    position: absolute;
+    transform: translate3d(-162px, -3px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}

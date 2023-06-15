@@ -12,3 +12,8 @@ table {
 mat-form-field {
   height: 70px;
 }
+
+.mat-toolbar {
+  background: #4e73df;
+  color: #fff;
+}

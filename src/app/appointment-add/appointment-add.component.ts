@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../servise/auth.service';
 
 @Component({
   selector: 'app-appointment-add',
@@ -20,7 +21,7 @@ appointment = {
   appointmentdate:''
   }
 
-  constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { }
+  constructor(private userService: UserService, private router: Router, private datePipe: DatePipe,private authService: AuthService) { }
 
   onappointment() {  // Update the method name to match the one used in the template
     this.userService.appointmentAdd(this.appointment).subscribe(
@@ -48,6 +49,10 @@ appointment = {
       return `${year}-${month}-${day}`;
     }
     return '';
+  }
+
+  minDate(): string {
+    return this.authService.setMinDate();
   }
   
 

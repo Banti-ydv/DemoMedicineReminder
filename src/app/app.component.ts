@@ -5,11 +5,19 @@ import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthService } from './servise/auth.service';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { UserService } from './servise/user.service';
 
-interface UserData {
+
+interface PeriodicElement {
+  id: number;
   firstname: string;
-  // other properties
+  lastname: string;
+  emailid: string;
+  
 }
+
 
 
 @Component({
@@ -17,16 +25,33 @@ interface UserData {
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  userData: PeriodicElement | undefined;
+  userPhoto: string | undefined;
+  imageUrl: SafeUrl | undefined;
+  updatedData: any;
+  defaultImageUrl: string = "assets/img/profile-img.png";
+
+  notificationMessages: any[] = [];
+  
+
   title = 'af-notification';
   message: any = null;
-  isLoggedIn: boolean = false;
-  userData: UserData | undefined;
-  constructor(public authService: AuthService,private router: Router) { }
+  isLoggedIn!: boolean;
+  
+  constructor(public authService: AuthService,private router: Router,private sanitizer: DomSanitizer,private http: HttpClient,private userService: UserService) { }
   ngOnInit(): void {
+//profile
+     this.getUserDetails();
+    this.getUserPhoto();
+
+//logged in
     this.isLoggedIn = this.authService.getIsLoggedIn();
-    if (!this.isLoggedIn) {
-      this.router.navigate(['/login']);
-    }
+if (!this.isLoggedIn) {
+  if (window.location.pathname !== '/home' && window.location.pathname !== '/register' && window.location.pathname !== '/contact') {
+    this.router.navigate(['/login']);
+  }
+}
+//message
     this.requestPermission();
     this.listen();
   }
@@ -79,5 +104,71 @@ export class AppComponent implements OnInit {
     this.authService.logOut();
     // this.isLoggedIn = false;
   }
+
+  
+  getUserDetails(): void {
+    const userDetailsUrl = 'http://192.168.1.11:8866/MyDetailes';
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
+
+      this.http.get<PeriodicElement>(userDetailsUrl, { headers }).subscribe(
+        (data) => {
+          this.userData = data;
+        },
+        (error) => {
+          console.error('Error retrieving user details:', error);
+        }
+      );
+    }
+  }
+
+  setDefaultImage(): void {
+    this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
+  }
+
+  
+getUserPhoto(): void {
+  const apiUrl = 'http://192.168.1.11:8866/photo/current';
+  const token = localStorage.getItem('token');
+
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+
+
+  this.http.get(apiUrl, { headers, responseType: 'blob' }).subscribe(
+    (response: Blob) => {
+      const objectURL = URL.createObjectURL(response);
+      this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+    },
+    (error) => {
+      console.error('API error:', error);
+      // Handle the error here
+    }
+  );
+}
+
+skipNotification(message: any) {
+  // Perform skip action for the given message
+  // You can remove the message from the notificationMessages array or update its status
+}
+
+takeAction(message: any) {
+  // Perform action for the given message
+  // You can update the message status or navigate to a specific page based on the action
+}
+
+// Method to handle incoming notification messages
+handleNotification(message: any) {
+  this.notificationMessages.push(message);
+}
+
+
+
+
+
+
+
 }
 

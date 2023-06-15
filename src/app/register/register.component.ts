@@ -120,6 +120,9 @@ export class RegisterComponent {
   registerIn: { password: string } = { password: '' };
   showPassword: boolean = false;
 
+  passwordTouched: boolean = false;
+
+
   togglePasswordVisibility(event: Event) {
     const target = event.target as HTMLInputElement;
     this.showPassword = target.checked;
@@ -132,12 +135,17 @@ export class RegisterComponent {
     emailid: '',
     username: '',
     password: ''
-  }
+  };
 
   constructor(
     private userService: UserService,
     private router: Router
   ) { }
+
+  onPasswordTouched() {
+    this.passwordTouched = true;
+  }
+  
 
   onRegister() {
     this.userService.registerUser(this.register).subscribe(
@@ -155,4 +163,25 @@ export class RegisterComponent {
       }
     );
   }
+
+  isPasswordInvalid(): boolean {
+    const password = this.register.password;
+    if (password.length < 8) {
+      return true;
+    }
+    const uppercaseRegex = /[A-Z]/;
+    if (!uppercaseRegex.test(password)) {
+      return true;
+    }
+    const lowercaseRegex = /[a-z]/;
+    if (!lowercaseRegex.test(password)) {
+      return true;
+    }
+    const specialCharsRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    if (!specialCharsRegex.test(password)) {
+      return true;
+    }
+    return false;
+  }
+  
 }

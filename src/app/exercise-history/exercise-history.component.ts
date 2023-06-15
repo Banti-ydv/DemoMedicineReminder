@@ -85,6 +85,7 @@ export class ExerciseHistoryComponent implements OnInit{
               'Your file has been deleted.',
               'success'
             );
+            location.reload();
           },
           (error) => {
             console.error('An error occurred while deleting the exercise:', error);

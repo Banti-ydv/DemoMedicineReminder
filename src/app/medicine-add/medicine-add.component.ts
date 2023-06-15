@@ -129,8 +129,9 @@ import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../servise/auth.service';
 
-interface Medicine {
+export interface Medicine {
   name: string;
   shape: string;
   dose: string[];
@@ -141,15 +142,21 @@ interface Medicine {
   frequency: string;
 }
 
+
+
 @Component({
   selector: 'app-medicine-add',
   templateUrl: './medicine-add.component.html',
   styleUrls: ['./medicine-add.component.css']
 })
 export class MedicineAddComponent implements OnInit {
+
+  
+  
   medicines: { timing: string; dose: string }[] = [{ timing: '', dose: '' }];
   timingsArray: string[] = [];
   doseArray: string[] = [];
+  
 
   medicine: Medicine = {
     name: '',
@@ -169,7 +176,8 @@ export class MedicineAddComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private datePipe: DatePipe,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -178,6 +186,8 @@ export class MedicineAddComponent implements OnInit {
       email: ['', Validators.required]
     });
   }
+
+  
 
   addMedicine() {
     this.medicines.push({ timing: '', dose: '' });
@@ -241,4 +251,11 @@ export class MedicineAddComponent implements OnInit {
     }
     return '';
   }
+
+ minDate(): string {
+    return this.authService.setMinDate();
+  }
+  
+
 }
+

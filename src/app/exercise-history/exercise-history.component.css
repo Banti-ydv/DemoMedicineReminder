@@ -17,3 +17,8 @@ mat-form-field{
     /* padding-top: 500px; */
     
 }
+
+.mat-toolbar {
+  background: #4e73df;
+  color: #fff;
+}

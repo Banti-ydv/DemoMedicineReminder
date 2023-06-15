@@ -15,11 +15,12 @@ import { AppointmentHistoryComponent } from './appointment-history/appointment-h
 import { ProfileComponent } from './profile/profile.component';
 import { ContactComponent } from './contact/contact.component';
 
+// import { AuthGuard } from './servise/auth.guard';
 
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  // { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'home', component: HomeComponent},
   { path: 'medicine-add', component: MedicineAddComponent },
@@ -30,10 +31,13 @@ const routes: Routes = [
   { path: 'food-history', component: FoodHistoryComponent },
   { path: 'appointment-add', component: AppointmentAddComponent },
   { path: 'appointment-history', component: AppointmentHistoryComponent },
-  { path: "login", component: LoginComponent, pathMatch:'full'},
+  { path: "login", component: LoginComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'navbar', component: NavbarComponent}, 
   { path: 'profile', component: ProfileComponent}, 
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home' },
+  
 
 ];
 

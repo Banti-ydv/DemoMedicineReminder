@@ -85,13 +85,14 @@ export class AppointmentHistoryComponent implements OnInit {
 
 
         this.http.delete(apiUrl, { headers }).subscribe(
-          () => {
-            console.log('Appointment deleted successfully.');
+          (reason) => {
+            console.log('Appointment deleted successfully.' ,reason);
             Swal.fire(
               'Deleted!',
               'Your file has been deleted.',
               'success'
             );
+            location.reload();
           },
           (error) => {
             console.error('An error occurred while deleting the appointment:', error);

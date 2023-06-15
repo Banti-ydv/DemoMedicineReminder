@@ -26,10 +26,8 @@ export class ProfileComponent implements OnInit {
   updatedData: any;
   defaultImageUrl: string = "assets/img/profile-img.png";
   logoutUrl = 'http://192.168.1.11:8866/signout';
+ 
   
-
-  // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp=CAU
-
 
 
   constructor(private http: HttpClient, private router: Router,private sanitizer: DomSanitizer,private userService: UserService) { }
@@ -41,6 +39,7 @@ export class ProfileComponent implements OnInit {
     this.getUserPhoto();
     
   }
+  
 
 
   getUserDetails(): void {
@@ -98,21 +97,6 @@ export class ProfileComponent implements OnInit {
     this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
   }
 
-  // deletePhoto(id: number) {
-  //   const url = 'http://192.168.1.11:8866/photo/delete/${id}';
-  
-  //   this.http.delete(url).subscribe(
-  //     (resp) => {
-  //       console.log(resp);
-  //       // Photo deletion successful, perform any necessary actions
-  //     },
-  //     (error) => {
-  //       console.log('Error occurred while deleting photo:', error);
-  //       // Handle the error appropriately
-  //     }
-  //   );
-  // }
-  
 
 
   openUploadPopup(): void {
@@ -128,14 +112,21 @@ export class ProfileComponent implements OnInit {
       cancelButtonText: 'Cancel',
       preConfirm: (file) => {
         return new Promise((resolve, reject) => {
+          if (!file) {
+            Swal.showValidationMessage('Please select an image file');
+            reject('No image selected');
+            return;
+          }
+  
           const apiUrl = 'http://192.168.1.11:8866/upload-photo';
           const token = localStorage.getItem('token');
   
           const formData = new FormData();
           formData.append('photo', file);
   
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
-
+          const headers = new HttpHeaders()
+            .set('Authorization', `Bearer ${token}`)
+            .set('Secret-Key', this.userService.SECRET_KEY);
   
           this.http.post(apiUrl, formData, { headers }).subscribe(
             (response) => {
@@ -147,17 +138,27 @@ export class ProfileComponent implements OnInit {
           );
         });
       }
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const uploadedFile = result.value;
-        console.log('File uploaded successfully:', uploadedFile);
-        
-        console.log('result:', result);
-      }
-    }).catch((error) => {
-      console.error('Upload error:', error);
-      
-    });
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          const uploadedFile = result.value;
+          console.log('File uploaded successfully:', uploadedFile);
+  
+          console.log('result:', result);
+  
+          // Reload the page
+          location.reload();
+        }
+      })
+      .catch((error) => {
+        if (error !== 'No image selected') {
+          console.error('Upload error:', error);
+          location.reload();
+        } else {
+          // Retry selecting an image
+          this.openUploadPopup();
+        }
+      });
   }
   
   
@@ -254,7 +255,8 @@ updateProfile(updatedData:any): void {
           emailid: data.emailid
         };
         
-        console.log('User details updated successfully.');
+        console.log('User details updated successfully.',data);
+        location.reload();
       },
       (error) => {
         console.error('An error occurred while updating user details:', error);
@@ -263,23 +265,7 @@ updateProfile(updatedData:any): void {
   }
 }
 
-// updateProfile(updatedData): void {
-//   const updateUrl = 'http://192.168.1.11:8866/updateMydetailes';
-//   const token = localStorage.getItem('token');
 
-//   if (token) {
-//     const headers = new HttpHeaders({
-//       'Authorization': `Bearer ${token}`
-//     });
-
-//     this.http.put(updateUrl, updatedData, { headers }).subscribe(
-//       () => {
-//         console.log('User details updated successfully.');
-//       },
-//       (error) => {
-//         console.error('An error occurred while updating user details:', error);
-//       }
-//     );
   }
 
 
