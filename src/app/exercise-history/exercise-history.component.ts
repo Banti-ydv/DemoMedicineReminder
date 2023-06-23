@@ -117,10 +117,6 @@ export class ExerciseHistoryComponent implements OnInit {
         '<input id="swal-input-exercisename" class="swal2-input" value="' +
         element.exercisename +
         '"><br>' +
-        // '<label for="swal-input-date" class="swal2-label">Date:</label>' +
-        // '<input type="date" id="swal-input-date" class="swal2-input" value="' +
-        // formattedDate +
-        // '"><br>' +
         '<label for="swal-input-exercisetime" class="swal2-label">Time:</label>' +
         '<input type="time" id="swal-input-exercisetime" class="swal2-input" value="' +
         formatTime +
@@ -131,15 +127,10 @@ export class ExerciseHistoryComponent implements OnInit {
       cancelButtonText: 'Cancel',
       preConfirm: () => {
         const nameValue = (<HTMLInputElement>document.getElementById('swal-input-exercisename')).value;
-        // const shapeValue = (<HTMLInputElement>document.getElementById('swal-input-shape')).value;
-        // const doseValue = (<HTMLInputElement>document.getElementById('swal-input-dose')).value;
-        // const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
         const timeValue = (<HTMLInputElement>document.getElementById('swal-input-exercisetime')).value;
-        // const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
 
         return {
           exercisename: nameValue,
-          // date: dateValue,
           exercisetime: timeValue,
         };
       },
@@ -161,7 +152,6 @@ export class ExerciseHistoryComponent implements OnInit {
           const updatedData: PeriodicElement = {
             ...element,
             exercisename: exercisename,
-            // date: date,
             exercisetime: exercisetime,
           };
 
@@ -184,18 +174,6 @@ export class ExerciseHistoryComponent implements OnInit {
       }
     });
   }
-
-  // formatDate(date: string | null): string {
-  //   if (date) {
-  //     const parsedDate = new Date(date);
-  //     const year = parsedDate.getFullYear();
-  //     const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
-  //     const day = ('0' + parsedDate.getDate()).slice(-2);
-  //     return `${year}-${month}-${day}`;
-  //   }
-  //   return '';
-  // }
-
   formatTime(time: string): string {
     if (!time) {
       return '';

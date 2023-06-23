@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
     this.getUserDetails();
     this.getUserPhoto();
     
+    this.getProfilePhotoFromLocalStorage();
   }
   
 
@@ -112,6 +113,180 @@ export class ProfileComponent implements OnInit {
     this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
   }
 
+  // openUploadPopup(): void {
+  //   Swal.fire({
+  //     title: 'Upload Image',
+  //     text: 'Select an image file to upload',
+  //     input: 'file',
+  //     inputAttributes: {
+  //       accept: 'image/*'
+  //     },
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Upload',
+  //     cancelButtonText: 'Cancel',
+  //     preConfirm: (file) => {
+  //       return new Promise((resolve, reject) => {
+  //         if (!file) {
+  //           Swal.showValidationMessage('Please select an image file');
+  //           reject('No image selected');
+  //           return;
+  //         }
+  
+      
+  //         const token = localStorage.getItem('token');
+  
+  //         const formData = new FormData();
+  //         formData.append('photo', file);
+  
+  //         const headers = new HttpHeaders()
+  //           .set('Authorization', `Bearer ${token}`)
+  //           .set('Secret-Key', this.key.SECRET_KEY);
+  
+  //         this.http.post(this.key.upload_photo, formData, { headers }).subscribe(
+  //           (response) => {
+  //             resolve(response);
+  //             // console.log(response);
+  //           },
+  //           (error) => {
+  //             reject(error);
+  //           }
+  //         );
+  //       });
+  //     }
+  //   })
+  //     .then((result) => {
+  //       if (result.isConfirmed) {
+  //         const uploadedFile: any = result.value;
+  //         console.log('File uploaded successfully:', result);
+
+  //         // Update profile photo in local storage
+  //       const profilePhoto = uploadedFile.profilePhoto; // Replace 'profilePhoto' with the key used in the response
+  //       localStorage.setItem('profilePhoto', profilePhoto);
+
+  
+  //         Swal.fire({
+  //           title: 'Success',
+  //           text: 'Profile photo uploaded successfully',
+  //           icon: 'success',
+  //           showConfirmButton: true,
+  //           timer: 3000,
+  //         }).then((result) => {
+  //           if (result.isConfirmed) {
+  //             location.reload();
+  //           }
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       if (error !== 'No image selected') {
+  //         console.error('Upload error:', error);
+  //         // location.reload();
+  //       } else {
+  //         // Retry selecting an image
+  //         this.openUploadPopup();
+  //       }
+  //     });
+  // }
+ 
+
+
+  // openUploadPopup(): void {
+  //   Swal.fire({
+  //     title: 'Upload Image',
+  //     text: 'Select an image file to upload',
+  //     input: 'file',
+  //     inputAttributes: {
+  //       accept: 'image/*'
+  //     },
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Upload',
+  //     cancelButtonText: 'Cancel',
+  //     preConfirm: (file) => {
+  //       return new Promise((resolve, reject) => {
+  //         if (!file) {
+  //           Swal.showValidationMessage('Please select an image file');
+  //           reject('No image selected');
+  //           return;
+  //         }
+      
+  //         const token = localStorage.getItem('token');
+    
+  //         const formData = new FormData();
+  //         formData.append('photo', file);
+    
+  //         const headers = new HttpHeaders()
+  //           .set('Authorization', `Bearer ${token}`)
+  //           .set('Secret-Key', this.key.SECRET_KEY);
+    
+  //         this.http.post(this.key.upload_photo, formData, { headers }).subscribe(
+  //           (response) => {
+  //             resolve(response);
+  //           },
+  //           (error) => {
+  //             reject(error);
+  //           }
+  //         );
+  //       });
+  //     }
+  //   })
+  //   .then((result) => {
+  //     if (result.isConfirmed) {
+  //       const uploadedFile: any = result.value;
+  //       console.log('File uploaded successfully:', result);
+  
+  //       // Remove the existing profile photo from local storage
+  //       localStorage.removeItem('profilePhoto');
+  
+  //       // Update profile photo in local storage with the new image path
+  //       const profilePhoto = uploadedFile.profilePhoto; // Replace 'profilePhoto' with the key used in the response
+  //       localStorage.setItem('profilePhoto', profilePhoto);
+  
+  //       Swal.fire({
+  //         title: 'Success',
+  //         text: 'Profile photo uploaded successfully',
+  //         icon: 'success',
+  //         showConfirmButton: false,
+  //         timer: 3000,
+  //       }).then((result) => {
+  //         if (result) {
+  //           location.reload();
+  //         }
+  //       });
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     if (error !== 'No image selected') {
+  //       const uploadedFile: any = error.value;
+  //       console.error('Upload error:', error.value);
+        
+  //       // Remove the existing profile photo from local storage
+  //       localStorage.removeItem('profilePhoto');
+
+  
+  //       // Update profile photo in local storage with the new image path
+  //       const profilePhoto = uploadedFile.profilePhoto; // Replace 'profilePhoto' with the key used in the response
+  //       localStorage.setItem('profilePhoto', profilePhoto);
+        
+  //       Swal.fire({
+  //         title: 'Opps....',
+  //         text: 'Profile photo not upload.',
+  //         icon: 'error',
+  //         showConfirmButton: false,
+  //         timer: 3000,
+  //       }).then((error) => {
+  //         if (error) {
+  //           location.reload();
+  //         }
+  //       });
+        
+  //     } else {
+  //       // Retry selecting an image
+  //       this.openUploadPopup();
+  //     }
+  //   });
+  // }
+  
+
   openUploadPopup(): void {
     Swal.fire({
       title: 'Upload Image',
@@ -131,12 +306,10 @@ export class ProfileComponent implements OnInit {
             return;
           }
   
-      
           const token = localStorage.getItem('token');
-  
           const formData = new FormData();
-          formData.append('photo', file);
-  
+          formData.append('photo', file, file.name); // Append the file with the correct field name
+          
           const headers = new HttpHeaders()
             .set('Authorization', `Bearer ${token}`)
             .set('Secret-Key', this.key.SECRET_KEY);
@@ -144,7 +317,6 @@ export class ProfileComponent implements OnInit {
           this.http.post(this.key.upload_photo, formData, { headers }).subscribe(
             (response) => {
               resolve(response);
-              // console.log(response);
             },
             (error) => {
               reject(error);
@@ -153,40 +325,54 @@ export class ProfileComponent implements OnInit {
         });
       }
     })
-      .then((result) => {
-        if (result.isConfirmed) {
-          const uploadedFile: any = result.value;
-          console.log('File uploaded successfully:', result);
-
-          // Update profile photo in local storage
-        const profilePhoto = uploadedFile.profilePhoto; // Replace 'profilePhoto' with the key used in the response
-        localStorage.setItem('profilePhoto', profilePhoto);
-
+    .then((result) => {
+      if (result.isConfirmed) {
+        const uploadedFile: any = result.value;
+        console.log('File uploaded successfully:', result);
+  
+        if (uploadedFile && uploadedFile.profilePhoto) {
+          // Remove the existing profile photo from local storage
+          localStorage.removeItem('profilePhoto');
+  
+          // Update profile photo in local storage with the new image path
+          const profilePhoto = uploadedFile.profilePhoto; // Replace 'profilePhoto' with the key used in the response
+          localStorage.setItem('profilePhoto', profilePhoto);
   
           Swal.fire({
             title: 'Success',
             text: 'Profile photo uploaded successfully',
             icon: 'success',
-            showConfirmButton: true,
+            showConfirmButton: false,
             timer: 3000,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.reload();
-            }
+          }).then(() => {
+            location.reload();
           });
-        }
-      })
-      .catch((error) => {
-        if (error !== 'No image selected') {
-          console.error('Upload error:', error);
-          // location.reload();
         } else {
-          // Retry selecting an image
-          this.openUploadPopup();
+          console.error('Profile photo not found in the server response');
         }
-      });
+      }
+    })
+    .catch((error) => {
+      if (error !== 'No image selected') {
+        console.error('Upload error:', error);
+  
+        // Handle the error response appropriately
+        Swal.fire({
+          title: 'Oops...',
+          text: 'Profile photo not uploaded',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 3000,
+        }).then(() => {
+          // location.reload();
+        });
+      } else {
+        // Retry selecting an image
+        this.openUploadPopup();
+      }
+    });
   }
- 
+  
 
   getProfilePhotoFromLocalStorage(): string {
     return localStorage.getItem('profilePhoto') || '';
