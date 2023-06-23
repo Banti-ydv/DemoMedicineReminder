@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './servise/user.service';
+import { KeyService } from './servise/key.service';
 
 
 interface PeriodicElement {
@@ -27,19 +28,22 @@ interface PeriodicElement {
 export class AppComponent implements OnInit {
   userData: PeriodicElement | undefined;
   userPhoto: string | undefined;
-  imageUrl: SafeUrl | undefined;
+  // imageUrl: SafeUrl | undefined;
   updatedData: any;
-  defaultImageUrl: string = "assets/img/profile-img.png";
+  // defaultImageUrl: string = "assets/img/profile-img.png";
 
   notificationMessages: any[] = [];
-  
+
+  messages: any[] = []; // Array to store messages
 
   title = 'af-notification';
   message: any = null;
   isLoggedIn!: boolean;
   
-  constructor(public authService: AuthService,private router: Router,private sanitizer: DomSanitizer,private http: HttpClient,private userService: UserService) { }
+  constructor(public authService: AuthService,private key : KeyService, private router: Router,private sanitizer: DomSanitizer,private http: HttpClient,private userService: UserService) { }
   ngOnInit(): void {
+
+    this.checkTokenExpiration();
 //profile
      this.getUserDetails();
     this.getUserPhoto();
@@ -54,6 +58,30 @@ if (!this.isLoggedIn) {
 //message
     this.requestPermission();
     this.listen();
+  }
+
+
+  deleteMessage(message: any) {
+    const index = this.messages.indexOf(message);
+    if (index > -1) {
+      this.messages.splice(index, 1);
+    }
+  }
+  
+
+  checkTokenExpiration() {
+    const expirationTime = localStorage.getItem('tokenExpiration');
+    if (expirationTime && new Date().getTime() > parseInt(expirationTime, 10)) {
+      // Token has expired, remove it from local storage
+      localStorage.removeItem('token');
+      localStorage.removeItem('tokenExpiration');
+      location.reload();
+      
+      // Redirect the user to the login page or perform any other necessary action
+    } else {
+      // Token is still valid, continue checking
+      setTimeout(() => this.checkTokenExpiration(), 5000); // Check every 5 seconds
+    }
   }
 
   requestPermission() {
@@ -106,15 +134,14 @@ if (!this.isLoggedIn) {
   }
 
   
-  getUserDetails(): void {
-    const userDetailsUrl = 'http://192.168.1.11:8866/MyDetailes';
+  getUserDetails(): void { 
     const token = localStorage.getItem('token');
 
     if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-      this.http.get<PeriodicElement>(userDetailsUrl, { headers }).subscribe(
+      this.http.get<PeriodicElement>(this.key.MyDetailes, { headers }).subscribe(
         (data) => {
           this.userData = data;
         },
@@ -125,22 +152,27 @@ if (!this.isLoggedIn) {
     }
   }
 
-  setDefaultImage(): void {
-    this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
-  }
+  // setDefaultImage(): void {
+  //   this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
+  // }
 
+  getProfilePhotoFromLocalStorage(): string {
+    return localStorage.getItem('profilePhoto') || '';
+  }
+  
   
 getUserPhoto(): void {
-  const apiUrl = 'http://192.168.1.11:8866/photo/current';
   const token = localStorage.getItem('token');
 
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-  this.http.get(apiUrl, { headers, responseType: 'blob' }).subscribe(
+  this.http.get(this.key.current_photo, { headers, responseType: 'blob' }).subscribe(
     (response: Blob) => {
-      const objectURL = URL.createObjectURL(response);
-      this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      const profileImg = localStorage.getItem('profilePhoto');
+      return profileImg; 
+      // const objectURL = URL.createObjectURL(response);
+      // this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
     },
     (error) => {
       console.error('API error:', error);

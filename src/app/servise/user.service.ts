@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { KeyService } from './key.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,28 +9,23 @@ import { Router } from '@angular/router';
 export class UserService {
 
 
-  private login = "http://192.168.1.11:9192/login";
-  private register = 'http://192.168.1.11:8866/register';
-  private medicineAddUrl = 'http://192.168.1.11:8866/addmedicine';
-  private exerciseAddUrl = 'http://192.168.1.11:8866/addExercise';
-  private foodAddUrl = 'http://192.168.1.11:8866/saveFood';
-  private appointmentAddUrl = 'http://192.168.1.11:8866/takeAppointment';
-  public SECRET_KEY = "Shubham12345";
+  // private login = "http://192.168.1.11:9192/login";
+  // private register = 'http://192.168.1.11:8866/register';
+  // private medicineAddUrl = 'http://192.168.1.11:8866/addmedicine';
+  // private exerciseAddUrl = 'http://192.168.1.11:8866/addExercise';
+  // private foodAddUrl = 'http://192.168.1.11:8866/saveFood';
+  // private appointmentAddUrl = 'http://192.168.1.11:8866/takeAppointment';
+  // public SECRET_KEY = "Shubham12345";
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private key : KeyService ) { }
 
 
-  generateToken(username: string, password: string) {
-    const deviceToken = localStorage.getItem('deviceToken');
-    const loginUrl = `${this.login}?username=${username}&password=${password}&deviceToken=${deviceToken}`;
-    console.log("deviceToken", deviceToken)
-    return this.http.get(loginUrl);
-  }
+ 
 
   registerUser(userData: any) {
-    const registerUrl = `${this.register}`;
+    const registerUrl = `${this.key.register}`;
     
-    const headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Secret-Key', this.SECRET_KEY);
+    const headers = new HttpHeaders({'Content-Type': 'application/json'}).set('Secret-Key', this.key.SECRET_KEY);
     return this.http.post(registerUrl, userData, { headers });
 
           
@@ -39,9 +35,9 @@ export class UserService {
   medicineAdd(medicineAdd: any) {
     const token = localStorage.getItem('token');
     console.log(token);
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.SECRET_KEY);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
-    return this.http.post(this.medicineAddUrl, medicineAdd, { headers });
+    return this.http.post(this.key.addmedicine, medicineAdd, { headers });
   }
 
 
@@ -49,24 +45,24 @@ export class UserService {
   exerciseAdd(exerciseAdd: any) {
     const token = localStorage.getItem('token');
     console.log(token);
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.SECRET_KEY);
-    return this.http.post(this.exerciseAddUrl, exerciseAdd, { headers });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+    return this.http.post(this.key.addExercise, exerciseAdd, { headers });
   }
 
   foodAdd(foodAdd: any) {
     const token = localStorage.getItem('token');
     console.log(token);
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.SECRET_KEY);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
-    return this.http.post(this.foodAddUrl, foodAdd, { headers });
+    return this.http.post(this.key.saveFood, foodAdd, { headers });
   }
 
   appointmentAdd(appointmentAdd: any) {
     const token = localStorage.getItem('token');
     console.log(token);
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.SECRET_KEY);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
-    return this.http.post(this.appointmentAddUrl, appointmentAdd, { headers });
+    return this.http.post(this.key.takeAppointment, appointmentAdd, { headers });
   }
 
 

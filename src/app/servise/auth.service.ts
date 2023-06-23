@@ -2,23 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
+import Swal from 'sweetalert2';
 
+import { KeyService } from './key.service';
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     private isLoggedIn = false;
-    private login = "http://192.168.1.11:9192/login";
-    private logoutUrl = 'http://192.168.1.11:8866/signout';
+    // private login = "http://192.168.1.11:9192/login";
+    // private logoutUrl = 'http://192.168.1.11:8866/signout';
     // private userDetailsUrl = 'http://192.168.1.11:8866/MyDetailes';
 
-    constructor(private http: HttpClient, private router: Router, private userService: UserService) { }
+    constructor(private http: HttpClient, private router: Router, private userService: UserService,private key :KeyService) { }
 
     logIn(username: string, password: string) {
+      
         const deviceToken = localStorage.getItem('deviceToken');
-        const loginUrl = `${this.login}?username=${username}&password=${password}&deviceToken=${deviceToken}`;
+        const loginUrl = `${this.key.login}?username=${username}&password=${password}&deviceToken=${deviceToken}`;
         console.log("deviceToken", deviceToken)
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' }).set('Secret-Key', this.userService.SECRET_KEY);
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' }).set('Secret-Key', this.key.SECRET_KEY);
+        
+        const expirationTime = new Date().getTime() + 5 * 60 * 60 * 1000;
+        localStorage.setItem('tokenExpiration', expirationTime.toString());
 
         this.isLoggedIn = true;
         return this.http.get(loginUrl, { headers });
@@ -27,27 +33,49 @@ export class AuthService {
 
         // log in code
     }
-
-    logOut() {
-        // log out code
-        const token = localStorage.getItem('token');
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
-        this.http.post(this.logoutUrl, null, { headers }).subscribe(
-            (response) => {
+    logOut(): void {
+        Swal.fire({
+          title: 'Logout',
+          text: 'Are you sure you want to log out?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, log out'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const token = localStorage.getItem('token');
+            const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+      
+            this.http.post(this.key.logout, null, { headers }).subscribe(
+              (response) => {
                 console.log('Logged out successfully.', response);
-
+      
                 localStorage.removeItem('token');
+                localStorage.removeItem('profilePhoto');
                 this.router.navigate(['/login']);
                 this.isLoggedIn = false;
-                location.reload();
-                // Perform any additional actions after successful logout
-            },
-            (error) => {
-
+      
+                Swal.fire({
+                  title: 'Logged Out',
+                  text: 'You have been logged out.',
+                  icon: 'success',
+                  showConfirmButton: false,
+            timer: 3000,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    location.reload();
+                  }
+                });
+              },
+              (error) => {
                 console.error('An error occurred while logging out:', error);
-            }
-        );
-    }
+              }
+            );
+          }
+        });
+      }
+      
 
     getIsLoggedIn(): boolean {
         const token = localStorage.getItem('token');
@@ -62,7 +90,7 @@ export class AuthService {
         const day: string = today.getDate().toString().padStart(2, '0');
         return `${year}-${month}-${day}`;
       }
-    
+
 
 
 }

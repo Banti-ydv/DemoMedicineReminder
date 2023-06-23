@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  selectedDate: Date | null = null;
+
+  constructor() { }
+
 }
 
 

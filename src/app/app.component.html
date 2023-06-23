@@ -125,7 +125,7 @@
                 <span>About</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/contact">
+            <a class="nav-link" routerLink="/home">
                 <i class="fas fa-envelope"></i>
                 <span>Privacy policy</span></a>
         </li>
@@ -198,7 +198,40 @@
                     </li> -->
 
                     <!-- Nav Item - Alerts -->
+
                     <li class="nav-item dropdown no-arrow mx-1" *ngIf="authService.getIsLoggedIn()">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <span class="badge badge-danger badge-counter">0</span>
+                        </a>
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Notification
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div *ngIf="message;">
+                                        <span>{{ message.notification.title }}</span>
+                                        <span>{{ message.notification.body }}</span>
+                                    </div>
+                                    <div *ngIf="!message;">
+                                        No Message Arrived
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                    </li>
+
+                    <!-- <li class="nav-item dropdown no-arrow mx-1" *ngIf="authService.getIsLoggedIn()">
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-bell fa-fw"></i>
@@ -217,8 +250,8 @@
                                 </div>
                               </div>
                               <div>
-                                <span>{{ message.title }}</span>
-                                <span>{{ message.body }}</span>
+                                <span>{{ message.notification.title }}</span>
+                                <span>{{ message.notification.body }}</span>
                                 <div>
                                   <a href="#" (click)="skipNotification(message)">Skip</a>
                                   <a href="#" (click)="takeAction(message)">Take Action</a>
@@ -232,7 +265,7 @@
                             </div>
                           </ng-template>
                         </div>
-                      </li>
+                      </li> -->
                       
 
                     <!-- Nav Item - Messages -->
@@ -305,27 +338,17 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow" *ngIf="!authService.getIsLoggedIn()">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" routerLink="/register" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                            <img class="img-profile rounded-circle"
-                                src="assets/img/profile-img.png"> -->Register/Login
+                            Register
                         </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
 
-                            <a class="dropdown-item" *ngIf="!authService.getIsLoggedIn()" routerLink="/register">
-                                <i class="fas fa-user-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Register
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" *ngIf="!authService.getIsLoggedIn()" routerLink="/login">
-                                <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Log In
-                            </a>
-
-                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow" *ngIf="!authService.getIsLoggedIn()">
+                        <a class="nav-link dropdown-toggle" routerLink="/login" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Log In
+                        </a>
 
                     </li>
 
@@ -334,10 +357,8 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome,<b> {{ userData?.firstname
                                     }}</b> !</span>
-                            <!-- <img class="img-profile rounded-circle" src="assets/img/profile-img.png"> -->
-                            <img [src]="imageUrl || defaultImageUrl" alt="" class="img-profile rounded-circle" />
+                            <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="img-profile rounded-circle" />
                         </a>
-                        <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
                             <a class="dropdown-item" routerLink="/profile">
@@ -345,13 +366,34 @@
                                 Profile
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" data-toggle="modal" data-target="#modalContactForm1">
+                            <a class="dropdown-item" (click)="logout()">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
                         </div>
 
                     </li>
+
+                    <!-- <li class="nav-item dropdown no-arrow" *ngIf="authService.getIsLoggedIn()">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome, <b>{{ userData?.firstname }}</b>!</span>
+                          <img *ngIf="imageUrl" [src]="imageUrl" alt="" class="img-profile rounded-circle" />
+                          <img *ngIf="!imageUrl" [src]="defaultImageUrl" alt="" class="img-profile rounded-circle" />
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                          <a class="dropdown-item" routerLink="/profile">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                          </a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" (click)="logout()">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                          </a>
+                        </div>
+                      </li> -->
+                      
 
                 </ul>
 
@@ -420,7 +462,7 @@
         </div>
     </div>
 </div> -->
-
+<!-- 
 <div class="modal fade" id="modalContactForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -434,4 +476,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

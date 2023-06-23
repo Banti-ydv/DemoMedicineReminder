@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { NgConfirmService } from 'ng-confirm-box';
 import Swal from 'sweetalert2';
 import { UserService } from '../servise/user.service';
+import { KeyService } from '../servise/key.service';
+import * as moment from 'moment';
+import { AuthService } from '../servise/auth.service';
 
 export interface PeriodicElement {
   id: number;
@@ -34,7 +37,9 @@ export class AppointmentHistoryComponent implements OnInit {
     private http: HttpClient,
     private confirmService: NgConfirmService,
     private router: Router,
-    private userService:UserService
+    private userService:UserService,
+    private key : KeyService,
+    private authService: AuthService
   ) { }
 
 
@@ -46,14 +51,13 @@ export class AppointmentHistoryComponent implements OnInit {
 
 
   callApi() {
-    const apiUrl = 'http://192.168.1.11:8866/myAppointment';
     const token = localStorage.getItem('token');
 
     // Set the headers with the token
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-    this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
+    this.http.get<PeriodicElement[]>(this.key.myAppointment, { headers }).subscribe(
       (data: PeriodicElement[]) => {
         this.dataSource.data = data;
 
@@ -79,20 +83,25 @@ export class AppointmentHistoryComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        const apiUrl = `http://192.168.1.11:8866/deleteMyAppointmnetdetail/${id}`;
         const token = localStorage.getItem('token');
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-        this.http.delete(apiUrl, { headers }).subscribe(
+        this.http.delete(this.key.deleteMyAppointmnetdetail+`${id}`, { headers }).subscribe(
           (reason) => {
             console.log('Appointment deleted successfully.' ,reason);
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            );
-            location.reload();
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your appointment has been deleted.',
+              icon: 'success',
+              showConfirmButton: false,
+            timer: 3000,
+              
+            }).then((result) => {
+              if (result) {
+                location.reload();
+              }
+            });
           },
           (error) => {
             console.error('An error occurred while deleting the appointment:', error);
@@ -105,38 +114,95 @@ export class AppointmentHistoryComponent implements OnInit {
 
   updateAppointment(element: PeriodicElement): void {
 
-    const formattedDate = this.formatDate(element.appointmentdate);
+    const formatDate = this.formatDate(element.appointmentdate);
+    const formatTime = this.formatTime(element.time);
+    const tableHtml =
+    '<table>' +
+    '<tr>' +
+    '<td><label for="swal-input-withWhome" class="swal2-label">With Whom:</label></td>' +
+    '<td>' + '<input id="swal-input-withWhome" class="swal2-input custom-width" value="' +
+      element.withWhome +
+      '">' + '</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td><label for="swal-input-reason" class="swal2-label">Reason:</label></td>' +
+    '<td>' + '<input type="text" id="swal-input-reason" class="swal2-input custom-width" value="' +
+      element.reason +
+      '">' + '</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td><label for="swal-input-speciality" class="swal2-label">Speciality:</label></td>' +
+    '<td>' + '<input type="text" id="swal-input-speciality" class="swal2-input custom-width" value="' +
+      element.speciality +
+      '">' + '</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td><label for="swal-input-address" class="swal2-label">Address:</label></td>' +
+    '<td>' + '<input type="text" id="swal-input-address" class="swal2-input custom-width" value="' +
+      element.address +
+      '">' + '</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td><label for="swal-input-phoneNumber" class="swal2-label">Phone Number:</label></td>' +
+    '<td>' + '<input type="text" id="swal-input-phoneNumber" class="swal2-input custom-width"  maxlength="10" minlength="10" value="' +
+      element.phoneNumber +
+      '">' + '</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td><label for="swal-input-appointmentdate" class="swal2-label">Date:</label></td>' +
+    '<td>' + '<input type="date" id="swal-input-appointmentdate" class="swal2-input custom-width" [min]="minDate()" value="' +
+      formatDate+
+      '">' + '</td>' +
+    '</tr>' +
+    '<tr>' +
+    '<td><label for="swal-input-time" class="swal2-label">Time:</label></td>' +
+    '<td>' + '<input type="time" id="swal-input-time" class="swal2-input custom-width" value="' +
+      formatTime +
+      '">' + '</td>' +
+    '</tr>' +
+    '</table>';
     Swal.fire({
       title: 'Update Appointment',
-      html:
-        '<label for="swal-input-withWhome" class="swal2-label">With Whome:</label>' +
-        '<input id="swal-input-withWhome" class="swal2-input custom-width" value="' +
-        element.withWhome +
-        '"><br>' +
-        '<label for="swal-input-reason" class="swal2-label">Reason:</label>' +
-        '<input type="text" id="swal-input-reason" class="swal2-input custom-width" value="' +
-        element.reason +
-        '"><br>' +
-        '<label for="swal-input-speciality" class="swal2-label">Speciality:</label>' +
-        '<input type="text" id="swal-input-speciality" class="swal2-input custom-width" value="' +
-        element.speciality +
-        '"><br>' +
-        '<label for="swal-input-address" class="swal2-label">Address:</label>' +
-        '<input type="text" id="swal-input-address" class="swal2-input custom-width" value="' +
-        element.address +
-        '"><br>' +
-        '<label for="swal-input-phoneNumber" class="swal2-label">Phone Number:</label>' +
-        '<input type="text" id="swal-input-phoneNumber" class="swal2-input custom-width" value="' +
-        element.phoneNumber +
-        '"><br>' +
-        '<label for="swal-input-appointmentdate" class="swal2-label"> Date:</label>' +
-        '<input type="text" id="swal-input-appointmentdate" class="swal2-input custom-width" value="' +
-        formattedDate+
-        '"><br>' +
-        '<label for="swal-input-time" class="swal2-label">Time:</label>' +
-        '<input type="time" id="swal-input-time" class="swal2-input custom-width" value="' +
-        element.time +
-        '"><br>',
+      html: tableHtml,
+      didOpen: () => {
+        const phoneNumberInput = document.getElementById('swal-input-phoneNumber') as HTMLInputElement;
+        phoneNumberInput.addEventListener('input', () => {
+          phoneNumberInput.value = phoneNumberInput.value.replace(/\D/g, '');
+          phoneNumberInput.pattern = '[0-9]{10}'; // Use regex pattern for 10-digit number
+          phoneNumberInput.addEventListener('input', () => {
+            phoneNumberInput.setCustomValidity(phoneNumberInput.validity.patternMismatch ? 'Please enter a 10-digit number' : '');
+          });
+        });
+        },
+      // html:
+      //   '<label for="swal-input-withWhome" class="swal2-label">With Whome:</label>' +
+      //   '<input id="swal-input-withWhome" class="swal2-input custom-width" value="' +
+      //   element.withWhome +
+      //   '"><br>' +
+      //   '<label for="swal-input-reason" class="swal2-label">Reason:</label>' +
+      //   '<input type="text" id="swal-input-reason" class="swal2-input custom-width" value="' +
+      //   element.reason +
+      //   '"><br>' +
+      //   '<label for="swal-input-speciality" class="swal2-label">Speciality:</label>' +
+      //   '<input type="text" id="swal-input-speciality" class="swal2-input custom-width" value="' +
+      //   element.speciality +
+      //   '"><br>' +
+      //   '<label for="swal-input-address" class="swal2-label">Address:</label>' +
+      //   '<input type="text" id="swal-input-address" class="swal2-input custom-width" value="' +
+      //   element.address +
+      //   '"><br>' +
+      //   '<label for="swal-input-phoneNumber" class="swal2-label">Phone Number:</label>' +
+      //   '<input type="text" id="swal-input-phoneNumber" class="swal2-input custom-width" value="' +
+      //   element.phoneNumber +
+      //   '"><br>' +
+      //   '<label for="swal-input-appointmentdate" class="swal2-label"> Date:</label>' +
+      //   '<input type="date" id="swal-input-appointmentdate" class="swal2-input custom-width" value="' +
+      //   formatDate+
+      //   '"><br>' +
+      //   '<label for="swal-input-time" class="swal2-label">Time:</label>' +
+      //   '<input type="time" id="swal-input-time" class="swal2-input custom-width" value="' +
+      //   formatTime +
+      //   '"><br>',
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Update',
@@ -168,9 +234,13 @@ export class AppointmentHistoryComponent implements OnInit {
         if (formValues) {
           const { withWhome, reason,appointmentdate,phoneNumber,address,speciality, time } = formValues;
 
-          const apiUrl = `http://192.168.1.11:8866/updateMyAppointment/${element.id}`;
+          if (!withWhome || !reason || !appointmentdate || !phoneNumber || !address || !speciality || !time) {
+            Swal.fire('Error!', 'Please fill all the input fields.', 'error');
+            return;
+          }
+
           const token = localStorage.getItem('token');
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
           const updatedData: PeriodicElement = {
@@ -184,7 +254,7 @@ export class AppointmentHistoryComponent implements OnInit {
             speciality:speciality,
           };
 
-          this.http.put(apiUrl, updatedData, { headers }).subscribe(
+          this.http.put(this.key.updateMyAppointment+`${element.id}`, updatedData, { headers }).subscribe(
             () => {
               console.log('Appointment updated successfully.');
 
@@ -214,5 +284,21 @@ export class AppointmentHistoryComponent implements OnInit {
     }
     return '';
   }
+
+  formatTime(time: string): string {
+    if (!time) {
+      return '';
+    }
+  
+    const formattedTime = moment(time, 'h:mm A').format('HH:mm');
+    return formattedTime;
+  }
+
+
+  minDate(): string {
+    return this.authService.setMinDate();
+  }
+  
+  
 
 }

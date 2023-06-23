@@ -1,11 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgConfirmService } from 'ng-confirm-box';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { UserService } from '../servise/user.service';
+
+import { KeyService } from '../servise/key.service';
+import * as moment from 'moment';
 
 export interface PeriodicElement {
   id: number;
@@ -20,7 +23,7 @@ export interface PeriodicElement {
   templateUrl: './exercise-history.component.html',
   styleUrls: ['./exercise-history.component.css']
 })
-export class ExerciseHistoryComponent implements OnInit{
+export class ExerciseHistoryComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'exercisename', 'exercisetime', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
@@ -29,30 +32,30 @@ export class ExerciseHistoryComponent implements OnInit{
     private http: HttpClient,
     private confirmService: NgConfirmService,
     private router: Router,
-    private userService: UserService
-    ) { }
+    private userService: UserService,
+    private key: KeyService
+  ) { }
 
-   
+
 
   ngOnInit() {
     this.callApi();
   }
 
 
-  
+
 
   callApi() {
-    const apiUrl = 'http://192.168.1.11:8866/myExercise';
     const token = localStorage.getItem('token'); // Replace with your actual token
 
     // Set the headers with the token
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-    this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
+    this.http.get<PeriodicElement[]>(this.key.myExercise, { headers }).subscribe(
       (data: PeriodicElement[]) => {
         this.dataSource.data = data;
-        
+
       },
       (error) => {
         console.error('An error occurred while calling the API:', error);
@@ -72,20 +75,24 @@ export class ExerciseHistoryComponent implements OnInit{
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        const apiUrl = `http://192.168.1.11:8866/deleteMyExercise/${id}`;
-        const token = localStorage.getItem('token'); 
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+        const token = localStorage.getItem('token');
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
-  
-        this.http.delete(apiUrl, { headers }).subscribe(
+
+        this.http.delete(this.key.deleteMyExercise + `${id}`, { headers }).subscribe(
           () => {
             console.log('Exercise deleted successfully.');
-            Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
-              'success'
-            );
-            location.reload();
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Your exercise has been deleted.',
+              icon: 'success',
+              showConfirmButton: true,
+              timer: 3000,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                location.reload();
+              }
+            });
           },
           (error) => {
             console.error('An error occurred while deleting the exercise:', error);
@@ -102,7 +109,7 @@ export class ExerciseHistoryComponent implements OnInit{
   }
 
   updateExercise(element: PeriodicElement): void {
-      // const formattedDate = this.formatDate(element.date);
+    const formatTime = this.formatTime(element.exercisetime);
     Swal.fire({
       title: 'Update Exercise',
       html:
@@ -116,7 +123,7 @@ export class ExerciseHistoryComponent implements OnInit{
         // '"><br>' +
         '<label for="swal-input-exercisetime" class="swal2-label">Time:</label>' +
         '<input type="time" id="swal-input-exercisetime" class="swal2-input" value="' +
-        element.exercisetime +
+        formatTime +
         '"><br>',
       focusConfirm: false,
       showCancelButton: true,
@@ -129,7 +136,7 @@ export class ExerciseHistoryComponent implements OnInit{
         // const dateValue = (<HTMLInputElement>document.getElementById('swal-input-date')).value;
         const timeValue = (<HTMLInputElement>document.getElementById('swal-input-exercisetime')).value;
         // const descriptionValue = (<HTMLInputElement>document.getElementById('swal-input-description')).value;
-  
+
         return {
           exercisename: nameValue,
           // date: dateValue,
@@ -140,24 +147,28 @@ export class ExerciseHistoryComponent implements OnInit{
       if (result.isConfirmed) {
         const formValues = result.value;
         if (formValues) {
-          const { exercisename, exercisetime} = formValues;
-  
-          const apiUrl = `http://192.168.1.11:8866/updateMyExercise/${element.id}`;
-          const token = localStorage.getItem('token');
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+          const { exercisename, exercisetime } = formValues;
 
-  
+          if (!exercisename || !exercisetime) {
+            Swal.fire('Error!', 'Please fill all the input fields.', 'error');
+            return;
+          }
+
+          const token = localStorage.getItem('token');
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+
           const updatedData: PeriodicElement = {
             ...element,
             exercisename: exercisename,
             // date: date,
             exercisetime: exercisetime,
           };
-  
-          this.http.put(apiUrl, updatedData, { headers }).subscribe(
+
+          this.http.put(this.key.updateMyExercise + `${element.id}`, updatedData, { headers }).subscribe(
             () => {
               console.log('Exercise updated successfully.');
-  
+
               const updatedElements = this.dataSource.data.map((e) =>
                 e.id === element.id ? updatedData : e
               );
@@ -184,5 +195,15 @@ export class ExerciseHistoryComponent implements OnInit{
   //   }
   //   return '';
   // }
+
+  formatTime(time: string): string {
+    if (!time) {
+      return '';
+    }
   
+    const formattedTime = moment(time, 'h:mm A').format('HH:mm');
+    return formattedTime;
+  }
+  
+
 }

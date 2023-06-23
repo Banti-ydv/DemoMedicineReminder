@@ -10,6 +10,9 @@ import { of } from 'rxjs';
 import { throwError } from 'rxjs';
 import { UserService } from '../servise/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { KeyService } from '../servise/key.service';
+import * as moment from 'moment';
+
 
 export interface PeriodicElement {
   frequency: string;
@@ -44,7 +47,8 @@ export class MedicineHistoryComponent implements OnInit{
   doseOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1);
 
 
-  displayedColumns: string[] = ['id', 'name', 'shape', 'dose', 'frequency' , 'fromDate', 'toDate', 'timing', 'description', 'edit', 'delete'];
+  // displayedColumns: string[] = ['id', 'name', 'shape', 'dose', 'frequency' , 'fromDate', 'toDate', 'timing', 'description', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'shape', 'fromDate', 'toDate', 'view'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   selectedElement: any;
@@ -54,11 +58,19 @@ export class MedicineHistoryComponent implements OnInit{
     private confirmService: NgConfirmService,
     private router: Router,
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private key : KeyService
     ) {
       this.updateMedicineForm = this.formBuilder.group({
         name: ['', Validators.required],
-        shape: ['', Validators.required]
+        shape: ['', Validators.required],
+        frequency: ['',Validators.required],
+        fromDate: ['',Validators.required],
+        toDate: ['',Validators.required],
+        description: ['',Validators.required],
+        dose: ['',Validators.required],
+        timing: ['',Validators.required], 
+
       });
      }
 
@@ -76,13 +88,13 @@ export class MedicineHistoryComponent implements OnInit{
   
 
   callApi() {
-    const apiUrl = 'http://192.168.1.11:8866/mymedicine';
+  
     const token = localStorage.getItem('token'); 
 
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-    this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
+    this.http.get<PeriodicElement[]>(this.key.mymedicine, { headers }).subscribe(
       (data: PeriodicElement[]) => {
         this.dataSource.data = data;
         
@@ -104,21 +116,25 @@ deleteMedicine(id: number) {
     confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
     if (result.isConfirmed) {
-      const apiUrl = `http://192.168.1.11:8866/deleteMyMedicine/${id}`;
+    
       const token = localStorage.getItem('token'); 
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-      this.http.delete(apiUrl, { headers }).subscribe(
+      this.http.delete(this.key.deleteMyMedicine+`${id}`, { headers }).subscribe(
         () => {
           console.log('Medicine deleted successfully.');
-          Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Your medicine has been deleted.',
+            icon: 'success',
+            showConfirmButton: true,
             
-          );
-          location.reload();
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
         },
         (error) => {
           console.error('An error occurred while deleting the medicine:', error);
@@ -135,28 +151,55 @@ deleteMedicine(id: number) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+
   updateMedicine(formValue: any) {
+
+    if (!formValue.name || !formValue.shape || !formValue.fromDate || !formValue.toDate || !formValue.description || !formValue.dose || !formValue.timing) {
+      Swal.fire('Error!', 'Please fill all the required fields.', 'error');
+      return;
+    }
     const updatedMedicine = {
       id: this.selectedElement.id,
       name: formValue.name,
       shape: formValue.shape,
+      frequency: formValue.frequency,
+      fromDate: formValue.fromDate,
+      toDate: formValue.toDate,
+      description: formValue.description,
+      dose: [formValue.dose],
+      timing: [formValue.timing]
       // Include other properties as needed
     };
+  
     if (this.selectedElement && this.selectedElement.id) {
-      const url = `http://192.168.1.11:8866/updateMyMedicine/${this.selectedElement.id}`;
-      const token = localStorage.getItem('token'); 
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
-
+      
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+  
       const requestBody = {
         name: updatedMedicine.name,
-        shape: updatedMedicine.shape
+        shape: updatedMedicine.shape,
+        frequency: updatedMedicine.frequency,
+        fromDate: updatedMedicine.fromDate,
+        toDate: updatedMedicine.toDate,
+        description: updatedMedicine.description,
+        dose: updatedMedicine.dose,
+        timing: updatedMedicine.timing,
         // Add other properties to update if needed
       };
-
-      this.http.put(url, requestBody, { headers }).subscribe(
+  
+      this.http.put(this.key.updateMyMedicine+`${this.selectedElement.id}`, requestBody, { headers }).subscribe(
         response => {
           console.log('Medicine updated successfully:', response);
-          location.reload();
+          Swal.fire({
+            title: 'Updated!',
+            text: 'Medicine updated successfully.',
+            icon: 'success'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
           // Handle success message or perform additional actions
         },
         error => {
@@ -166,7 +209,7 @@ deleteMedicine(id: number) {
       );
     }
   }
-
+  
   addMedicine() {
     this.medicines.push({ timing: '', dose: '' });
   }
@@ -182,7 +225,7 @@ formatfromDate(date: string | null): string {
       const year = parsedDate.getFullYear();
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
-      return `${month}/${day}/${year}`;
+      return `${year}-${month}-${day}`;
     }
     return '';
   }
@@ -193,10 +236,20 @@ formatfromDate(date: string | null): string {
       const year = parsedDate.getFullYear();
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
-      return `${month}/${day}/${year}`;
+      return `${year}-${month}-${day}`;
     }
     return '';
   }
+
+  formatTime(time: string): string {
+    if (!time) {
+      return '';
+    }
+  
+    const formattedTime = moment(time, 'h:mm A').format('HH:mm');
+    return formattedTime;
+  }
+  
   
 }
 

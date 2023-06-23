@@ -5,12 +5,15 @@ import Swal from 'sweetalert2';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AuthService } from '../servise/auth.service';
 import { UserService } from '../servise/user.service';
+import { KeyService } from '../servise/key.service';
+
 
 interface PeriodicElement {
   id: number;
   firstname: string;
   lastname: string;
   emailid: string;
+  imageUrl?: string;
   
 }
 
@@ -24,13 +27,13 @@ export class ProfileComponent implements OnInit {
   userPhoto: string | undefined;
   imageUrl: SafeUrl | undefined;
   updatedData: any;
-  defaultImageUrl: string = "assets/img/profile-img.png";
-  logoutUrl = 'http://192.168.1.11:8866/signout';
+  defaultImageUrl: string = 'assets/img/profile-img.png';
+  
  
   
 
 
-  constructor(private http: HttpClient, private router: Router,private sanitizer: DomSanitizer,private userService: UserService) { }
+  constructor(private http: HttpClient, private router: Router,private sanitizer: DomSanitizer,private userService: UserService,private key : KeyService) { }
 
   // id: number | any;
   
@@ -43,16 +46,20 @@ export class ProfileComponent implements OnInit {
 
 
   getUserDetails(): void {
-    const userDetailsUrl = 'http://192.168.1.11:8866/MyDetailes';
+  
     const token = localStorage.getItem('token');
 
     if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-      this.http.get<PeriodicElement>(userDetailsUrl, { headers }).subscribe(
+      this.http.get<PeriodicElement>(this.key.MyDetailes, { headers }).subscribe(
         (data) => {
           this.userData = data;
+
+          if (!this.userData.imageUrl) {
+            this.setDefaultImage();
+          }
         },
         (error) => {
           console.error('Error retrieving user details:', error);
@@ -71,14 +78,13 @@ export class ProfileComponent implements OnInit {
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
-        const deleteUrl = 'http://192.168.1.11:8866/deleteMydetail';
         const token = localStorage.getItem('token');
   
         if (token) {
-          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+          const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
   
-          this.http.delete(deleteUrl, { headers }).subscribe(
+          this.http.delete(this.key.deleteMydetail, { headers }).subscribe(
             () => {
               console.log('User details deleted successfully.');
               // this.userData = undefined;
@@ -93,11 +99,18 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  setDefaultImage(): void {
-    this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
+  setImageUrl(): void {
+    if (this.userData?.imageUrl) {
+      this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.userData.imageUrl);
+    } else {
+      this.setDefaultImage();
+    }
   }
 
 
+  setDefaultImage(): void {
+    this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
+  }
 
   openUploadPopup(): void {
     Swal.fire({
@@ -118,7 +131,7 @@ export class ProfileComponent implements OnInit {
             return;
           }
   
-          const apiUrl = 'http://192.168.1.11:8866/upload-photo';
+      
           const token = localStorage.getItem('token');
   
           const formData = new FormData();
@@ -126,11 +139,12 @@ export class ProfileComponent implements OnInit {
   
           const headers = new HttpHeaders()
             .set('Authorization', `Bearer ${token}`)
-            .set('Secret-Key', this.userService.SECRET_KEY);
+            .set('Secret-Key', this.key.SECRET_KEY);
   
-          this.http.post(apiUrl, formData, { headers }).subscribe(
+          this.http.post(this.key.upload_photo, formData, { headers }).subscribe(
             (response) => {
               resolve(response);
+              // console.log(response);
             },
             (error) => {
               reject(error);
@@ -141,35 +155,50 @@ export class ProfileComponent implements OnInit {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          const uploadedFile = result.value;
-          console.log('File uploaded successfully:', uploadedFile);
+          const uploadedFile: any = result.value;
+          console.log('File uploaded successfully:', result);
+
+          // Update profile photo in local storage
+        const profilePhoto = uploadedFile.profilePhoto; // Replace 'profilePhoto' with the key used in the response
+        localStorage.setItem('profilePhoto', profilePhoto);
+
   
-          console.log('result:', result);
-  
-          // Reload the page
-          location.reload();
+          Swal.fire({
+            title: 'Success',
+            text: 'Profile photo uploaded successfully',
+            icon: 'success',
+            showConfirmButton: true,
+            timer: 3000,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          });
         }
       })
       .catch((error) => {
         if (error !== 'No image selected') {
           console.error('Upload error:', error);
-          location.reload();
+          // location.reload();
         } else {
           // Retry selecting an image
           this.openUploadPopup();
         }
       });
   }
-  
+ 
+
+  getProfilePhotoFromLocalStorage(): string {
+    return localStorage.getItem('profilePhoto') || '';
+  }
   
 getUserPhoto(): void {
-  const apiUrl = 'http://192.168.1.11:8866/photo/current';
   const token = localStorage.getItem('token');
 
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-  this.http.get(apiUrl, { headers, responseType: 'blob' }).subscribe(
+  this.http.get(this.key.current_photo, { headers, responseType: 'blob' }).subscribe(
     (response: Blob) => {
       const objectURL = URL.createObjectURL(response);
       this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
@@ -181,14 +210,13 @@ getUserPhoto(): void {
   );
 }
 openUpDatePopUp(): void {
-  const userDetailsUrl = 'http://192.168.1.11:8866/MyDetailes';
   const token = localStorage.getItem('token');
 
   if (token) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-    this.http.get<PeriodicElement>(userDetailsUrl, { headers }).subscribe(
+    this.http.get<PeriodicElement>(this.key.MyDetailes, { headers }).subscribe(
       (data) => {
         const element = {
           firstname: data.firstname,
@@ -239,24 +267,33 @@ openUpDatePopUp(): void {
 }
 
 
-updateProfile(updatedData:any): void {
-  const updateUrl = 'http://192.168.1.11:8866/updateMydetailes';
+
+
+updateProfile(updatedData: any): void {
   const token = localStorage.getItem('token');
 
   if (token) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.userService.SECRET_KEY);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
-
-    this.http.put(updateUrl, updatedData, { headers }).subscribe(
+    this.http.put(this.key.updateMydetailes, updatedData, { headers }).subscribe(
       (data: any) => {
         const element = {
           firstname: data.firstname,
           lastname: data.lastname,
           emailid: data.emailid
         };
-        
-        console.log('User details updated successfully.',data);
-        location.reload();
+
+        Swal.fire({
+          title: 'Success',
+          text: 'User details updated successfully',
+          icon: 'success',
+          showConfirmButton: true,
+            timer: 3000,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        });
       },
       (error) => {
         console.error('An error occurred while updating user details:', error);

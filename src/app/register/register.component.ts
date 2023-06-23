@@ -110,6 +110,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -127,8 +128,8 @@ export class RegisterComponent {
     const target = event.target as HTMLInputElement;
     this.showPassword = target.checked;
   }
-  
-  
+
+
   register = {
     firstname: '',
     lastname: '',
@@ -145,24 +146,60 @@ export class RegisterComponent {
   onPasswordTouched() {
     this.passwordTouched = true;
   }
-  
+
 
   onRegister() {
     this.userService.registerUser(this.register).subscribe(
       (response: any) => {
         console.log('response ===>', response);
-        this.router.navigate(['/login']);
+        Swal.fire({
+          icon: 'success',
+          title: 'Registration Successful',
+          text: 'User registered successfully.',
+          showConfirmButton: false,
+            timer: 3000,
+        }).then((result) => {
+          if (result) {
+
+            console.log('result====>',result);
+            this.router.navigate(['/login'])
+            .then(() => {
+              location.reload();
+            });
+          }
+        });
       },
       (error: any) => {
         console.log('error ===>', error);
         if (error.status === 400) {
-          alert('User already exists. Please choose a different username.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'User already exists. Please choose a different username.',
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        } else if (error.status === 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'Service is currently offline. Please try again later.',
+            showConfirmButton: false,
+            timer: 3000,
+          });
         } else {
-          alert('Error occurred during registration');
-        } 
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'An error occurred during registration.',
+            showConfirmButton: false,
+            timer: 3000,
+          });
+        }
       }
     );
   }
+
 
   isPasswordInvalid(): boolean {
     const password = this.register.password;
@@ -183,5 +220,5 @@ export class RegisterComponent {
     }
     return false;
   }
-  
+
 }

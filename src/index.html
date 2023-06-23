@@ -30,7 +30,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
+  <meta name="description" http-equiv="refresh" content="">
   <meta name="author" content="">
 
   <title>MedicineApp</title>
@@ -43,6 +43,8 @@
 
   <!-- Custom styles for this template-->
   <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <!-- <link href='assets/css/main.css' rel='stylesheet' /> -->
   <!-- <link rel="manifest" href="./manifest.json"> -->
 
 </head>
@@ -50,6 +52,43 @@
 <body id="page-top">
 
   <medicine-app></medicine-app>
+
+  <!-- <script src="assets/js/main.js"></script>
+  <script src="assets/js/demo/main.js"></script> -->
+ 
+<script>
+  
+  
+</script>
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: [ 'interaction', 'dayGrid' ],
+    defaultDate: '2020-02-12',
+    editable: true,
+    eventLimit: true, // allow "more" link when too many events
+    events: [
+      {
+        title: 'Long Event',
+        start: '2020-02-07',
+        end: '2020-02-10'
+      },
+      {
+        title: 'Meeting',
+        start: '2020-02-12T10:30:00',
+        end: '2020-02-12T12:30:00'
+      }
+
+    ]
+  });
+
+  calendar.render();
+});
+
+  </script> -->
+
   <!-- Bootstrap core JavaScript-->
   <script src="assets/vendor/jquery/jquery.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -121,7 +160,7 @@
     });
   </script>
 
-
+<!-- 
 <script>
   var liveObjOfState = {
     "Everyday": {
@@ -182,13 +221,14 @@
     },
   };
 
+
   window.onload = function () {
     var selectCountry = document.getElementById("selectCountry"),
-      selectState = document.getElementById("selectState"),
+      frequency = document.getElementById("frequency"),
       selectedOptionsDiv = document.getElementById("selectedOptions");
 
     selectCountry.onchange = function () {
-      selectState.innerHTML = ""; // Clear all options
+      frequency.innerHTML = ""; // Clear all options
       selectedOptionsDiv.innerHTML = ""; // Clear the selected options display
 
       if (this.selectedIndex < 1) return; // No country selected
@@ -199,13 +239,13 @@
         options.push(...selectedState[state]);
       }
 
-      var rows = Math.ceil(options.length / 3); // Calculate the number of rows needed
+      var rows = Math.ceil(options.length / 10); // Calculate the number of rows needed
 
       for (var i = 0; i < rows; i++) {
         var row = document.createElement("tr");
 
-        for (var j = 0; j < 3; j++) {
-          var index = i * 3 + j;
+        for (var j = 0; j < 10; j++) {
+          var index = i * 10 + j;
           if (index < options.length) {
             var option = options[index];
 
@@ -226,18 +266,18 @@
             row.appendChild(checkboxCell);
           }
         }
-        selectState.appendChild(row);
+        frequency.appendChild(row);
       }
     };
 
     function updateSelectedOptions() {
-      var selectedOptions = Array.from(selectState.querySelectorAll("input[name='state']:checked")).map(function (input) {
+      var selectedOptions = Array.from(frequency.querySelectorAll("input[name='state']:checked")).map(function (input) {
         return input.value;
       });
       selectedOptionsDiv.innerHTML = selectedOptions.join(", ");
     }
   };
-</script>
+</script> -->
 
 
 

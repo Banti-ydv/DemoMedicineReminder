@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../servise/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-appointment-add',
@@ -11,26 +12,45 @@ import { AuthService } from '../servise/auth.service';
 })
 export class AppointmentAddComponent {
 
-appointment = {
-  withWhome:'',
-  reason:'',
-  speciality:'',
-  phoneNumber:'',
-  address:'',
-  time:'',
-  appointmentdate:''
-  }
-
+  appointment: {
+    withWhome: string;
+    reason: string;
+    speciality: string;
+    phoneNumber: string;
+    address: string;
+    time: string;
+    appointmentdate: string; // Corrected property name
+    countryCode: string;
+  } = {
+    withWhome: '',
+    reason: '',
+    speciality: '',
+    phoneNumber: '',
+    address: '',
+    time: '',
+    appointmentdate: '', // Corrected property name
+    countryCode: '+91',
+  };
   constructor(private userService: UserService, private router: Router, private datePipe: DatePipe,private authService: AuthService) { }
 
-  onappointment() {  // Update the method name to match the one used in the template
+
+
+  onappointment() { // Update the method name to match the one used in the template
     this.userService.appointmentAdd(this.appointment).subscribe(
       (response: any) => {
-        // Registration successful, do something with the response
-        console.log('Add successful', response);
-        // Redirect to a success page or perform any other action
-        this.router.navigate(['/appointment-history']);
-
+        // Registration successful, show success message
+        Swal.fire({
+          title: 'Success',
+          text: 'Appointment added successfully',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 3000,
+        }).then((result) => {
+          if (result) {
+            this.router.navigate(['/appointment-history']);
+            // Redirect to a success page or perform any other action
+          }
+        });
       },
       (error: any) => {
         // Registration failed, handle the error
@@ -39,7 +59,7 @@ appointment = {
       }
     );
   }
-
+  
     formatDate(date: string | null): string {
     if (date) {
       const parsedDate = new Date(date);

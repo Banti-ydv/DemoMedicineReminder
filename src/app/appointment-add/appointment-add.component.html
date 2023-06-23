@@ -1,171 +1,106 @@
-<!-- <div class="center-content">
-  <form (ngSubmit)="onappointment()">
-    <mat-card class="example-card">
-      <mat-card-header class="center-header">
-        <mat-card-title>Add Appointment</mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content>
-        <div class="form-row">
-          <div class="form-column">
-
-            <mat-form-field class="example-full-width">
-              <mat-label>With Whome</mat-label>
-              <input type="text" matInput placeholder="" value="" name="withWhome" [(ngModel)]="appointment.withWhome">
-
-              <mat-icon matSuffix>account_circle</mat-icon>
-            </mat-form-field>
+<div class="container">
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-lg-12 col-md-9">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
 
 
-            <mat-form-field class="example-full-width">
-              <mat-label>Choose a date</mat-label>
-              <input matInput [matDatepicker]="picker" name="appointmentdate" [(ngModel)]="appointment.appointmentdate"
-                (ngModelChange)="appointment.appointmentdate = formatDate($event)">
-              <mat-hint>YYYY-MM-DD</mat-hint>
-              <mat-datepicker-toggle matSuffix [for]="picker">
-                <mat-icon>date_range</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+          <div class="row">
+            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+            <div class="col-lg-6">
+              <div class="p-5"> 
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4"><b>Add Appointment</b></h1>
+                </div>
+                <form (ngSubmit)="onappointment()" #appointmentForm="ngForm" class="user">
+                  <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                      <!-- <label>With Whom</label> -->
+                      <input type="text" name="withWhome" class="form-control form-control-user" placeholder="Enter Name"
+                        [(ngModel)]="appointment.withWhome" required />
+                    </div>
 
-            <mat-form-field class="example-full-width">
-              <mat-label>Time</mat-label>
-              <input type="time" matInput placeholder="" value="" name="time" [(ngModel)]="appointment.time">
-              <mat-icon matSuffix>access_time</mat-icon>
-            </mat-form-field>
+                    <div class="form-group col-md-6">
+                      <!-- <label>Address</label> -->
+                      <input type="text" name="address" class="form-control form-control-user" placeholder="Enter Address"
+                        [(ngModel)]="appointment.address" required />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                      <!-- <label>Reason</label> -->
+                      <input type="text" name="reason" class="form-control form-control-user" placeholder="Enter Reason"
+                        [(ngModel)]="appointment.reason" required />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <!-- <label>Speciality</label> -->
+                      <input type="text" name="speciality" class="form-control form-control-user" placeholder="Speciality"
+                        [(ngModel)]="appointment.speciality" required />
+                    </div>
+                  </div>
+
+
+                  <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                      <!-- <label>Date</label> -->
+                      <input type="date" name="appointmentdate" class="form-control form-control-user" placeholder="Enter date.."
+                        [(ngModel)]="appointment.appointmentdate" required [min]="minDate()" />
+                    </div>
+                    <div class="form-group col-md-6">
+                      <!-- <label>Time</label> -->
+                      <input type="time" name="time" class="form-control form-control-user" placeholder="Enter time.."
+                        [(ngModel)]="appointment.time" required />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                      <div class="input-group">
+                       
+                        <div class="input-group-prepend">
+                          <select class="custom-select-class" id="countryCode" name="countryCode"
+                            [(ngModel)]="appointment.countryCode">
+                            <option value="+91" selected>+91 (India)</option>
+                            <option value="+1">+1 (USA)</option>
+                            <option value="+44">+44 (UK)</option>
+                            <option value="+61">+61 (Aust)</option>
+                            <option value="+86">+86 (China)</option>
+                            <option value="+33">+33 (France)</option>
+                            <option value="+49">+49 (Germany)</option>
+                            <option value="+81">+81 (Japan)</option>
+                            <option value="+52">+52 (Mexico)</option>
+                          </select>
+                        </div>
+                        
+                        
+                       
+                          
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                      <input type="text" class="form-control form-control-user" id="phoneNumber" name="phoneNumber"
+                      [(ngModel)]="appointment.phoneNumber" placeholder="Enter phone number" pattern="[0-9]*" maxlength="10" minlength="10">
+                    </div>
+                  </div>
+
+                                    
+
+                 
+                    <button type="submit" class="btn btn-primary btn-user btn-block"
+                      [disabled]="!appointmentForm.form.valid">Save</button>
+                 
+                </form>
+              </div>
+            </div>
           </div>
-        </div>
-        <button class="mat-button" mat-raised-button color="primary">Add</button>
-      </mat-card-content>
-    </mat-card>
-  </form>
-
-</div> -->
+       
+        
 
 
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-<!-- 
-<main id="main">
-
-  <section id="breadcrumbs" class="breadcrumbs">
-    
-<div class="container_1" id="blur">
-<form class="login-form" id="appointment" (ngSubmit)="onappointment()">
-  <div class="heading-container_1">
-    <h2>Appointment</h2>
-  
+    </div>
   </div>
-  <div class="group login-input">
-    <input type="text" required id="withWhome" name="withWhome" [(ngModel)]="appointment.withWhome">
-    <span>With Whom</span>
-    <i class="fa fa-user"></i>
-  </div>
-  <div class="group login-input">
-    <input type="text" required id="appointmentdate" name="appointmentdate">
-    <span>Date</span>
-    <i class="fa fa-calendar"></i>
-  </div>
-  <div class="group login-input">
-    <input type="text" required id="appointmenttime" name="appointmenttime">
-    <span>Time</span>
-    <i class="fa fa-clock-o"></i>
-  </div>
-
-  <div class="group">
-    <button class="btn" type="submit" id="add_appointment" name="add_appointment">Add Appointment</button>
-  </div>
-</form>
 </div>
-<div class="popup" id="popup">
-<h2>Thank You!</h2>
-<p>Your appointment has been successfully added.</p>
-<button type="button" onclick="closepopup()">OK</button>
 </div>
-
-  </section>
-
-</main> -->
-
-
-
-<div class="row">
-  <div class="col-sm-12">
-    <!-- <h5 class="mt-3 mb-4 fw-bold">Add </h5> -->
-    <h5 class="mt-3 mb-4 fw-bold text-center bg-primary text-white p-2 mb-2 rounded">Add Appointment</h5>
-    <form (ngSubmit)="onappointment()">
-      <div class="row mb-3">
-        <div class="form-group col-md-4">
-          <label>With Whome</label>
-          <input type="text" name="withWhome" class="form-control" placeholder="Enter Name"
-            [(ngModel)]="appointment.withWhome" required />
-        </div>
-
-        <div class="form-group col-md-4">
-          <label>Address</label>
-          <input type="text" name="address" class="form-control" placeholder="Enter Address"
-            [(ngModel)]="appointment.address" required />
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="form-group col-md-4">
-          <label>Reason</label>
-          <input type="text" name="reason" class="form-control" placeholder="Enter Reason"
-            [(ngModel)]="appointment.reason" required />
-        </div>
-        <div class="form-group col-md-4">
-          <label>Speciality</label>
-          <input type="text" name="speciality" class="form-control" placeholder="speciality"
-            [(ngModel)]="appointment.speciality" required />
-        </div>
-      </div>
-
-
-      <div class="row mb-3">
-        <div class="form-group col-md-4">
-          <label>Date</label>
-          <input type="date" name="appointmentdate" class="form-control" placeholder="Enter date.." [(ngModel)]="appointment.appointmentdate"
-            required [min]="minDate()" />
-        </div>
-        <div class="form-group col-md-4">
-          <label>Time</label>
-          <input type="time" name="time" class="form-control" placeholder="Enter time.." [(ngModel)]="appointment.time"
-            required />
-        </div>
-      </div>
-
-      <div class="row mb-3">
-      <div class="form-group col-md-4">
-        <label for="phoneNumber">Phone Number</label>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <select class="custom-select" id="countryCode" name="countryCode">
-              <option value="+91" selected>+91 (India)</option>
-              <option value="+1">+1 (USA)</option>
-              <option value="+44">+44 (UK)</option>
-              <option value="+61">+61 (Aust)</option>
-              <option value="+86">+86 (China)</option>
-              <option value="+33">+33 (France)</option>
-              <option value="+49">+49 (Germany)</option>
-              <option value="+81">+81 (Japan)</option>
-              <option value="+52">+52 (Mexico)</option>
-              <!-- Add more country code options here -->
-            </select>
-          </div>
-         
-        </div>
-      </div>
-
-      <div class="form-group col-md-4">
-        <label for="phoneNumber">Phone Number</label>
-        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
-        [(ngModel)]="appointment.phoneNumber" placeholder="Enter phone number">
-      </div>
-      </div>
-
-      <div class="form-group col-md-2">
-        <button type="submit" class="btn btn-primary mt-3">Save</button>
-      </div>
-    </form>
-  </div>
 </div>

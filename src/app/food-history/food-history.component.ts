@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgConfirmService } from 'ng-confirm-box';
 import Swal from 'sweetalert2';
+import { KeyService } from '../servise/key.service';
 
 export interface PeriodicElement {
   id: number;
@@ -29,7 +30,8 @@ export class FoodHistoryComponent implements OnInit{
   constructor(
     private http: HttpClient,
     private confirmService: NgConfirmService,
-    private router: Router
+    private router: Router,
+    private key : KeyService
     ) { }
     
   ngOnInit() {
@@ -40,13 +42,12 @@ export class FoodHistoryComponent implements OnInit{
   
 
   callApi() {
-    const apiUrl = 'http://192.168.1.11:8866/myFood';
     const token = localStorage.getItem('token'); // Replace with your actual token
 
     // Set the headers with the token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    this.http.get<PeriodicElement[]>(apiUrl, { headers }).subscribe(
+    this.http.get<PeriodicElement[]>(this.key.myFood, { headers }).subscribe(
       (data: PeriodicElement[]) => {
         this.dataSource.data = data;
         
@@ -72,11 +73,11 @@ export class FoodHistoryComponent implements OnInit{
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        const apiUrl = `http://192.168.1.11:8866/deleteMyFood/${id}`;
+      
         const token = localStorage.getItem('token'); 
         const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
   
-        this.http.delete(apiUrl, { headers }).subscribe(
+        this.http.delete(this.key.deleteMyFood+`${id}`, { headers }).subscribe(
           () => {
             console.log('Food deleted successfully.');
             Swal.fire(
@@ -135,7 +136,6 @@ export class FoodHistoryComponent implements OnInit{
         if (formValues) {
           const { foodname, date, foodtime} = formValues;
   
-          const apiUrl = `http://192.168.1.11:8866/updateMyFood/${element.id}`;
           const token = localStorage.getItem('token');
           const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
   
@@ -146,7 +146,7 @@ export class FoodHistoryComponent implements OnInit{
             foodtime: foodtime,
           };
   
-          this.http.put(apiUrl, updatedData, { headers }).subscribe(
+          this.http.put(this.key.updateMyFood+`${element.id}`, updatedData, { headers }).subscribe(
             () => {
               console.log('Food updated successfully.');
   
