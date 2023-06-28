@@ -13,7 +13,7 @@ interface PeriodicElement {
   firstname: string;
   lastname: string;
   emailid: string;
-  imageUrl?: string;
+  
   
 }
 
@@ -25,9 +25,9 @@ interface PeriodicElement {
 export class ProfileComponent implements OnInit {
   userData: PeriodicElement | undefined;
   userPhoto: string | undefined;
-  imageUrl: SafeUrl | undefined;
+  imageUrl: SafeUrl | any;
   updatedData: any;
-  defaultImageUrl: string = 'assets/img/profile-img.png';
+  
   
  
   
@@ -62,12 +62,6 @@ export class ProfileComponent implements OnInit {
         (data) => {
           this.userData = data;
 
-          if (!this.userData.imageUrl) {
-            this.setDefaultImage();
-          }
-        },
-        (error) => {
-          console.error('Error retrieving user details:', error);
         }
       );
     }
@@ -104,18 +98,10 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  setImageUrl(): void {
-    if (this.userData?.imageUrl) {
-      this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.userData.imageUrl);
-    } else {
-      this.setDefaultImage();
-    }
-  }
-
-
-  setDefaultImage(): void {
-    this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
-  }
+  // setImageUrl(): void {
+  //   if (this.userData?.imageUrl) {
+  //     this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.userData.imageUrl);
+  //   } }
 
   // openUploadPopup(): void {
   //   Swal.fire({
@@ -291,71 +277,91 @@ export class ProfileComponent implements OnInit {
   // }
   
 
-  openUploadPopup(): void {
-    Swal.fire({
-      title: 'Upload Image',
-      text: 'Select an image file to upload',
-      input: 'file',
-      inputAttributes: {
-        accept: 'image/*'
-      },
-      showCancelButton: true,
-      confirmButtonText: 'Upload',
-      cancelButtonText: 'Cancel',
-      preConfirm: (file) => {
-        return new Promise((resolve, reject) => {
-          if (!file) {
-            Swal.showValidationMessage('Please select an image file');
-            reject('No image selected');
-            return;
-          }
+  // openUploadPopup(): void {
+  //   Swal.fire({
+  //     title: 'Upload Image',
+  //     text: 'Select an image file to upload',
+  //     input: 'file',
+  //     inputAttributes: {
+  //       accept: 'image/*'
+  //     },
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Upload',
+  //     cancelButtonText: 'Cancel',
+  //     preConfirm: (file) => {
+  //       return new Promise((resolve, reject) => {
+  //         if (!file) {
+  //           Swal.showValidationMessage('Please select an image file');
+  //           reject('No image selected');
+  //           return;
+  //         }
   
-          const apiUrl = 'http://192.168.1.11:8866/upload-photo';
-          const token = localStorage.getItem('token');
+  //         // const apiUrl = 'http://192.168.1.11:8866/upload-photo';
+  //         const token = localStorage.getItem('token');
   
-          const formData = new FormData();
-          formData.append('photo', file);
+  //         const formData = new FormData();
+  //         formData.append('photo', file);
   
-          const headers = new HttpHeaders()
-            .set('Authorization', `Bearer ${token}`)
-            .set('Secret-Key', this.key.SECRET_KEY);
+  //         const headers = new HttpHeaders()
+  //           .set('Authorization', `Bearer ${token}`)
+  //           .set('Secret-Key', this.key.SECRET_KEY);
   
-          this.http.post(apiUrl, formData, { headers }).subscribe(
-            (response) => {
-              resolve(response);
-            },
-            (error) => {
-              reject(error);
-            }
-          );
-        });
-      }
-    })
-      .then((result) => {
-        if (result.isConfirmed) {
-          const uploadedFile = result.value;
-          console.log('File uploaded successfully:', uploadedFile);
+  //         this.http.post(this.key.upload_photo, formData, { headers }).subscribe(
+  //           (response) => {
+  //             resolve(response);
+  //           },
+  //           (error) => {
+  //             reject(error);
+  //           }
+  //         );
+  //       });
+  //     }
+  //   })
+  //     .then((result) => {
+  //       if (result.isConfirmed) {
+  //         const uploadedFile = result.value;
+  //         console.log('File uploaded successfully:', uploadedFile);
   
-          console.log('result:', result);
+  //         console.log('result:', result);
   
-          // Reload the page
-          location.reload();
-        }
-      })
-      .catch((error) => {
-        if (error !== 'No image selected') {
-          console.error('Upload error:', error);
-          location.reload();
-        } else {
-          // Retry selecting an image
-          this.openUploadPopup();
-        }
-      });
-  }
+  //         // Reload the page
+  //         location.reload();
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       if (error !== 'No image selected') {
+  //         console.error('Upload error:', error);
+  //         location.reload();
+  //       } else {
+  //         // Retry selecting an image
+  //         this.openUploadPopup();
+  //       }
+  //     });
+  // }
  
   
 
+  handleFileInput(event: any) {
+    const token = localStorage.getItem('token');
+    console.log('Upload:', token);
   
+    // Set the token in the request headers
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+    const file: File = event.target.files[0];
+    const formData: FormData = new FormData();
+    formData.append('photo', file);
+  
+    this.http.post('http://192.168.1.11:8866/upload-photo', formData, { headers }).subscribe(response => {
+      // Handle the response from the server after image upload
+      console.log(response);
+      
+    }, (error) => {
+      console.error('API error:', error);
+      // Handle the error here
+      location.reload()
+    }
+    );
+  }
   
   getUserPhoto(): void {
     const apiUrl = 'http://192.168.1.11:8866/photo/current';
@@ -368,6 +374,7 @@ export class ProfileComponent implements OnInit {
       (response: Blob) => {
         const objectURL = URL.createObjectURL(response);
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        console.warn(response);
       },
       (error) => {
         console.error('API error:', error);

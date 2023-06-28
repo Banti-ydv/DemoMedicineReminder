@@ -7,8 +7,9 @@
 
       <div class="col-md-4">
         <div class="profile-img">
-          <img [src]="imageUrl || defaultImageUrl" alt="" class="rounded-circle"
-          [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" />
+          <img [src]="imageUrl" alt="" class="rounded-circle"
+          [style.width.%]="50" [style.height.%]="70" (click)="fileInput.click()" />
+          <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)">
           <!-- <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="rounded-circle" [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" /> -->
           <br>
             <button type="button" class="btn btn-outline-primary mt-3" (click)="openUpDatePopUp()">Edit Profile</button>

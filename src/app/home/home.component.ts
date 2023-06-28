@@ -1,17 +1,130 @@
-import { Component } from '@angular/core';
-import { CalendarView, CalendarEvent } from 'angular-calendar';
-import { AuthService } from '../servise/auth.service';
+// import { Component } from '@angular/core';
+// import { CalendarView, CalendarEvent } from 'angular-calendar';
+// import { AuthService } from '../servise/auth.service';
+
+// @Component({
+//   selector: 'app-home',
+//   templateUrl: './home.component.html',
+//   styleUrls: ['./home.component.css']
+// })
+// export class HomeComponent {
+
+//   selectedDate: Date | null = null;
+
+//   constructor(public authService : AuthService) { }
+
+// }
+
+import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { MatTableDataSource } from '@angular/material/table';
+import { NgConfirmService } from 'ng-confirm-box';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
+import { UserService } from '../servise/user.service';
+
+import { KeyService } from '../servise/key.service';
+import * as moment from 'moment';
+
+export interface PeriodicElement1 {
+  exercisename: string;
+  exercisetime: string;
+
+
+}
+export interface PeriodicElement2 {
+  withWhome: string;
+  time: string;
+  appointmentdate: string;
+
+
+}
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  selectedDate: Date | null = null;
+  // displayedColumns: string[] = ['position', 'exercisename', 'exercisetime', 'edit', 'delete'];
+  dataSource1 = new MatTableDataSource<PeriodicElement1>();
+  dataSource2 = new MatTableDataSource<PeriodicElement2>();
 
-  constructor(public authService : AuthService) { }
+  constructor(
+    private http: HttpClient,
+    private confirmService: NgConfirmService,
+    private router: Router,
+    private userService: UserService,
+    private key: KeyService
+  ) { }
+
+
+
+  ngOnInit() {
+    this.callApi();
+    this.callAppointment();
+  }
+
+
+
+
+  callApi() {
+    const token = localStorage.getItem('token'); // Replace with your actual token
+
+    // Set the headers with the token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+
+    this.http.get<PeriodicElement1[]>(this.key.myExercise, { headers }).subscribe(
+      (data: PeriodicElement1[]) => {
+        this.dataSource1.data = data;
+        console.error(data)
+
+      },
+      (error) => {
+        console.error('An error occurred while calling the API:', error);
+      }
+    );
+  }
+
+
+  callAppointment() {
+    const token = localStorage.getItem('token');
+
+    // Set the headers with the token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+
+    this.http.get<PeriodicElement2[]>(this.key.myAppointment, { headers }).subscribe(
+      (data: PeriodicElement2[]) => {
+        this.dataSource2.data = data;
+
+      },
+      (error) => {
+        console.error('An error occurred while calling the API:', error);
+      }
+    );
+  }
+
+  exercise(){
+    this.router.navigate(['/exercise-history']);
+  }
+  appointment(){
+    this.router.navigate(['/appointment-history']);
+  }
+
+  formatTime(time: string): string {
+    if (!time) {
+      return '';
+    }
+  
+    const formattedTime = moment(time, 'h:mm A').format('HH:mm');
+    return formattedTime;
+  }
+  
 
 }
 

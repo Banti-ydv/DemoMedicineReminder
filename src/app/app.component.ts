@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
   title = 'af-notification';
   message: any = null;
   isLoggedIn!: boolean;
+  imageUrl : SafeUrl| any;
   
   constructor(public authService: AuthService,private key : KeyService, private router: Router,private sanitizer: DomSanitizer,private http: HttpClient,private userService: UserService) { }
   ngOnInit(): void {
@@ -164,26 +165,25 @@ if (!this.isLoggedIn) {
   }
   
   
-getUserPhoto(): void {
-  const token = localStorage.getItem('token');
-
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
-
-
-  this.http.get(this.key.current_photo, { headers, responseType: 'blob' }).subscribe(
-    (response: Blob) => {
-      const profileImg = localStorage.getItem('profilePhoto');
-      return profileImg; 
-      // const objectURL = URL.createObjectURL(response);
-      // this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-    },
-    (error) => {
-      console.error('API error:', error);
-      // Handle the error here
-    }
-  );
-}
-
+  getUserPhoto(): void {
+    const apiUrl = 'http://192.168.1.11:8866/photo/current';
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+  
+  
+    this.http.get(apiUrl, { headers, responseType: 'blob' }).subscribe(
+      (response: Blob) => {
+        const objectURL = URL.createObjectURL(response);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        console.warn(response);
+      },
+      (error) => {
+        console.error('API error:', error);
+        // Handle the error here
+      }
+    );
+  }
 skipNotification(message: any) {
   // Perform skip action for the given message
   // You can remove the message from the notificationMessages array or update its status

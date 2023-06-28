@@ -34,15 +34,7 @@ export class LoginComponent {
         (resp: any) => {
           console.log(resp); // Check the response structure and status code
           localStorage.setItem('token', resp.token);
-          if (resp.user.profilePhoto === null ){
-            localStorage.setItem('profilePhoto',this.Key.defaultImageUrl);
-            console.log('if===>',resp);
-          }
-          else{
-            localStorage.setItem('profilePhoto',resp.user.profilePhoto);
-            console.error('else===>',resp)
-          }
-
+          
           Swal.fire({
             icon: 'success',
             title: 'Successfully...',
