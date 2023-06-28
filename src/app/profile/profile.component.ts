@@ -33,15 +33,19 @@ export class ProfileComponent implements OnInit {
   
 
 
-  constructor(private http: HttpClient, private router: Router,private sanitizer: DomSanitizer,private userService: UserService,private key : KeyService) { }
+  constructor(
+    private http: HttpClient,
+     private router: Router,
+     private sanitizer: DomSanitizer,
+     private userService: UserService,
+     private key : KeyService
+     ) { }
 
   // id: number | any;
   
   ngOnInit(): void {
     this.getUserDetails();
     this.getUserPhoto();
-    
-    this.getProfilePhotoFromLocalStorage();
   }
   
 
@@ -306,15 +310,17 @@ export class ProfileComponent implements OnInit {
             return;
           }
   
+          const apiUrl = 'http://192.168.1.11:8866/upload-photo';
           const token = localStorage.getItem('token');
+  
           const formData = new FormData();
-          formData.append('photo', file, file.name); // Append the file with the correct field name
-          
+          formData.append('photo', file);
+  
           const headers = new HttpHeaders()
             .set('Authorization', `Bearer ${token}`)
             .set('Secret-Key', this.key.SECRET_KEY);
   
-          this.http.post(this.key.upload_photo, formData, { headers }).subscribe(
+          this.http.post(apiUrl, formData, { headers }).subscribe(
             (response) => {
               resolve(response);
             },
@@ -325,76 +331,50 @@ export class ProfileComponent implements OnInit {
         });
       }
     })
-    .then((result) => {
-      if (result.isConfirmed) {
-        const uploadedFile: any = result.value;
-        console.log('File uploaded successfully:', result);
+      .then((result) => {
+        if (result.isConfirmed) {
+          const uploadedFile = result.value;
+          console.log('File uploaded successfully:', uploadedFile);
   
-        if (uploadedFile && uploadedFile.profilePhoto) {
-          // Remove the existing profile photo from local storage
-          localStorage.removeItem('profilePhoto');
+          console.log('result:', result);
   
-          // Update profile photo in local storage with the new image path
-          const profilePhoto = uploadedFile.profilePhoto; // Replace 'profilePhoto' with the key used in the response
-          localStorage.setItem('profilePhoto', profilePhoto);
-  
-          Swal.fire({
-            title: 'Success',
-            text: 'Profile photo uploaded successfully',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 3000,
-          }).then(() => {
-            location.reload();
-          });
-        } else {
-          console.error('Profile photo not found in the server response');
+          // Reload the page
+          location.reload();
         }
-      }
-    })
-    .catch((error) => {
-      if (error !== 'No image selected') {
-        console.error('Upload error:', error);
-  
-        // Handle the error response appropriately
-        Swal.fire({
-          title: 'Oops...',
-          text: 'Profile photo not uploaded',
-          icon: 'error',
-          showConfirmButton: false,
-          timer: 3000,
-        }).then(() => {
-          // location.reload();
-        });
-      } else {
-        // Retry selecting an image
-        this.openUploadPopup();
-      }
-    });
+      })
+      .catch((error) => {
+        if (error !== 'No image selected') {
+          console.error('Upload error:', error);
+          location.reload();
+        } else {
+          // Retry selecting an image
+          this.openUploadPopup();
+        }
+      });
   }
+ 
   
 
-  getProfilePhotoFromLocalStorage(): string {
-    return localStorage.getItem('profilePhoto') || '';
+  
+  
+  getUserPhoto(): void {
+    const apiUrl = 'http://192.168.1.11:8866/photo/current';
+    const token = localStorage.getItem('token');
+  
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+  
+  
+    this.http.get(apiUrl, { headers, responseType: 'blob' }).subscribe(
+      (response: Blob) => {
+        const objectURL = URL.createObjectURL(response);
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+      },
+      (error) => {
+        console.error('API error:', error);
+        // Handle the error here
+      }
+    );
   }
-  
-getUserPhoto(): void {
-  const token = localStorage.getItem('token');
-
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
-
-
-  this.http.get(this.key.current_photo, { headers, responseType: 'blob' }).subscribe(
-    (response: Blob) => {
-      const objectURL = URL.createObjectURL(response);
-      this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-    },
-    (error) => {
-      console.error('API error:', error);
-      // Handle the error here
-    }
-  );
-}
 openUpDatePopUp(): void {
   const token = localStorage.getItem('token');
 

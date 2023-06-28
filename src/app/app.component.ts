@@ -125,7 +125,10 @@ if (!this.isLoggedIn) {
       // Handle notification click event
     });
   }
-
+  navigateToHome() {
+    this.router.navigateByUrl('/home')
+      .then(() => location.reload());
+  }
 
   logout() {
     // Call the logout() method from AuthService

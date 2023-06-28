@@ -22,6 +22,7 @@ export class KeyService {
   public myAppointment = `${this.Url}myAppointment`;
   public deleteMyAppointmnetdetail = `${this.Url}deleteMyAppointmnetdetail/`;
   public updateMyAppointment = `${this.Url}updateMyAppointment/`;
+  public getAppointmentById = `${this.Url}getAppointmentById/`;
   public myExercise = `${this.Url}myExercise`;
   public deleteMyExercise = `${this.Url}deleteMyExercise/`;
   public updateMyExercise = `${this.Url}updateMyExercise/`;

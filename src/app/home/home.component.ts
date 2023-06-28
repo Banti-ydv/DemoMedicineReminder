@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CalendarView, CalendarEvent } from 'angular-calendar';
+import { AuthService } from '../servise/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,7 @@ export class HomeComponent {
 
   selectedDate: Date | null = null;
 
-  constructor() { }
+  constructor(public authService : AuthService) { }
 
 }
 

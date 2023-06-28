@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from './servise/user.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class PushNotificationService {
   currentMessage = new BehaviorSubject(null);
 
-  constructor(private angularFireMessaging: AngularFireMessaging,private userService: UserService) {
+  constructor(private angularFireMessaging: AngularFireMessaging,private userService: UserService, public router : Router) {
     this.angularFireMessaging.messages.subscribe((messaging:any) => {
       messaging.onMessage((payload:any) => {
         console.log('Message received:', payload);

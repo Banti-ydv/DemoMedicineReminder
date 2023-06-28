@@ -30,7 +30,7 @@ export interface PeriodicElement {
 })
 export class AppointmentHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'withWhome', 'reason', 'speciality','appointmentdate',  'time', 'phoneNumber', 'address', 'edit','view', 'delete'];
+  displayedColumns: string[] = ['id', 'withWhome', 'reason', 'speciality','appointmentdate',  'time', 'phoneNumber', 'address', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(

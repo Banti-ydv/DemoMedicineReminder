@@ -7,7 +7,9 @@
 
       <div class="col-md-4">
         <div class="profile-img">
-          <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="rounded-circle" [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" />
+          <img [src]="imageUrl || defaultImageUrl" alt="" class="rounded-circle"
+          [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" />
+          <!-- <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="rounded-circle" [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" /> -->
           <br>
             <button type="button" class="btn btn-outline-primary mt-3" (click)="openUpDatePopUp()">Edit Profile</button>
           
