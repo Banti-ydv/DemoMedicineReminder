@@ -4,12 +4,15 @@
 <div class="container emp-profile">
   <form method="post">
     <div class="row">
-
       <div class="col-md-4">
         <div class="profile-img">
-          <img [src]="imageUrl" alt="" class="rounded-circle"
-          [style.width.%]="50" [style.height.%]="70" (click)="fileInput.click()" />
-          <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)">
+          <!-- <img [src]="imageUrl" alt="" class="rounded-circle"
+          [style.width.%]="50" [style.height.%]="70" (click)="fileInput.click()" /> -->
+          <!-- component.html -->
+<img [src]="isResponseSizeZero() ? '../assets/img/profile.png' : imageUrl" alt="" class="rounded-circle"
+[style.width.%]="50" [style.height.%]="70" (click)="openPopupForImg()" />
+
+          <!-- <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)"> -->
           <!-- <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="rounded-circle" [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" /> -->
           <br>
             <button type="button" class="btn btn-outline-primary mt-3" (click)="openUpDatePopUp()">Edit Profile</button>

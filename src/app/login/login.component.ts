@@ -34,6 +34,10 @@ export class LoginComponent {
         (resp: any) => {
           console.log(resp); // Check the response structure and status code
           localStorage.setItem('token', resp.token);
+          if (resp.user.profile==null){
+            const defaultimg = '/assets/img/profile.png';
+            localStorage.setItem('profileimg',defaultimg)
+          }
           
           Swal.fire({
             icon: 'success',

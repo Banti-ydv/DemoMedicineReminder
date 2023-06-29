@@ -30,7 +30,7 @@ onexercise() { // Update the method name to match the one used in the template
         text: 'Exercise added successfully',
         icon: 'success',
         showConfirmButton: false,
-            timer: 3000,
+            timer: 2000,
       }).then((result) => {
         if (result) {
           this.router.navigate(['/exercise-history']);

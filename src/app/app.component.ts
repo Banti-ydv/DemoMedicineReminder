@@ -40,6 +40,9 @@ export class AppComponent implements OnInit {
   message: any = null;
   isLoggedIn!: boolean;
   imageUrl : SafeUrl| any;
+
+
+  handleNotification: any;
   
   constructor(public authService: AuthService,private key : KeyService, private router: Router,private sanitizer: DomSanitizer,private http: HttpClient,private userService: UserService) { }
   ngOnInit(): void {
@@ -124,8 +127,28 @@ if (!this.isLoggedIn) {
 
     notification.addEventListener('click', () => {
       // Handle notification click event
+      
+        const notificationTypeName = payload.notification.body;
+        switch (notificationTypeName.at(1)) {
+         case 'a':
+           this.router.navigate(['/medicine-history']);
+           break;
+         case 't':
+           this.router.navigate(['/exercise-history']);
+           break;
+         case 'o':
+           this.router.navigate(['/appointment-history']);
+           break;
+         default:
+           this.router.navigate(['/home']);
+           break;
+        }
+      
+      
     });
   }
+
+  //menu in home there home option on this event
   navigateToHome() {
     this.router.navigateByUrl('/home')
       .then(() => location.reload());
@@ -156,15 +179,14 @@ if (!this.isLoggedIn) {
     }
   }
 
-  // setDefaultImage(): void {
-  //   this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.defaultImageUrl);
-  // }
-
   getProfilePhotoFromLocalStorage(): string {
     return localStorage.getItem('profilePhoto') || '';
   }
   
-  
+  isResponseSizeZero(): boolean {
+    const responseSize = parseInt(localStorage.getItem('responseSize') || '0', 10);
+    return responseSize === 0;
+  }
   getUserPhoto(): void {
     const apiUrl = 'http://192.168.1.11:8866/photo/current';
     const token = localStorage.getItem('token');
@@ -176,7 +198,10 @@ if (!this.isLoggedIn) {
       (response: Blob) => {
         const objectURL = URL.createObjectURL(response);
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        console.warn(response);
+        const responseSize = response.size;
+      console.warn(responseSize);
+      localStorage.setItem('responseSize', responseSize.toString());
+        
       },
       (error) => {
         console.error('API error:', error);
@@ -184,24 +209,6 @@ if (!this.isLoggedIn) {
       }
     );
   }
-skipNotification(message: any) {
-  // Perform skip action for the given message
-  // You can remove the message from the notificationMessages array or update its status
-}
-
-takeAction(message: any) {
-  // Perform action for the given message
-  // You can update the message status or navigate to a specific page based on the action
-}
-
-// Method to handle incoming notification messages
-handleNotification(message: any) {
-  this.notificationMessages.push(message);
-}
-
-
-
-
 
 
 

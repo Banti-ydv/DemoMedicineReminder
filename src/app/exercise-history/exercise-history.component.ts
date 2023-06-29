@@ -86,10 +86,10 @@ export class ExerciseHistoryComponent implements OnInit {
               title: 'Deleted!',
               text: 'Your exercise has been deleted.',
               icon: 'success',
-              showConfirmButton: true,
+              showConfirmButton: false,
               timer: 3000,
             }).then((result) => {
-              if (result.isConfirmed) {
+              if (result) {
                 location.reload();
               }
             });
@@ -141,7 +141,17 @@ export class ExerciseHistoryComponent implements OnInit {
           const { exercisename, exercisetime } = formValues;
 
           if (!exercisename || !exercisetime) {
-            Swal.fire('Error!', 'Please fill all the input fields.', 'error');
+            // Swal.fire('Error!', 'Please fill all the input fields.', 'error')
+            Swal.fire({
+              title: 'Error!',
+              text: 'Please fill all the input fields.',
+              icon: 'error',
+              showConfirmButton: false,
+              timer: 2000,
+            }).then(() => {
+              this.updateExercise(element); // Recursive call to reopen the Swal dialog
+            });
+  
             return;
           }
 
@@ -163,11 +173,24 @@ export class ExerciseHistoryComponent implements OnInit {
                 e.id === element.id ? updatedData : e
               );
               this.dataSource.data = updatedElements;
-              Swal.fire('Success!', 'Exercise updated successfully.', 'success');
+              Swal.fire({
+                title: 'Success!',
+                text: 'Exercise updated successfully.',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 2000,
+              });
             },
             (error) => {
               console.error('An error occurred while updating the Exercise:', error);
-              Swal.fire('Error!', 'An error occurred while updating the Exercise.', 'error');
+              // Swal.fire('Error!', 'An error occurred while updating the Exercise.', 'error');
+              Swal.fire({
+                title: 'Error!',
+                text: 'An error occurred while updating the Exercise.',
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 2000,
+              });
             }
           );
         }

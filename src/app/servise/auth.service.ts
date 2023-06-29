@@ -55,6 +55,7 @@ export class AuthService {
                 console.log('Logged out successfully.', response);
       
                 localStorage.removeItem('token');
+                localStorage.removeItem('responseSize');
                 
                 this.router.navigate(['/login']);
                 this.isLoggedIn = false;

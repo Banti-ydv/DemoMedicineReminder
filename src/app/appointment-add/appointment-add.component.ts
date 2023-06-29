@@ -44,7 +44,7 @@ export class AppointmentAddComponent {
           text: 'Appointment added successfully',
           icon: 'success',
           showConfirmButton: false,
-          timer: 3000,
+          timer: 2000,
         }).then((result) => {
           if (result) {
             this.router.navigate(['/appointment-history']);
