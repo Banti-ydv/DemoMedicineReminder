@@ -291,6 +291,7 @@ export class ProfileComponent implements OnInit {
         accept: 'image/*'
       },
       showCancelButton: true,
+      showCloseButton: true,
       confirmButtonText: 'Upload',
       cancelButtonText: 'Cancel',
       preConfirm: (file) => {

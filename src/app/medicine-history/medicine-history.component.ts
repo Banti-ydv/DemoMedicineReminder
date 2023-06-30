@@ -48,7 +48,7 @@ export class MedicineHistoryComponent implements OnInit{
 
 
   // displayedColumns: string[] = ['id', 'name', 'shape', 'dose', 'frequency' , 'fromDate', 'toDate', 'timing', 'description', 'edit', 'delete'];
-  displayedColumns: string[] = ['id', 'name', 'shape', 'fromDate', 'toDate', 'view'];
+  displayedColumns: string[] = ['id', 'name', 'shape', 'fromDate', 'toDate', 'view','delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   selectedElement: any;
@@ -128,10 +128,10 @@ deleteMedicine(id: number) {
             title: 'Deleted!',
             text: 'Your medicine has been deleted.',
             icon: 'success',
-            showConfirmButton: true,
-            
+            showConfirmButton: false,
+            timer: 2000,
           }).then((result) => {
-            if (result.isConfirmed) {
+            if (result) {
               location.reload();
             }
           });

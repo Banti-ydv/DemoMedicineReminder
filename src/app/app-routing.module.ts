@@ -13,6 +13,7 @@ import { ExerciseHistoryComponent } from './exercise-history/exercise-history.co
 import { FoodHistoryComponent } from './food-history/food-history.component';
 import { AppointmentHistoryComponent } from './appointment-history/appointment-history.component';
 import { ProfileComponent } from './profile/profile.component';
+import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 
 // import { AuthGuard } from './servise/auth.guard';
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   // { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent},
   { path: 'medicine-add', component: MedicineAddComponent },
+  { path: 'medicine-details', component: MedicineDetailsComponent },
   { path: 'medicine-history', component: MedicineHistoryComponent },
   { path: 'exercise-add', component: ExerciseAddComponent },
   { path: 'exercise-history', component: ExerciseHistoryComponent },

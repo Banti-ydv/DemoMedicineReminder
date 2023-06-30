@@ -42,6 +42,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { MatSelectModule } from '@angular/material/select';
 
 import { AuthService } from './servise/auth.service';
+import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 
 
 
@@ -63,7 +64,8 @@ import { AuthService } from './servise/auth.service';
     ExerciseHistoryComponent,
     FoodHistoryComponent,
     AppointmentHistoryComponent,
-    ProfileComponent
+    ProfileComponent,
+    MedicineDetailsComponent
   ],
   imports: [
     BrowserModule,
