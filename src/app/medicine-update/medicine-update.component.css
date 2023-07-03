@@ -25,17 +25,3 @@
     /* justify-content: center; */
     /* align-items: center; */
   }
-
-
-  .table thead th{
-    border-bottom: 2px solid #000000;
-  }
-  .table thead th{
-    border-top: 2px solid #000000;
-  }
-  .table td, .table th{
-    border-bottom: 1px solid #000000;
-  }
-  .table{
-    color: #000000;
-  }

@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { KeyService } from './key.service';
+import { Medicine } from '../medicine-update/medicine-update.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  updateMedicine(updatedMedicine: Medicine) {
+    throw new Error('Method not implemented.');
+  }
 
 
   // private login = "http://192.168.1.11:9192/login";

@@ -21,6 +21,7 @@ import Swal from 'sweetalert2';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { KeyService } from '../servise/key.service';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import * as moment from 'moment';
 
 export interface Medicine {
   name: string;
@@ -42,16 +43,18 @@ export interface Medicine {
 })
 export class MedicineDetailsComponent implements OnInit {
 
-  items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+  // items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
   dosedata: string[] | any;
   timedata: string[] | any;
+  dosetime: string[] | any;
 
 
   
   selectedElement: any;
   // updateMedicineForm: FormGroup;
   medicines: { timing: string; dose: string }[] = [{ timing: '', dose: '' }];
-  profileDetails: any;
+  profileDetails1: any;
+  profileDetails2: any;
   
   // timingsArray: string[] = [];
   // doseArray: string[] = [];
@@ -67,12 +70,44 @@ export class MedicineDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.EmployeeProfile();
+    this.EmployeeProfile2();
+    this.EmployeeProfile1();
   }
   
 
 
-  EmployeeProfile(): void{
+  EmployeeProfile1(): void{
+    const token = localStorage.getItem('token');
+   
+    const urlParams = new URLSearchParams(window.location.search);
+    const employeeId = urlParams.get('id')
+    // Set the token in the request headers    
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+    const updateUrl = `http://192.168.1.11:8866/getallData/${employeeId}`;
+       // Fetch the team leads from the API endpoint
+       this.http.get(updateUrl, { headers })
+      
+        .subscribe(
+          
+         (response: any) => {
+          this.profileDetails1 = response;
+          console.log(response);
+
+          this.dosedata = response.dose;
+          this.timedata = response.timing;
+          console.error('dosedata=====>',this.dosedata)
+          console.error('timedata=====>',this.timedata)
+          
+         },
+         (error) => {
+           console.error('Failed to fetch team leads:', error);
+         }
+     );
+     
+  }
+
+  EmployeeProfile2(): void{
     const token = localStorage.getItem('token');
    
     const urlParams = new URLSearchParams(window.location.search);
@@ -87,12 +122,12 @@ export class MedicineDetailsComponent implements OnInit {
         .subscribe(
           
          (response: any) => {
-          this.profileDetails = response;
-          console.log(response);
+          this.profileDetails2 = response;
+          console.log('2222222',response);
 
-          this.dosedata = response.dose;
-          this.timedata = response.timing;
-          console.error('dosedata=====>',this.dosedata)
+          this.dosetime = response;
+          console.error('dosetime=====>',this.dosetime)
+
           
          },
          (error) => {
@@ -101,63 +136,7 @@ export class MedicineDetailsComponent implements OnInit {
      );
      
   }
-  updateMedicine(formValue: any) {
-
-    if (!formValue.name || !formValue.shape || !formValue.fromDate || !formValue.toDate || !formValue.description || !formValue.dose || !formValue.timing) {
-      Swal.fire('Error!', 'Please fill all the required fields.', 'error');
-      return;
-    }
-    const updatedMedicine = {
-      id: this.selectedElement.id,
-      name: formValue.name,
-      shape: formValue.shape,
-      frequency: formValue.frequency,
-      fromDate: formValue.fromDate,
-      toDate: formValue.toDate,
-      description: formValue.description,
-      dose: [formValue.dose],
-      timing: [formValue.timing]
-      // Include other properties as needed
-    };
   
-    if (this.selectedElement && this.selectedElement.id) {
-      
-      const token = localStorage.getItem('token');
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
-  
-      const requestBody = {
-        name: updatedMedicine.name,
-        shape: updatedMedicine.shape,
-        frequency: updatedMedicine.frequency,
-        fromDate: updatedMedicine.fromDate,
-        toDate: updatedMedicine.toDate,
-        description: updatedMedicine.description,
-        dose: updatedMedicine.dose,
-        timing: updatedMedicine.timing,
-        // Add other properties to update if needed
-      };
-  
-      this.http.put(this.key.updateMyMedicine+`${this.selectedElement.id}`, requestBody, { headers }).subscribe(
-        response => {
-          console.log('Medicine updated successfully:', response);
-          Swal.fire({
-            title: 'Updated!',
-            text: 'Medicine updated successfully.',
-            icon: 'success'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              location.reload();
-            }
-          });
-          // Handle success message or perform additional actions
-        },
-        error => {
-          console.error('Error updating medicine:', error);
-          // Handle error message or perform error handling
-        }
-      );
-    }
-  }
   
   addMedicine() {
     this.medicines.push({ timing: '', dose: '' });
@@ -195,5 +174,9 @@ export class MedicineDetailsComponent implements OnInit {
  minDate(): string {
     return this.authService.setMinDate();
   }
-  
+
+  convertTo24HourFormat(timing: string): string {
+    const formattedTime = moment(timing, 'h:mm A').format('HH:mm');
+    return formattedTime;
+  }
 }

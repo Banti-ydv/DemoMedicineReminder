@@ -39,7 +39,7 @@
     </div>
   </div> -->
 
-  <div class="container m-4" *ngIf="dataSource1.data.length > 0">
+  <!-- <div class="container m-4" *ngIf="dataSource1.data.length > 0">
     <h2>Exercise History</h2>
   
     <div class="row">
@@ -48,14 +48,12 @@
           <div class="card-body" (click)="exercise()">
             <h5 class="card-title">{{ element.exercisename }}</h5>
             <p class="card-text">Time: {{ formatTime(element.exercisetime) }}</p>
-            <!-- <button class="btn btn-primary m-2" (click)="updateExercise(element)">Edit</button>
-            <button class="btn btn-danger m-2" (click)="deleteExercise(element.id)">Delete</button> -->
           </div>
         </div>
       </div>
     </div>
-  </div>
-
+  </div> -->
+<!-- 
   <div class="container m-4" *ngIf="dataSource2.data.length > 0">
     <h2>Appointment History</h2>
   
@@ -65,12 +63,45 @@
           <div class="card-body" (click)="appointment()">
             <h5 class="card-title">{{element.withWhome}}</h5>
             <p class="card-text">Time: {{ formatTime(element.time) }} </p>
-            <!-- <button class="btn btn-primary m-2" (click)="updateExercise(element)">Edit</button>
-            <button class="btn btn-danger m-2" (click)="deleteExercise(element.id)">Delete</button> -->
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   
+
+  <div class="container" *ngIf="dataSource2.data.length > 0">
+    <h3>Appointment</h3>
+    <ul class="cards">
+        <li class="card" *ngFor="let element of dataSource2.data">
+            <div>
+                <h3 class="card-title">{{element.withWhome}}</h3>
+                <div class="card-content">
+                    <p>Time: {{ formatTime(element.time) }}</p>
+                    <p>Date: {{formatDate(element.appointmentdate)}}</p>
+                </div>
+            </div>
+            <div class="card-link-wrapper">
+                <a routerLink="/appointment-history" class="card-link">View More</a>
+            </div>
+        </li>        
+    </ul>
+</div>
+
+<div class="container" *ngIf="dataSource1.data.length > 0">
+  <h3>Exercise</h3>
+  <ul class="cards">
+      <li class="card" *ngFor="let element of dataSource1.data">
+          <div>
+              <h3 class="card-title">{{element.exercisename}}</h3>
+              <div class="card-content">
+                  <p>Time: {{ formatTime(element.exercisetime) }}</p>
+              </div>
+          </div>
+          <div class="card-link-wrapper">
+              <a routerLink="/exercise-history" class="card-link">View More</a>
+          </div>
+      </li>        
+  </ul>
+</div>
 

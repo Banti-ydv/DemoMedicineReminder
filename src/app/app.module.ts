@@ -43,6 +43,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { AuthService } from './servise/auth.service';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
+import { MedicineUpdateComponent } from './medicine-update/medicine-update.component';
 
 
 
@@ -65,7 +66,8 @@ import { MedicineDetailsComponent } from './medicine-details/medicine-details.co
     FoodHistoryComponent,
     AppointmentHistoryComponent,
     ProfileComponent,
-    MedicineDetailsComponent
+    MedicineDetailsComponent,
+    MedicineUpdateComponent
   ],
   imports: [
     BrowserModule,

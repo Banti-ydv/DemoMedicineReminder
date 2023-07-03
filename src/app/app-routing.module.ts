@@ -14,7 +14,7 @@ import { FoodHistoryComponent } from './food-history/food-history.component';
 import { AppointmentHistoryComponent } from './appointment-history/appointment-history.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
-
+import { MedicineUpdateComponent } from './medicine-update/medicine-update.component';
 // import { AuthGuard } from './servise/auth.guard';
 
 
@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'medicine-add', component: MedicineAddComponent },
   { path: 'medicine-details', component: MedicineDetailsComponent },
   { path: 'medicine-history', component: MedicineHistoryComponent },
+  { path: 'medicine-update', component: MedicineUpdateComponent },
   { path: 'exercise-add', component: ExerciseAddComponent },
   { path: 'exercise-history', component: ExerciseHistoryComponent },
   { path: 'food-add', component: FoodAddComponent },

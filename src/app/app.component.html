@@ -17,7 +17,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" (click)="navigateToHome()">
+            <a class="nav-link" href="" (click)="navigateToHome()">
                 <i class="fas fa-home"></i>
                 <span>Home</span></a>
         </li>
@@ -48,7 +48,7 @@
         </li> -->
 
         <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-medkit"></i>
                 <span>Medicine</span>
@@ -63,7 +63,7 @@
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseExercise"
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseExercise"
                 aria-expanded="true" aria-controls="collapseExercise">
                 <i class="fas fa-dumbbell"></i>
                 <span>Exercise</span>
@@ -79,7 +79,7 @@
         </li>
 
         <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAppointment"
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseAppointment"
                 aria-expanded="true" aria-controls="collapseAppointment">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Appointment</span>
@@ -266,7 +266,7 @@
                                 Profile
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" (click)="logout()">
+                            <a class="dropdown-item" href="#" (click)="logout()">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>

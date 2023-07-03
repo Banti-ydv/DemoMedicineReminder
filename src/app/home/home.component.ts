@@ -124,6 +124,16 @@ export class HomeComponent implements OnInit {
     const formattedTime = moment(time, 'h:mm A').format('HH:mm');
     return formattedTime;
   }
+  formatDate(date: string | null): string {
+    if (date) {
+      const parsedDate = new Date(date);
+      const year = parsedDate.getFullYear();
+      const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
+      const day = ('0' + parsedDate.getDate()).slice(-2);
+      return `${year}-${month}-${day}`;
+    }
+    return '';
+  }
   
 
 }

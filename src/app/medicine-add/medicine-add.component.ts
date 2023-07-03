@@ -196,22 +196,21 @@ export class MedicineAddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.firstFormGroup = this.formBuilder.group({
-    //   name: ['', Validators.required],
-    //   email: ['', Validators.required]
-    // });
-    // this.medicine.frequency = this.selectedInterval;
-  }
 
+  }
 
   addMedicine() {
     this.medicines.push({ timing: '', dose: '' });
+    this.timingsArray.push('');
+    this.doseArray.push('');
   }
-
+  
   removeMedicine(index: number) {
     this.medicines.splice(index, 1);
+    this.timingsArray.splice(index, 1);
+    this.doseArray.splice(index, 1);
   }
-
+  
   
 
 onMedicine() {
