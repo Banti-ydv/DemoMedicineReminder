@@ -88,7 +88,7 @@ h2 {
 }
 
 .card .card-content {
-    margin: 20px 0;
+    margin: 5px 0;
     max-width: 85%;
 }
 
@@ -131,6 +131,7 @@ h2 {
     .cards {
         grid-auto-columns: calc(50% - 10px);
         grid-column-gap: 150px;
+        padding-left: 20px;
     }
 }
 
@@ -138,6 +139,7 @@ h2 {
     .cards {
         grid-auto-columns: calc(calc(100% / 3) - 20px);
         grid-column-gap: 210px;
+        padding-left: 20px;
     }
 }
 
@@ -145,5 +147,6 @@ h2 {
     .cards {
         grid-auto-columns: calc(25% - 30px);
         grid-column-gap: 120px;
+        padding-left: 20px;
     }
 }

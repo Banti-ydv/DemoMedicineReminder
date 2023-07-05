@@ -19,13 +19,13 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { KeyService } from '../servise/key.service';
 
 export interface Medicine {
+  id: string,
   name: string;
   shape: string;
-  dose: string[];
+  dose: number[];
   fromDate: string;
   toDate: string;
   timing: string[];
-  // description: string;
   frequency: string[];
 }
 
@@ -48,34 +48,28 @@ export class MedicineUpdateComponent implements OnInit {
 
 
   medicine: Medicine = {
+    id: '',
     name: '',
     shape: '',
     fromDate: '',
     toDate: '',
     timing: [],
-    // description: '',
     frequency: [],
     dose: [],
-    // description: ''
   };
   doseOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1); // Generate dose options dynamically
-  // firstFormGroup: FormGroup | any;
-  // secondFormGroup: FormGroup | any;
-  profileDetails: any;
-  dosetime: string[] | any;
-  profileDetails2: any;
 
   dosedata: string[] | any;
   timedata: string[] | any;
-
+  
+  combinedData: { time: string, dose: number }[] = [];
+  
   frequencyOptions = ['Everyday', 'Every X day', 'Every X day of week', 'Every X day of month'];
   selectedFrequency: string | any;
   everydayOptions = ['everyday'];
   intervalOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   weekOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   monthOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-
-  // selectedInterval: string[] = [];
 
   constructor(
     private userService: UserService,
@@ -88,49 +82,90 @@ export class MedicineUpdateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userData();
-    this.EmployeeProfile2();
+    this.userAllData();
+    this.userTimeData();
   }
 
-
-  addMedicine() {
-    this.medicines.push({ timing: '', dose: '' });
+  // addData() {
+  //   this.timedata.push({ time: '', dose: 0 });
+  // }
+  
+  // removeData(index: number) {
+  //   this.timedata.splice(index, 1);
+  // }
+  addData() {
+    this.timedata.push({ timing: '', dose: '' });
+    
+    
   }
-
-  removeMedicine(index: number) {
-    this.medicines.splice(index, 1);
+  
+  removeData(index: number) {
+    this.timedata.splice(index, 1);
+    this.dosedata.splice(index, 1);
+   
   }
+  
+
+  // addMedicine() {
+  //   this.medicines.push({ timing: '', dose: '' });
+  // }
+
+  // removeMedicine(index: number) {
+  //   this.medicines.splice(index, 1);
+  // }
 
 
 
 
-  formatfromDate(date: string | null): string {
+  formatfromDate(date: string | any): string {
     if (date) {
       const parsedDate = new Date(date);
       const year = parsedDate.getFullYear();
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
       return `${year}-${month}-${day}`;
+      //return `${month}/${day}/${year}`;
     }
     return '';
   }
 
-  formattoDate(date: string | null): string {
+  formattoDate(date: string | any): string {
     if (date) {
       const parsedDate = new Date(date);
       const year = parsedDate.getFullYear();
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
       return `${year}-${month}-${day}`;
+      //return `${month}/${day}/${year}`;
     }
     return '';
   }
+
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
 
   minDate(): string {
     return this.authService.setMinDate();
   }
 
   updateMedicineData() {
+
+    const timingsArray = Array.from(
+      document.querySelectorAll('input[type="time"]')
+    ).map((input) => (input as HTMLInputElement).value);
+    const doseArray = Array.from(
+      document.querySelectorAll('input[type="number"]')
+    ).map((input) => parseInt((input as HTMLInputElement).value));
+
+    console.log('Timings:', timingsArray);
+    console.log('Doses:', doseArray);
     const urlParams = new URLSearchParams(window.location.search);
     const employeeId = urlParams.get('id')
     const url = `http://192.168.1.11:8866/updateMyMedicine/${employeeId}`;
@@ -139,15 +174,17 @@ export class MedicineUpdateComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
     const updatedMedicineData: Medicine = {
+      id: this.medicine.id,
       name: this.medicine.name,
       shape: this.medicine.shape,
-      fromDate: this.formatfromDate(this.medicine.fromDate),
-      toDate: this.formattoDate(this.medicine.toDate),
-      timing: this.timedata,
-      // description: this.medicine.description,
+      fromDate: this.medicine.fromDate,
+      toDate: this.medicine.toDate,
       frequency: this.medicine.frequency,
-      dose: this.medicines.map((medicine) => medicine.dose),
-      // description: ''
+
+      // dose: this.medicines.map((medicine) => medicine.dose),
+      // timing: this.timedata,
+      dose: doseArray,
+      timing: timingsArray,
     };
 
     this.http.put(url, updatedMedicineData, { headers }).subscribe(
@@ -175,7 +212,7 @@ export class MedicineUpdateComponent implements OnInit {
   }
 
 
-  userData(): void {
+  userAllData(): void {
     const token = localStorage.getItem('token');
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -190,7 +227,14 @@ export class MedicineUpdateComponent implements OnInit {
       .subscribe(
 
         (response: any) => {
-          this.profileDetails = response;
+          //this.profileDetails = response;
+          // this.medicine.dose = response.dose;
+          this.medicine.id = response.id;
+          this.medicine.frequency = response.frequency;
+          this.medicine.fromDate = response.fromDate;
+          this.medicine.toDate = response.toDate;
+          this.medicine.name = response.name;
+          this.medicine.shape = response.shape;
           this.dosedata = response.dose;
           console.error('response=======>', response);
 
@@ -204,39 +248,21 @@ export class MedicineUpdateComponent implements OnInit {
 
 
 
-  EmployeeProfile2(): void {
+  userTimeData(): void {
     const token = localStorage.getItem('token');
-
     const urlParams = new URLSearchParams(window.location.search);
     const employeeId = urlParams.get('id')
-    // Set the token in the request headers    
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
-
     const updateUrl = `http://192.168.1.11:8866/getDoseandTime/${employeeId}`;
-    // Fetch the team leads from the API endpoint
     this.http.get(updateUrl, { headers })
-
       .subscribe(
-
         (response: any) => {
-          this.profileDetails2 = response;
-          console.log('2222222', response);
-
-
-          this.dosetime = response;
-          // this.dosedata = response.dose;
-
-          console.error('dosetime=====>', this.dosetime)
-
-
+          this.timedata = response;
         },
         (error) => {
           console.error('Failed to fetch team leads:', error);
         }
       );
-
   }
-
-
 }
 

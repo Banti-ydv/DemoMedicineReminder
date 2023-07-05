@@ -24,6 +24,7 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import * as moment from 'moment';
 
 export interface Medicine {
+  id: string;
   name: string;
   shape: string;
   dose: string[];
@@ -46,7 +47,7 @@ export class MedicineDetailsComponent implements OnInit {
   // items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
   dosedata: string[] | any;
   timedata: string[] | any;
-  dosetime: string[] | any;
+  // dosetime: string[] | any;
 
 
   
@@ -55,10 +56,7 @@ export class MedicineDetailsComponent implements OnInit {
   medicines: { timing: string; dose: string }[] = [{ timing: '', dose: '' }];
   profileDetails1: any;
   profileDetails2: any;
-  
-  // timingsArray: string[] = [];
-  // doseArray: string[] = [];
-  
+    
   constructor(
     private userService: UserService,
     private router: Router,
@@ -95,9 +93,9 @@ export class MedicineDetailsComponent implements OnInit {
           console.log(response);
 
           this.dosedata = response.dose;
-          this.timedata = response.timing;
+          // this.timedata = response.timing;
           console.error('dosedata=====>',this.dosedata)
-          console.error('timedata=====>',this.timedata)
+          // console.error('timedata=====>',this.timedata)
           
          },
          (error) => {
@@ -122,12 +120,8 @@ export class MedicineDetailsComponent implements OnInit {
         .subscribe(
           
          (response: any) => {
-          this.profileDetails2 = response;
-          console.log('2222222',response);
-
-          this.dosetime = response;
-          console.error('dosetime=====>',this.dosetime)
-
+          
+          this.timedata = response;
           
          },
          (error) => {
@@ -156,6 +150,7 @@ export class MedicineDetailsComponent implements OnInit {
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
       return `${year}-${month}-${day}`;
+      // return `${month}/${day}/${year}`;
     }
     return '';
   }
@@ -167,6 +162,7 @@ export class MedicineDetailsComponent implements OnInit {
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
       return `${year}-${month}-${day}`;
+      // return `${month}/${day}/${year}`;
     }
     return '';
   }

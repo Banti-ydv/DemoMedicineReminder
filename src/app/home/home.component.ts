@@ -25,6 +25,7 @@ import Swal from 'sweetalert2';
 import { UserService } from '../servise/user.service';
 
 import { KeyService } from '../servise/key.service';
+import { AuthService } from '../servise/auth.service';
 import * as moment from 'moment';
 
 export interface PeriodicElement1 {
@@ -58,7 +59,8 @@ export class HomeComponent implements OnInit {
     private confirmService: NgConfirmService,
     private router: Router,
     private userService: UserService,
-    private key: KeyService
+    public key: KeyService,
+    public authService: AuthService
   ) { }
 
 

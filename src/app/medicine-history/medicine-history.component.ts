@@ -225,7 +225,8 @@ formatfromDate(date: string | null): string {
       const year = parsedDate.getFullYear();
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
-      return `${year}-${month}-${day}`;
+      // return `${year}-${month}-${day}`;
+      return `${month}/${day}/${year}`;
     }
     return '';
   }
@@ -236,7 +237,8 @@ formatfromDate(date: string | null): string {
       const year = parsedDate.getFullYear();
       const month = ('0' + (parsedDate.getMonth() + 1)).slice(-2);
       const day = ('0' + parsedDate.getDate()).slice(-2);
-      return `${year}-${month}-${day}`;
+      // return `${year}-${month}-${day}`;
+      return `${month}/${day}/${year}`;
     }
     return '';
   }
