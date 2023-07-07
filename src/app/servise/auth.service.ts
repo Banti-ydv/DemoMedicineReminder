@@ -9,9 +9,7 @@ import { KeyService } from './key.service';
     providedIn: 'root'
 })
 export class AuthService {
-    minDate() {
-      throw new Error('Method not implemented.');
-    }
+    
     private isLoggedIn = false;
     // private login = "http://192.168.1.11:9192/login";
     // private logoutUrl = 'http://192.168.1.11:8866/signout';

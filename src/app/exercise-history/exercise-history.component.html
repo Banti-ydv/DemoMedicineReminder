@@ -48,10 +48,15 @@ margin: -60px 0px 10px 0px;
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="position">
+  <!-- <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container> -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
   </ng-container>
+  
 
   <ng-container matColumnDef="exercisename">
     <th mat-header-cell *matHeaderCellDef> Exercise Name </th>

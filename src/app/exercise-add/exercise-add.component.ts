@@ -12,11 +12,37 @@ import Swal from 'sweetalert2';
 })
 export class ExerciseAddComponent {
 
-  exercise = {
+  // exercise = {
+  //   exercisename:'',
+  //   date:'',
+  //   exercisetime:'',
+  //   frequency:'',
+  //   exerciseTimes: []
+  // }
+  
+
+  exercise: {exercisename:string,date:string,frequency: string[], exercisetime: string, exerciseTimes: string[], exerciseName: string[] } = {
     exercisename:'',
     date:'',
-    exercisetime:''
-  }
+    exercisetime:'',
+    frequency:[],
+    exerciseTimes: [],
+    exerciseName: []
+
+  };
+  EverydayX: any;
+
+
+  weekOptions: Array<any> = [
+    { name: 'Sunday', value: 'Sunday'},
+    { name: 'Monday', value: 'Monday'},
+    { name: 'Tuesday', value: 'Tuesday' },
+    { name: 'Wednesday', value: 'Wednesday' },
+    { name: 'Thursday', value: 'Thursday' },
+    { name: 'Friday', value: 'Friday' },
+    { name: 'Saturday', value: 'Saturday' }
+  ];
+  
 
   constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { }
 
@@ -46,6 +72,22 @@ onexercise() { // Update the method name to match the one used in the template
   );
 }
 
+
+addExerciseTime() {
+  this.exercise.exerciseTimes.push('');
+}
+
+removeExerciseTime(index: number) {
+  this.exercise.exerciseTimes.splice(index, 1);
+}
+
+addExerciseName() {
+  this.exercise.exerciseName.push('');
+}
+
+removeExerciseName(index: number) {
+  this.exercise.exerciseName.splice(index, 1);
+}
 
   formatDate(date: string | null): string {
     if (date) {

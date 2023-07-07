@@ -1,6 +1,7 @@
 /* Structure */
 table {
-    width: 100%;
+  margin-bottom: 50px;
+  width: 100%;
   }
   
   .mat-mdc-form-field {
