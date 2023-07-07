@@ -54,11 +54,11 @@ export class AppComponent implements OnInit {
 
 //logged in
     this.isLoggedIn = this.authService.getIsLoggedIn();
-if (!this.isLoggedIn) {
-  if (window.location.pathname !== '/home' && window.location.pathname !== '/register' && window.location.pathname !== '/contact') {
-    this.router.navigate(['/login']);
-  }
-}
+// if (!this.isLoggedIn) {
+//   if (window.location.pathname !== '/home' && window.location.pathname !== '/register' && window.location.pathname !== '/contact') {
+//     this.router.navigate(['/home']);
+//   }
+// }
 //message
     this.requestPermission();
     this.listen();

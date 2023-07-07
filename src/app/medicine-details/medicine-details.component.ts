@@ -68,13 +68,13 @@ export class MedicineDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.EmployeeProfile2();
-    this.EmployeeProfile1();
+    this.getTimeData();
+    this.getAllData();
   }
   
 
 
-  EmployeeProfile1(): void{
+  getAllData(): void{
     const token = localStorage.getItem('token');
    
     const urlParams = new URLSearchParams(window.location.search);
@@ -105,7 +105,7 @@ export class MedicineDetailsComponent implements OnInit {
      
   }
 
-  EmployeeProfile2(): void{
+  getTimeData(): void{
     const token = localStorage.getItem('token');
    
     const urlParams = new URLSearchParams(window.location.search);

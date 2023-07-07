@@ -28,16 +28,22 @@ import { KeyService } from '../servise/key.service';
 import { AuthService } from '../servise/auth.service';
 import * as moment from 'moment';
 
-export interface PeriodicElement1 {
+export interface PeriodicElementExercise {
   exercisename: string;
   exercisetime: string;
 
 
 }
-export interface PeriodicElement2 {
+export interface PeriodicElementAppointment {
   withWhome: string;
   time: string;
   appointmentdate: string;
+
+
+}
+export interface PeriodicElementMedicien {
+  name: string;
+  timing: string;
 
 
 }
@@ -51,8 +57,9 @@ export interface PeriodicElement2 {
 export class HomeComponent implements OnInit {
 
   // displayedColumns: string[] = ['position', 'exercisename', 'exercisetime', 'edit', 'delete'];
-  dataSource1 = new MatTableDataSource<PeriodicElement1>();
-  dataSource2 = new MatTableDataSource<PeriodicElement2>();
+  dataSourceExercise = new MatTableDataSource<PeriodicElementExercise>();
+  dataSourceAppointment = new MatTableDataSource<PeriodicElementAppointment>();
+  dataSourceMedicine = new MatTableDataSource<PeriodicElementMedicien>();
 
   constructor(
     private http: HttpClient,
@@ -66,23 +73,24 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.callApi();
+    this.callExercise();
     this.callAppointment();
+    this.callMedicine();
   }
 
 
 
 
-  callApi() {
+  callExercise() {
     const token = localStorage.getItem('token'); // Replace with your actual token
 
     // Set the headers with the token
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-    this.http.get<PeriodicElement1[]>(this.key.myExercise, { headers }).subscribe(
-      (data: PeriodicElement1[]) => {
-        this.dataSource1.data = data;
+    this.http.get<PeriodicElementExercise[]>(this.key.myExercise, { headers }).subscribe(
+      (data: PeriodicElementExercise[]) => {
+        this.dataSourceExercise.data = data;
         console.error(data)
 
       },
@@ -100,9 +108,27 @@ export class HomeComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
 
 
-    this.http.get<PeriodicElement2[]>(this.key.myAppointment, { headers }).subscribe(
-      (data: PeriodicElement2[]) => {
-        this.dataSource2.data = data;
+    this.http.get<PeriodicElementAppointment[]>(this.key.myAppointment, { headers }).subscribe(
+      (data: PeriodicElementAppointment[]) => {
+        this.dataSourceAppointment.data = data;
+
+      },
+      (error) => {
+        console.error('An error occurred while calling the API:', error);
+      }
+    );
+  }
+
+  callMedicine() {
+    const token = localStorage.getItem('token');
+
+    // Set the headers with the token
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+
+    this.http.get<PeriodicElementMedicien[]>(this.key.mymedicine, { headers }).subscribe(
+      (data: PeriodicElementMedicien[]) => {
+        this.dataSourceMedicine.data = data;
 
       },
       (error) => {

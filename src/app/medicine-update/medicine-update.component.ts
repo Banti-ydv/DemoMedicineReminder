@@ -57,7 +57,8 @@ export class MedicineUpdateComponent implements OnInit {
     frequency: [],
     dose: [],
   };
-  doseOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 1); // Generate dose options dynamically
+  doseOptions: number[] = [0.5,1.0, 1.5, 2.0, 2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,8.5,9.0,9.5,10.0]; // Generate dose options dynamically
+
 
   dosedata: string[] | any;
   timedata: string[] | any;
@@ -162,7 +163,7 @@ export class MedicineUpdateComponent implements OnInit {
     ).map((input) => (input as HTMLInputElement).value);
     const doseArray = Array.from(
       document.querySelectorAll('input[type="number"]')
-    ).map((input) => parseInt((input as HTMLInputElement).value));
+    ).map((input) => parseFloat((input as HTMLInputElement).value));
 
     console.log('Timings:', timingsArray);
     console.log('Doses:', doseArray);

@@ -1779,11 +1779,21 @@ pre code {
     color: #858796
 }
 
-.table td,
+.table td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #e3e6f0;
+    border-bottom: 1px solid #e3e6f0;
+}
 .table th {
     padding: .75rem;
     vertical-align: top;
-    border-top: 1px solid #e3e6f0
+    border-top: 1px solid #e3e6f0;
+    /* border-bottom: 1px solid #e3e6f0; */
+}
+.table th {
+    padding: .75rem;
+    vertical-align: top;
 }
 
 .table thead th {
@@ -4522,7 +4532,8 @@ input[type=submit].btn-block {
 }
 
 .tab-content>.active {
-    display: block
+    display: block;
+    margin-top:-40px;
 }
 
 .navbar {
@@ -7109,7 +7120,8 @@ button.bg-dark:hover {
 }
 
 .bg-white {
-    background-color: #fff !important
+    background-color: #fff !important;
+    box-shadow:0 0.15rem 1.75rem 0 rgba(58, 59, 69, .15) !important;
 }
 
 .bg-transparent {
@@ -10996,7 +11008,8 @@ a:focus {
 }
 
 #wrapper #content-wrapper #content {
-    flex: 1 0 auto
+    flex: 1 0 auto;
+    background-color: #ccd9ff;
 }
 
 .container,

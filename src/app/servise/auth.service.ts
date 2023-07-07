@@ -57,7 +57,13 @@ export class AuthService {
                 localStorage.removeItem('token');
                 localStorage.removeItem('responseSize');
                 
-                this.router.navigate(['/login']);
+                // this.router.navigate(['/login']).then((result) => {
+                //   if (result) {
+                //     location.reload();
+                //   }
+                // });
+                    // location.reload();
+
                 this.isLoggedIn = false;
       
                 Swal.fire({
@@ -65,9 +71,9 @@ export class AuthService {
                   text: 'You have been logged out.',
                   icon: 'success',
                   showConfirmButton: false,
-            timer: 3000,
+            timer: 2000,
                 }).then((result) => {
-                  if (result.isConfirmed) {
+                  if (result) {
                     location.reload();
                   }
                 });

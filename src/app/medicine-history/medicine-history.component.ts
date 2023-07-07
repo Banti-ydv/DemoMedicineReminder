@@ -96,8 +96,11 @@ export class MedicineHistoryComponent implements OnInit{
 
     this.http.get<PeriodicElement[]>(this.key.mymedicine, { headers }).subscribe(
       (data: PeriodicElement[]) => {
-        this.dataSource.data = data;
-        
+        // Reverse the received array
+        const reversedData = data.reverse();
+  
+        // Set the reversed array as the data source
+        this.dataSource.data = reversedData;
       },
       (error) => {
         console.error('An error occurred while calling the API:', error);

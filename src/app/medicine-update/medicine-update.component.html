@@ -125,30 +125,30 @@
                                           <table class="table">
                                             <thead>
                                               <tr>
-                                                <th>No.</th>
-                                                <th>Time Data</th>
-                                                <th>Dose Data</th>
-                                                <th>Action</th>
+                                                <td>No.</td>
+                                                <td  style="text-align:center;">Time Data</td>
+                                                <td  style="text-align:center;">Dose Data</td>
+                                                <td  style="text-align:center;">Action</td>
                                               </tr>
                                             </thead>
                                             <tbody>
                                               <tr *ngFor="let item of timedata; let i = index">
-                                                <td>{{ i + 1 }}.)</td>
-                                                <td>
+                                                <td>{{ i + 1 }}.</td>
+                                                <td  style="text-align:center;">
                                                   <input type="time" class="form-control form-control-user" [(ngModel)]="timedata[i]" name="time{{ i }}" />
                                                 </td>
-                                                <td>
-                                                  <input type="number" class="form-control form-control-user" [(ngModel)]="dosedata[i]" name="dose{{ i }}" />
+                                                <td  style="text-align:center; width:30%;">
+                                                  <input type="number" class="form-control form-control-user" step="0.5" max="10" min="0.5" [(ngModel)]="dosedata[i]" name="dose{{ i }}" placeholder="Enter Dose" />
                                                 </td>
-                                                <td>
-                                                  <button type="button" class="btn btn-danger btn-sm" (click)="removeData(i)"><i class="fa fa-minus"></i> Remove</button>
+                                                <td  style="text-align:center; width:30%;">
+                                                  <button type="button" class="btn btn-danger btn-sm mt-2" (click)="removeData(i)"><i class="fa fa-minus"></i> Remove</button>
                                                 </td>
                                               </tr>
                                               <tr>
-                                                <td colspan="3"></td>
-                                                <td>
+                                                <th colspan="3"></th>
+                                                <th  style="text-align:center; width:30%;">
                                                   <button type="button" class="btn btn-primary btn-sm" (click)="addData()"> <i class="fa fa-plus"></i> Add More</button>
-                                                </td>
+                                                </th>
                                               </tr>
                                             </tbody>
                                           </table>
@@ -164,7 +164,7 @@
                                             <label for="frequency">Frequency:</label>
                                             <select id="selectedFrequency" [(ngModel)]="selectedFrequency" name="frequency"
                                                 class="custom-select-class">
-                                                <option value="{{medicine.frequency}}" disabled>{{medicine.frequency}}</option>
+                                                <!-- <option value="{{medicine.frequency}}" disabled>{{medicine.frequency}}</option> -->
                                                 <option *ngFor="let option of frequencyOptions" [value]="option">{{
                                                     option }}</option>
                                             </select>

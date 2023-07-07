@@ -20,7 +20,7 @@ import { MedicineUpdateComponent } from './medicine-update/medicine-update.compo
 
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent},
   { path: 'medicine-add', component: MedicineAddComponent },
   { path: 'medicine-details', component: MedicineDetailsComponent },
@@ -36,11 +36,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'navbar', component: NavbarComponent}, 
   { path: 'profile', component: ProfileComponent}, 
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
-  
-
-];
+ ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

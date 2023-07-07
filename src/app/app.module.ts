@@ -45,9 +45,7 @@ import { AuthService } from './servise/auth.service';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { MedicineUpdateComponent } from './medicine-update/medicine-update.component';
 
-
-
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -94,6 +92,7 @@ import { MedicineUpdateComponent } from './medicine-update/medicine-update.compo
     MatNativeDateModule,
     MatSelectModule,
     AngularFireModule.initializeApp(environment.firebase),
+    MatAutocompleteModule
 
     
   ],

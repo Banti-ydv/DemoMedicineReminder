@@ -17,12 +17,32 @@
                 <form (ngSubmit)="onMedicine()" #medicineForm="ngForm" class="user">
                   
                   <div class="row mb-3">
-                    <div class="form-group col-md-6">
+                    <!-- <div class="form-group col-md-6">
                       <label>Medicine Name</label>
                       <input type="text" name="name" class="form-control form-control-user" placeholder="Enter Medicine Name"
                         [(ngModel)]="medicine.name" required />
-                    </div>
-
+                    </div> -->
+                    <form class="example-form">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Medicine Name</mat-label>
+                        <input type="text"
+                               placeholder="Pick Mediidne Name"
+                               aria-label="Medicine Name"
+                               matInput
+                               [formControl]="myControl"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </form>
+                    
+                    
+                    
+                    
+                    
                     <div class="form-group col-md-6">
                       <label>Shape</label>
                       <select name="shape" [(ngModel)]="medicine.shape" class="custom-select-class" required>
@@ -85,30 +105,31 @@
                         </thead>
                         <tbody>
                           <tr *ngFor="let medicine of medicines; let i = index">
-                            <td style="text-align:center;">{{ i + 1 }}.</td>
-                            <td style="justify-content:center;">
+                            <td style="text-align:center; margin-top: 10px;">{{ i + 1 }}.</td>
+                            <td style="justify-content:center; width:27%;" >
                               <input type="time" name="timing{{i}}" class="form-control form-control-user" placeholder="Enter Time"
-                        [(ngModel)]="timingsArray[i]" width="80%" required />
+                        [(ngModel)]="timingsArray[i]" required />
                             </td>
-                            <td style="text-align:center;">
-                              <select [(ngModel)]="doseArray[i]" name="dose{{i}}" class="custom-select-class" required>
+                            <td style="text-align:center; width:30%;">
+                              <!-- <select [(ngModel)]="doseArray[i]" name="dose{{i}}" class="custom-select-class" required>
                                 <option *ngFor="let doseOption of doseOptions" [value]="doseOption">{{ doseOption }}</option>
-                              </select>
+                              </select> -->
+                              <input type="number" name="dose{{i}}" class="form-control form-control-user" placeholder="Enter Dose"
+                        [(ngModel)]="doseArray[i]" step="0.5" max="10" min="0.5" required />
                             </td>
-                            <td *ngIf="i !== 0">
-                              <button class="btn btn-danger mt-2" (click)="removeMedicine(i)">
+                            <td *ngIf="i !== 0" style="text-align:center; width:30%;">
+                              <button type="button" class="btn btn-danger mt-2" (click)="removeMedicine(i)">
                                 <i class="fa fa-minus"></i> Remove
                               </button>
                             </td>
                           </tr>
                           <tr>
-                            <td colspan="3"></td>
-                            <td style="text-align:center;">
-                              <button type="button" class="btn btn-success addMedicine" (click)="addMedicine()">
+                            <th colspan="3"></th>
+                            <th style="text-align:center; width:30%;">
+                              <button type="button" class="btn btn-primary" (click)="addMedicine()">
                                 <i class="fa fa-plus"></i> Add More
                               </button>
-                            </td>
-                            <td></td>
+                            </th>
                           </tr>
                         </tbody>
                       </table>
