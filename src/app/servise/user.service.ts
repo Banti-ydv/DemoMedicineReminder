@@ -11,16 +11,6 @@ export class UserService {
   updateMedicine(updatedMedicine: Medicine) {
     throw new Error('Method not implemented.');
   }
-
-
-  // private login = "http://192.168.1.11:9192/login";
-  // private register = 'http://192.168.1.11:8866/register';
-  // private medicineAddUrl = 'http://192.168.1.11:8866/addmedicine';
-  // private exerciseAddUrl = 'http://192.168.1.11:8866/addExercise';
-  // private foodAddUrl = 'http://192.168.1.11:8866/saveFood';
-  // private appointmentAddUrl = 'http://192.168.1.11:8866/takeAppointment';
-  // public SECRET_KEY = "Shubham12345";
-
   constructor(private http: HttpClient, private router: Router,private key : KeyService ) { }
 
 

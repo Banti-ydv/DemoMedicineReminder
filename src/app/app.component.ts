@@ -28,9 +28,7 @@ interface PeriodicElement {
 export class AppComponent implements OnInit {
   userData: PeriodicElement | undefined;
   userPhoto: string | undefined;
-  // imageUrl: SafeUrl | undefined;
   updatedData: any;
-  // defaultImageUrl: string = "assets/img/profile-img.png";
 
   notificationMessages: any[] = [];
 
@@ -54,11 +52,11 @@ export class AppComponent implements OnInit {
 
 //logged in
     this.isLoggedIn = this.authService.getIsLoggedIn();
-// if (!this.isLoggedIn) {
-//   if (window.location.pathname !== '/home' && window.location.pathname !== '/register' && window.location.pathname !== '/contact') {
-//     this.router.navigate(['/home']);
-//   }
-// }
+if (!this.isLoggedIn) {
+  if (window.location.pathname !== '/home' && window.location.pathname !== '/register' && window.location.pathname !== '/contact') {
+    this.router.navigate(['/home']);
+  }
+}
 //message
     this.requestPermission();
     this.listen();

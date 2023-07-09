@@ -10,16 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './exercise-add.component.html',
   styleUrls: ['./exercise-add.component.css']
 })
-export class ExerciseAddComponent {
-
-  // exercise = {
-  //   exercisename:'',
-  //   date:'',
-  //   exercisetime:'',
-  //   frequency:'',
-  //   exerciseTimes: []
-  // }
-  
+export class ExerciseAddComponent {  
 
   exercise: {exercisename:string,date:string,frequency: string[], exercisetime: string, exerciseTimes: string[], exerciseName: string[] } = {
     exercisename:'',
@@ -47,10 +38,9 @@ export class ExerciseAddComponent {
   constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { }
 
 
-onexercise() { // Update the method name to match the one used in the template
+onexercise() { 
   this.userService.exerciseAdd(this.exercise).subscribe(
     (response: any) => {
-      // Registration successful, show success message
       Swal.fire({
         title: 'Success',
         text: 'Exercise added successfully',
@@ -60,7 +50,6 @@ onexercise() { // Update the method name to match the one used in the template
       }).then((result) => {
         if (result) {
           this.router.navigate(['/exercise-history']);
-          // Redirect to a success page or perform any other action
         }
       });
     },

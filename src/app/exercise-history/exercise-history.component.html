@@ -34,11 +34,6 @@ margin: -60px 0px 10px 0px;
                   <input type="text" (keyup)="applyFilter($event)" class="form-control bg-light border-0 small"
                       placeholder="Search for..." aria-label="Search"
                       aria-describedby="basic-addon2">
-                  <!-- <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                          <i class="fas fa-search fa-sm"></i>
-                      </button>
-                  </div> -->
               </div>
           </form>
       </div>
@@ -48,10 +43,7 @@ margin: -60px 0px 10px 0px;
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-  <!-- <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container> -->
+  
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let element; let i = index"> {{ i + 1 }} </td>
@@ -63,10 +55,7 @@ margin: -60px 0px 10px 0px;
     <td mat-cell *matCellDef="let element"> {{element.exercisename}} </td>
   </ng-container>
 
-  <!-- <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef> Date </th>
-    <td mat-cell *matCellDef="let element"> {{ formatDate(element.date) }} </td>
-  </ng-container> -->
+ 
 
   <ng-container matColumnDef="exercisetime">
     <th mat-header-cell *matHeaderCellDef> Time </th>
@@ -81,16 +70,6 @@ margin: -60px 0px 10px 0px;
       </button>
     </td>
   </ng-container>
-
-
-  <!-- <ng-container matColumnDef="view">
-    <th mat-header-cell *matHeaderCellDef> View More</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" >
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-    </td>
-  </ng-container> -->
 
   <ng-container matColumnDef="delete">
     <th mat-header-cell *matHeaderCellDef> Delete </th>

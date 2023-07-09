@@ -257,37 +257,3 @@ formatfromDate(date: string | null): string {
   
   
 }
-
-
-// '<label for="swal-input-name" class="swal2-label">Name:</label>' +
-//       '<input id="swal-input-name" class="swal2-input custom-width" value="' +
-//       element.name +
-//       '"><br>' +
-//       '<label for="swal-input-shape" class="swal2-label">Shape:</label>' +
-//       '<input id="swal-input-shape" class="swal2-input custom-width" value="' +
-//       element.shape +
-//       '"><br>' +
-//       '<label for="swal-input-dose" class="swal2-label">Dose:</label>' +
-//       '<input id="swal-input-dose" class="swal2-input custom-width" value="' +
-//       element.dose +
-//       '"><br>' +
-//       '<label for="swal-input-frequency" class="swal2-label">Frequency:</label>' +
-//       '<input id="swal-input-frequency" class="swal2-input custom-width" value="' +
-//       element.frequency +
-//       '"><br>' +
-//       '<label for="swal-input-fromDate" class="swal2-label">fromDate:</label>' +
-//       '<input type="date" id="swal-input-fromDate" class="swal2-input custom-width" value="' +
-//       formattedfromDate +
-//       '"><br>' +
-//       '<label for="swal-input-toDate" class="swal2-label">toDate:</label>' +
-//       '<input type="date" id="swal-input-toDate" class="swal2-input custom-width" value="' +
-//       formattedtoDate +
-//       '"><br>' +
-//       '<label for="swal-input-timing" class="swal2-label">Timing:</label>' +
-//       '<input type="time" id="swal-input-timing" class="swal2-input custom-width" value="' +
-//       element.timing +
-//       '"><br>' +
-//       '<label for="swal-input-description" class="swal2-label">Description:</label>' +
-//       '<input id="swal-input-description" class="swal2-input custom-width" value="' +
-//       element.description +
-//       '"><br>',

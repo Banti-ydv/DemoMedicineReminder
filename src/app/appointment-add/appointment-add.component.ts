@@ -28,17 +28,16 @@ export class AppointmentAddComponent {
     phoneNumber: '',
     address: '',
     time: '',
-    appointmentdate: '', // Corrected property name
+    appointmentdate: '',
     countryCode: '+91',
   };
   constructor(private userService: UserService, private router: Router, private datePipe: DatePipe,private authService: AuthService) { }
 
 
 
-  onappointment() { // Update the method name to match the one used in the template
+  onappointment() {
     this.userService.appointmentAdd(this.appointment).subscribe(
       (response: any) => {
-        // Registration successful, show success message
         Swal.fire({
           title: 'Success',
           text: 'Appointment added successfully',
@@ -48,14 +47,11 @@ export class AppointmentAddComponent {
         }).then((result) => {
           if (result) {
             this.router.navigate(['/appointment-history']);
-            // Redirect to a success page or perform any other action
           }
         });
       },
       (error: any) => {
-        // Registration failed, handle the error
         console.error('Error occurred during add', error);
-        // Display an error message or perform any other action
       }
     );
   }

@@ -11,9 +11,7 @@ import { KeyService } from './key.service';
 export class AuthService {
     
     private isLoggedIn = false;
-    // private login = "http://192.168.1.11:9192/login";
-    // private logoutUrl = 'http://192.168.1.11:8866/signout';
-    // private userDetailsUrl = 'http://192.168.1.11:8866/MyDetailes';
+  
 
     constructor(private http: HttpClient, private router: Router, private userService: UserService,private key :KeyService) { }
 
@@ -54,14 +52,6 @@ export class AuthService {
       
                 localStorage.removeItem('token');
                 localStorage.removeItem('responseSize');
-                
-                // this.router.navigate(['/login']).then((result) => {
-                //   if (result) {
-                //     location.reload();
-                //   }
-                // });
-                    // location.reload();
-
                 this.isLoggedIn = false;
       
                 Swal.fire({

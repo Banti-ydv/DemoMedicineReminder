@@ -6,30 +6,13 @@
     <div class="row">
       <div class="col-md-4">
         <div class="profile-img">
-          <!-- <img [src]="imageUrl" alt="" class="rounded-circle"
-          [style.width.%]="50" [style.height.%]="70" (click)="fileInput.click()" /> -->
-          <!-- component.html -->
 <img [src]="isResponseSizeZero() ? '../assets/img/profile.png' : imageUrl" alt="" class="img-thumbnail" (click)="openPopupForImg()" />
 
-          <!-- <input type="file" #fileInput style="display: none;" (change)="handleFileInput($event)"> -->
-          <!-- <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="rounded-circle" [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" /> -->
           <br>
             <button type="button" class="btn btn-outline-primary mt-3" (click)="openUpDatePopUp()">Edit Profile</button>
           
         </div>
-      </div>
-
-      <!-- <div class="col-md-4">
-        <div class="profile-img">
-          <img *ngIf="!imageUrl" [src]="defaultImageUrl" alt="Default Profile Image" class="rounded-circle"
-            [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" />
-          <img *ngIf="imageUrl" [src]="imageUrl" alt="Profile Image" class="rounded-circle"
-            [style.width.%]="50" [style.height.%]="70" (click)="openUploadPopup()" />
-          <br>
-          <button type="button" class="btn btn-outline-primary mt-3" (click)="openUpDatePopUp()">Edit Profile</button>
-        </div>
-      </div> -->
-      
+      </div>      
       <div class="tab-content profile-tab col-md-8 mt-5" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <div class="row">

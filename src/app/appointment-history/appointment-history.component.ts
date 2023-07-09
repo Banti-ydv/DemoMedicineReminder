@@ -170,7 +170,7 @@ export class AppointmentHistoryComponent implements OnInit {
         const phoneNumberInput = document.getElementById('swal-input-phoneNumber') as HTMLInputElement;
       phoneNumberInput.addEventListener('input', () => {
         phoneNumberInput.value = phoneNumberInput.value.replace(/\D/g, '');
-        phoneNumberInput.pattern = '[0-9]{10}'; // Use regex pattern for 10-digit number
+        phoneNumberInput.pattern = '[0-9]{10}';
         phoneNumberInput.addEventListener('input', () => {
           phoneNumberInput.setCustomValidity(phoneNumberInput.validity.patternMismatch ? 'Please enter a 10-digit number' : '');
         });
@@ -180,35 +180,7 @@ export class AppointmentHistoryComponent implements OnInit {
       const minDate = currentDate.toISOString().split('T')[0];
       appointmentDateInput.min = minDate;
       },
-      // html:
-      //   '<label for="swal-input-withWhome" class="swal2-label">With Whome:</label>' +
-      //   '<input id="swal-input-withWhome" class="swal2-input custom-width" value="' +
-      //   element.withWhome +
-      //   '"><br>' +
-      //   '<label for="swal-input-reason" class="swal2-label">Reason:</label>' +
-      //   '<input type="text" id="swal-input-reason" class="swal2-input custom-width" value="' +
-      //   element.reason +
-      //   '"><br>' +
-      //   '<label for="swal-input-speciality" class="swal2-label">Speciality:</label>' +
-      //   '<input type="text" id="swal-input-speciality" class="swal2-input custom-width" value="' +
-      //   element.speciality +
-      //   '"><br>' +
-      //   '<label for="swal-input-address" class="swal2-label">Address:</label>' +
-      //   '<input type="text" id="swal-input-address" class="swal2-input custom-width" value="' +
-      //   element.address +
-      //   '"><br>' +
-      //   '<label for="swal-input-phoneNumber" class="swal2-label">Phone Number:</label>' +
-      //   '<input type="text" id="swal-input-phoneNumber" class="swal2-input custom-width" value="' +
-      //   element.phoneNumber +
-      //   '"><br>' +
-      //   '<label for="swal-input-appointmentdate" class="swal2-label"> Date:</label>' +
-      //   '<input type="date" id="swal-input-appointmentdate" class="swal2-input custom-width" value="' +
-      //   formatDate+
-      //   '"><br>' +
-      //   '<label for="swal-input-time" class="swal2-label">Time:</label>' +
-      //   '<input type="time" id="swal-input-time" class="swal2-input custom-width" value="' +
-      //   formatTime +
-      //   '"><br>',
+      
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Update',
@@ -262,7 +234,7 @@ export class AppointmentHistoryComponent implements OnInit {
 
           
           if (!withWhome || !reason || !appointmentdate || !phoneNumber || !address || !speciality || !time) {
-            // Swal.fire('Error!', 'Please fill all the input fields.', 'error');
+           
             Swal.fire({
               title: 'Error!',
               text: 'Please fill all the input fields.',
@@ -270,7 +242,7 @@ export class AppointmentHistoryComponent implements OnInit {
               showConfirmButton: false,
               timer: 2000,
             }).then(() => {
-              this.updateAppointment(element); // Recursive call to reopen the Swal dialog
+              this.updateAppointment(element); 
             });
             return;
           }
@@ -299,7 +271,6 @@ export class AppointmentHistoryComponent implements OnInit {
                 e.id === element.id ? updatedData : e
               );
               this.dataSource.data = updatedElements;
-              // Swal.fire('Success!', 'Appointment updated successfully.', 'success');
               Swal.fire({
                 title: 'Success!',
                 text: 'Appointment updated successfully.',
@@ -310,7 +281,6 @@ export class AppointmentHistoryComponent implements OnInit {
             },
             (error) => {
               console.error('An error occurred while updating the Appointment:', error);
-              // Swal.fire('Error!', 'An error occurred while updating the Appointment.', 'error');
               Swal.fire({
                 title: 'Error!',
                 text: 'An error occurred while updating the Appointment.',

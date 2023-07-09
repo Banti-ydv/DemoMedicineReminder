@@ -39,13 +39,7 @@
                 <input type="text" class="form-control form-control-user" id="emailid" name="emailid"
                   [(ngModel)]="register.emailid" placeholder="Email Address" required style="display: none;"
                   pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$" #emailid="ngModel">
-                <!-- <div *ngIf="registerForm.controls['emailid'].invalid && (registerForm.controls['emailid'].touched || registerForm.controls['emailid'].dirty)"
-                  class="text-danger small mt-2" style="color: red;">
-                  <ng-container *ngIf="registerForm.controls['emailid'].errors?.['required']">Email is required.</ng-container>
-                  <ng-container *ngIf="registerForm.controls['emailid'].errors?.['email']">Invalid email address.</ng-container>
-                  <ng-container *ngIf="registerForm.controls['emailid'].errors?.['pattern']">Invalid email format.</ng-container>
-                </div>
-              </div> -->
+              
 
               <div class="form-group">
                 <input type="text" class="form-control form-control-user" id="emailid" name="emailid"
@@ -60,14 +54,6 @@
                 </div>
               </div>
 
-              <!-- <div class="col-md-4">
-                <label for="validationSuccess" class="form-label text-success">Input with success</label>
-                <input type="text" class="form-control is-valid" id="validationSuccess" required>
-             </div>
-             <div class="col-md-4">
-                <label for="validationError" class="form-label text-danger">Input with error</label>
-                <input type="text" class="form-control is-invalid" id="validationError" required>
-             </div> -->
              <div class="form-group row">
               <div class="col-sm-6 mb-3 mb-sm-0">
                 <input type="text" class="form-control form-control-user" id="username" name="username"

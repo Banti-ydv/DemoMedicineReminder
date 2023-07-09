@@ -15,81 +15,69 @@
                   <div class="row mb-3">
                     <div class="form-group col-md-6">
                       <label>Medicine Name</label>
-                      <input type="text" name="name" class="form-control form-control-user" placeholder="Enter Medicine Name"
-                        [(ngModel)]="medicine.name" list="optionList" autocomplete="off" required />
+                      <input type="text" name="name" class="form-control form-control-user"
+                        placeholder="Enter Medicine Name" [(ngModel)]="medicine.name" list="optionList"
+                        autocomplete="off" required />
                     </div>
 
                     <!-- <input type="text" name="option" list="optionList" autocomplete="off" /> -->
-<datalist id="optionList">
-  <option value="Abiraterone"></option>
-  <option value="Apixaban"></option>
-  <option value="Bactrim"></option>
-  <option value="Breo Ellipta"></option>
-  <option value="Candesartan"></option>
-  <option value="Clonidine"></option>
-  <option value="Denosumab"></option>
-  <option value="Donepezil"></option>
-  <option value="Effexor XR"></option>
-  <option value="Evenity"></option>
-  <option value="Fentanyl"></option>
-  <option value="Folic Acid"></option>
-  <option value="GaviLyte G"></option>
-  <option value="Hydroquinone"></option>
-  <option value="Hydromorphone"></option>
-  <option value="Imatinib"></option>
-  <option value="Irbesartan"></option>
-  <option value="Junel Fe 24"></option>
-  <option value="Jencycla"></option>
-  <option value="Kineret"></option>
-  <option value="Kenalog"></option>
-  <option value="Lofexidine"></option>
-  <option value="Leuprolide"></option>
-  <option value="Minoxidil"></option>
-  <option value="Mavyret"></option>
-  <option value="Nitrofurantoin"></option>
-  <option value="Naprosyn"></option>
-  <option value="Osilodrostat"></option>
-  <option value="Ofev"></option>
-  <option value="Probuphine"></option>
-  <option value="Pepcid"></option>
-  <option value="Quviviq"></option>
-  <option value="Qtern"></option>
-  <option value="Rinvoq"></option>
-  <option value="Ranitidine"></option>
-  <option value="Scopolamine"></option>
-  <option value="Sotalol"></option>
-  <option value="Tazarotene"></option>
-  <option value="Tremfya"></option>
-  <option value="Udenyca"></option>
-  <option value="Urso"></option>
-  <option value="Vitamin B1"></option>
-  <option value="Vilazodone"></option>
-  <option value="Vitamin D3"></option>
-  <option value="Welchol"></option>
-  <option value="Wormwood"></option>
-  <option value="Xanax XR"></option>
-  <option value="Xofigo"></option>
-  <option value="Yescarta"></option>
-  <option value="Yupelri"></option>
-  <option value="Zarxio"></option>
-  <option value="Zosyn"></option>
-  <option value="8-Mop"></option>
-  <option value="5-hydroxytryptophan"></option>
-  <option value="12 Hour Nasal"></option>
-</datalist>
-
-                    <!-- <form class="example-form">
-                      <mat-form-field class="example-full-width">
-                        <mat-label>Medicine Name</mat-label>
-                        <input type="text" placeholder="Pick Mediidne Name" aria-label="Medicine Name" matInput
-                          [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="medicine.name" name="name">
-                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
-                          </mat-option>
-                        </mat-autocomplete>
-                      </mat-form-field>
-                    </form> -->
+                    <datalist id="optionList">
+                      <option value="Abiraterone"></option>
+                      <option value="Apixaban"></option>
+                      <option value="Bactrim"></option>
+                      <option value="Breo Ellipta"></option>
+                      <option value="Candesartan"></option>
+                      <option value="Clonidine"></option>
+                      <option value="Denosumab"></option>
+                      <option value="Donepezil"></option>
+                      <option value="Effexor XR"></option>
+                      <option value="Evenity"></option>
+                      <option value="Fentanyl"></option>
+                      <option value="Folic Acid"></option>
+                      <option value="GaviLyte G"></option>
+                      <option value="Hydroquinone"></option>
+                      <option value="Hydromorphone"></option>
+                      <option value="Imatinib"></option>
+                      <option value="Irbesartan"></option>
+                      <option value="Junel Fe 24"></option>
+                      <option value="Jencycla"></option>
+                      <option value="Kineret"></option>
+                      <option value="Kenalog"></option>
+                      <option value="Lofexidine"></option>
+                      <option value="Leuprolide"></option>
+                      <option value="Minoxidil"></option>
+                      <option value="Mavyret"></option>
+                      <option value="Nitrofurantoin"></option>
+                      <option value="Naprosyn"></option>
+                      <option value="Osilodrostat"></option>
+                      <option value="Ofev"></option>
+                      <option value="Probuphine"></option>
+                      <option value="Pepcid"></option>
+                      <option value="Quviviq"></option>
+                      <option value="Qtern"></option>
+                      <option value="Rinvoq"></option>
+                      <option value="Ranitidine"></option>
+                      <option value="Scopolamine"></option>
+                      <option value="Sotalol"></option>
+                      <option value="Tazarotene"></option>
+                      <option value="Tremfya"></option>
+                      <option value="Udenyca"></option>
+                      <option value="Urso"></option>
+                      <option value="Vitamin B1"></option>
+                      <option value="Vilazodone"></option>
+                      <option value="Vitamin D3"></option>
+                      <option value="Welchol"></option>
+                      <option value="Wormwood"></option>
+                      <option value="Xanax XR"></option>
+                      <option value="Xofigo"></option>
+                      <option value="Yescarta"></option>
+                      <option value="Yupelri"></option>
+                      <option value="Zarxio"></option>
+                      <option value="Zosyn"></option>
+                      <option value="8-Mop"></option>
+                      <option value="5-hydroxytryptophan"></option>
+                      <option value="12 Hour Nasal"></option>
+                    </datalist>
 
                     <div class="form-group col-md-6">
                       <label>Shape</label>
@@ -203,7 +191,7 @@
                     <div class="form-group col-md-6" *ngIf="medicine.fromDate">
                       <label>End Date</label>
                       <input type="date" name="toDate" class="form-control form-control-user" placeholder="Select"
-                        [(ngModel)]="medicine.toDate" required [min]="calculateMinEndDate()" required/>
+                        [(ngModel)]="medicine.toDate" required [min]="calculateMinEndDate()" required />
                     </div>
                   </div>
 

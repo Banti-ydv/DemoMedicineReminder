@@ -87,13 +87,7 @@ export class MedicineUpdateComponent implements OnInit {
     this.userTimeData();
   }
 
-  // addData() {
-  //   this.timedata.push({ time: '', dose: 0 });
-  // }
-  
-  // removeData(index: number) {
-  //   this.timedata.splice(index, 1);
-  // }
+
   addData() {
     this.timedata.push({ timing: '', dose: '' });
     
@@ -106,14 +100,6 @@ export class MedicineUpdateComponent implements OnInit {
    
   }
   
-
-  // addMedicine() {
-  //   this.medicines.push({ timing: '', dose: '' });
-  // }
-
-  // removeMedicine(index: number) {
-  //   this.medicines.splice(index, 1);
-  // }
 
 
 
@@ -181,9 +167,6 @@ export class MedicineUpdateComponent implements OnInit {
       fromDate: this.medicine.fromDate,
       toDate: this.medicine.toDate,
       frequency: this.medicine.frequency,
-
-      // dose: this.medicines.map((medicine) => medicine.dose),
-      // timing: this.timedata,
       dose: doseArray,
       timing: timingsArray,
     };

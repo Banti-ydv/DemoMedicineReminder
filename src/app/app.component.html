@@ -31,25 +31,9 @@
             Reminder
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
-        <!-- <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-medkit"></i>
-                <span>Medicine</span>
-            </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Detailes :</h6>
-                    <a class="collapse-item" routerLink="/medicine-add">Add</a>
-                    <a class="collapse-item" routerLink="/medicine-history">History</a>
-                </div>
-            </div>
-        </li> -->
-
         <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
-            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
-                aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                aria-controls="collapseTwo">
                 <i class="fas fa-medkit"></i>
                 <span>Medicine</span>
             </a>
@@ -96,29 +80,6 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        <!-- <div class="sidebar-heading">
-            Addons
-        </div> -->
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <!-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>More</span>
-            </a>
-            <div id="collapsePages" class="collapse " aria-labelledby="headingPages"
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" routerLink="/login">Login</a>
-                    <a class="collapse-item" routerLink="/register">Register</a>
-                    <a class="collapse-item" routerLink="/forgot-password">Forgot Password</a>
-                </div>
-            </div>
-        </li> -->
-
         <li class="nav-item">
             <a class="nav-link" routerLink="/home">
                 <i class="fas fa-info-circle"></i>
@@ -157,54 +118,18 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- Topbar Search -->
-                <!-- <form
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                            aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form> -->
+
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
-
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <!-- <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                            aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                        placeholder="Search for..." aria-label="Search"
-                                        aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li> -->
-
                     <!-- Nav Item - Alerts -->
 
                     <li class="nav-item dropdown no-arrow mx-1" *ngIf="authService.getIsLoggedIn()">
-                        <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw" *ngIf="message;"></i>
                             <i class="fas fa-bell-slash fa-fw" *ngIf="!message;"></i>
-                            
+
                             <!-- <span class="badge badge-danger badge-counter">0</span> -->
                         </a>
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -257,7 +182,8 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome,<b> {{ userData?.firstname
                                     }}</b> !</span>
                             <!-- <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="img-profile rounded-circle" /> -->
-                            <img [src]="isResponseSizeZero() ? '../assets/img/profile.png' : imageUrl" alt="" class="img-profile rounded-circle" />
+                            <img [src]="isResponseSizeZero() ? '../assets/img/profile.png' : imageUrl" alt=""
+                                class="img-profile rounded-circle" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
@@ -284,18 +210,8 @@
             <div class="container-fluid backimg">
 
                 <!-- Page Heading -->
-
-                <!-- <medicine-app></medicine-app> -->
-                <!-- <app-navbar></app-navbar> -->
                 <router-outlet></router-outlet>
                 <ng-confirm></ng-confirm>
-
-                
-
-
-
-
-
 
             </div>
             <!-- /.container-fluid -->
@@ -307,7 +223,8 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>© Copyright <a href="https://prilient.com/" style="text-decoration: none;"> Prilient</a>. All Rights Reserved</span>
+                    <span>© Copyright <a href="https://prilient.com/" style="text-decoration: none;"> Prilient</a>. All
+                        Rights Reserved</span>
                 </div>
             </div>
         </footer>
@@ -323,39 +240,3 @@
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<!-- Logout Modal
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog text-center" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Log Out</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Are you sure, you want to log out ?</div>
-            <div class="modal-footer">
-                <a class="btn btn-primary" (click)="logout()">Yes</a>
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
-                
-            </div>
-        </div>
-    </div>
-</div> -->
-<!-- 
-<div class="modal fade" id="modalContactForm1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body mx-3 text-center">
-                <h4 class="modal-title font-weight-bold">Log Out</h4>
-                <p>Are you sure, you want to log out ?</p>
-                <a class="btn btn-primary m-1" (click)="logout()">Yes</a>
-                <button class="btn btn-secondary m-1" type="button" data-dismiss="modal">No</button>
-            </div>
-        </div>
-    </div>
-</div> -->

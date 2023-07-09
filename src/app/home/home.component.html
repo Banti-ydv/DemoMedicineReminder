@@ -1,75 +1,3 @@
-<!-- <div class="content"  *ngIf="authService.getIsLoggedIn()">
-    <div id='calendar'></div>
-  </div> -->
-
-<!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="3000" *ngIf="authService.getIsLoggedIn()">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="/assets/img/img14.jpeg" height="300" width="1000" class="d-block w-100" alt="Slide 1">
-      </div>
-      <div class="carousel-item">
-        <img src="/assets/img/img-12.jpg" height="300" width="1000" class="d-block w-100" alt="Slide 2">
-      </div>
-      <div class="carousel-item">
-        <img src="/assets/img/img-13.jpg" height="300" width="1000" class="d-block w-100" alt="Slide 3">
-      </div>
-    </div>
-  </div>
-   -->
-<!-- <div class="row" *ngFor="let element of dataSource.data">
-    <div class="card m-2" style="width: 18rem;" *ngFor="let element">
-      <div class="card-body">
-        <h5 class="card-title">{{ element.exercisename }}</h5>
-        <p class="card-text">Time: {{ formatTime(element.exercisetime) }}</p>
-
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-   -->
-
-<!-- <div class="card-container">
-    <div *ngFor="let element of dataSource.data" class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{ element.exercisename }}</h5>
-        <p class="card-text">Exercise Time: {{ formatTime(element.exercisetime) }}</p>
-        <button class="btn btn-primary" (click)="editExercise(element.id)">Edit</button>
-        <button class="btn btn-danger" (click)="deleteExercise(element.id)">Delete</button>
-      </div>
-    </div>
-  </div> -->
-
-<!-- <div class="container m-4" *ngIf="dataSource1.data.length > 0">
-    <h2>Exercise History</h2>
-  
-    <div class="row">
-      <div class="col-sm-4" *ngFor="let element of dataSource1.data">
-        <div class="card m-2">
-          <div class="card-body" (click)="exercise()">
-            <h5 class="card-title">{{ element.exercisename }}</h5>
-            <p class="card-text">Time: {{ formatTime(element.exercisetime) }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-<!-- 
-  <div class="container m-4" *ngIf="dataSource2.data.length > 0">
-    <h2>Appointment History</h2>
-  
-    <div class="row">
-      <div class="col-sm-4" *ngFor="let element of dataSource2.data">
-        <div class="card m-2">
-          <div class="card-body" (click)="appointment()">
-            <h5 class="card-title">{{element.withWhome}}</h5>
-            <p class="card-text">Time: {{ formatTime(element.time) }} </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
 <div class="container" *ngIf="dataSourceAppointment.data.length > 0">
   <h3>Appointment</h3>
   <ul class="cards">
@@ -112,15 +40,7 @@
       <div>
         <h3 class="card-title">{{element.name}}</h3>
         <div class="card-content">
-          <!-- <p>Time: {{ formatTime(element.timing) }}</p> -->
-
-          <!-- <p>Time:
-            <span *ngFor="let timing of element.timing; let i = index;">
-              {{ i > 0 ? ', ' : '' }}{{ formatTime(timing) }}
-            </span>
-          </p> -->
-
-          <p>Time:
+                    <p>Time:
             <span *ngFor="let timing of element.timing.slice(0, 2); let i = index">
               {{ i > 0 ? ', ' : '' }}{{ formatTime(timing) }}
             </span>
@@ -143,10 +63,6 @@
     <h5 style="font-family:'Poppins';">Never miss a dose again and take control of your health with our convenient and user-friendly features.</h5>
     <!-- <button type="button" class="btn btn-outline-primary mt-3" routerLink="/login">Log In Here</button> -->
     <button class="button" routerLink="/login">Start Here</button>
-    <!-- <input type="button" style="left: 50;" value="Start Here"> -->
-<!-- <button class="btn-outline-primary">Submit</button> -->
-
-
   </div>
 
 </div>
