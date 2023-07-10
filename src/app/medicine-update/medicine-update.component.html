@@ -40,14 +40,14 @@
 
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row table-responsive rounded">
                                         <div class="form-group col-md-12">
                                           <table class="table">
                                             <thead>
                                               <tr>
                                                 <td>No.</td>
-                                                <td  style="text-align:center;">Time Data</td>
-                                                <td  style="text-align:center;">Dose Data</td>
+                                                <td  style="text-align:center;">Time</td>
+                                                <td  style="text-align:center;">Dose</td>
                                                 <td  style="text-align:center;">Action</td>
                                               </tr>
                                             </thead>
@@ -60,7 +60,7 @@
                                                 <td  style="text-align:center; width:30%;">
                                                   <input type="number" class="form-control form-control-user" step="0.5" max="10" min="0.5" [(ngModel)]="dosedata[i]" name="dose{{ i }}" placeholder="Enter Dose" />
                                                 </td>
-                                                <td  style="text-align:center; width:30%;">
+                                                <td *ngIf="i !== 0" style="text-align:center; width:30%;">
                                                   <button type="button" class="btn btn-danger btn-sm mt-2" (click)="removeData(i)"><i class="fa fa-minus"></i> Remove</button>
                                                 </td>
                                               </tr>
@@ -147,9 +147,11 @@
                                         <div class="form-group col-md-6">
                                             <label>End Date</label>
                                             <input type="date" name="toDate" id="toDate" class="form-control form-control-user" required
-                                                [min]="minDate()" [(ngModel)]="medicine.toDate" value="{{ medicine.toDate}}"/>
+                                                [min]="calculateMinEndDate()" [(ngModel)]="medicine.toDate" value="{{ medicine.toDate}}"/>
                                         </div>
                                     </div>
+
+                                    
 
                                     <div class="row mb-3">
                                         <div class="form-group col-md-6">

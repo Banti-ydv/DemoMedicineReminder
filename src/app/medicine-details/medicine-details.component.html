@@ -21,7 +21,7 @@
                                         </div>
                                     </div>
                                    
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="form-group col-md-1">
                                             <table class="table">
                                                 <thead>
@@ -64,8 +64,37 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    </div> -->
 
+                                    <div class="row table-responsive rounded">
+                                        <div class="form-group col-md-12">
+                                          <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th>No.</th>
+                                                <th  style="text-align:center;">Time</th>
+                                                <th  style="text-align:center;">Dose</th>
+                                                <!-- <td  style="text-align:center;">Action</td> -->
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let item of timedata; let i = index">
+                                                <td>{{ i + 1 }}.</td>
+                                                <td  style="text-align:center;">
+                                                    {{timedata[i]}}
+                                                  <!-- <input type="time" class="form-control form-control-user" [(ngModel)]="timedata[i]" name="time{{ i }}" /> -->
+                                                </td>
+                                                <td  style="text-align:center; width:30%;">
+                                                    {{dosedata[i]}}
+                                                  <!-- <input type="number" class="form-control form-control-user" step="0.5" max="10" min="0.5" [(ngModel)]="dosedata[i]" name="dose{{ i }}" placeholder="Enter Dose" /> -->
+                                                </td>
+                                                
+                                              </tr>
+                                              
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
 
 
 

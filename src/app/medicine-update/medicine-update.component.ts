@@ -100,6 +100,52 @@ export class MedicineUpdateComponent implements OnInit {
    
   }
   
+  getDayNumber(dayName: string): number {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return daysOfWeek.indexOf(dayName);
+  }
+
+  calculateMinEndDate(): string {
+    if (this.selectedFrequency === 'Every X day') {
+      const fromDate = new Date(this.medicine.fromDate);
+      const interval = parseInt(this.medicine.frequency[0], 10);
+      const adjustedInterval = Math.max(interval + 1, 0);
+
+      const minEndDate = new Date(fromDate.getTime() + adjustedInterval * 24 * 60 * 60 * 1000);
+      return minEndDate.toISOString().substr(0, 10);
+    }
+    else if (this.selectedFrequency === 'Every X day of month') {
+      const fromDate = new Date(this.medicine.fromDate);
+      const lastIndex = this.medicine.frequency.length - 1;
+      const interval = parseInt(this.medicine.frequency[lastIndex], 10);
+      const adjustedInterval = Math.max(interval, 0);
+      const startday = fromDate.getDate();
+      if (startday < interval) {
+        console.warn(startday);
+        const minEndDate = new Date(fromDate.getFullYear(), fromDate.getMonth() + 0, interval + 1);
+        console.log(minEndDate);
+        return minEndDate.toISOString().substr(0, 10);
+      }
+      else {
+        console.error(startday)
+        const minEndDate = new Date(fromDate.getFullYear(), fromDate.getMonth() + 1, interval + 1);
+        console.log(minEndDate);
+        return minEndDate.toISOString().substr(0, 10);
+      }
+    }
+    else if (this.selectedFrequency === 'Every X day of week') {
+      const fromDate = new Date(this.medicine.fromDate);
+      const selectedDayOfWeek = this.medicine.frequency[0];
+      const nextDate = new Date(fromDate.getTime());
+      while (nextDate.getDay() !== this.getDayNumber(selectedDayOfWeek)) {
+        nextDate.setDate(nextDate.getDate() + 1);
+      }
+      const minEndDate = nextDate.toISOString().substr(0, 10);
+      return minEndDate;
+    }
+    return this.medicine.fromDate;
+  }
+
 
 
 

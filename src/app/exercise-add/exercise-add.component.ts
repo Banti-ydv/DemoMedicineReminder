@@ -12,13 +12,12 @@ import Swal from 'sweetalert2';
 })
 export class ExerciseAddComponent {  
 
-  exercise: {exercisename:string,date:string,frequency: string[], exercisetime: string, exerciseTimes: string[], exerciseName: string[] } = {
-    exercisename:'',
-    date:'',
-    exercisetime:'',
+  exercise: {exercisename:string[],frequency: string[], exercisetime: string[], exerciseTimes: string[], exerciseName: string[] } = {
+    exercisename:[],
+    exercisetime:[],
     frequency:[],
-    exerciseTimes: [],
-    exerciseName: []
+    exerciseTimes: [''],
+    exerciseName: ['']
 
   };
   EverydayX: any;
@@ -50,6 +49,7 @@ onexercise() {
       }).then((result) => {
         if (result) {
           this.router.navigate(['/exercise-history']);
+          console.log(response)
         }
       });
     },

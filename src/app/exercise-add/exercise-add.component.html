@@ -25,75 +25,13 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1.</td>
-                          <td>
-                            <input type="text" class="form-control form-control-user" id="exercisename_0"
-                              name="exercisename_0" [(ngModel)]="exercise.exerciseName[0]" placeholder="Exercise Name" list="optionList" required>
-                              <datalist id="optionList">
-                                <option value="Push-up"></option>
-                                <option value="Lunge"></option>
-                                <option value="Squat"></option>
-                                <option value="Neck Glide"></option>
-                                <option value="Shoulder Shrugs"></option>
-                                <option value="Neck Rotation Lateral Extension"></option>
-                                <option value="Partial sit-ups"></option>
-                                <option value="Hamstring stretching"></option>
-                                <option value="Pelvic tilt exercises"></option>
-                                <option value="Wrist curl"></option>
-                                <option value="Crab walk"></option>
-                                <option value="Front raise"></option>
-                                <option value="Arnold press"></option>
-                                <option value="Bent-over row"></option>
-                                <option value="face pulls"></option>
-                                <option value="Hanging Leg Raises"></option>
-                                <option value="Seted Cable Rows"></option>
-                                <option value="Pullups and Chinups"></option>
-                                <option value="Trap Bar Deadlifts"></option>
-                                <option value="Overhead Presses"></option>
-                                <option value="Rope and pulley exercise"></option>
-                                <option value="Monkey Curls"></option>
-                                <option value="Lateral Raise"></option>
-                                <option value="Neck Extension"></option>
-                                <option value="Standing lunges"></option>
-                                <option value="Lumbar Extension Articulation"></option>
-                                <option value="Hyperextension machine exercises"></option>
-                                <option value="45-Degree Hyperextension"></option>
-                                <option value="4-point kneel hip extension/ donkey kicks"></option>
-                                <option value="Ankle strengthening exercise"></option>
-                                <option value="Toe or towel curl exercise"></option>
-                                <option value="Frankenstein walk"></option>
-                                <option value="Crab walking"></option>
-                                <option value="Knee Extensions"></option>
-                                <option value="Star jumps"></option>
-                                <option value="Knee Curls"></option>
-                                <option value="Standing hip abduction"></option>
-                                <option value="Heel sliding"></option>
-                                <option value="Ankle toe movements"></option>
-                                <option value="Clamshell"></option>
-                                <option value="Bridging"></option>
-                                <option value="Prone Leg Lift"></option>
-                                <option value="Split Squats Lunges"></option>
-                                <option value="Single leg squats"></option>
-                                <option value="Seated knee extension (theraband)"></option>
-                                <option value="Prisoner Hyperextension"></option>
-                                <option value="Cat and camel exercise"></option>
-                                <option value="Plank"></option>
-                                <option value="push-ups"></option>
-                                <option value="Back Extensions on Bench"></option>
-                                <option value="Quadruped or bird dog exercise"></option>
-                                <option value="Full squats"></option>
-                                <option value="Seated trunk flexion"></option>
-                              </datalist> 
-                          </td>
-                          <td></td>
-                        </tr>
+              
                         <ng-container *ngFor="let name of exercise.exerciseName; let i = index">
                           <tr>
-                            <td>{{ i + 2}}.</td>
+                            <td>{{ i + 1}}.</td>
                             <td>
-                              <input type="text" class="form-control form-control-user" id="exercisename_{{ i  }}"
-                                name="exercisename_{{ i }}" [(ngModel)]="exercise.exerciseName[i + 1]" placeholder="Exercise Name" list="optionList" required>
+                              <input type="text" class="form-control form-control-user" id="exercisename{{i}}"
+                                name="exercisename{{i}}" [(ngModel)]="exercise.exerciseName[i]" placeholder="Exercise Name" list="optionList" required>
                                 <datalist id="optionList">
                                   <option value="Push-up"></option>
                                   <option value="Lunge"></option>
@@ -150,7 +88,7 @@
                                   <option value="Seated trunk flexion"></option>
                                 </datalist>
                             </td>
-                            <td>
+                            <td *ngIf="i !== 0" >
                               <button class="btn btn-outline-danger" type="button" (click)="removeExerciseName(i)">
                                 Remove
                               </button>
@@ -197,28 +135,23 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1.</td>
-                          <td>
-                            <input type="time" class="form-control form-control-user" id="exercisetime_0"
-                              name="exercisetime_0" [(ngModel)]="exercise.exerciseTimes[0]" required>
-                          </td>
-                          <td></td>
-                        </tr>
+
                         <ng-container *ngFor="let time of exercise.exerciseTimes; let i = index">
                           <tr>
-                            <td>{{ i + 2}}.</td>
+                            <td>{{ i + 1}}.</td>
                             <td>
-                              <input type="time" class="form-control form-control-user" id="exercisetime_{{ i  }}"
-                                name="exercisetime_{{ i }}" [(ngModel)]="exercise.exerciseTimes[i + 1]" required>
+                              <input type="time" class="form-control form-control-user" id="exercisetime{{i}}"
+                                name="exercisetime{{i}}" [(ngModel)]="exercise.exerciseTimes[i]" required>
                             </td>
-                            <td>
+                            <td *ngIf="i !== 0">
                               <button class="btn btn-outline-danger" type="button" (click)="removeExerciseTime(i)">
                                 Remove
                               </button>
                             </td>
                           </tr>
                         </ng-container>
+
+
                       </tbody>
                     </table>
                     <button class="btn btn-outline-primary mt-2" type="button" (click)="addExerciseTime()">
