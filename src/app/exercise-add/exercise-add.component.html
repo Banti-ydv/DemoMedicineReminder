@@ -31,7 +31,7 @@
                             <td>{{ i + 1}}.</td>
                             <td>
                               <input type="text" class="form-control form-control-user" id="exercisename{{i}}"
-                                name="exercisename{{i}}" [(ngModel)]="exercise.exerciseName[i]" placeholder="Exercise Name" list="optionList" required>
+                                name="exercisename{{i}}" [(ngModel)]="exercise.exercisename[i]" placeholder="Exercise Name" list="optionList" required>
                                 <datalist id="optionList">
                                   <option value="Push-up"></option>
                                   <option value="Lunge"></option>
@@ -104,10 +104,10 @@
 
 
                   <label for="optionA">Frequency:</label>
-                  <div class="row form-group">
+                  <!-- <div class="row form-group">
                     <div class="col-md-6">
                       <input type="radio" id="optionA" name="option" value="Everyday"
-                        [(ngModel)]="EverydayX" />&nbsp;
+                        [(ngModel)]="exercise.frequency" />&nbsp;
                       <label for="optionA"> Everyday</label>
                     </div>
                     <div class="col-md-6">
@@ -115,15 +115,15 @@
                         [(ngModel)]="EverydayX" />&nbsp;
                       <label for="optionB"> Every X day</label>
                     </div>
-                  </div>
+                  </div> -->
 
-                  <div *ngIf="EverydayX === 'Every X day'" class="form-group col-md-12">
+                  <!-- <div *ngIf="EverydayX === 'Every X day'" class="form-group col-md-12"> -->
                     <!-- <label for="everyday">Everyday:</label> -->
                     <select id="everyday" name="everyday" [(ngModel)]="exercise.frequency" multiple
                       class="custom-select-class">
-                      <option *ngFor="let days of weekOptions" selected [value]="days">{{ days.name }}</option>
+                      <option *ngFor="let days of weekOptions" [value]="days">{{ days.name }}</option>
                     </select>
-                  </div>
+                  <!-- </div> -->
                   <div class="form-group">
                     <label for="exercisetime">Exercise Time:</label>
                     <table class="table">
@@ -141,7 +141,7 @@
                             <td>{{ i + 1}}.</td>
                             <td>
                               <input type="time" class="form-control form-control-user" id="exercisetime{{i}}"
-                                name="exercisetime{{i}}" [(ngModel)]="exercise.exerciseTimes[i]" required>
+                                name="exercisetime{{i}}" [(ngModel)]="exercise.exercisetime[i]" required>
                             </td>
                             <td *ngIf="i !== 0">
                               <button class="btn btn-outline-danger" type="button" (click)="removeExerciseTime(i)">

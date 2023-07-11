@@ -181,7 +181,7 @@ h2 {
   cursor: pointer;
   border: 1px solid #fff;
   border-radius: 4px;
-  margin: 30px 0px 0px 220px;
+  /* margin: 30px 0px 0px 220px; */
 }
 
 .button {
@@ -254,3 +254,19 @@ h2 {
 .show > .btn-outline-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100%; */
+  margin-top: 10%;
+}
+
+.button {
+  /* Add your button styles here */
+  /* Example styles */
+  padding: 10px 20px;
+  font-size: 16px;
+}
+

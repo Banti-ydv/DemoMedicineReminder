@@ -1,27 +1,3 @@
-<!-- <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>MedicineApp</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="manifest" href="./manifest.json">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-</head>
-<body class="mat-typography" style="background-color: #677ae0;">
-<medicine-app></medicine-app>
-</body>
-
-
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,9 +13,7 @@
 
   <!-- Custom fonts for this template-->
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
   <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
@@ -48,16 +22,14 @@
   <link href='assets/css/main/main.css' rel='stylesheet' />
   <link rel="manifest" href="./manifest.json">
 
-  
 </head>
-
 <body id="page-top">
+
 
   <medicine-app></medicine-app>
 
 
   <script>
-  
     // Array of available options for autocomplete
    var options = [
      "Medicine 1",
@@ -66,38 +38,30 @@
      "Medicine 4",
      // Add more options as needed
    ];
-   
    // Get the input element and autocomplete list container
    var input = document.querySelector('input[name="name"]');
    var autocompleteList = document.getElementById("autocomplete-list");
-   
    // Function to update the autocomplete list
    function updateAutocompleteList() {
      // Clear previous suggestions
      autocompleteList.innerHTML = "";
-   
      // Get the user input
      var userInput = input.value.toLowerCase();
-   
      // Filter the options based on the input
      var matchingOptions = options.filter(function(option) {
        return option.toLowerCase().indexOf(userInput) > -1;
      });
-   
      // Create and append new suggestion elements to the autocomplete list
      matchingOptions.forEach(function(option) {
        var suggestion = document.createElement("div");
        suggestion.innerHTML = option;
-   
        // Handle click event on each suggestion
        suggestion.addEventListener("click", function() {
          input.value = option;
          autocompleteList.innerHTML = "";
        });
-   
        autocompleteList.appendChild(suggestion);
      });
-   
      // Show or hide the autocomplete list based on the matching options
      if (matchingOptions.length > 0) {
        autocompleteList.style.display = "block";
@@ -105,20 +69,15 @@
        autocompleteList.style.display = "none";
      }
    }
-   
    // Add event listener for input keyup event
    input.addEventListener("keyup", updateAutocompleteList);
-   
    // Hide the autocomplete list when clicking outside of it
    document.addEventListener("click", function(e) {
      if (e.target !== input) {
        autocompleteList.style.display = "none";
      }
    });
-    
    </script>
-
-
   <script src="assets/js/main.js"></script>
   <script src="assets/js/demo/main.js"></script>
 
@@ -146,7 +105,6 @@
       });
     });
   </script>
-
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>

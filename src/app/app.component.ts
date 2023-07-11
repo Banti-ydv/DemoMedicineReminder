@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
 //logged in
     this.isLoggedIn = this.authService.getIsLoggedIn();
 if (!this.isLoggedIn) {
-  if (window.location.pathname !== '/home' && window.location.pathname !== '/register' && window.location.pathname !== '/contact') {
+  if (window.location.pathname !== '/home' && window.location.pathname !== '/register' && window.location.pathname !== '/login') {
     this.router.navigate(['/home']);
   }
 }
@@ -149,7 +149,7 @@ if (!this.isLoggedIn) {
   //menu in home there home option on this event
   navigateToHome() {
     this.router.navigateByUrl('/home')
-      .then(() => location.reload());
+      // .then(() => location.reload());
   }
 
   logout() {

@@ -39,7 +39,7 @@ export class UserService {
   exerciseAdd(exerciseAdd: any) {
     const token = localStorage.getItem('token');
     console.log(token);
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY).set('Content-Type', 'application/json');
     return this.http.post(this.key.addExercise, exerciseAdd, { headers });
   }
 

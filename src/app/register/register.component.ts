@@ -54,9 +54,9 @@ export class RegisterComponent {
 
             console.log('result====>',result);
             this.router.navigate(['/login'])
-            .then(() => {
-              location.reload();
-            });
+            // .then(() => {
+            //   location.reload();
+            // });
           }
         });
       },

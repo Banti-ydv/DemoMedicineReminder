@@ -38,6 +38,7 @@ export interface PeriodicElementMedicien {
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  
 
   // displayedColumns: string[] = ['position', 'exercisename', 'exercisetime', 'edit', 'delete'];
   dataSourceExercise = new MatTableDataSource<PeriodicElementExercise>();
