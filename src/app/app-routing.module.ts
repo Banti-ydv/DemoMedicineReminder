@@ -15,6 +15,8 @@ import { AppointmentHistoryComponent } from './appointment-history/appointment-h
 import { ProfileComponent } from './profile/profile.component';
 import { MedicineDetailsComponent } from './medicine-details/medicine-details.component';
 import { MedicineUpdateComponent } from './medicine-update/medicine-update.component';
+import { AppointmentUpdateComponent } from './appointment-update/appointment-update.component';
+import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
 // import { AuthGuard } from './servise/auth.guard';
 
 
@@ -28,10 +30,12 @@ const routes: Routes = [
   { path: 'medicine-update', component: MedicineUpdateComponent },
   { path: 'exercise-add', component: ExerciseAddComponent },
   { path: 'exercise-history', component: ExerciseHistoryComponent },
+  { path: 'exercise-update', component: ExerciseUpdateComponent },
   { path: 'food-add', component: FoodAddComponent },
   { path: 'food-history', component: FoodHistoryComponent },
   { path: 'appointment-add', component: AppointmentAddComponent },
   { path: 'appointment-history', component: AppointmentHistoryComponent },
+  { path: 'appointment-update', component: AppointmentUpdateComponent },
   { path: "login", component: LoginComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'navbar', component: NavbarComponent}, 

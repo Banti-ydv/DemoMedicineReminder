@@ -8,8 +8,8 @@ export interface Exercise {
   exercisename: string[];
   exercisetime: string[];
   frequency: string[];
-  exerciseTimes: string[];
-  exerciseName: string[];
+  // exerciseTimes: string[];
+  // exerciseName: string[];
 }
 
 
@@ -24,8 +24,8 @@ export class ExerciseAddComponent {
     exercisename: [],
     exercisetime: [],
     frequency: [],
-    exerciseTimes: [],
-    exerciseName: [],
+    // exerciseTimes: [],
+    // exerciseName: [],
 
   };
   EverydayX: any;
@@ -42,7 +42,7 @@ export class ExerciseAddComponent {
   ];
 
 
-  constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { console.log('===>',this.exercise.frequency) }
+  constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { }
 
 
   onexercise() {
@@ -53,8 +53,8 @@ export class ExerciseAddComponent {
       exercisename: this.exercise.exercisename,
       exercisetime: this.exercise.exercisetime,
       frequency: this.exercise.frequency,
-      exerciseTimes: this.exercise.exerciseTimes,
-      exerciseName: this.exercise.exerciseName,
+      // exerciseTimes: this.exercise.exerciseTimes,
+      // exerciseName: this.exercise.exerciseName,
      
       
     };
@@ -85,19 +85,19 @@ export class ExerciseAddComponent {
 
 
   addExerciseTime() {
-    this.exercise.exerciseTimes.push('');
+    this.exercise.exercisetime.push('');
   }
 
   removeExerciseTime(index: number) {
-    this.exercise.exerciseTimes.splice(index, 1);
+    this.exercise.exercisetime.splice(index, 1);
   }
 
   addExerciseName() {
-    this.exercise.exerciseName.push('');
+    this.exercise.exercisename.push('');
   }
 
   removeExerciseName(index: number) {
-    this.exercise.exerciseName.splice(index, 1);
+    this.exercise.exercisename.splice(index, 1);
   }
 
   formatDate(date: string | null): string {

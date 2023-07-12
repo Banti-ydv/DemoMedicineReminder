@@ -13,15 +13,73 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"><b>Update Medicine</b></h1>
                                 </div>
-                                <form class="user" >
+                                <form class="user" #medicineForm="ngForm">
 
                                     <div class="row mb-3">
                                         <div class="form-group col-md-6">
                                             <label>Medicine Name</label>
                                             <input type="text" name="name" class="form-control form-control-user"
-                                                placeholder="Enter Medicine Name" [(ngModel)]="medicine.name"
-                                                required value="{{medicine.name}}" />
+                                                placeholder="Enter Medicine Name" [(ngModel)]="medicine.name" required
+                                                value="{{medicine.name}}" list="optionList" autocomplete="off" />
                                         </div>
+
+                                        <datalist id="optionList">
+                      <option value="Abiraterone"></option>
+                      <option value="Apixaban"></option>
+                      <option value="Bactrim"></option>
+                      <option value="Breo Ellipta"></option>
+                      <option value="Candesartan"></option>
+                      <option value="Clonidine"></option>
+                      <option value="Denosumab"></option>
+                      <option value="Donepezil"></option>
+                      <option value="Effexor XR"></option>
+                      <option value="Evenity"></option>
+                      <option value="Fentanyl"></option>
+                      <option value="Folic Acid"></option>
+                      <option value="GaviLyte G"></option>
+                      <option value="Hydroquinone"></option>
+                      <option value="Hydromorphone"></option>
+                      <option value="Imatinib"></option>
+                      <option value="Irbesartan"></option>
+                      <option value="Junel Fe 24"></option>
+                      <option value="Jencycla"></option>
+                      <option value="Kineret"></option>
+                      <option value="Kenalog"></option>
+                      <option value="Lofexidine"></option>
+                      <option value="Leuprolide"></option>
+                      <option value="Minoxidil"></option>
+                      <option value="Mavyret"></option>
+                      <option value="Nitrofurantoin"></option>
+                      <option value="Naprosyn"></option>
+                      <option value="Osilodrostat"></option>
+                      <option value="Ofev"></option>
+                      <option value="Probuphine"></option>
+                      <option value="Pepcid"></option>
+                      <option value="Quviviq"></option>
+                      <option value="Qtern"></option>
+                      <option value="Rinvoq"></option>
+                      <option value="Ranitidine"></option>
+                      <option value="Scopolamine"></option>
+                      <option value="Sotalol"></option>
+                      <option value="Tazarotene"></option>
+                      <option value="Tremfya"></option>
+                      <option value="Udenyca"></option>
+                      <option value="Urso"></option>
+                      <option value="Vitamin B1"></option>
+                      <option value="Vilazodone"></option>
+                      <option value="Vitamin D3"></option>
+                      <option value="Welchol"></option>
+                      <option value="Wormwood"></option>
+                      <option value="Xanax XR"></option>
+                      <option value="Xofigo"></option>
+                      <option value="Yescarta"></option>
+                      <option value="Yupelri"></option>
+                      <option value="Zarxio"></option>
+                      <option value="Zosyn"></option>
+                      <option value="8-Mop"></option>
+                      <option value="5-hydroxytryptophan"></option>
+                      <option value="12 Hour Nasal"></option>
+                    </datalist>
 
                                         <div class="form-group col-md-6">
                                             <label>Shape</label>
@@ -42,52 +100,62 @@
 
                                     <div class="row table-responsive rounded">
                                         <div class="form-group col-md-12">
-                                          <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <td>No.</td>
-                                                <td  style="text-align:center;">Time</td>
-                                                <td  style="text-align:center;">Dose</td>
-                                                <td  style="text-align:center;">Action</td>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr *ngFor="let item of timedata; let i = index">
-                                                <td>{{ i + 1 }}.</td>
-                                                <td  style="text-align:center;">
-                                                  <input type="time" class="form-control form-control-user" [(ngModel)]="timedata[i]" name="time{{ i }}" />
-                                                </td>
-                                                <td  style="text-align:center; width:30%;">
-                                                  <input type="number" class="form-control form-control-user" step="0.5" max="10" min="0.5" [(ngModel)]="dosedata[i]" name="dose{{ i }}" placeholder="Enter Dose" />
-                                                </td>
-                                                <td *ngIf="i !== 0" style="text-align:center; width:30%;">
-                                                  <button type="button" class="btn btn-danger btn-sm mt-2" (click)="removeData(i)"><i class="fa fa-minus"></i> Remove</button>
-                                                </td>
-                                              </tr>
-                                              <tr>
-                                                <th colspan="3"></th>
-                                                <th  style="text-align:center; width:30%;">
-                                                  <button type="button" class="btn btn-primary btn-sm" (click)="addData()"> <i class="fa fa-plus"></i> Add More</button>
-                                                </th>
-                                              </tr>
-                                            </tbody>
-                                          </table>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <td>No.</td>
+                                                        <td style="text-align:center;">Time</td>
+                                                        <td style="text-align:center;">Dose</td>
+                                                        <td style="text-align:center;">Action</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of timedata; let i = index">
+                                                        <td>{{ i + 1 }}.</td>
+                                                        <td style="text-align:center;">
+                                                            <input type="time" class="form-control form-control-user"
+                                                                [(ngModel)]="timedata[i]" name="time{{ i }}" />
+                                                        </td>
+                                                        <td style="text-align:center; width:30%;">
+                                                            <input type="number" class="form-control form-control-user"
+                                                                step="0.5" max="10" min="0.5" [(ngModel)]="dosedata[i]"
+                                                                name="dose{{ i }}" placeholder="Enter Dose" />
+                                                        </td>
+                                                        <td *ngIf="i !== 0" style="text-align:center; width:30%;">
+                                                            <button type="button" class="btn btn-danger btn-sm mt-2"
+                                                                (click)="removeData(i)"><i class="fa fa-minus"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="3"></th>
+                                                        <th style="text-align:center; width:30%;">
+                                                            <button type="button" class="btn btn-primary btn-sm"
+                                                                (click)="addData()"> <i class="fa fa-plus"></i></button>
+                                                        </th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                      </div>
-                                      
-                                      
+                                    </div>
 
 
 
-                                    <div class="row">
+
+
+                                    <div class="row" *ngIf="!medicine.fromDate">
                                         <div class="form-group col-md-6">
                                             <label for="frequency">Frequency:</label>
-                                            <select id="selectedFrequency" [(ngModel)]="selectedFrequency" name="frequency"
-                                                class="custom-select-class">
+                                            <select id="selectedFrequency" [(ngModel)]="selectedFrequency"
+                                                name="frequency" class="custom-select-class">
                                                 <!-- <option value="{{medicine.frequency}}" disabled>{{medicine.frequency}}</option> -->
                                                 <option *ngFor="let option of frequencyOptions" [value]="option">{{
                                                     option }}</option>
                                             </select>
+                                            <div class="button-container">
+                                                <button type="button" (click)="clearFieldsFrequency()"
+                                                    *ngIf="selectedFrequency"
+                                                    class="btn btn-primary btn-user mt-2">Clear Frequency</button>
+                                            </div>
                                         </div>
 
                                         <div *ngIf="selectedFrequency === 'Everyday'" class="form-group col-md-6">
@@ -128,40 +196,59 @@
                                             </select>
                                         </div>
 
-                                        <div *ngIf="selectedFrequency !== ''"
-                                            class="form-group col-md-6">
+                                        <div *ngIf="selectedFrequency !== ''" class="form-group col-md-6">
                                             <label>Frequency selected :</label>
                                             <p>{{medicine.frequency}}</p>
-                                            
+
                                         </div>
 
                                     </div>
 
                                     <div class="row mb-3">
                                         <div class="form-group col-md-6">
-                                            <label>Start Date</label>
-                                            <input type="date" name="fromDate" id="fromDate" class="form-control form-control-user" required
-                                                [min]="minDate()"  [(ngModel)]="medicine.fromDate" value="{{ medicine.fromDate }}"/>
-                                        </div>  
-
-                                        <div class="form-group col-md-6">
-                                            <label>End Date</label>
-                                            <input type="date" name="toDate" id="toDate" class="form-control form-control-user" required
-                                                [min]="calculateMinEndDate()" [(ngModel)]="medicine.toDate" value="{{ medicine.toDate}}"/>
-                                        </div>
-                                    </div>
-
-                                    
-
-                                    <div class="row mb-3">
-                                        <div class="form-group col-md-6">
-                                    <button class="btn btn-primary btn-user btn-block" (click)="updateMedicineData()"> <i class="fas fa-pen-nib"></i> Update</button>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <button class="btn btn-danger btn-user btn-block" routerLink="/medicine-history"> <i class="fas fa-reply"></i> Cancel</button>
+                                          <label>Start Date</label>
+                                          <div class="input-group">
+                                            <input type="date" name="fromDate" class="form-control form-control-user"
+                                              placeholder="Select" [(ngModel)]="medicine.fromDate" required [min]="minDate()" #fromDateInput />
+                                            <div class="input-group-append" *ngIf="medicine.fromDate">
+                                              <span class="input-group-text" (click)="clearFieldsFromDate()">
+                                                <i class="fas fa-times"></i> <!-- Replace with your desired icon class -->
+                                              </span>
+                                            </div>
+                                          </div>
                                         </div>
                                         
-                                    </div> 
+                                      
+                                        <div class="form-group col-md-6" *ngIf="medicine.fromDate">
+                                          <label>End Date</label>
+                                          <div class="input-group">
+                                          <input type="date" name="toDate" class="form-control form-control-user" placeholder="Select"
+                                            [(ngModel)]="medicine.toDate" required [min]="calculateMinEndDate()" required #toDateInput />
+                                            <div class="input-group-append" *ngIf="medicine.toDate">
+                                              <span class="input-group-text" (click)="clearFieldsToDate()">
+                                                <i class="fas fa-times"></i> <!-- Replace with your desired icon class -->
+                                              </span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                      </div>
+                                      
+
+
+
+                                    <div class="row mb-3">
+                                        <div class="form-group col-md-6">
+                                            <button class="btn btn-primary btn-user btn-block"
+                                                (click)="updateMedicineData()" [disabled]="!medicineForm.valid"> <i class="fas fa-pen-nib"></i>
+                                                Update</button>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <button class="btn btn-danger btn-user btn-block"
+                                                routerLink="/medicine-history"> <i class="fas fa-reply"></i>
+                                                Cancel</button>
+                                        </div>
+
+                                    </div>
                                 </form>
                             </div>
                         </div>

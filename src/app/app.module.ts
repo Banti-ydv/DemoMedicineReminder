@@ -46,6 +46,8 @@ import { MedicineDetailsComponent } from './medicine-details/medicine-details.co
 import { MedicineUpdateComponent } from './medicine-update/medicine-update.component';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AppointmentUpdateComponent } from './appointment-update/appointment-update.component';
+import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
 
 
 
@@ -66,7 +68,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     AppointmentHistoryComponent,
     ProfileComponent,
     MedicineDetailsComponent,
-    MedicineUpdateComponent
+    MedicineUpdateComponent,
+    AppointmentUpdateComponent,
+    ExerciseUpdateComponent
   ],
   imports: [
     BrowserModule,

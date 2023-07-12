@@ -119,7 +119,8 @@
                             </td>
                             <td *ngIf="i !== 0" style="text-align:center; width:30%;">
                               <button type="button" class="btn btn-danger mt-2" (click)="removeMedicine(i)">
-                                <i class="fa fa-minus"></i> Remove
+                                <!-- <i class="fa fa-minus"></i> Remove -->
+                                <i class="fa fa-minus"></i> 
                               </button>
                             </td>
                           </tr>
@@ -127,7 +128,8 @@
                             <th colspan="3"></th>
                             <th style="text-align:center; width:30%;">
                               <button type="button" class="btn btn-primary" (click)="addMedicine()">
-                                <i class="fa fa-plus"></i> Add More
+                                <!-- <i class="fa fa-plus"></i> Add More -->
+                                <i class="fa fa-plus"></i>
                               </button>
                             </th>
                           </tr>
@@ -136,13 +138,16 @@
                     </div>
                   </div>
 
-                  <div class="row" [hidden]="!!medicine.toDate">
+                  <div class="row" *ngIf="!medicine.fromDate">
                     <div class="form-group col-md-6">
                       <label for="frequency">Frequency:</label>
                       <select id="frequency" [(ngModel)]="selectedFrequency" name="frequency"
                         class="custom-select-class">
                         <option *ngFor="let option of frequencyOptions" [value]="option">{{ option }}</option>
                       </select>
+                      <div class="button-container">
+                      <button type="button" (click)="clearFieldsFrequency()" *ngIf="selectedFrequency" class="btn btn-primary btn-user mt-2">Clear Frequency</button>
+                    </div>
                     </div>
 
                     <div *ngIf="selectedFrequency === 'Everyday'" class="form-group col-md-6">
@@ -181,7 +186,7 @@
 
                   </div>
 
-                  <div class="row mb-3">
+                  <!-- <div class="row mb-3">
                     <div class="form-group col-md-6">
                       <label>Start Date</label>
                       <input type="date" name="fromDate" class="form-control form-control-user" placeholder="Select"
@@ -193,8 +198,39 @@
                       <input type="date" name="toDate" class="form-control form-control-user" placeholder="Select"
                         [(ngModel)]="medicine.toDate" required [min]="calculateMinEndDate()" required />
                     </div>
-                  </div>
+                  </div> -->
 
+                  <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                      <label>Start Date</label>
+                      <div class="input-group">
+                        <input type="date" name="fromDate" class="form-control form-control-user"
+                          placeholder="Select" [(ngModel)]="medicine.fromDate" required [min]="minDate()" #fromDateInput />
+                        <div class="input-group-append" *ngIf="medicine.fromDate">
+                          <span class="input-group-text" (click)="clearFieldsFromDate()">
+                            <i class="fas fa-times"></i> <!-- Replace with your desired icon class -->
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  
+                    <div class="form-group col-md-6" *ngIf="medicine.fromDate">
+                      <label>End Date</label>
+                      <div class="input-group">
+                      <input type="date" name="toDate" class="form-control form-control-user" placeholder="Select"
+                        [(ngModel)]="medicine.toDate" required [min]="calculateMinEndDate()" required #toDateInput />
+                        <div class="input-group-append" *ngIf="medicine.toDate">
+                          <span class="input-group-text" (click)="clearFieldsToDate()">
+                            <i class="fas fa-times"></i> <!-- Replace with your desired icon class -->
+                          </span>
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+                  
+                  <!-- <button (click)="clearFields()">Clear</button> -->
+                  
                   <div class="row mb-3">
                     <div class="form-group col-md-12">
                       <label>Description</label>

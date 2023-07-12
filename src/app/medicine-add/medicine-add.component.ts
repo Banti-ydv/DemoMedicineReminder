@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
 import { DatePipe } from '@angular/common';
@@ -20,8 +20,6 @@ export interface Medicine {
   description: string;
   frequency: string[];
 }
-
-
 
 @Component({
   selector: 'app-medicine-add',
@@ -61,6 +59,9 @@ export class MedicineAddComponent implements OnInit {
   intervalOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   weekOptions = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   monthOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+  fromDateInput: any;
+  toDateInput: any;
+  divElement: any;
 
   // selectedInterval: string[] = [];
 
@@ -136,6 +137,53 @@ export class MedicineAddComponent implements OnInit {
   }
 
 
+  clearFieldsToDate() {
+    // this.medicine.fromDate = '';
+    this.medicine.toDate = '';
+
+    if (this.fromDateInput) {
+      this.fromDateInput.nativeElement.value = '';
+    }
+
+    if (this.toDateInput) {
+      this.toDateInput.nativeElement.value = '';
+    }
+
+    if (this.divElement) {
+      this.divElement.nativeElement.innerHTML = '';
+    }
+  }
+  clearFieldsFromDate() {
+    this.medicine.fromDate = '';
+    this.medicine.toDate = '';
+
+    if (this.fromDateInput) {
+      this.fromDateInput.nativeElement.value = '';
+    }
+
+    if (this.toDateInput) {
+      this.toDateInput.nativeElement.value = '';
+    }
+
+    if (this.divElement) {
+      this.divElement.nativeElement.innerHTML = '';
+    }
+  }
+  clearFieldsFrequency() {
+    this.selectedFrequency = '';
+
+    if (this.fromDateInput) {
+      this.fromDateInput.nativeElement.value = '';
+    }
+
+    if (this.toDateInput) {
+      this.toDateInput.nativeElement.value = '';
+    }
+
+    if (this.divElement) {
+      this.divElement.nativeElement.innerHTML = '';
+    }
+  }
 
 
 

@@ -1,0 +1,182 @@
+<div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+              <div class="col-lg-12">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4"> <b>Update Exercise </b></h1>
+                  </div>
+                  <form class="user" #exerciseForm="ngForm">
+        
+                    <div class="form-group">
+                      <label for="exercisename">Exercise Name:</label>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="width: 10%;">No.</th>
+                            <th style="width: 50%;">Name</th>
+                            <th style="width: 40%;">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                
+                          <ng-container *ngFor="let name of exercise.exercisename; let i = index">
+                            <tr>
+                              <td>{{ i + 1}}.</td>
+                              <td>
+                                <input type="text" class="form-control form-control-user" id="exercisename{{i}}"
+                                  name="exercisename{{i}}" [(ngModel)]="exercise.exercisename[i]" placeholder="Exercise Name" list="optionList" required>
+                                  <datalist id="optionList">
+                                    <option value="Push-up"></option>
+                                    <option value="Lunge"></option>
+                                    <option value="Squat"></option>
+                                    <option value="Neck Glide"></option>
+                                    <option value="Shoulder Shrugs"></option>
+                                    <option value="Neck Rotation Lateral Extension"></option>
+                                    <option value="Partial sit-ups"></option>
+                                    <option value="Hamstring stretching"></option>
+                                    <option value="Pelvic tilt exercises"></option>
+                                    <option value="Wrist curl"></option>
+                                    <option value="Crab walk"></option>
+                                    <option value="Front raise"></option>
+                                    <option value="Arnold press"></option>
+                                    <option value="Bent-over row"></option>
+                                    <option value="face pulls"></option>
+                                    <option value="Hanging Leg Raises"></option>
+                                    <option value="Seted Cable Rows"></option>
+                                    <option value="Pullups and Chinups"></option>
+                                    <option value="Trap Bar Deadlifts"></option>
+                                    <option value="Overhead Presses"></option>
+                                    <option value="Rope and pulley exercise"></option>
+                                    <option value="Monkey Curls"></option>
+                                    <option value="Lateral Raise"></option>
+                                    <option value="Neck Extension"></option>
+                                    <option value="Standing lunges"></option>
+                                    <option value="Lumbar Extension Articulation"></option>
+                                    <option value="Hyperextension machine exercises"></option>
+                                    <option value="45-Degree Hyperextension"></option>
+                                    <option value="4-point kneel hip extension/ donkey kicks"></option>
+                                    <option value="Ankle strengthening exercise"></option>
+                                    <option value="Toe or towel curl exercise"></option>
+                                    <option value="Frankenstein walk"></option>
+                                    <option value="Crab walking"></option>
+                                    <option value="Knee Extensions"></option>
+                                    <option value="Star jumps"></option>
+                                    <option value="Knee Curls"></option>
+                                    <option value="Standing hip abduction"></option>
+                                    <option value="Heel sliding"></option>
+                                    <option value="Ankle toe movements"></option>
+                                    <option value="Clamshell"></option>
+                                    <option value="Bridging"></option>
+                                    <option value="Prone Leg Lift"></option>
+                                    <option value="Split Squats Lunges"></option>
+                                    <option value="Single leg squats"></option>
+                                    <option value="Seated knee extension (theraband)"></option>
+                                    <option value="Prisoner Hyperextension"></option>
+                                    <option value="Cat and camel exercise"></option>
+                                    <option value="Plank"></option>
+                                    <option value="push-ups"></option>
+                                    <option value="Back Extensions on Bench"></option>
+                                    <option value="Quadruped or bird dog exercise"></option>
+                                    <option value="Full squats"></option>
+                                    <option value="Seated trunk flexion"></option>
+                                  </datalist>
+                              </td>
+                              <td *ngIf="i !== 0" >
+                                <button class="btn btn-outline-danger" type="button" (click)="removeExerciseName(i)">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                      <button class="btn btn-outline-primary mt-2" type="button" (click)="addExerciseName()">
+                        Add Exercise Name
+                      </button>
+                    </div>
+  
+  
+                    <label for="optionA">Frequency:</label>
+                    <!-- <div class="row form-group">
+                      <div class="col-md-6">
+                        <input type="radio" id="optionA" name="option" value="Everyday"
+                          [(ngModel)]="exercise.frequency" />&nbsp;
+                        <label for="optionA"> Everyday</label>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="radio" id="optionB" name="option" value="Every X day"
+                          [(ngModel)]="EverydayX" />&nbsp;
+                        <label for="optionB"> Every X day</label>
+                      </div>
+                    </div> -->
+  
+                    <!-- <div *ngIf="EverydayX === 'Every X day'" class="form-group col-md-12"> -->
+                      <!-- <label for="everyday">Everyday:</label> -->
+                      <select id="everyday" name="everyday" [(ngModel)]="exercise.frequency" multiple
+                        class="custom-select-class">
+                        <option *ngFor="let days of weekOptions" [value]="days">{{ days.name }}</option>
+                      </select>
+                    <!-- </div> -->
+                    <div class="form-group">
+                      <label for="exercisetime">Exercise Time:</label>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="width: 10%;">No.</th>
+                            <th style="width: 50%;">Time</th>
+                            <th style="width: 40%;">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+  
+                          <ng-container *ngFor="let time of exercise.exercisetime; let i = index">
+                            <tr>
+                              <td>{{ i + 1}}.</td>
+                              <td>
+                                <input type="time" class="form-control form-control-user" id="exercisetime{{i}}"
+                                  name="exercisetime{{i}}" [(ngModel)]="exercise.exercisetime[i]" required>
+                              </td>
+                              <td *ngIf="i !== 0">
+                                <button class="btn btn-outline-danger" type="button" (click)="removeExerciseTime(i)">
+                                  Remove
+                                </button>
+                              </td>
+                            </tr>
+                          </ng-container>
+  
+  
+                        </tbody>
+                      </table>
+                      <button class="btn btn-outline-primary mt-2" type="button" (click)="addExerciseTime()">
+                        Add Exercise Time
+                      </button>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="form-group col-md-6">
+                            <button class="btn btn-primary btn-user btn-block"
+                                (click)="updateExerciseData()" [disabled]="!exerciseForm.valid"> <i class="fas fa-pen-nib"></i>
+                                Update</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button class="btn btn-danger btn-user btn-block"
+                                routerLink="/exercise-history"> <i class="fas fa-reply"></i>
+                                Cancel</button>
+                        </div>
+
+                    </div>
+                   </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

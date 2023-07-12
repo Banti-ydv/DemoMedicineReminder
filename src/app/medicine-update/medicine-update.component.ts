@@ -1,13 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-medicine-update',
-//   templateUrl: './medicine-update.component.html',
-//   styleUrls: ['./medicine-update.component.css']
-// })
-// export class MedicineUpdateComponent {
-
-// }
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../servise/user.service';
@@ -71,6 +61,9 @@ export class MedicineUpdateComponent implements OnInit {
   intervalOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   weekOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   monthOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+  fromDateInput: any;
+  toDateInput: any;
+  divElement: any;
 
   constructor(
     private userService: UserService,
@@ -90,8 +83,6 @@ export class MedicineUpdateComponent implements OnInit {
 
   addData() {
     this.timedata.push({ timing: '', dose: '' });
-    
-    
   }
   
   removeData(index: number) {
@@ -146,6 +137,56 @@ export class MedicineUpdateComponent implements OnInit {
     return this.medicine.fromDate;
   }
 
+
+  clearFieldsToDate() {
+    // this.medicine.fromDate = '';
+    this.medicine.toDate = '';
+
+    if (this.fromDateInput) {
+      this.fromDateInput.nativeElement.value = '';
+    }
+
+    if (this.toDateInput) {
+      this.toDateInput.nativeElement.value = '';
+    }
+
+    if (this.divElement) {
+      this.divElement.nativeElement.innerHTML = '';
+    }
+  }
+  clearFieldsFromDate() {
+    this.medicine.fromDate = '';
+    this.medicine.toDate = '';
+
+    if (this.fromDateInput) {
+      this.fromDateInput.nativeElement.value = '';
+    }
+
+    if (this.toDateInput) {
+      this.toDateInput.nativeElement.value = '';
+    }
+
+    if (this.divElement) {
+      this.divElement.nativeElement.innerHTML = '';
+    }
+  }
+  clearFieldsFrequency() {
+    this.selectedFrequency = '';
+
+    if (this.fromDateInput) {
+      this.fromDateInput.nativeElement.value = '';
+    }
+
+    if (this.toDateInput) {
+      this.toDateInput.nativeElement.value = '';
+    }
+
+    if (this.divElement) {
+      this.divElement.nativeElement.innerHTML = '';
+    }
+  }
+
+  
 
 
 
