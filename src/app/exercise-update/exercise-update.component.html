@@ -14,7 +14,7 @@
                   </div>
                   <form class="user" #exerciseForm="ngForm">
         
-                    <div class="form-group">
+                    <div class="form-group table-responsive">
                       <label for="exercisename">Exercise Name:</label>
                       <table class="table">
                         <thead>
@@ -104,10 +104,10 @@
   
   
                     <label for="optionA">Frequency:</label>
-                    <!-- <div class="row form-group">
+                    <div class="row form-group">
                       <div class="col-md-6">
                         <input type="radio" id="optionA" name="option" value="Everyday"
-                          [(ngModel)]="exercise.frequency" />&nbsp;
+                          [(ngModel)]="EverydayX" />&nbsp;
                         <label for="optionA"> Everyday</label>
                       </div>
                       <div class="col-md-6">
@@ -115,16 +115,29 @@
                           [(ngModel)]="EverydayX" />&nbsp;
                         <label for="optionB"> Every X day</label>
                       </div>
-                    </div> -->
-  
-                    <!-- <div *ngIf="EverydayX === 'Every X day'" class="form-group col-md-12"> -->
-                      <!-- <label for="everyday">Everyday:</label> -->
+                    </div>
+                    <div class="row">
+                    <div *ngIf="EverydayX == 'Every X day'" class="form-group col-md-6">
+                      <label for="everyday">Everyday X day of week</label>
+                      <select id="everyXDay" name="everyXDay" [(ngModel)]="exercise.frequency" multiple
+                        class="custom-select-class">
+                        <option *ngFor="let days of weekOptions" [value]="days">{{ days }}</option>
+                      </select>
+                    </div>
+                    <div *ngIf="EverydayX == 'Everyday'" class="form-group col-md-6">
+                      <label for="everyday">Everyday X day of week</label>
                       <select id="everyday" name="everyday" [(ngModel)]="exercise.frequency" multiple
                         class="custom-select-class">
-                        <option *ngFor="let days of weekOptions" [value]="days">{{ days.name }}</option>
+                        <option *ngFor="let days of everday" [value]="days">{{ days }}</option>
                       </select>
-                    <!-- </div> -->
-                    <div class="form-group">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Frequency selected :</label>
+                      <p>{{exercise.frequency}}</p>
+                      </div>
+                    </div>
+  
+                    <div class="form-group table-responsive">
                       <label for="exercisetime">Exercise Time:</label>
                       <table class="table">
                         <thead>

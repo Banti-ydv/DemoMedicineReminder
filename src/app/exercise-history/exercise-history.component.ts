@@ -13,7 +13,7 @@ import * as moment from 'moment';
 export interface PeriodicElement {
   id: number;
   exercisename: string;
-  // date: string;
+  frequency: string;
   exercisetime: string;
 
 }
@@ -25,7 +25,7 @@ export interface PeriodicElement {
 })
 export class ExerciseHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'exercisename', 'exercisetime', 'edit', 'delete'];
+  displayedColumns: string[] = ['position', 'exercisename', 'exercisetime','frequency', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   constructor(

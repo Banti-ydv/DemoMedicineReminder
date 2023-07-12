@@ -21,8 +21,8 @@ export interface Exercise {
 export class ExerciseAddComponent {
 
   exercise: Exercise = {
-    exercisename: [],
-    exercisetime: [],
+    exercisename: [''],
+    exercisetime: [''],
     frequency: [],
     // exerciseTimes: [],
     // exerciseName: [],
@@ -31,15 +31,8 @@ export class ExerciseAddComponent {
   EverydayX: any;
 
 
-  weekOptions: Array<any> = [
-    { name: 'Sunday', value: 'Sunday' },
-    { name: 'Monday', value: 'Monday' },
-    { name: 'Tuesday', value: 'Tuesday' },
-    { name: 'Wednesday', value: 'Wednesday' },
-    { name: 'Thursday', value: 'Thursday' },
-    { name: 'Friday', value: 'Friday' },
-    { name: 'Saturday', value: 'Saturday' }
-  ];
+  weekOptions: Array<any> = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  everday: Array<any> = ['Everday'];
 
 
   constructor(private userService: UserService, private router: Router, private datePipe: DatePipe) { }

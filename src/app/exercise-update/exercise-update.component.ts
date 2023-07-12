@@ -29,15 +29,8 @@ export class ExerciseUpdateComponent {
     // exerciseName: [],
   };
   EverydayX: any;
-  weekOptions: Array<any> = [
-    { name: 'Sunday', value: 'Sunday' },
-    { name: 'Monday', value: 'Monday' },
-    { name: 'Tuesday', value: 'Tuesday' },
-    { name: 'Wednesday', value: 'Wednesday' },
-    { name: 'Thursday', value: 'Thursday' },
-    { name: 'Friday', value: 'Friday' },
-    { name: 'Saturday', value: 'Saturday' }
-  ];
+  weekOptions: Array<any> = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  everday: Array<any> = ['Everday'];
 
   constructor(
     private http: HttpClient,
