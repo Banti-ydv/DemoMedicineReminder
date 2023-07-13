@@ -5,7 +5,8 @@
         <div class="card-body p-0">
 
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6 d-none d-lg-block bg-medicine-image"></div>
+            <div class="col-lg-6">
               <div class="p-3">
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4"><b>Add Medicine</b></h1>
@@ -99,25 +100,25 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <td style="text-align:center;">No.</td>
-                            <td style="text-align:center;">Time</td>
-                            <td style="text-align:center;">Dose</td>
-                            <td style="text-align:center;">Action</td>
+                            <!-- <td style="text-align:center;">No.</td> -->
+                            <td style="width: 43%;">Time</td>
+                            <td style="width: 57%;">Dose</td>
+                            <td style="width: 0%;">Action</td>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let medicine of medicines; let i = index">
-                            <td style="text-align:center; margin-top: 10px;">{{ i + 1 }}.</td>
-                            <td style="justify-content:center; width:27%;">
+                            <!-- <td style="text-align:center; margin-top: 10px;">{{ i + 1 }}.</td> -->
+                            <td style="justify-content:center;">
                               <input type="time" name="timing{{i}}" class="form-control form-control-user"
                                 placeholder="Enter Time" [(ngModel)]="timingsArray[i]" required />
                             </td>
-                            <td style="text-align:center; width:30%;">
+                            <td style="text-align:center;">
                               <input type="number" name="dose{{i}}" class="form-control form-control-user"
                                 placeholder="Enter Dose" [(ngModel)]="doseArray[i]" step="0.5" max="10" min="0.5"
                                 required />
                             </td>
-                            <td *ngIf="i !== 0" style="text-align:center; width:30%;">
+                            <td *ngIf="i !== 0" style="text-align:center;">
                               <button type="button" class="btn btn-danger mt-2" (click)="removeMedicine(i)">
                                 <!-- <i class="fa fa-minus"></i> Remove -->
                                 <i class="fa fa-minus"></i> 
@@ -125,7 +126,7 @@
                             </td>
                           </tr>
                           <tr>
-                            <th colspan="3"></th>
+                            <th colspan="2"></th>
                             <th style="text-align:center; width:30%;">
                               <button type="button" class="btn btn-primary" (click)="addMedicine()">
                                 <!-- <i class="fa fa-plus"></i> Add More -->

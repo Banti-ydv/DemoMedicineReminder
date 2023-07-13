@@ -48,6 +48,7 @@ import { MedicineUpdateComponent } from './medicine-update/medicine-update.compo
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AppointmentUpdateComponent } from './appointment-update/appointment-update.component';
 import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -70,7 +71,8 @@ import { ExerciseUpdateComponent } from './exercise-update/exercise-update.compo
     MedicineDetailsComponent,
     MedicineUpdateComponent,
     AppointmentUpdateComponent,
-    ExerciseUpdateComponent
+    ExerciseUpdateComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

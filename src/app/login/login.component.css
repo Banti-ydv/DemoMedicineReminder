@@ -1,0 +1,7 @@
+.forgot_Password{
+    text-decoration: none;
+    float: right;
+}
+.forgot_Password:hover{
+color: rgb(0, 0, 214);
+}

@@ -189,7 +189,7 @@ export class ProfileComponent implements OnInit {
                   return;
                 }
 
-                this.updateProfile(result.value);
+                // this.updateProfile(result.value);
               }
             }
           });

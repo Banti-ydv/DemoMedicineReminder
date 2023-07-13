@@ -3787,7 +3787,8 @@ input[type=submit].btn-block {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-    width: 100%
+    width: 100%;
+    margin-top: 10px;
 }
 
 .input-group>.custom-file,
@@ -3798,7 +3799,7 @@ input[type=submit].btn-block {
     flex: 1 1 auto;
     width: 1%;
     min-width: 0;
-    margin-bottom: 0
+    /* margin-top: -10px; */
 }
 
 .input-group>.custom-file+.custom-file,
@@ -12115,13 +12116,33 @@ a:focus {
 }
 
 .bg-login-image {
-    background: url(../img/medicine-login.jpg);
+    background: url(../img/24488452_6927689.jpg);
+    background-position: center;
+    background-size: cover
+}
+.bg-exercise-image {
+    background: url(../img/7971279_3802449.jpg);
+    background-position: center;
+    background-size: cover
+}
+.bg-medicine-image {
+    background: url(../img/woman-s-hand-pours-medicine-pills-out-bottle.jpg);
+    background-position: center;
+    background-size: cover
+}
+.bg-medicine-detailes-image {
+    background: url(../img/pills-medical-tools-arrangement-flat-lay.jpg);
+    background-position: center;
+    background-size: cover
+}
+.bg-appointment-image {
+    background: url(../img/3d-illustration-calendar-with-checkmarks-pen.jpg);
     background-position: center;
     background-size: cover
 }
 
 .bg-register-image {
-    background: url(../img/photo-156.jpg);
+    background: url(../img/24488452_6927689.jpg);
     background-position: center;
     background-size: cover
 }

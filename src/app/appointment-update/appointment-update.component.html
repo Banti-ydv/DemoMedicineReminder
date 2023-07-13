@@ -7,7 +7,7 @@
   
   
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
@@ -16,26 +16,26 @@
                   <form #appointmentFrom="ngForm" class="user">
                     <div class="row mb-3">
                       <div class="form-group col-md-6">
-                        <label>With Whome</label>
+                        <label><b>With Whome</b></label>
                         <input type="text" name="withWhome" class="form-control form-control-user"
                           placeholder="Enter Name" [(ngModel)]="appointment.withWhome" required />
                       </div>
   
                       <div class="form-group col-md-6">
-                        <label>Address</label>
+                        <label><b>Address</b></label>
                         <input type="text" name="address" class="form-control form-control-user"
                           placeholder="Enter Address" [(ngModel)]="appointment.address" required />
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="form-group col-md-6">
-                        <label>Reason</label>
+                        <label><b>Reason</b></label>
   
                         <input type="text" name="reason" class="form-control form-control-user" placeholder="Enter Reason"
                           [(ngModel)]="appointment.reason" required />
                       </div>
                       <div class="form-group col-md-6">
-                        <label>Speciality</label>
+                        <label><b>Speciality</b></label>
                         
                         <input type="text" name="speciality" class="form-control form-control-user"
                           placeholder="Speciality" [(ngModel)]="appointment.speciality" required />
@@ -45,14 +45,14 @@
   
                     <div class="row mb-3">
                       <div class="form-group col-md-6">
-                        <label>Appointment date</label>
+                        <label><b>Date</b></label>
   
                         <input type="date" name="appointmentdate" class="form-control form-control-user"
                      [(ngModel)]="appointment.appointmentdate" required
                           [min]="minDate()" />
                       </div>
                       <div class="form-group col-md-6">
-                        <label>Appointment time</label>
+                        <label><b>Time</b></label>
   
                         <input type="time" name="time" class="form-control form-control-user"
                           [(ngModel)]="appointment.time" required />
@@ -61,8 +61,8 @@
   
                     <div class="row mb-3">
                       <div class="form-group col-md-6">
-                        <label>Country code</label>
-                        <div class="input-group">
+                        <label><b>Country Code</b></label>
+                        <div class="input-group-code">
                           <div class="input-group-prepend">
                         
                             <select class="custom-select-class" id="countryCode" name="countryCode">
@@ -85,7 +85,7 @@
                       </div>
   
                       <div class="form-group col-md-6">
-                        <label>Mobile number</label>
+                        <label><b>Mobile Number</b></label>
   
                         <input type="text" class="form-control form-control-user" id="phoneNumber" name="phoneNumber"
                           [(ngModel)]="appointment.phoneNumber" placeholder="Enter phone number" pattern="[0-9]*"
@@ -113,6 +113,7 @@
                   </form>
                 </div>
               </div>
+              <div class="col-lg-6 d-none d-lg-block bg-appointment-image"></div>
             </div>
   
   

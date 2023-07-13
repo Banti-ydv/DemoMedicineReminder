@@ -5,7 +5,7 @@
       <div>
         <h3 class="card-title">{{element.withWhome}}</h3>
         <div class="card-content">
-          <p>Time: {{ formatTime(element.time) }}</p>
+          <p>Time: {{ element.time }}</p>
           <p>Date: {{formatDate(element.appointmentdate)}}</p>
         </div>
       </div>
@@ -23,7 +23,12 @@
       <div>
         <h3 class="card-title">{{element.exercisename}}</h3>
         <div class="card-content">
-          <p>Time: {{ formatTime(element.exercisetime) }}</p>
+          <p>Time: 
+            <span *ngFor="let exercisetime of element.exercisetime.slice(0, 2); let i = index">
+              {{ i > 0 ? ', ' : '' }}{{ exercisetime }}
+            </span>
+          </p>
+
         </div>
       </div>
       <div class="card-link-wrapper">
