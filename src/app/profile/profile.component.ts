@@ -6,7 +6,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AuthService } from '../servise/auth.service';
 import { UserService } from '../servise/user.service';
 import { KeyService } from '../servise/key.service';
-
+// import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface PeriodicElement {
   id: number;
@@ -38,7 +38,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private sanitizer: DomSanitizer,
     private userService: UserService,
-    private key: KeyService
+    private key: KeyService,
+    // private snackBar: MatSnackBar
   ) { }
 
   // id: number | any;
@@ -53,6 +54,69 @@ export class ProfileComponent implements OnInit {
     return responseSize === 0;
   }
 
+  profilePhotoDelete() {
+    const deleteUrl = 'http://192.168.1.11:8866/photo/delete';
+ const token = localStorage.getItem('token');
+  console.log('Upload:', token);
+
+  // Set the token in the request headers
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+    this.http.delete(deleteUrl, {headers})
+      .subscribe(
+        (response) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Delete Successful',
+            text: 'Profile photo delete successfully.',
+            showConfirmButton: false,
+              timer: 3000,
+          }).then((result) => {
+            if (result) {
+  
+              console.log('result====>',result);
+              this.router.navigate(['/profile'])
+              .then(() => {
+                location.reload();
+              });
+            }
+          });
+          // Handle successful deletion
+          console.log('Profile photo deleted successfully:', response);
+        
+        },
+        (error) => {
+          // Handle error
+          
+          console.error('Error deleting profile photo:', error);
+        }
+      );
+  }
+  
+// API for upload image start
+handleFileInput(event: any) {
+  const token = localStorage.getItem('token');
+  console.log('Upload:', token);
+
+  // Set the token in the request headers
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+  const file: File = event.target.files[0];
+  const formData: FormData = new FormData();
+  formData.append('photo', file);
+
+  this.http.post('http://192.168.1.11:8866/upload-photo', formData, { headers }).subscribe(response => {
+    // Handle the response from the server after image upload
+    console.log(response);
+    
+  }, (error) => {
+    console.error('API error:', error);
+    // Handle the error here
+    location.reload()
+  }
+  );
+}
+// API for upload image end
 
 
   getUserDetails(): void {
@@ -96,6 +160,7 @@ export class ProfileComponent implements OnInit {
             },
             (error) => {
               console.error('An error occurred while deleting user details:', error);
+              this.router.navigate(['/login']);
             }
           );
         }

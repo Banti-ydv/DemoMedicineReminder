@@ -48,7 +48,10 @@ import { MedicineUpdateComponent } from './medicine-update/medicine-update.compo
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AppointmentUpdateComponent } from './appointment-update/appointment-update.component';
 import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangepasswordComponent } from './change-password/change-password.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+// import { ConfirmedValidatorTsComponent } from './change-password/confirmed.validator.ts/confirmed.validator.ts.component';
 
 
 
@@ -72,7 +75,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MedicineUpdateComponent,
     AppointmentUpdateComponent,
     ExerciseUpdateComponent,
-    ChangePasswordComponent
+    ChangepasswordComponent,
+    // ConfirmedValidatorTsComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +103,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MatNativeDateModule,
     MatSelectModule,
     AngularFireModule.initializeApp(environment.firebase),
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatExpansionModule,
+    // MatSnackBar
 
     
   ],

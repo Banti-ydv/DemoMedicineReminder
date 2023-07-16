@@ -26,8 +26,10 @@ export interface PeriodicElement {
 export class ExerciseHistoryComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'exercisename', 'exercisetime','frequency', 'edit', 'delete'];
+  displayedColumnsWithExpand = [...this.displayedColumns, 'expand'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
+  expandedElement: any;
   constructor(
     private http: HttpClient,
     private confirmService: NgConfirmService,

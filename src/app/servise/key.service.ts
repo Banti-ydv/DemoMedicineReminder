@@ -15,8 +15,8 @@ export class KeyService {
   public saveFood = `${this.Url}saveFood`;
   public takeAppointment = `${this.Url}takeAppointment`;
   public MyDetailes = `${this.Url}MyDetailes`;
-  public current_photo = `${this.Url}photo/current`;
   public deleteMydetail = `${this.Url}deleteMydetail`;
+  public current_photo = `${this.Url}photo/current`;
   public upload_photo = `${this.Url}upload-photo`;
   public updateMydetailes = `${this.Url}updateMydetailes`;
   public myAppointment = `${this.Url}myAppointment`;

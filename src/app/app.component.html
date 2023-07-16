@@ -2,31 +2,25 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-        <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/home">
             <div class="sidebar-brand-icon">
-                <i class="fas fa-leaf"></i> <!-- icon for medicine remander -->
+                <i class="fas fa-leaf"></i>
             </div>
             <div class="sidebar-brand-text mx-3">Medicine Reminder</div>
         </a>
 
-        <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link" routerLink="/home" >
                 <i class="fas fa-home"></i>
                 <span>Home</span></a>
         </li>
 
-
-        <!-- Divider -->
         <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn()">
 
-        <!-- Heading -->
         <div class="sidebar-heading" *ngIf="authService.getIsLoggedIn()">
             Reminder
         </div>
@@ -45,7 +39,7 @@
                 </div>
             </div>
         </li>
-        <!-- Nav Item - Utilities Collapse Menu -->
+
         <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
             <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseExercise"
                 aria-expanded="true" aria-controls="collapseExercise">
@@ -77,7 +71,7 @@
                 </div>
             </div>
         </li>
-        <!-- Divider -->
+
         <hr class="sidebar-divider">
 
         <li class="nav-item">
@@ -91,17 +85,14 @@
                 <span>Privacy policy</span></a>
         </li>
 
-        <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
 
         <div class="text-center d-none d-md-inline" id="sidebarToggleContainer">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+        </div> 
 
 
-    </ul>
+    </ul> -->
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -193,7 +184,7 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" routerLink="/change-password">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Change Password
                             </a>
                             <div class="dropdown-divider"></div>

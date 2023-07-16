@@ -3971,8 +3971,7 @@ input[type=submit].btn-block {
 .input-group>.input-group-prepend:first-child>.input-group-text:not(:first-child),
 .input-group>.input-group-prepend:not(:first-child)>.btn,
 .input-group>.input-group-prepend:not(:first-child)>.input-group-text {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0
+    border-radius: 0px 30px 30px 0px;
 }
 
 .custom-control {
@@ -10815,7 +10814,9 @@ a.text-warning:hover {
 }
 
 .text-danger {
-    color: #e74a3b !important
+    color: #e74a3b !important;
+    font-size: 13px;
+    float: right;
 }
 
 a.text-danger:focus,
@@ -12114,7 +12115,11 @@ a:focus {
         height: calc(20rem - 43px) !important
     }
 }
-
+.bg-change-password-image{
+    background: url(../img/7070629_3293465.jpg  );
+    background-position: center;
+    background-size: cover
+}
 .bg-login-image {
     background: url(../img/24488452_6927689.jpg);
     background-position: center;
@@ -12149,6 +12154,11 @@ a:focus {
 
 .bg-password-image {
     background: url(../img/photo-155.jpg);
+    background-position: center;
+    background-size: cover
+}
+.bg-detailes-image {
+    background: url(../img/32594240_m028t0135_e_medical_icon_24aug22.jpg);
     background-position: center;
     background-size: cover
 }

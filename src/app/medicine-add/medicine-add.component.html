@@ -121,7 +121,7 @@
                             <td *ngIf="i !== 0" style="text-align:center;">
                               <button type="button" class="btn btn-danger mt-2" (click)="removeMedicine(i)">
                                 <!-- <i class="fa fa-minus"></i> Remove -->
-                                <i class="fa fa-minus"></i> 
+                                <i class="fa fa-minus"></i>
                               </button>
                             </td>
                           </tr>
@@ -141,18 +141,19 @@
 
                   <div class="row" *ngIf="!medicine.fromDate">
                     <div class="form-group col-md-6">
-                      <label for="frequency">Frequency:</label>
+                      <label for="frequency">Frequency</label>
                       <select id="frequency" [(ngModel)]="selectedFrequency" name="frequency"
                         class="custom-select-class">
                         <option *ngFor="let option of frequencyOptions" [value]="option">{{ option }}</option>
                       </select>
                       <div class="button-container">
-                      <button type="button" (click)="clearFieldsFrequency()" *ngIf="selectedFrequency" class="btn btn-primary btn-user mt-2">Clear Frequency</button>
-                    </div>
+                        <button type="button" (click)="clearFieldsFrequency()" *ngIf="selectedFrequency"
+                          class="btn btn-primary btn-user mt-2">Clear Frequency</button>
+                      </div>
                     </div>
 
                     <div *ngIf="selectedFrequency === 'Everyday'" class="form-group col-md-6">
-                      <label for="everyday">Everyday:</label>
+                      <label for="everyday">Everyday</label>
                       <select id="everyday" name="everyday" [(ngModel)]="medicine.frequency" multiple
                         class="custom-select-class">
                         <option *ngFor="let option of everydayOptions" selected [value]="option">{{ option }}</option>
@@ -162,7 +163,7 @@
                     </div>
 
                     <div *ngIf="selectedFrequency === 'Every X day'" class="form-group col-md-6">
-                      <label for="interval">Every X day:</label>
+                      <label for="interval">Every X Day</label>
                       <select id="interval" name="interval" [(ngModel)]="medicine.frequency" multiple
                         class="custom-select-class">
                         <option *ngFor="let option of intervalOptions" [value]="option">{{ option }}</option>
@@ -170,7 +171,7 @@
                     </div>
 
                     <div *ngIf="selectedFrequency === 'Every X day of week'" class="form-group col-md-6">
-                      <label for="daysOfWeek">Every X day of week:</label>
+                      <label for="daysOfWeek">Every X Day of Week</label>
                       <select id="daysOfWeek" name="daysOfWeek" multiple [(ngModel)]="medicine.frequency"
                         class="custom-select-class">
                         <option *ngFor="let option of weekOptions" [value]="option">{{ option }}</option>
@@ -178,7 +179,7 @@
                     </div>
 
                     <div *ngIf="selectedFrequency === 'Every X day of month'" class="form-group col-md-6">
-                      <label for="daysOfmonth">Every X day of month:</label>
+                      <label for="daysOfmonth">Every X Day of Month</label>
                       <select id="daysOfmonth" name="daysOfmonth" multiple [(ngModel)]="medicine.frequency"
                         class="custom-select-class">
                         <option *ngFor="let option of monthOptions" [value]="option">{{ option }}</option>
@@ -187,10 +188,25 @@
 
                   </div>
                   <div *ngIf="selectedFrequency !== ''" class="form-group col-md-6">
-                    <label>Frequency selected :</label>
+                    
+                      <!-- <label> -->
+                      <div class="section-left">
+                        <label aria-label="If you want to change the frequency, it is necessary to clear the start date." data-pop="right" data-pop-arrow data-pop-multiline>
+                          Frequency selected
+                        </label>
+                      </div>
+                    <!-- </label> -->
+                  
                     <p>{{medicine.frequency}}</p>
+                  </div>
 
-                </div>
+                  <!-- <section>
+                    <div class="section-left">
+                      <samp aria-label="If you want to change the frequency, it is necessary to clear the start date." data-pop="right" data-pop-arrow data-pop-multiline>
+                        ?
+                      </samp>
+                    </div>
+                  </section> -->
 
                   <!-- <div class="row mb-3">
                     <div class="form-group col-md-6">
@@ -210,8 +226,8 @@
                     <div class="form-group col-md-6">
                       <label>Start Date</label>
                       <div class="input-group">
-                        <input type="date" name="fromDate" class="form-control form-control-user"
-                          placeholder="Select" [(ngModel)]="medicine.fromDate" required [min]="minDate()" #fromDateInput />
+                        <input type="date" name="fromDate" class="form-control form-control-user" placeholder="Select"
+                          [(ngModel)]="medicine.fromDate" required [min]="minDate()" #fromDateInput />
                         <div class="input-group-append" *ngIf="medicine.fromDate">
                           <span class="input-group-text" (click)="clearFieldsFromDate()">
                             <i class="fas fa-times"></i> <!-- Replace with your desired icon class -->
@@ -219,24 +235,24 @@
                         </div>
                       </div>
                     </div>
-                    
-                  
+
+
                     <div class="form-group col-md-6" *ngIf="medicine.fromDate">
                       <label>End Date</label>
                       <div class="input-group">
-                      <input type="date" name="toDate" class="form-control form-control-user" placeholder="Select"
-                        [(ngModel)]="medicine.toDate" required [min]="calculateMinEndDate()" required #toDateInput />
+                        <input type="date" name="toDate" class="form-control form-control-user" placeholder="Select"
+                          [(ngModel)]="medicine.toDate" required [min]="calculateMinEndDate()" required #toDateInput />
                         <div class="input-group-append" *ngIf="medicine.toDate">
                           <span class="input-group-text" (click)="clearFieldsToDate()">
                             <i class="fas fa-times"></i> <!-- Replace with your desired icon class -->
                           </span>
                         </div>
-                    </div>
+                      </div>
                     </div>
                   </div>
-                  
+
                   <!-- <button (click)="clearFields()">Clear</button> -->
-                  
+
                   <div class="row mb-3">
                     <div class="form-group col-md-12">
                       <label>Description</label>

@@ -17,7 +17,7 @@ import { MedicineDetailsComponent } from './medicine-details/medicine-details.co
 import { MedicineUpdateComponent } from './medicine-update/medicine-update.component';
 import { AppointmentUpdateComponent } from './appointment-update/appointment-update.component';
 import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangepasswordComponent } from './change-password/change-password.component';
 // import { AuthGuard } from './servise/auth.guard';
 
 
@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'navbar', component: NavbarComponent}, 
   { path: 'profile', component: ProfileComponent}, 
-  { path: 'change-password', component: ChangePasswordComponent}, 
+  { path: 'change-password', component: ChangepasswordComponent}, 
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
  ];

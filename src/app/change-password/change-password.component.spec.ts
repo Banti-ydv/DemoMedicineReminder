@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChangePasswordComponent } from './change-password.component';
+import { ChangepasswordComponent } from './change-password.component';
 
-describe('ChangePasswordComponent', () => {
-  let component: ChangePasswordComponent;
-  let fixture: ComponentFixture<ChangePasswordComponent>;
+describe('ChangepasswordComponent', () => {
+  let component: ChangepasswordComponent;
+  let fixture: ComponentFixture<ChangepasswordComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ChangePasswordComponent]
+      declarations: [ChangepasswordComponent]
     });
-    fixture = TestBed.createComponent(ChangePasswordComponent);
+    fixture = TestBed.createComponent(ChangepasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

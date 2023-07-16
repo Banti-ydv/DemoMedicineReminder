@@ -8,8 +8,8 @@
 
 
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-medicine-image"></div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-5 d-none d-lg-block bg-medicine-image"></div>
+                        <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"><b>Update Medicine</b></h1>
@@ -86,7 +86,7 @@
                                             <label>Shape</label>
                                             <select name="shape" [(ngModel)]="medicine.shape"
                                                 class="custom-select-class" required>
-                                                <option value="{{medicine.shape}}" selected>{{medicine.shape}}</option>
+                                                <option value="{{medicine.shape}}" disabled selected>{{medicine.shape}}</option>
                                                 <option value="Pill">Pill</option>
                                                 <option value="Injection">Injection</option>
                                                 <option value="Solution(liquid)">Solution(liquid)</option>
@@ -105,8 +105,8 @@
                                                 <thead>
                                                     <tr>
                                                         <!-- <td>No.</td> -->
-                                                        <td style="width: 43%;">Time</td>
-                                                        <td style="width: 57%;">Dose</td>
+                                                        <td style="width: 47%;">Time</td>
+                                                        <td style="width: 53%;">Dose</td>
                                                         <td style="width: 0%;">Action</td>
                                                     </tr>
                                                 </thead>
@@ -146,7 +146,7 @@
 
                                     <div class="row" *ngIf="!medicine.fromDate">
                                         <div class="form-group col-md-6">
-                                            <label for="frequency">Frequency:</label>
+                                            <label for="frequency">Frequency</label>
                                             <select id="selectedFrequency" [(ngModel)]="selectedFrequency"
                                                 name="frequency" class="custom-select-class">
                                                 <!-- <option value="{{medicine.frequency}}" disabled>{{medicine.frequency}}</option> -->
@@ -161,7 +161,7 @@
                                         </div>
 
                                         <div *ngIf="selectedFrequency === 'Everyday'" class="form-group col-md-6">
-                                            <label for="everyday">Everyday:</label>
+                                            <label for="everyday">Everyday</label>
                                             <select id="everyday" name="everyday" [(ngModel)]="medicine.frequency"
                                                 multiple class="custom-select-class">
                                                 <option *ngFor="let option of everydayOptions" [value]="option">{{
@@ -170,7 +170,7 @@
                                         </div>
 
                                         <div *ngIf="selectedFrequency === 'Every X day'" class="form-group col-md-6">
-                                            <label for="interval">Every X day:</label>
+                                            <label for="interval">Every X Day</label>
                                             <select id="interval" name="interval" [(ngModel)]="medicine.frequency"
                                                 multiple class="custom-select-class">
                                                 <option *ngFor="let option of intervalOptions" [value]="option">{{
@@ -180,7 +180,7 @@
 
                                         <div *ngIf="selectedFrequency === 'Every X day of week'"
                                             class="form-group col-md-6">
-                                            <label for="daysOfWeek">Days of Week:</label>
+                                            <label for="daysOfWeek">Days of Week</label>
                                             <select id="daysOfWeek" name="daysOfWeek" multiple
                                                 [(ngModel)]="medicine.frequency" class="custom-select-class">
                                                 <option *ngFor="let option of weekOptions" [value]="option">{{ option }}
@@ -190,7 +190,7 @@
 
                                         <div *ngIf="selectedFrequency === 'Every X day of month'"
                                             class="form-group col-md-6">
-                                            <label for="daysOfmonth">Days of Mouth:</label>
+                                            <label for="daysOfmonth">Days of Mouth</label>
                                             <select id="daysOfmonth" name="daysOfmonth" multiple
                                                 [(ngModel)]="medicine.frequency" class="custom-select-class">
                                                 <option *ngFor="let option of monthOptions" [value]="option">{{ option
@@ -200,7 +200,11 @@
 
                                     </div>
                                     <div *ngIf="selectedFrequency !== ''" class="form-group col-md-12">
-                                            <label>Frequency Selected:</label>
+                                        <div class="section-left">
+                                            <label aria-label="If you want to change the frequency, it is necessary to clear the start date." data-pop="right" data-pop-arrow data-pop-multiline>
+                                              Frequency selected
+                                            </label>
+                                          </div>
                                         <p>{{medicine.frequency}}</p>
 
                                     </div>

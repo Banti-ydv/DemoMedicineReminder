@@ -1,57 +1,95 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-xl-10 col-lg-12 col-md-9">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
 
 
 
-<div class="container emp-profile">
-  <form method="post">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="profile-img">
-<img [src]="isResponseSizeZero() ? '../assets/img/profile.png' : imageUrl" alt="" class="img-thumbnail" (click)="openUpDatePopUp()" />
 
-          <br>
-            <button type="button" class="btn btn-outline-primary mt-3" (click)="openUpDatePopUp()">Edit Profile</button>
-          
+          <div class="row">
+            <div class="col-lg-6 d-none d-lg-block bg-detailes-image"></div>
+            <div class="col-lg-6">
+              <div class="p-4">
+
+                <div class="container emp-profile">
+                  <div>
+                    <form method="post">
+                      <div>
+                        <div class="profile-img px-5">
+                          <img [src]="isResponseSizeZero() ? '../assets/img/profile.png' : imageUrl" alt=""
+                            class="rounded-circle" />
+
+
+
+                          <!-- <input type="file" (change)="onFileSelected($event)">
+                                <button (click)="onUpload()">Upload</button> -->
+                          <br>
+                          <a class="btn btn-outline-primary m-3" (click)="fileInput.click()"><i
+                              class="fa fa-upload"></i></a>
+                          <a class="btn btn-outline-danger m-3" (click)="profilePhotoDelete()"><i
+                              class="fa fa-trash"></i></a>
+                          <input type="file" #fileInput style="display: none" (change)="handleFileInput($event)">
+
+                        </div>
+                      </div>
+                      <div class="tab-content profile-tab mt-5" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                          <div class="row col-md-12 pl-5">
+                            <div class="col-md-6">
+                              <label>User Name</label>
+                            </div>
+                            <div class="col-md-6">
+                              <p>{{ userData?.firstname }}</p>
+                            </div>
+                          </div>
+                          <div class="row col-md-12 pl-5">
+                            <div class="col-md-6">
+                              <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                              <p>{{ userData?.firstname }} {{ userData?.lastname }}</p>
+                            </div>
+                          </div>
+                          <div class="row col-md-12 pl-5">
+                            <div class="col-md-6">
+                              <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                              <p>{{ userData?.emailid }}</p>
+                            </div>
+                          </div>
+                          <div class="row col-md-12 pl-5">
+                            <div class="col-md-6">
+                              <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                              <p>+91 98XXX XXX45</p>
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="row col-md-12 pl-5">
+                          <div class="col-md-6 d-flex justify-content-center">
+                            <button type="button" class="btn btn-primary m-1" style="float:left; width: 100%;" (click)="openUpDatePopUp()">Edit
+                              Profile</button>
+                          </div>
+                          <div class="col-md-6 d-flex justify-content-center">
+                            <button type="button" class="btn btn-danger m-1" style="float:right; width: 100%;" (click)="deleteProfile()">Delet
+                              Profile</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
         </div>
-      </div>      
-      <div class="tab-content profile-tab col-md-8 mt-5" id="myTabContent">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-          <div class="row">
-            <div class="col-md-6">
-              <label>User Name</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ userData?.firstname }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Name</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ userData?.firstname }} {{ userData?.lastname }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Email</label>
-            </div>
-            <div class="col-md-6">
-              <p>{{ userData?.emailid }}</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <label>Phone</label>
-            </div>
-            <div class="col-md-6">
-              <p>+91 98XXX XXX45</p>
-            </div>
-          </div>
-        
-        </div>
-
       </div>
     </div>
-  </form>
-</div>
-
+  </div>
