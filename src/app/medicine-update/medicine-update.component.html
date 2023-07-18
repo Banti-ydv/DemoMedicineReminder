@@ -86,7 +86,8 @@
                                             <label>Shape</label>
                                             <select name="shape" [(ngModel)]="medicine.shape"
                                                 class="custom-select-class" required>
-                                                <option value="{{medicine.shape}}" disabled selected>{{medicine.shape}}</option>
+                                                <option value="{{medicine.shape}}" disabled selected>{{medicine.shape}}
+                                                </option>
                                                 <option value="Pill">Pill</option>
                                                 <option value="Injection">Injection</option>
                                                 <option value="Solution(liquid)">Solution(liquid)</option>
@@ -172,7 +173,7 @@
                                         <div *ngIf="selectedFrequency === 'Every X day'" class="form-group col-md-6">
                                             <label for="interval">Every X Day</label>
                                             <select id="interval" name="interval" [(ngModel)]="medicine.frequency"
-                                                multiple class="custom-select-class">
+                                                class="custom-select-class">
                                                 <option *ngFor="let option of intervalOptions" [value]="option">{{
                                                     option }}</option>
                                             </select>
@@ -201,17 +202,20 @@
                                     </div>
                                     <div *ngIf="selectedFrequency !== ''" class="form-group col-md-12">
                                         <div class="section-left">
-                                            <label aria-label="If you want to change the frequency, it is necessary to clear the start date." data-pop="right" data-pop-arrow data-pop-multiline>
-                                              Frequency selected
+                                            <label>Frequency selected </label>&nbsp;
+                                            <label
+                                                aria-label="If you want to change the frequency, it is necessary to clear the start date."
+                                                data-pop="up" data-pop-arrow data-pop-multiline>
+                                                <i class="fa fa-question-circle" aria-hidden="true"></i>
                                             </label>
-                                          </div>
+                                        </div>
                                         <p>{{medicine.frequency}}</p>
 
                                     </div>
 
                                     <div class="row mb-3">
                                         <div class="form-group col-md-6">
-                                          <label>Start Date</label>
+                                            <label>Start Date</label>
                                             <div class="input-group">
                                                 <input type="date" name="fromDate"
                                                     class="form-control form-control-user" placeholder="Select"
@@ -228,7 +232,7 @@
 
 
                                         <div class="form-group col-md-6" *ngIf="medicine.fromDate">
-                                          <label>End Date</label>
+                                            <label>End Date</label>
                                             <div class="input-group">
                                                 <input type="date" name="toDate" class="form-control form-control-user"
                                                     placeholder="Select" [(ngModel)]="medicine.toDate" required

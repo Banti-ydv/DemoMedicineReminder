@@ -24,6 +24,8 @@
 
   <link rel="stylesheet" href="assets/css/main/popover.css">
 
+
+  
 </head>
 <body id="page-top">
 
@@ -31,57 +33,9 @@
   <medicine-app></medicine-app>
 
 
-  <script>
-    // Array of available options for autocomplete
-   var options = [
-     "Medicine 1",
-     "Medicine 2",
-     "Medicine 3",
-     "Medicine 4",
-     // Add more options as needed
-   ];
-   // Get the input element and autocomplete list container
-   var input = document.querySelector('input[name="name"]');
-   var autocompleteList = document.getElementById("autocomplete-list");
-   // Function to update the autocomplete list
-   function updateAutocompleteList() {
-     // Clear previous suggestions
-     autocompleteList.innerHTML = "";
-     // Get the user input
-     var userInput = input.value.toLowerCase();
-     // Filter the options based on the input
-     var matchingOptions = options.filter(function(option) {
-       return option.toLowerCase().indexOf(userInput) > -1;
-     });
-     // Create and append new suggestion elements to the autocomplete list
-     matchingOptions.forEach(function(option) {
-       var suggestion = document.createElement("div");
-       suggestion.innerHTML = option;
-       // Handle click event on each suggestion
-       suggestion.addEventListener("click", function() {
-         input.value = option;
-         autocompleteList.innerHTML = "";
-       });
-       autocompleteList.appendChild(suggestion);
-     });
-     // Show or hide the autocomplete list based on the matching options
-     if (matchingOptions.length > 0) {
-       autocompleteList.style.display = "block";
-     } else {
-       autocompleteList.style.display = "none";
-     }
-   }
-   // Add event listener for input keyup event
-   input.addEventListener("keyup", updateAutocompleteList);
-   // Hide the autocomplete list when clicking outside of it
-   document.addEventListener("click", function(e) {
-     if (e.target !== input) {
-       autocompleteList.style.display = "none";
-     }
-   });
-   </script>
+  
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/demo/main.js"></script>
+  <script src="assets/js/demo/main-1.js"></script>
 
   <!-- Bootstrap core JavaScript-->
   <script src="assets/vendor/jquery/jquery.min.js"></script>
@@ -93,13 +47,13 @@
   <!-- Custom scripts for all pages-->
   <script src="assets/js/sb-admin-2.min.js"></script>
   <!-- for side bar -->
-  <script>
-    $(document).ready(function () {
-      $('#sidebarToggleTop').click(function () {
-        $('#accordionSidebar').toggleClass('toggled');
+    <script>
+      $(document).ready(function () {
+        $('#sidebarToggleTop').click(function () {
+          $('#accordionSidebar').toggleClass('toggled');
+        });
       });
-    });
-  </script>
+    </script>
   <script>
     $(document).ready(function () {
       $('#sidebarToggleContainer').click(function () {

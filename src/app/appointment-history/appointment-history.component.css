@@ -18,3 +18,22 @@ mat-form-field {
   background: #4e73df;
   color: #fff;
 }
+
+
+.input-group>.custom-file,
+.input-group>.custom-select,
+.input-group>.form-control,
+.input-group>.form-control-plaintext {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    /* margin-top: -10px; */
+}
+.input-group-user-s{
+  position: relative;
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 0;
+  margin-top: -10px;
+}

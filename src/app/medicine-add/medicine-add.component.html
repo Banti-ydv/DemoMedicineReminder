@@ -164,7 +164,7 @@
 
                     <div *ngIf="selectedFrequency === 'Every X day'" class="form-group col-md-6">
                       <label for="interval">Every X Day</label>
-                      <select id="interval" name="interval" [(ngModel)]="medicine.frequency" multiple
+                      <select id="interval" name="interval" [(ngModel)]="medicine.frequency"
                         class="custom-select-class">
                         <option *ngFor="let option of intervalOptions" [value]="option">{{ option }}</option>
                       </select>
@@ -187,16 +187,18 @@
                     </div>
 
                   </div>
-                  <div *ngIf="selectedFrequency !== ''" class="form-group col-md-6">
-                    
-                      <!-- <label> -->
-                      <div class="section-left">
-                        <label aria-label="If you want to change the frequency, it is necessary to clear the start date." data-pop="right" data-pop-arrow data-pop-multiline>
-                          Frequency selected
-                        </label>
-                      </div>
+                  <div *ngIf="selectedFrequency !== ''">
+
+                    <!-- <label> -->
+                    <div class="section-left">
+                      <label>Frequency selected </label>&nbsp;
+                      <label aria-label="If you want to change the frequency, it is necessary to clear the start date."
+                        data-pop="up" data-pop-arrow data-pop-multiline>
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                      </label>
+                    </div>
                     <!-- </label> -->
-                  
+
                     <p>{{medicine.frequency}}</p>
                   </div>
 

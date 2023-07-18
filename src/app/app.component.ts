@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import 'firebase/compat/messaging';
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { environment } from 'src/environments/environment';
@@ -61,7 +61,15 @@ if (!this.isLoggedIn) {
     this.requestPermission();
     this.listen();
   }
+  @ViewChild('collapseMedicine') collapseMedicineRef: ElementRef | undefined;
+  @ViewChild('collapseExercise') collapseExerciseRef: ElementRef | undefined;
+  @ViewChild('collapseAppointment') collapseAppointmentRef: ElementRef | undefined;
 
+  closeSubMenu(collapseRef: ElementRef | undefined) {
+    if (collapseRef) {
+      collapseRef.nativeElement.classList.remove('show');
+    }
+  }
 
   deleteMessage(message: any) {
     const index = this.messages.indexOf(message);

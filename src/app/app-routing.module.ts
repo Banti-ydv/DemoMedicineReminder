@@ -19,6 +19,7 @@ import { AppointmentUpdateComponent } from './appointment-update/appointment-upd
 import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
 import { ChangepasswordComponent } from './change-password/change-password.component';
 // import { AuthGuard } from './servise/auth.guard';
+// import { NavbarComponent } from './navbar/navbar.component';
 
 
 

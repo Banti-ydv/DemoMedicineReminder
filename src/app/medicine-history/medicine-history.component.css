@@ -31,3 +31,14 @@ mat-form-field{
   left: 0px;
   will-change: transform;
 }
+
+.input-group>.custom-file,
+.input-group>.custom-select,
+.input-group>.form-control,
+.input-group>.form-control-plaintext {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+    /* margin-top: -10px; */
+}

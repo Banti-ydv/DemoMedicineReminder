@@ -16,7 +16,7 @@ export interface Medicine {
   fromDate: string;
   toDate: string;
   timing: string[];
-  frequency: string[];
+  frequency: string | string[];
 }
 
 
@@ -44,7 +44,7 @@ export class MedicineUpdateComponent implements OnInit {
     fromDate: '',
     toDate: '',
     timing: [],
-    frequency: [],
+    frequency: '',
     dose: [],
   };
   doseOptions: number[] = [0.5,1.0, 1.5, 2.0, 2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,8.5,9.0,9.5,10.0]; // Generate dose options dynamically
@@ -231,12 +231,20 @@ export class MedicineUpdateComponent implements OnInit {
 
   updateMedicineData() {
 
+
+    if (this.selectedFrequency === 'Everyday') {
+      this.medicine.frequency = this.medicine.frequency as string; // This will be a single string
+    } else {
+      this.medicine.frequency = [this.medicine.frequency as string]; // Convert to an array with a single value
+    }
+
     const timingsArray = Array.from(
       document.querySelectorAll('input[type="time"]')
     ).map((input) => (input as HTMLInputElement).value);
     const doseArray = Array.from(
       document.querySelectorAll('input[type="number"]')
     ).map((input) => parseFloat((input as HTMLInputElement).value));
+    
 
     console.log('Timings:', timingsArray);
     console.log('Doses:', doseArray);

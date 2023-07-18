@@ -7254,9 +7254,9 @@ button.bg-dark:hover {
     content: ""
 }
 
-.d-none {
+/* .d-none {
     display: none !important
-}
+} */
 
 .d-inline {
     display: inline !important
@@ -12158,7 +12158,7 @@ a:focus {
     background-size: cover
 }
 .bg-detailes-image {
-    background: url(../img/32594240_m028t0135_e_medical_icon_24aug22.jpg);
+    background: url(../img/4029328_16209.jpg);
     background-position: center;
     background-size: cover
 }

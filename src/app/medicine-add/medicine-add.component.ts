@@ -6,10 +6,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../servise/auth.service';
 import Swal from 'sweetalert2';
 
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-
 export interface Medicine {
   name: string;
   shape: string;
@@ -18,7 +14,7 @@ export interface Medicine {
   toDate: string;
   timing: string[];
   description: string;
-  frequency: string[];
+  frequency: string | string[];
 }
 
 @Component({
@@ -36,7 +32,6 @@ export class MedicineAddComponent implements OnInit {
   timingsArray: string[] = [];
   doseArray: string[] = [];
 
-
   medicine: Medicine = {
     name: '',
     shape: '',
@@ -44,7 +39,7 @@ export class MedicineAddComponent implements OnInit {
     toDate: '',
     timing: [],
     description: '',
-    frequency: [],
+    frequency: '',
     dose: [],
   };
   // doseOptions: number[] = Array.from({ length: 10 }, (_, i) => i + 0.5); // Generate dose options dynamically
@@ -56,7 +51,7 @@ export class MedicineAddComponent implements OnInit {
   frequencyOptions = ['Everyday', 'Every X day', 'Every X day of week', 'Every X day of month'];
   selectedFrequency: string | any;
   everydayOptions = ['everyday'];
-  intervalOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  intervalOptions: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   weekOptions = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   monthOptions = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
   fromDateInput: any;
@@ -189,17 +184,25 @@ export class MedicineAddComponent implements OnInit {
 
   onMedicine() {
     // Perform any necessary action with the captured medicine details
-    console.log(this.medicine);
-
+    // console.log(this.medicine);
+  // Set the frequency property based on selectedFrequency
+  if (this.selectedFrequency === 'Everyday') {
+    this.medicine.frequency = this.medicine.frequency as string; // This will be a single string
+  } else {
+    this.medicine.frequency = [this.medicine.frequency as string]; // Convert to an array with a single value
+  }
     // Filter out empty strings from the timings array
     this.medicine.timing = this.timingsArray.filter(timing => timing !== '');
-
+this.medicine.frequency = this.medicine.frequency;
     // Convert the array of doses to a Set
     this.medicine.dose = Array.from(this.doseArray);
-
+    console.log("medicine frequency",this.medicine.frequency);
+console.log(typeof(this.medicine.frequency))
+console.log("medicine data",this.medicine)
     // Call the API to save the medicine details
     this.userService.medicineAdd(this.medicine).subscribe(
       (response: any) => {
+        
         // Registration successful, show success message
         Swal.fire({
           title: 'Success',
