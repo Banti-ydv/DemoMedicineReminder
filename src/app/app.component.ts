@@ -9,6 +9,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserService } from './servise/user.service';
 import { KeyService } from './servise/key.service';
+import { Sidebar } from '@syncfusion/ej2/navigations';
 
 
 interface PeriodicElement {
@@ -65,12 +66,25 @@ if (!this.isLoggedIn) {
   @ViewChild('collapseExercise') collapseExerciseRef: ElementRef | undefined;
   @ViewChild('collapseAppointment') collapseAppointmentRef: ElementRef | undefined;
 
-  closeSubMenu(collapseRef: ElementRef | undefined) {
+  closeSubMenu(collapseRef: ElementRef | undefined, sidebar: HTMLElement) {
     if (collapseRef) {
       collapseRef.nativeElement.classList.remove('show');
+      sidebar.classList.add('toggled');
+      
+      // const sidebarToggle = document.getElementById('sidebarToggle');
+      // if (sidebarToggle) {
+      //   sidebarToggle.click();
+      // }
     }
   }
+  // $('#accordionSidebar').toggleClass('toggled');
 
+
+  onClick(sidebar: HTMLElement) {
+    // Add or remove the class for "Home" click
+    sidebar.classList.add('toggled');
+    // sidebar.classList.remove('medicine-reminder-clicked');
+  }
   deleteMessage(message: any) {
     const index = this.messages.indexOf(message);
     if (index > -1) {

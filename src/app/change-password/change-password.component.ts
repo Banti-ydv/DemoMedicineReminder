@@ -13,6 +13,9 @@ import { KeyService } from '../servise/key.service';
 
 export class ChangepasswordComponent {
   passwordForm: any;
+  showPasswordOld: boolean | any;
+  showPasswordNew: boolean | any;
+  showPasswordConfirm: boolean | any;
   
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router,public key: KeyService) {
@@ -25,6 +28,18 @@ export class ChangepasswordComponent {
 
   closeForm() {
     this.passwordForm.reset(); // Reset the form and clear the input fields
+  }
+  togglePasswordVisibilityOld(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.showPasswordOld = target.checked;
+  }
+  togglePasswordVisibilityNew(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.showPasswordNew = target.checked;
+  }
+  togglePasswordVisibilityConfirm(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.showPasswordConfirm = target.checked;
   }
 
 

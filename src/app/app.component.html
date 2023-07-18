@@ -2,9 +2,9 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar" #sidebar>
 
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/home">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/home" (click)="onClick(sidebar)" >
             <div class="sidebar-brand-icon">
                 <i class="fas fa-leaf"></i>
             </div>
@@ -14,7 +14,7 @@
         <hr class="sidebar-divider my-0">
 
         <li class="nav-item">
-            <a class="nav-link" routerLink="/home" >
+            <a class="nav-link" routerLink="/home" (click)="onClick(sidebar)" >
                 <i class="fas fa-home"></i>
                 <span>Home</span></a>
         </li>
@@ -35,8 +35,8 @@
       data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Details:</h6>
-        <a class="collapse-item" routerLink="/medicine-add" (click)="closeSubMenu(collapseMedicineRef)">Add</a>
-        <a class="collapse-item" routerLink="/medicine-history" (click)="closeSubMenu(collapseMedicineRef)">History</a>
+        <a class="collapse-item" routerLink="/medicine-add" (click)="closeSubMenu(collapseMedicineRef,sidebar)">Add</a>
+        <a class="collapse-item" routerLink="/medicine-history" (click)="closeSubMenu(collapseMedicineRef,sidebar)">History</a>
       </div>
     </div>
   </li>
@@ -52,8 +52,8 @@
       data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Details:</h6>
-        <a class="collapse-item" routerLink="/exercise-add" (click)="closeSubMenu(collapseExerciseRef)">Add</a>
-        <a class="collapse-item" routerLink="/exercise-history" (click)="closeSubMenu(collapseExerciseRef)">History</a>
+        <a class="collapse-item" routerLink="/exercise-add" (click)="closeSubMenu(collapseExerciseRef,sidebar)">Add</a>
+        <a class="collapse-item" routerLink="/exercise-history" (click)="closeSubMenu(collapseExerciseRef,sidebar)">History</a>
       </div>
     </div>
   </li>
@@ -69,8 +69,8 @@
       data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Details:</h6>
-        <a class="collapse-item" routerLink="/appointment-add" (click)="closeSubMenu(collapseAppointmentRef)">Add</a>
-        <a class="collapse-item" routerLink="/appointment-history" (click)="closeSubMenu(collapseAppointmentRef)">History</a>
+        <a class="collapse-item" routerLink="/appointment-add" (click)="closeSubMenu(collapseAppointmentRef,sidebar)">Add</a>
+        <a class="collapse-item" routerLink="/appointment-history" (click)="closeSubMenu(collapseAppointmentRef,sidebar)">History</a>
       </div>
     </div>
   </li>
@@ -95,12 +95,12 @@
 
 
         <li class="nav-item">
-            <a class="nav-link" routerLink="/home">
+            <a class="nav-link" routerLink="/home" (click)="onClick(sidebar)">
                 <i class="fas fa-info-circle"></i>
                 <span>About</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/home">
+            <a class="nav-link" routerLink="/home" (click)="onClick(sidebar)">
                 <i class="fas fa-envelope"></i>
                 <span>Privacy policy</span></a>
         </li>
@@ -165,7 +165,7 @@
                                 </div>
                             </a>
 
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
                         </div>
                     </li>
 
