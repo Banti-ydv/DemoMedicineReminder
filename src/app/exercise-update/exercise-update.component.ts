@@ -112,7 +112,7 @@ export class ExerciseUpdateComponent {
         console.log('Data updated successfully!');
         Swal.fire({
           title: 'Updated!',
-          text: 'Appointment updated successfully.',
+          text: 'Exercise updated successfully.',
           icon: 'success',
           showConfirmButton: false,
           timer: 2000,

@@ -27,10 +27,7 @@
 .profile-img{
     text-align: center;
 }
-.profile-img img{
-    width: 80%;
-    height: 70%;
-}
+
 .profile-img .file {
     position: relative;
     overflow: hidden;
@@ -112,5 +109,30 @@
 }
 
 
+.profile-img img{
+    height: 15rem;
+    width: 15rem
+}
 
 
+@media screen and (max-width: 440px) and (min-width: 390px)  {
+   
+    .profile-img img{
+        height: 10rem;
+        width: 10rem
+    }
+  }
+  @media screen and (max-width: 540px) and (min-width: 440px) {
+   
+    .profile-img img{
+        height: 12rem;
+        width: 12rem
+    }
+  }
+  @media screen and (max-width: 390px) {
+   
+    .profile-img img{
+        height: 7rem;
+        width: 7rem
+    }
+  }

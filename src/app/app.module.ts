@@ -50,6 +50,7 @@ import { AppointmentUpdateComponent } from './appointment-update/appointment-upd
 import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
 import { ChangepasswordComponent } from './change-password/change-password.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { AboutUsComponent } from './about-us/about-us.component';
 // import { MatSnackBar } from '@angular/material/snack-bar';
 // import { ConfirmedValidatorTsComponent } from './change-password/confirmed.validator.ts/confirmed.validator.ts.component';
 
@@ -76,6 +77,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     AppointmentUpdateComponent,
     ExerciseUpdateComponent,
     ChangepasswordComponent,
+    AboutUsComponent,
     // ConfirmedValidatorTsComponent
   ],
   imports: [

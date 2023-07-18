@@ -106,15 +106,15 @@ export class MedicineAddComponent implements OnInit {
       const adjustedInterval = Math.max(interval, 0);
       const startday = fromDate.getDate();
       if (startday < interval) {
-        console.warn(startday);
+        // console.warn(startday);
         const minEndDate = new Date(fromDate.getFullYear(), fromDate.getMonth() + 0, interval + 1);
-        console.log(minEndDate);
+        // console.log(minEndDate);
         return minEndDate.toISOString().substr(0, 10);
       }
       else {
-        console.error(startday)
+        // console.error(startday)
         const minEndDate = new Date(fromDate.getFullYear(), fromDate.getMonth() + 1, interval + 1);
-        console.log(minEndDate);
+        // console.log(minEndDate);
         return minEndDate.toISOString().substr(0, 10);
       }
     }

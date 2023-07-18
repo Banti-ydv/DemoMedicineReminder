@@ -156,6 +156,7 @@ handleFileInput(event: any) {
             () => {
               console.log('User details deleted successfully.');
               // this.userData = undefined;
+              localStorage.removeItem('token')
               this.router.navigate(['/login']);
             },
             (error) => {
@@ -254,7 +255,7 @@ handleFileInput(event: any) {
                   return;
                 }
 
-                // this.updateProfile(result.value);
+                this.updateProfile(result.value);
               }
             }
           });
@@ -267,6 +268,7 @@ handleFileInput(event: any) {
   }
 
 
+  
 
 
   updateProfile(updatedData: any): void {

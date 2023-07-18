@@ -77,7 +77,14 @@
 </div>
 
 
-
 </div>
 
-
+<div *ngIf="authService.getIsLoggedIn()">
+<div class="col-md-12 textForHome" *ngIf="dataSourceAppointment.data.length == 0 && dataSourceExercise.data.length == 0 && dataSourceMedicine.data.length == 0">
+  <h3 style="font-family:'Poppins';">Monitor your<samp style="color: rgb(70 108 217);"> medicine schedule!</samp></h3>
+  <h5 style="font-family:'Poppins';">View your daily schedule  </h5>
+  <div class="button-container-add">
+      <button class="button-add" routerLink="/medicine-add">Add Medicine</button>
+  </div>
+</div>
+</div>

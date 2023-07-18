@@ -29,7 +29,7 @@ export class AppointmentAddComponent {
     address: '',
     time: '',
     appointmentdate: '',
-    countryCode: '+91',
+    countryCode: '',
   };
   constructor(private userService: UserService, private router: Router, private datePipe: DatePipe,private authService: AuthService) { }
 
