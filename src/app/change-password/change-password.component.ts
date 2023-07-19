@@ -79,19 +79,16 @@ export class ChangepasswordComponent {
       },
       (error: any) => {
         // Handle the error response
-        console.error('API error:', error);
-        if (error.status === 401) {
-          // Unauthorized - Token expired or invalid
-          // Handle unauthorized error
-        } else if (error.status === 400) {
-          // Bad Request - Request body validation failed or other errors
-          // Handle bad request error
-        } else if (error.status === 500) {
-          // Internal Server Error
-          // Handle internal server error
+        if (error.status === 400) {
+          Swal.fire({
+            icon:'error',
+            title:'Opss..',
+            text:'Old password incorrect.',
+            showConfirmButton: false,
+              timer: 2000,
+          });
         } else {
-          // Other error statuses
-          // Handle other errors
+          console.error('API error:', error);
         }
       }
     );
