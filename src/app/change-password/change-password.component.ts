@@ -21,9 +21,10 @@ export class ChangepasswordComponent {
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router,public key: KeyService) {
     this.passwordForm = this.formBuilder.group({
       oldPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/)]],
+      newPassword: ['',[Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/)]],
       confirmPassword: ['', Validators.required]
     });
+    console.log("old password",this.passwordForm.get('oldPassword').value);
    
   }
 
@@ -76,13 +77,26 @@ export class ChangepasswordComponent {
           });
     
       },
-      (error) => {
+      (error: any) => {
         // Handle the error response
         console.error('API error:', error);
-        // Additional error handling...
+        if (error.status === 401) {
+          // Unauthorized - Token expired or invalid
+          // Handle unauthorized error
+        } else if (error.status === 400) {
+          // Bad Request - Request body validation failed or other errors
+          // Handle bad request error
+        } else if (error.status === 500) {
+          // Internal Server Error
+          // Handle internal server error
+        } else {
+          // Other error statuses
+          // Handle other errors
+        }
       }
     );
-    
   }
+
+
   
 }

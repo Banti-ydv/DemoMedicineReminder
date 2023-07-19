@@ -115,18 +115,18 @@
 }
 
 
+@media screen and (max-width: 540px) and (min-width: 440px) {
+ 
+  .profile-img img{
+      height: 12rem;
+      width: 12rem
+  }
+}
 @media screen and (max-width: 440px) and (min-width: 390px)  {
    
     .profile-img img{
         height: 10rem;
         width: 10rem
-    }
-  }
-  @media screen and (max-width: 540px) and (min-width: 440px) {
-   
-    .profile-img img{
-        height: 12rem;
-        width: 12rem
     }
   }
   @media screen and (max-width: 390px) {

@@ -58,6 +58,8 @@ img {
 .about-text p {
   font-size: 18px;
   max-width: 450px;
+  padding-left: 15px;
+
 }
 .about-text p mark {
   font-weight: 600;
@@ -73,8 +75,9 @@ img {
 .about-list label {
   color: #4e73df;
   font-weight: 600;
-  width: 30px;
-  margin: 0;
+  width: 10px;
+  /* padding: 1px; */
+  /* margin: 0; */
   /* position: relative; */
 }
 /* .about-list label:after {

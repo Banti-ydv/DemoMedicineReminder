@@ -238,6 +238,13 @@ export class MedicineUpdateComponent implements OnInit {
       this.medicine.frequency = [this.medicine.frequency as string]; // Convert to an array with a single value
     }
 
+    if ((this.medicine.frequency)) {
+      // If it's an array, stringify it before sending in the API request
+      this.medicine.frequency = JSON.stringify(this.medicine.frequency);
+      this.medicine.frequency = this.medicine.frequency.replace(/[\[\]"]/g, '');
+      console.log('medicine frequency===>',this.medicine.frequency)
+    }
+
     const timingsArray = Array.from(
       document.querySelectorAll('input[type="time"]')
     ).map((input) => (input as HTMLInputElement).value);

@@ -193,7 +193,13 @@ export class MedicineAddComponent implements OnInit {
   }
     // Filter out empty strings from the timings array
     this.medicine.timing = this.timingsArray.filter(timing => timing !== '');
-this.medicine.frequency = this.medicine.frequency;
+  // Check if the frequency is an array of strings
+  if ((this.medicine.frequency)) {
+    // If it's an array, stringify it before sending in the API request
+    this.medicine.frequency = JSON.stringify(this.medicine.frequency);
+      this.medicine.frequency = this.medicine.frequency.replace(/[\[\]"]/g, '');
+
+  }
     // Convert the array of doses to a Set
     this.medicine.dose = Array.from(this.doseArray);
     console.log("medicine frequency",this.medicine.frequency);

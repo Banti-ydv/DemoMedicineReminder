@@ -156,11 +156,12 @@ handleFileInput(event: any) {
             () => {
               console.log('User details deleted successfully.');
               // this.userData = undefined;
-              localStorage.removeItem('token')
+              localStorage.removeItem('token');
               this.router.navigate(['/login']);
             },
             (error) => {
               console.error('An error occurred while deleting user details:', error);
+              localStorage.removeItem('token');
               this.router.navigate(['/login']);
             }
           );

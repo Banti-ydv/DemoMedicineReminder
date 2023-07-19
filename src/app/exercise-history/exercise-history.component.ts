@@ -25,8 +25,7 @@ export interface PeriodicElement {
 })
 export class ExerciseHistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'exercisename', 'exercisetime','frequency', 'edit', 'delete'];
-  displayedColumnsWithExpand = [...this.displayedColumns, 'expand'];
+  displayedColumns: string[] = ['position', 'exercisename', 'view', 'edit', 'delete'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
   expandedElement: any;
@@ -44,6 +43,12 @@ export class ExerciseHistoryComponent implements OnInit {
     this.callApi();
   }
 
+  selectedExercise: any;
+
+  // Function to handle the "View More" button click and open the modal
+  showExerciseDetails(exercise: any) {
+    this.selectedExercise = exercise;
+  }
 
 
 

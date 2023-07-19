@@ -57,7 +57,7 @@ margin: 0px 0px 20px 0px;
 
  
 
-  <ng-container matColumnDef="exercisetime">
+  <!-- <ng-container matColumnDef="exercisetime">
     <th mat-header-cell *matHeaderCellDef> Time </th>
     <td mat-cell *matCellDef="let element"> {{ element.exercisetime}}</td>
   </ng-container>
@@ -65,6 +65,24 @@ margin: 0px 0px 20px 0px;
   <ng-container matColumnDef="frequency">
     <th mat-header-cell *matHeaderCellDef> Frequency </th>
     <td mat-cell *matCellDef="let element"> {{ element.frequency}}</td>
+  </ng-container> -->
+
+  <!-- <ng-container matColumnDef="view">
+    <th mat-header-cell *matHeaderCellDef> View More</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" data-toggle="modal" data-target="#exampleModal">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="view">
+    <th mat-header-cell *matHeaderCellDef> View More</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" (click)="showExerciseDetails(element)" data-toggle="modal" data-target="#exampleModal">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="edit">
@@ -92,4 +110,51 @@ margin: 0px 0px 20px 0px;
     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
   </tr>
 </table>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exercise Detailes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Name : {{element.exercisename}}</p>
+        <p>Time : {{element.exercisetime}}</p>
+        <p>Frequency : {{element.frequency}}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exercise Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Use the selectedExercise property to display the data in the modal -->
+        <p>Name: {{ selectedExercise?.exercisename }}</p>
+        <p>Time: {{ selectedExercise?.exercisetime }}</p>
+        <p>Frequency: {{ selectedExercise?.frequency }}</p>
+      </div>
+    </div>
+  </div>
 </div>

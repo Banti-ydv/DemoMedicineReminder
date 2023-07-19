@@ -4,7 +4,8 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar" #sidebar>
 
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/home" (click)="onClick(sidebar)" >
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/home"
+            (click)="onClick(sidebar)">
             <div class="sidebar-brand-icon">
                 <i class="fas fa-leaf"></i>
             </div>
@@ -14,7 +15,7 @@
         <hr class="sidebar-divider my-0">
 
         <li class="nav-item">
-            <a class="nav-link" routerLink="/home" (click)="onClick(sidebar)" >
+            <a class="nav-link" routerLink="/home" (click)="onClick(sidebar)">
                 <i class="fas fa-home"></i>
                 <span>Home</span></a>
         </li>
@@ -24,57 +25,63 @@
         <div class="sidebar-heading" *ngIf="authService.getIsLoggedIn()">
             Reminder
         </div>
-<!-- Medicine Sub-menu -->
-<li class="nav-item" *ngIf="authService.getIsLoggedIn()">
-    <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-      aria-controls="collapseTwo">
-      <i class="fas fa-medkit"></i>
-      <span>Medicine</span>
-    </a>
-    <div #collapseMedicine id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-      data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Details:</h6>
-        <a class="collapse-item" routerLink="/medicine-add" (click)="closeSubMenu(collapseMedicineRef,sidebar)">Add</a>
-        <a class="collapse-item" routerLink="/medicine-history" (click)="closeSubMenu(collapseMedicineRef,sidebar)">History</a>
-      </div>
-    </div>
-  </li>
-  
-  <!-- Exercise Sub-menu -->
-  <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
-    <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseExercise" aria-expanded="true"
-      aria-controls="collapseExercise">
-      <i class="fas fa-dumbbell"></i>
-      <span>Exercise</span>
-    </a>
-    <div #collapseExercise id="collapseExercise" class="collapse" aria-labelledby="headingExercise"
-      data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Details:</h6>
-        <a class="collapse-item" routerLink="/exercise-add" (click)="closeSubMenu(collapseExerciseRef,sidebar)">Add</a>
-        <a class="collapse-item" routerLink="/exercise-history" (click)="closeSubMenu(collapseExerciseRef,sidebar)">History</a>
-      </div>
-    </div>
-  </li>
-  
-  <!-- Appointment Sub-menu -->
-  <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
-    <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseAppointment" aria-expanded="true"
-      aria-controls="collapseAppointment">
-      <i class="fas fa-calendar-alt"></i>
-      <span>Appointment</span>
-    </a>
-    <div #collapseAppointment id="collapseAppointment" class="collapse" aria-labelledby="headingAppointment"
-      data-parent="#accordionSidebar">
-      <div class="bg-white py-2 collapse-inner rounded">
-        <h6 class="collapse-header">Details:</h6>
-        <a class="collapse-item" routerLink="/appointment-add" (click)="closeSubMenu(collapseAppointmentRef,sidebar)">Add</a>
-        <a class="collapse-item" routerLink="/appointment-history" (click)="closeSubMenu(collapseAppointmentRef,sidebar)">History</a>
-      </div>
-    </div>
-  </li>
-  
+        <!-- Medicine Sub-menu -->
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                aria-controls="collapseTwo">
+                <i class="fas fa-medkit"></i>
+                <span>Medicine</span>
+            </a>
+            <div #collapseMedicine id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Details:</h6>
+                    <a class="collapse-item" routerLink="/medicine-add"
+                        (click)="closeSubMenu(collapseMedicineRef,sidebar)">Add</a>
+                    <a class="collapse-item" routerLink="/medicine-history"
+                        (click)="closeSubMenu(collapseMedicineRef,sidebar)">History</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Exercise Sub-menu -->
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseExercise"
+                aria-expanded="true" aria-controls="collapseExercise">
+                <i class="fas fa-dumbbell"></i>
+                <span>Exercise</span>
+            </a>
+            <div #collapseExercise id="collapseExercise" class="collapse" aria-labelledby="headingExercise"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Details:</h6>
+                    <a class="collapse-item" routerLink="/exercise-add"
+                        (click)="closeSubMenu(collapseExerciseRef,sidebar)">Add</a>
+                    <a class="collapse-item" routerLink="/exercise-history"
+                        (click)="closeSubMenu(collapseExerciseRef,sidebar)">History</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Appointment Sub-menu -->
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+            <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseAppointment"
+                aria-expanded="true" aria-controls="collapseAppointment">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Appointment</span>
+            </a>
+            <div #collapseAppointment id="collapseAppointment" class="collapse" aria-labelledby="headingAppointment"
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Details:</h6>
+                    <a class="collapse-item" routerLink="/appointment-add"
+                        (click)="closeSubMenu(collapseAppointmentRef,sidebar)">Add</a>
+                    <a class="collapse-item" routerLink="/appointment-history"
+                        (click)="closeSubMenu(collapseAppointmentRef,sidebar)">History</a>
+                </div>
+            </div>
+        </li>
+
         <hr class="sidebar-divider">
 
 
@@ -109,7 +116,7 @@
 
         <div class="text-center d-none d-md-inline" id="sidebarToggleContainer">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div> 
+        </div>
 
 
     </ul>
@@ -138,11 +145,19 @@
                     <li class="nav-item dropdown no-arrow mx-1" *ngIf="authService.getIsLoggedIn()">
                         <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <span class="badge badge-danger badge-counter" *ngIf="message;">1</span>
+                            <!-- <i class="fas fa-bell-slash fa-fw" *ngIf="!message;"></i> -->
+                            <span class="badge badge-danger badge-counter" *ngIf="!message;">0</span>
+
+                        </a>
+
+                        <!-- <a class="nav-link dropdown-toggle" id="alertsDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw" *ngIf="message;"></i>
                             <i class="fas fa-bell-slash fa-fw" *ngIf="!message;"></i>
-
-                            <!-- <span class="badge badge-danger badge-counter">0</span> -->
-                        </a>
+                            <span class="badge badge-danger badge-counter">0</span>
+                        </a> -->
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
