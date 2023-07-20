@@ -114,9 +114,9 @@
 
         <hr class="sidebar-divider d-none d-md-block">
 
-        <div class="text-center d-none d-md-inline" id="sidebarToggleContainer">
+        <!-- <div class="text-center d-none d-md-inline" id="sidebarToggleContainer">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+        </div> -->
 
 
     </ul>
@@ -133,8 +133,39 @@
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
+                    <!-- <i class="fa fa-bars"></i> -->
+                    <img src="assets/img/caduceus-symbol_3209049.png" height="30px" alt="">
                 </button>
+                
+
+                <mat-menu #medicineMenu="matMenu">
+                    <button mat-menu-item routerLink="/medicine-add">Add</button>
+                    <button mat-menu-item routerLink="/medicine-history">History</button>
+                </mat-menu>
+
+                <mat-menu #exerciseMenu="matMenu">
+                    <button mat-menu-item routerLink="/exercise-add">Add</button>
+                    <button mat-menu-item routerLink="/exercise-history">History</button>
+                </mat-menu>
+
+                <mat-menu #appointmentMenu="matMenu">
+                    <button mat-menu-item routerLink="/appointment-add">Add</button>
+                    <button mat-menu-item routerLink="/appointment-history">History</button>
+                </mat-menu>
+ 
+                <!-- <mat-toolbar color="primary"> -->
+                <div class="top-bar-show" style="display: none;">
+                    <img src="assets/img/caduceus-symbol_3209049.png" height="30px" alt="">
+
+                    <button mat-button routerLink="/home">Home</button>
+
+                    <button mat-button [matMenuTriggerFor]="medicineMenu"  *ngIf="authService.getIsLoggedIn()">Medicine</button>
+                    <button mat-button [matMenuTriggerFor]="exerciseMenu"  *ngIf="authService.getIsLoggedIn()">Exercise</button>
+                    <button mat-button [matMenuTriggerFor]="appointmentMenu"  *ngIf="authService.getIsLoggedIn()">Appointment</button>
+                    <button mat-button routerLink="/about-us" *ngIf="!authService.getIsLoggedIn()">About</button>
+                    <button mat-button routerLink="/home" *ngIf="!authService.getIsLoggedIn()">Privacy policy</button>
+                </div>
+
 
 
 
@@ -233,6 +264,7 @@
 
 
                 </ul>
+                <!-- </mat-toolbar> -->
 
             </nav>
             <!-- End of Topbar -->

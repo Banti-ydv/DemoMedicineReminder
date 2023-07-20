@@ -19,6 +19,7 @@ import { AppointmentUpdateComponent } from './appointment-update/appointment-upd
 import { ExerciseUpdateComponent } from './exercise-update/exercise-update.component';
 import { ChangepasswordComponent } from './change-password/change-password.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 // import { AuthGuard } from './servise/auth.guard';
 // import { NavbarComponent } from './navbar/navbar.component';
 
@@ -27,6 +28,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent},
+  { path: 'doctor-profile', component: DoctorProfileComponent},
   { path: 'about-us', component: AboutUsComponent},
   { path: 'medicine-add', component: MedicineAddComponent },
   { path: 'medicine-details', component: MedicineDetailsComponent },

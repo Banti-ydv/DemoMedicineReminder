@@ -51,6 +51,7 @@ import { ExerciseUpdateComponent } from './exercise-update/exercise-update.compo
 import { ChangepasswordComponent } from './change-password/change-password.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 // import { MatSnackBar } from '@angular/material/snack-bar';
 // import { ConfirmedValidatorTsComponent } from './change-password/confirmed.validator.ts/confirmed.validator.ts.component';
 
@@ -78,6 +79,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ExerciseUpdateComponent,
     ChangepasswordComponent,
     AboutUsComponent,
+    DoctorProfileComponent,
     // ConfirmedValidatorTsComponent
   ],
   imports: [

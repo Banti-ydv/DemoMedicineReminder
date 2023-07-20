@@ -7289,8 +7289,18 @@ button.bg-dark:hover {
 .d-inline-flex {
     display: inline-flex !important
 }
+@media (max-width:700px) {
+
+    #wrapper #content-wrapper #content {
+        flex: 1 0 auto;
+        background-color: #ccd9ff;
+        height: auto;
+    }
+}
 
 @media (min-width:576px) {
+
+    
     .d-sm-none {
         display: none !important
     }
@@ -7331,6 +7341,9 @@ button.bg-dark:hover {
 @media (min-width:768px) {
     .d-md-none {
         display: none !important
+    }
+    .top-bar-show {
+        display: block !important
     }
 
     .d-md-inline {
@@ -11012,6 +11025,7 @@ a:focus {
 #wrapper #content-wrapper #content {
     flex: 1 0 auto;
     background-color: #ccd9ff;
+    height: auto;
 }
 
 /* .container,
@@ -11387,7 +11401,8 @@ a:focus {
 
 .topbar #sidebarToggleTop {
     height: 2.5rem;
-    width: 2.5rem
+    width: 2.5rem;
+    padding-left: 4.5px;
 }
 
 .topbar #sidebarToggleTop:hover {
@@ -11800,6 +11815,7 @@ a:focus {
 
     .sidebar.toggled {
         overflow: visible;
+        display: none;
         width: 6.5rem !important
     }
 
@@ -12120,6 +12136,7 @@ a:focus {
     background-position: center;
     background-size: cover
 }
+
 .bg-login-image {
     background: url(../img/24488452_6927689.jpg);
     background-position: center;
@@ -12161,6 +12178,12 @@ a:focus {
     background: url(../img/4029328_16209.jpg);
     background-position: center;
     background-size: cover
+}
+.bg-back-img-home{
+    background: url(../img/To\ do\ list-amico.svg);
+    background-position: center;
+    background-size: cover ;
+    height: 75vh;
 }
 
 form.user .custom-checkbox.small label {
