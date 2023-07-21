@@ -52,6 +52,8 @@ import { ChangepasswordComponent } from './change-password/change-password.compo
 import {MatExpansionModule} from '@angular/material/expansion';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
+import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
+import { AllAppointmentComponent } from './all-appointment/all-appointment.component';
 // import { MatSnackBar } from '@angular/material/snack-bar';
 // import { ConfirmedValidatorTsComponent } from './change-password/confirmed.validator.ts/confirmed.validator.ts.component';
 
@@ -80,6 +82,8 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
     ChangepasswordComponent,
     AboutUsComponent,
     DoctorProfileComponent,
+    NewAppointmentComponent,
+    AllAppointmentComponent,
     // ConfirmedValidatorTsComponent
   ],
   imports: [

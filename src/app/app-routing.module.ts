@@ -20,6 +20,8 @@ import { ExerciseUpdateComponent } from './exercise-update/exercise-update.compo
 import { ChangepasswordComponent } from './change-password/change-password.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
+import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
+import { AllAppointmentComponent } from './all-appointment/all-appointment.component';
 // import { AuthGuard } from './servise/auth.guard';
 // import { NavbarComponent } from './navbar/navbar.component';
 
@@ -28,6 +30,8 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent},
+  { path: 'new-appointment', component: NewAppointmentComponent},
+  { path: 'all-appointment', component: AllAppointmentComponent},
   { path: 'doctor-profile', component: DoctorProfileComponent},
   { path: 'about-us', component: AboutUsComponent},
   { path: 'medicine-add', component: MedicineAddComponent },

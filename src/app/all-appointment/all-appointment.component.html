@@ -1,0 +1,161 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<p>
+  <mat-toolbar class="mb-3 rounded" style="background-color: #fff;">
+    <span>All Appointments</span>
+  </mat-toolbar>
+</p>
+<div style="
+float: right;
+margin: 0px 0px 20px 0px;
+">
+   
+   <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <div class="input-group">
+      <input type="text"  class="form-control form-control-sm bg-light border-0"
+        placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" #input>
+      <div class="input-group-append">
+        <button class="btn btn-primary btn-sm" type="button">
+          <i class="fas fa-search fa-sm"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+  
+<!-- <ul class="navbar-nav ml-auto">
+
+  <li class="nav-item dropdown no-arrow d-sm-none">
+      <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-search fa-fw"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right p-0 shadow show" style="position: absolute;">
+          <form class="form-inline mr-auto w-100 navbar-search">
+              <div class="input-group">
+                  <input type="text" (keyup)="applyFilter($event)" class="form-control bg-light border-0 small"
+                      placeholder="Search for..." aria-label="Search"
+                      aria-describedby="basic-addon2">
+              </div>
+          </form>
+      </div>
+  </li>
+</ul>  -->
+</div>
+<div class="table-responsive rounded">
+<table class="table table-hover" style="background-color: #fff;">
+<thead>
+  
+  <tr>
+    <th>No.</th>  
+    <th>Patient name</th>
+    <th>Mobile number</th>
+    <th>Status</th>
+  <!-- <ng-container matColumnDef="exercisetime">
+    <th> Time </th>
+    <td> {{ element.exercisetime}}</td>
+  
+
+  <ng-container matColumnDef="frequency">
+    <th> Frequency </th>
+    <td> {{ element.frequency}}</td>
+   -->
+
+  <!-- <ng-container matColumnDef="view">
+    <th> View More</th>
+    <td>
+      <button mat-icon-button color="primary" data-toggle="modal" data-target="#exampleModal">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </td>
+   -->
+
+  
+    <th> View More</th>
+    
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>1.</td>
+    <td>banti</td>
+    <td>90XXX XXX23</td>
+    <td>Coming</td>
+    <td>
+        <button mat-icon-button color="primary"  data-toggle="modal" data-target="#exampleModal">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+      </td>
+  </tr>
+  <tr>
+    <td>2.</td>
+    <td>sohan</td>
+    <td>97XXX XXX44</td>
+    <td>Not coming</td>
+    <td>
+        <button mat-icon-button color="primary"  data-toggle="modal" data-target="#exampleModal">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+      </td>
+   
+  </tr>
+  </tbody>
+
+  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
+  <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+
+  <!-- Row shown when there is no matching data. -->
+  <!-- <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+  </tr> -->
+</table>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Exercise Detailes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Name : {{element.exercisename}}</p>
+        <p>Time : {{element.exercisetime}}</p>
+        <p>Frequency : {{element.frequency}}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Appointmnet</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Use the selectedExercise property to display the data in the modal -->
+        <p>Appointment number : 1</p>
+        <p>Patient name : Banti yadav</p>
+        <p>Mobile number : 98XXX XXX66</p>
+        <p>Reason : Bladder cancer</p>
+        <p>Date : 11/02/2023</p>
+        <p>Time : 12:20 ppm</p>
+        <p>Payment details : done</p>
+      </div>
+    </div>
+  </div>
+</div>
