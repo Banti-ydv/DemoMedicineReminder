@@ -14,8 +14,7 @@ import { Sidebar } from '@syncfusion/ej2/navigations';
 
 interface PeriodicElement {
   id: number;
-  firstname: string;
-  lastname: string;
+  name: string;
   emailid: string;
   
 }
@@ -76,10 +75,14 @@ if (!this.isLoggedIn) {
       //   sidebarToggle.click();
       // }
     }
+
   }
   // $('#accordionSidebar').toggleClass('toggled');
 
 
+  isLogedInPage(): Boolean{
+    return this.router.url === '/doctor-profile';
+  }
   onClick(sidebar: HTMLElement) {
     // Add or remove the class for "Home" click
     sidebar.classList.add('toggled');

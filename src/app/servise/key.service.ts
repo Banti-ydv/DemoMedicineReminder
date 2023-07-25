@@ -32,7 +32,7 @@ export class KeyService {
   public mymedicine = `${this.Url}mymedicine`;
   public deleteMyMedicine = `${this.Url}deleteMyMedicine/`;
   public updateMyMedicine = `${this.Url}updateMyMedicine/`;
-
+  public doctorProfile = `${this.Url}addDoctor`;
   public defaultImageUrl = "assets/img/profile-img.png";
   public SECRET_KEY = "Shubham12345";
   

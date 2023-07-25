@@ -22,10 +22,9 @@ export class RegisterComponent {
 
 
   register = {
-    firstname: '',
-    lastname: '',
+    name: '',
     emailid: '',
-    username: '',
+    chooseAccount: '',
     password: ''
   };
 
@@ -42,7 +41,8 @@ export class RegisterComponent {
   onRegister() {
     this.userService.registerUser(this.register).subscribe(
       (response: any) => {
-        console.log('response ===>', response);
+        console.log('response =======>', response);
+        localStorage.setItem("chooseAccount",response.chooseAccount);
         Swal.fire({
           icon: 'success',
           title: 'Registration Successful',

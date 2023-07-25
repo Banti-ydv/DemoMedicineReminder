@@ -26,6 +26,14 @@ export class UserService {
   }
 
 
+  doctorProfile(doctorProfile: any) {
+    const token = localStorage.getItem('token');
+    console.log(token);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Secret-Key', this.key.SECRET_KEY);
+
+    return this.http.post(this.key.doctorProfile, doctorProfile, { headers });
+  }
+
   medicineAdd(medicineAdd: any) {
     const token = localStorage.getItem('token');
     console.log(token);

@@ -10,9 +10,9 @@ import { KeyService } from '../servise/key.service';
 
 interface PeriodicElement {
   
-  firstname: string;
-  lastname: string;
+  name: string;
   emailid: string;
+  chooseAccount: string;
 
 
 }
@@ -26,7 +26,7 @@ export class ProfileComponent implements OnInit {
   userData: PeriodicElement | any;
   userPhoto: string | undefined;
   imageUrl: SafeUrl | any;
-  // updatedData: PeriodicElement = { firstname: '', lastname: '', emailid: '' };
+  // updatedData: PeriodicElement = { name: '', lastname: '', emailid: '' };
 
 
  
@@ -132,6 +132,7 @@ getUserDetails(): void {
     this.http.get<PeriodicElement>(this.key.MyDetailes, { headers }).subscribe(
       (data) => {
         this.userData = data;
+        console.log('=====>',data);
         this.populateFormFields();
       }
     );
@@ -140,13 +141,11 @@ getUserDetails(): void {
 
 populateFormFields(): void {
   // Update the form fields with the fetched data
-  const firstNameInput = document.getElementById('firstname') as HTMLInputElement;
-  const lastNameInput = document.getElementById('lastname') as HTMLInputElement;
+  const nameInput = document.getElementById('name') as HTMLInputElement;
   const emailIdInput = document.getElementById('emailid') as HTMLInputElement;
 
-  if (firstNameInput && lastNameInput && emailIdInput) {
-    firstNameInput.value = this.userData.firstname;
-    lastNameInput.value = this.userData.lastname;
+  if (nameInput && emailIdInput) {
+    nameInput.value = this.userData.name;
     emailIdInput.value = this.userData.emailid;
   }
 }
@@ -235,7 +234,7 @@ populateFormFields(): void {
   //     this.http.get<PeriodicElement>(this.key.MyDetailes, { headers }).subscribe(
   //       (data) => {
   //         const element = {
-  //           firstname: data.firstname,
+  //           name: data.name,
   //           lastname: data.lastname,
   //           emailid: data.emailid
   //         };
@@ -243,9 +242,9 @@ populateFormFields(): void {
   //         const swalConfig = {
   //           title: 'Update Profile',
   //           html:
-  //             '<label for="swal-input-firstname" class="swal2-label">First Name:</label>' +
-  //             '<input type="text" id="swal-input-firstname" class="swal2-input custom-width" value="' +
-  //             element.firstname +
+  //             '<label for="swal-input-name" class="swal2-label">First Name:</label>' +
+  //             '<input type="text" id="swal-input-name" class="swal2-input custom-width" value="' +
+  //             element.name +
   //             '"><br>' +
   //             '<label for="swal-input-lastname" class="swal2-label">Last Name:</label>' +
   //             '<input id="swal-input-lastname" class="swal2-input custom-width" value="' +
@@ -259,12 +258,12 @@ populateFormFields(): void {
   //           confirmButtonText: 'Update',
   //           cancelButtonText: 'Cancel',
   //           preConfirm: () => {
-  //             const firstnameValue = (<HTMLInputElement>document.getElementById('swal-input-firstname')).value;
+  //             const nameValue = (<HTMLInputElement>document.getElementById('swal-input-name')).value;
   //             const lastnameValue = (<HTMLInputElement>document.getElementById('swal-input-lastname')).value;
   //             const emailidValue = (<HTMLInputElement>document.getElementById('swal-input-emailid')).value;
 
   //             return {
-  //               firstname: firstnameValue,
+  //               name: nameValue,
   //               lastname: lastnameValue,
   //               emailid: emailidValue,
   //             };
@@ -275,9 +274,9 @@ populateFormFields(): void {
   //           if (result.isConfirmed) {
   //             const formValues = result.value;
   //             if (formValues) {
-  //               const { firstname, lastname, emailid } = formValues;
+  //               const { name, lastname, emailid } = formValues;
 
-  //               if (!firstname || !lastname || !emailid) {
+  //               if (!name || !lastname || !emailid) {
   //                 Swal.fire({
   //                   title: 'Error!',
   //                   text: 'Please fill all the input fields.',
@@ -315,7 +314,7 @@ populateFormFields(): void {
   //     this.http.put(this.key.updateMydetailes, updatedData, { headers }).subscribe(
   //       (data: any) => {
   //         const element = {
-  //           firstname: data.firstname,
+  //           name: data.name,
   //           lastname: data.lastname,
   //           emailid: data.emailid
   //         };

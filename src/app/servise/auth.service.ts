@@ -78,7 +78,10 @@ export class AuthService {
     getIsLoggedIn(): boolean {
         const token = localStorage.getItem('token');
         return token !== null;
-
+    }
+    chooseAccount(){
+      const chooseAccount = localStorage.getItem('chooseAccount');
+      return chooseAccount == 'Doctor';
     }
 
     setMinDate(): string {

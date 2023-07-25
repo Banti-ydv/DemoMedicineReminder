@@ -46,7 +46,7 @@ const routes: Routes = [
   { path: 'appointment-add', component: AppointmentAddComponent },
   { path: 'appointment-history', component: AppointmentHistoryComponent },
   { path: 'appointment-update', component: AppointmentUpdateComponent },
-  { path: "login", component: LoginComponent},
+  { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'navbar', component: NavbarComponent}, 
   { path: 'profile', component: ProfileComponent}, 

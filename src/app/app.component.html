@@ -20,11 +20,11 @@
                 <span>Home</span></a>
         </li>
 
-        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn()">
+        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">
 
         
         <!-- Medicine Sub-menu -->
-        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">
             <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
                 aria-controls="collapseTwo">
                 <i class="fas fa-medkit"></i>
@@ -41,11 +41,11 @@
                 </div>
             </div>
         </li>
-        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn()">
+        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">
 
 
         <!-- Exercise Sub-menu -->
-        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">
             <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseExercise"
                 aria-expanded="true" aria-controls="collapseExercise">
                 <i class="fas fa-dumbbell"></i>
@@ -62,11 +62,11 @@
                 </div>
             </div>
         </li>
-        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn()">
+        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">
 
 
         <!-- Appointment Sub-menu -->
-        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">
             <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseAppointment"
                 aria-expanded="true" aria-controls="collapseAppointment">
                 <i class="fas fa-calendar-alt"></i>
@@ -84,7 +84,7 @@
             </div>
         </li>
 
-        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn()">
+        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn() && authService.chooseAccount()">
 
 
 
@@ -103,14 +103,14 @@
             </div>
           </li> -->
 
-          <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+          <li class="nav-item" *ngIf="authService.getIsLoggedIn() && authService.chooseAccount()">
             <a class="nav-link" routerLink="/new-appointment" (click)="onClick(sidebar)">
                 <i class="fas fa-clipboard-list"></i>
                 <span>New Appointment</span></a>
         </li>
-        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn()">
+        <hr class="sidebar-divider" *ngIf="authService.getIsLoggedIn() && authService.chooseAccount()">
 
-        <li class="nav-item" *ngIf="authService.getIsLoggedIn()">
+        <li class="nav-item" *ngIf="authService.getIsLoggedIn() && authService.chooseAccount()">
             <a class="nav-link" routerLink="/all-appointment" (click)="onClick(sidebar)">
                 <i class="fas fa-calendar-check"></i>
                 <span>All Appointment</span></a>
@@ -147,7 +147,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" *ngIf="!isLogedInPage()">
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -177,11 +177,11 @@
 
                     <button mat-button routerLink="/home" class="ml-3">Home</button>
 
-                    <button mat-button [matMenuTriggerFor]="medicineMenu"  *ngIf="authService.getIsLoggedIn()">Medicine</button>
-                    <button mat-button [matMenuTriggerFor]="exerciseMenu"  *ngIf="authService.getIsLoggedIn()">Exercise</button>
-                    <button mat-button [matMenuTriggerFor]="appointmentMenu"  *ngIf="authService.getIsLoggedIn()">Appointment</button>
-                    <button mat-button routerLink="/new-appointment" *ngIf="authService.getIsLoggedIn()">New Appointment</button>
-                    <button mat-button routerLink="/all-appointment" *ngIf="authService.getIsLoggedIn()">All Appointment </button>
+                    <button mat-button [matMenuTriggerFor]="medicineMenu"  *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">Medicine</button>
+                    <button mat-button [matMenuTriggerFor]="exerciseMenu"  *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">Exercise</button>
+                    <button mat-button [matMenuTriggerFor]="appointmentMenu"  *ngIf="authService.getIsLoggedIn() && !authService.chooseAccount()">Appointment</button>
+                    <button mat-button routerLink="/new-appointment" *ngIf="authService.getIsLoggedIn() && authService.chooseAccount()">New Appointment</button>
+                    <button mat-button routerLink="/all-appointment" *ngIf="authService.getIsLoggedIn() && authService.chooseAccount()">All Appointment </button>
                     <button mat-button routerLink="/about-us" *ngIf="!authService.getIsLoggedIn()">About</button>
                     <button mat-button routerLink="/home" *ngIf="!authService.getIsLoggedIn()">Privacy policy</button>
                 </div>
@@ -256,7 +256,7 @@
                     <li class="nav-item dropdown no-arrow" *ngIf="authService.getIsLoggedIn()">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome,<b> {{ userData?.firstname
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Welcome,<b> {{ userData?.name
                                     }}</b> !</span>
                             <!-- <img [src]="getProfilePhotoFromLocalStorage()" alt="" class="img-profile rounded-circle" /> -->
                             <img [src]="isResponseSizeZero() ? '../assets/img/profile.png' : imageUrl" alt=""
@@ -314,7 +314,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
+        <footer class="sticky-footer bg-white"  *ngIf="!isLogedInPage()">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
                     <span>© Copyright <a href="https://prilient.com/" style="text-decoration: none;"> Prilient</a>. All

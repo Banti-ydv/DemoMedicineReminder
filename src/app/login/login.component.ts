@@ -45,14 +45,20 @@ export class LoginComponent {
             text: 'Log In Successfully.',
             showConfirmButton: true,
             timer: 5000,
-          }).then((result) => {
-            if (result) {
+          }).then((resp) => {
+            if (resp) {
 
-              console.log('result====>',result);
-              this.router.navigate(['/home'])
-              .then(() => {
-                location.reload();
-              });
+              const chooseAccount = localStorage.getItem('chooseAccount');
+              if(chooseAccount == 'Doctor'){
+                this.router.navigate(['/doctor-profile'])
+                
+              }
+              else{
+                this.router.navigate(['/home'])
+                .then(() => {
+                  location.reload();
+                });
+              }
             }
           });
         },

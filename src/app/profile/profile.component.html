@@ -37,10 +37,10 @@
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                           <div class="row col-md-12 pl-5">
                             <div class="col-md-6">
-                              <label>User Name</label>
+                              <label>Account</label>
                             </div>
                             <div class="col-md-6">
-                              <p>{{ userData?.firstname }}</p>
+                              <p>{{ userData?.chooseAccount }}</p>
                             </div>
                           </div>
                           <div class="row col-md-12 pl-5">
@@ -48,7 +48,7 @@
                               <label>Name</label>
                             </div>
                             <div class="col-md-6">
-                              <p>{{ userData?.firstname }} {{ userData?.lastname }}</p>
+                              <p>{{ userData?.name }}</p>
                             </div>
                           </div>
                           <div class="row col-md-12 pl-5">
@@ -59,14 +59,7 @@
                               <p>{{ userData?.emailid }}</p>
                             </div>
                           </div>
-                          <div class="row col-md-12 pl-5">
-                            <div class="col-md-6">
-                              <label>Phone</label>
-                            </div>
-                            <div class="col-md-6">
-                              <p>+91 98XXX XXX45</p>
-                            </div>
-                          </div>
+                          
 
                         </div>
                         <div class="row col-md-12 pl-5">
@@ -111,11 +104,8 @@
       </div>
       <div class="modal-body">
         <form class="user">
-          <label for="firstname">First Name</label>
-          <input [(ngModel)]="userData.firstname" type="text" id="firstname" name="firstname" class="form-control form-control-user" placeholder="Enter First Name">
-      
-          <label for="lastname">Last Name</label>
-          <input [(ngModel)]="userData.lastname" type="text" id="lastname" name="lastname" class="form-control form-control-user" placeholder="Enter Last Name">
+          <label for="name">Name</label>
+          <input [(ngModel)]="userData.name" type="text" id="name" name="name" class="form-control form-control-user" placeholder="Enter First Name">
       
           <label for="emailid">Email ID</label>
           <input [(ngModel)]="userData.emailid" type="email" id="emailid" name="emailid" class="form-control form-control-user" placeholder="Enter Email Id">

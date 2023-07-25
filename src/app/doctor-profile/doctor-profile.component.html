@@ -13,29 +13,29 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Doctor Profile</h1>
                                 </div>
-                                <form class="user">
+                                <form class="user" (ngSubmit)="onDoctorProfile()" #doctorProfileForm="ngForm">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Name</label>
-                                            <input type="text" class="form-control form-control-user" id="firstname"
-                                                name="firstname" placeholder="Name">
+                                            <input type="text" class="form-control form-control-user" id="name"
+                                                name="name" placeholder="Name" [(ngModel)]="doctorProfile.name">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Email Id</label>
-                                            <input type="text" class="form-control form-control-user"
-                                                placeholder="Email id">
+                                            <input type="text" class="form-control form-control-user" name="emailid"
+                                                placeholder="Email id" [(ngModel)]="doctorProfile.emailid">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Mobile number</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Mobile number">
+                                                placeholder="Mobile number" name="mobileNumber" [(ngModel)]="doctorProfile.mobileNumber">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Specialization</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Specialization" list="speciality" autocomplete="off">
+                                                placeholder="Specialization" list="speciality" autocomplete="off" name="specilization" [(ngModel)]="doctorProfile.specilization">
                                                 <datalist id="speciality">
                                                     <option value="General Medicine">General Medicine (Internal Medicine)</option>
                                                     <option value="Pediatrics">Pediatrics</option>
@@ -75,55 +75,55 @@
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Experience</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Experience">
+                                                placeholder="Experience" name="experiance" [(ngModel)]="doctorProfile.experiance">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Qualification</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Qualification">
+                                                placeholder="Qualification" name="qualification" [(ngModel)]="doctorProfile.qualification">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Appointment Fees</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Appointment Fees">
+                                                placeholder="Appointment Fees" name="appointmentFees" [(ngModel)]="doctorProfile.appointmentFees">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Address / Location</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Address / Location">
+                                                placeholder="Address / Location" name="address" [(ngModel)]="doctorProfile.address">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Registration date</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Registration date">
+                                                placeholder="Registration date" name="registrationDate" [(ngModel)]="doctorProfile.registrationDate">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Hospital / Clinic name</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Hospital / Clinic name">
+                                                placeholder="Hospital / Clinic name" name="hospital" [(ngModel)]="doctorProfile.hospital">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <label>Start time</label>
                                             <input type="time" class="form-control form-control-user"
-                                                placeholder="Start time">
+                                                placeholder="Start time" name="availableTime">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>End time</label>
                                             <input type="time" class="form-control form-control-user"
-                                                placeholder="End time">
+                                                placeholder="End time" name="availableTime">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-12 mb-3 mb-sm-0">
                                             <label>Appointment Number</label>
                                             <input type="text" class="form-control form-control-user"
-                                                placeholder="Add appointment Number per day">
+                                                placeholder="Add appointment Number per day" name="appointmentNumberPerDay" [(ngModel)]="doctorProfile.appointmentNumberPerDay">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
