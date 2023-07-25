@@ -164,27 +164,28 @@
 
                     <div *ngIf="selectedFrequency === 'Every X day'" class="form-group col-md-6">
                       <label for="interval">Every X Day</label>
-                      <select id="interval" name="interval" [(ngModel)]="medicine.frequency"
+                      <mat-select id="interval" name="interval" [(ngModel)]="medicine.frequency"
                         class="custom-select-class">
-                        <option *ngFor="let option of intervalOptions" [value]="option">{{ option }}</option>
-                      </select>
+                        <mat-option *ngFor="let option of intervalOptions" [value]="option">{{ option }}</mat-option>
+                      </mat-select>
                     </div>
 
                     <div *ngIf="selectedFrequency === 'Every X day of week'" class="form-group col-md-6">
                       <label for="daysOfWeek">Every X Day of Week</label>
-                      <select id="daysOfWeek" name="daysOfWeek" multiple [(ngModel)]="medicine.frequency"
+                      <mat-select id="daysOfWeek" name="daysOfWeek" multiple [(ngModel)]="medicine.frequency"
                         class="custom-select-class">
-                        <option *ngFor="let option of weekOptions" [value]="option">{{ option }}</option>
-                      </select>
+                        <mat-option *ngFor="let option of weekOptions" [value]="option">{{ option }}</mat-option>
+                      </mat-select>
                     </div>
 
                     <div *ngIf="selectedFrequency === 'Every X day of month'" class="form-group col-md-6">
                       <label for="daysOfmonth">Every X Day of Month</label>
-                      <select id="daysOfmonth" name="daysOfmonth" multiple [(ngModel)]="medicine.frequency"
-                        class="custom-select-class">
-                        <option *ngFor="let option of monthOptions" [value]="option">{{ option }}</option>
-                      </select>
+                      <mat-select [(ngModel)]="medicine.frequency" id="daysOfmonth" name="daysOfmonth" multiple class="custom-select-class">
+                        <mat-option *ngFor="let monthOption of monthOptions" [value]="monthOption">{{monthOption}}</mat-option>
+                      </mat-select>
                     </div>
+                    
+
 
                   </div>
                   <div *ngIf="selectedFrequency !== ''">

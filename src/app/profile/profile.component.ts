@@ -13,6 +13,7 @@ interface PeriodicElement {
   name: string;
   emailid: string;
   chooseAccount: string;
+  
 
 
 }

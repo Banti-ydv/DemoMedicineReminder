@@ -72,6 +72,7 @@ export class MedicineAddComponent implements OnInit {
   ngOnInit() {
     
   }
+  
 
   addMedicine() {
     this.medicines.push({ timing: '', dose: '' });
