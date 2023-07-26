@@ -32,15 +32,6 @@
   
 
 
-  /* Base styling*/
-body {
-  background-color: lightgrey;
-  max-width: 768px;
-  margin: 0 auto;
-  padding: 1em 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
 /* Popover styling */
 
 a {

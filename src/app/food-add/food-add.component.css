@@ -42,20 +42,6 @@
 
 
 
-@import url(https://fonts.googleapis.com/css?family=Poppins);
-*{
-  box-sizing: border-box;
-}
-
-body{
-  margin: 0px;
-  padding: 0px;
-  font-family: "Poppins", sans-serif;
-  /* background-color: #042331; */
-  
-}
-
-
 
 .group.login-input {
   position: relative;
