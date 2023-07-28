@@ -18,7 +18,7 @@
                     [ngClass]="{'is-invalid': name.invalid && (name.touched || name.dirty), 'is-valid': name.valid && (name.touched || name.dirty)}">
                   <div *ngIf="name.invalid && name.touched" class="text-danger small mt-2">
                     <div *ngIf="name.errors && name.errors['required']">
-                      Name is required.
+                      Name is a required.
                     </div>
                   </div>
                 </div>
